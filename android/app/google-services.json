@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "267472351549",
+    "project_id": "gpa-76da2",
+    "storage_bucket": "gpa-76da2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:267472351549:android:e2d3bcdf8a4811d13b5554",
+        "android_client_info": {
+          "package_name": "com.gpa.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeJLCd8gJq7gj1i2j8rR4mBDcJROFOA-Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
