@@ -12,7 +12,7 @@ class LetterDropdownWidget extends StatefulWidget {
 }
 
 class _LetterDropdownWidgetState extends State<LetterDropdownWidget> {
-  double selectedLetterValue = 4;
+  double selectedLetterValue = 2;
 
   @override
   Widget build(BuildContext context) {

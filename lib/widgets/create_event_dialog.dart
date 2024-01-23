@@ -143,7 +143,7 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
                     ],
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 6),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

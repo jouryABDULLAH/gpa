@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 import 'package:gpa/presentation/Servecis/GPA/model/lesson.dart';
@@ -24,18 +25,19 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
+      /* appBar: AppBar(
         backgroundColor: Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
-        title: Text(
+        /* title: Text(
           Constants.title,
           style: Constants.titleStyle,
-        ),
+        ),*/
         centerTitle: true,
-      ),
+      ),*/
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
+          Upper(),
           Row(
             children: <Widget>[
               Expanded(
@@ -71,7 +73,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       child: Column(
         children: <Widget>[
           _buildTextFormField(),
-          SizedBox(height: 5),
+          SizedBox(height: 25),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -98,13 +100,13 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               IconButton(
                 onPressed: _addLessonAndCalAvg,
                 icon: Icon(Icons.arrow_forward_ios_sharp),
-                color: Constants.mainColor,
+                color: const Color.fromRGBO(0, 168, 171, 1),
                 iconSize: 30,
               ),
             ],
           ),
           SizedBox(
-            height: 5,
+            height: 15,
           ),
         ],
       ),
@@ -113,7 +115,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
 
   _buildTextFormField() {
     return Padding(
-      padding: const EdgeInsets.only(left: 8),
+      padding: const EdgeInsets.only(left: 18, top: 30),
       child: TextFormField(
         onSaved: (value) {
           setState(() {
@@ -127,7 +129,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             return null;
         },
         decoration: InputDecoration(
-          hintText: "Mathematics",
+          hintText: "Enter The Class",
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -149,5 +151,49 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       print(DataHelper.calculateAvg());
       setState(() {});
     }
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 200,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GPAPage()),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "حساب المعدل الفصلي",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+                  .copyWith(color: Colors.white),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

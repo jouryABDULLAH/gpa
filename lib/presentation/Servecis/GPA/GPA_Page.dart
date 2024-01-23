@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page.dart';
 
@@ -17,23 +18,29 @@ class _GPAPage extends State<GPAPage> {
         elevation: 0,
         backgroundColor: ColorManager.primary,
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => ServicisPage()),
+            );
+          },
           icon: Icon(
-            Icons.list,
-            color: Colors.black,
-            size: 32,
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 25.0,
           ),
+          padding: EdgeInsets.all(0),
         ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications, color: Colors.black, size: 25),
+            icon: Icon(Icons.notifications, color: Colors.white, size: 25),
           ),
         ],
       ),
       body: Column(
         children: [
-          const Image(image: AssetImage("assets/images/Acadmic Servecis.png")),
+          Upper(), // const Image(image: AssetImage("assets/images/Acadmic Servecis.png")),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MyList(),
@@ -97,6 +104,33 @@ class _GPAPage extends State<GPAPage> {
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 50),
+      height: 100,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              " المعدل ",
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineLarge!
+                  .copyWith(color: Colors.white),
+            ),
+          ),
+        ],
       ),
     );
   }
