@@ -20,6 +20,25 @@ class DataHelper {
     return sumOfGrade / sumOfCredit;
   }
 
+  static double cumulativeAvg(double previousHours, double previousGPA) {
+    double sumOfGrade = 0;
+    double sumOfCredit = 0;
+
+    if (allAddedLessons.isNotEmpty) {
+      allAddedLessons.forEach((element) {
+        sumOfGrade += (element.creditGrade * element.letterGrade);
+        sumOfCredit += element.creditGrade;
+      });
+
+      return (sumOfCredit + previousHours) != 0
+          ? (sumOfGrade + (previousGPA * previousHours)) /
+              (sumOfCredit + previousHours)
+          : 0.0;
+    } else {
+      return 0.0; // Handle the case where there are no lessons added
+    }
+  }
+
   static List<String> _gradeLetters() {
     return ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "E", "F"];
   }
