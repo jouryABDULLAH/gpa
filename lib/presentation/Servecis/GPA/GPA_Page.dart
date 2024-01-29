@@ -21,7 +21,7 @@ class _GPAPage extends State<GPAPage> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => ServicisPage()),
+              MaterialPageRoute(builder: (context) => const ServicisPage()),
             );
           },
           icon: Icon(
@@ -84,7 +84,7 @@ class _GPAPage extends State<GPAPage> {
               } else if (index == 1) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => const GradeAveragePage()),
+                      builder: (context) => const GradeAveragePageTR()),
                 );
               }
             },
