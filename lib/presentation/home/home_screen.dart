@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
+import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import '../../../control.dart';
 
@@ -22,8 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int index = 0;
   final controller = Get.put(Controller());
-  List screens = [const HomeWidget(), ServicisPage()];
-  @override
+List screens = [const HomeWidget(), ServicisPage(),ServicisPage(),ProfileScreen(),ProfileScreen(),];  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),

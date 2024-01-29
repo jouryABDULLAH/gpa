@@ -6,6 +6,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gpa/presentation/logIn/login_screen.dart';
 import 'package:gpa/presentation/resources/constants.dart';
 import 'package:gpa/presentation/resources/extensions.dart';
 import 'package:gpa/widgets/create_event_dialog.dart';
@@ -104,9 +105,9 @@ class Controller extends GetxController {
       await FirebaseAuth.instance.signOut();
       await CacheHelper.removeData(key: 'uId');
 
-      // Navigator.of(context).pushReplacement(MaterialPageRoute(
-      //         builder: (context) =>
-      //         const LogInWidget()));
+         Navigator.of(context).pushReplacement(MaterialPageRoute(
+               builder: (context) =>
+                const LogInWidget()));
     } catch (e) {
       if (kDebugMode) {
         print(e);
