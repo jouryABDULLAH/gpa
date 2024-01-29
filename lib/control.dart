@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cr_calendar/cr_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,6 +10,7 @@ import 'package:gpa/presentation/resources/constants.dart';
 import 'package:gpa/presentation/resources/extensions.dart';
 import 'package:gpa/widgets/create_event_dialog.dart';
 import 'package:gpa/widgets/day_events_bottom_sheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'model/user_model.dart';
 import 'shared/network/cache_helper.dart';
 
@@ -27,12 +30,12 @@ class Controller extends GetxController {
   String uId = "";
   var events = [].obs;
 
-
   final currentDate = DateTime.now();
   final appbarTitleNotifier = ValueNotifier<String>('');
   final monthNameNotifier = ValueNotifier<String>('');
 
-   CrCalendarController calendarController=CrCalendarController();
+  CrCalendarController calendarController = CrCalendarController();
+
   // String local = CacheHelper.getDate(key: 'local');
   ch() {
     isLoading = false;
@@ -64,6 +67,7 @@ class Controller extends GetxController {
     isAddChild = !isAddChild;
     update();
   }
+
   Future getMe() async {
     var ol = await FirebaseFirestore.instance
         .collection('users')
@@ -76,15 +80,20 @@ class Controller extends GetxController {
     // me?.children?.add(ol.data()?["children"]);
     return me;
   }
+
   Future getEvents() async {
     events.clear();
-    var ol = await FirebaseFirestore.instance
-        .collection('events')
-        .get();
+    var ol = await FirebaseFirestore.instance.collection('events').get();
     for (var element in ol.docs) {
       var begin = element["begin"].toString().split("-");
-     var end = element["end"].toString().split("-");
-      events.add(CalendarEventModel(eventColor: Color(element["color"]),name: element["name"], begin: DateTime(int.parse(begin[0]),int.parse(begin[1]),int.parse(begin[2])), end: DateTime(int.parse(end[0]),int.parse(end[1]),int.parse(end[2]))));
+      var end = element["end"].toString().split("-");
+      events.add(CalendarEventModel(
+          eventColor: Color(element["color"]),
+          name: element["name"],
+          begin: DateTime(
+              int.parse(begin[0]), int.parse(begin[1]), int.parse(begin[2])),
+          end: DateTime(
+              int.parse(end[0]), int.parse(end[1]), int.parse(end[2]))));
     }
     return events;
   }
@@ -104,9 +113,6 @@ class Controller extends GetxController {
       }
     }
   }
-
-
-
 
   /// Control calendar with arrow buttons.
   void changeCalendarPage({required bool showNext}) => showNext
@@ -141,24 +147,86 @@ class Controller extends GetxController {
   void createExampleEvents() {
     final now = currentDate;
     calendarController = CrCalendarController(
-
       onSwipe: onCalendarPageChanged,
-      events:List.generate(events.length, (index) => CalendarEventModel(eventColor: events[index].eventColor,name: events[index].name, begin: events[index].begin, end: events[index].end)),
+      events: List.generate(
+          events.length,
+          (index) => CalendarEventModel(
+              eventColor: events[index].eventColor,
+              name: events[index].name,
+              begin: events[index].begin,
+              end: events[index].end)),
     );
   }
 
   void showDayEventsInModalSheet(
-      List<CalendarEventModel> events, DateTime day,context) {
+      List<CalendarEventModel> events, DateTime day, context) {
     showModalBottomSheet(
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(8))),
         isScrollControlled: true,
         context: context,
         builder: (context) => DayEventsBottomSheet(
-          events: events,
-          day: day,
-          screenHeight: MediaQuery.of(context).size.height,
-        ));
+              events: events,
+              day: day,
+              screenHeight: MediaQuery.of(context).size.height,
+            ));
   }
 
+  Future<bool> changePassword(
+    String currentPassword,
+    String newPassword,
+    BuildContext context,
+  ) async {
+    log("I've been called");
+    if (currentPassword.isEmpty) return true;
+    try {
+      if (newPassword.isEmpty) return false;
+      // Get the current user object from Firebase Authentication.
+      final user = FirebaseAuth.instance.currentUser;
+
+      // If the user is not signed in, return.
+      if (user == null) {
+        return false;
+      }
+      // Create a credential object with the user's current password.
+      final credential = EmailAuthProvider.credential(
+          email: user.email!, password: currentPassword);
+
+      // Reauthenticate the user with their current password.
+      await user.reauthenticateWithCredential(credential);
+
+      // Update the user's password with the new password.
+      await user.updatePassword(newPassword);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "wrong-password") {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("wrong-password")));
+      }
+      return false;
+    }
+  }
+
+  Future updateUserData({
+    required String userName,
+    required String email,
+    required BuildContext context,
+  }) async {
+    print("+++++++++++++++++++++++++${FirebaseAuth.instance.currentUser!.uid}");
+    try {
+      if (email.isNotEmpty) {
+        await FirebaseAuth.instance.currentUser?.updateEmail(email);
+      }
+      if (userName.isEmpty && email.isEmpty) return;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        if (userName.isNotEmpty) "name": userName,
+        if (email.isNotEmpty) "email": email,
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }
