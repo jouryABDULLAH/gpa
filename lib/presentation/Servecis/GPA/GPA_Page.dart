@@ -84,7 +84,7 @@ class _GPAPage extends State<GPAPage> {
               } else if (index == 1) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => const GradeAveragePageTR()),
+                      builder: (context) => const GradeAveragePage()),
                 );
               }
             },
