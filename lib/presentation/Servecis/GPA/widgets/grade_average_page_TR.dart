@@ -20,8 +20,8 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
   double selectedLetterValue = 4;
   double selectedCreditValue = 1;
   var enteringValue = "";
-  // Define a variable to store the entered value
-  String enteringVal = "";
+  int hours = 0;
+  double previousGPA = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +31,24 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Upper(),
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: _buildForm(),
-              ),
-              Expanded(
-                flex: 1,
-                child: ShowAverage(
-                  average: DataHelper.cumulativeAvg(
-                    double.parse(enteringValue)
-                        as double, // Convert the enteringValue to double
-                    double.parse(
-                        enteringVal), // Convert the enteringVal to double
-                  ),
-                  numberOfClass: DataHelper.allAddedLessons.length,
+          Flexible(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: _buildForm(),
                 ),
-              ),
-            ],
+                Expanded(
+                  flex: 1,
+                  child: ShowAverage(
+                    average: DataHelper.cumulativeAvg(hours, previousGPA),
+                    numberOfClass: DataHelper.allAddedLessons.length,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Expanded(
+          Flexible(
             child: Container(
               child: LessonList(
                 onDismiss: (index) {
@@ -114,9 +111,74 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     );
   }
 
+  _buildTextFormFieldPreviousHours() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 18, top: 10),
+      child: TextFormField(
+        keyboardType: TextInputType.number, // Set the keyboard type to number
+        onSaved: (value) {
+          setState(() {
+            // Parse the entered value to an integer and save it to the 'hours' variable
+            hours = int.tryParse(value!) ?? 0;
+          });
+        },
+        validator: (v) {
+          if (v!.isEmpty) {
+            return "Enter The Previous Hours.";
+          } else if (int.tryParse(v) == null) {
+            return "Enter a valid integer.";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Enter The Previous Hours",
+          border: OutlineInputBorder(
+            borderRadius: Constants.borderRadius,
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Constants.mainColor.withOpacity(0.3),
+        ),
+      ),
+    );
+  }
+
+  _buildTextFormFieldPreviousGPA() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 18, top: 10),
+      child: TextFormField(
+        keyboardType: TextInputType.numberWithOptions(
+            decimal: true), // Allow numeric input with decimal
+        onSaved: (value) {
+          setState(() {
+            // Parse the entered value to a double and save it to the 'previousGPA' variable
+            previousGPA = double.tryParse(value!) ?? 0.0;
+          });
+        },
+        validator: (v) {
+          if (v!.isEmpty) {
+            return "Enter The Previous GPA.";
+          } else if (double.tryParse(v) == null) {
+            return "Enter a valid number.";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Enter The Previous GPA",
+          border: OutlineInputBorder(
+            borderRadius: Constants.borderRadius,
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Constants.mainColor.withOpacity(0.3),
+        ),
+      ),
+    );
+  }
+
   _buildTextFormField() {
     return Padding(
-      padding: const EdgeInsets.only(left: 18, top: 30),
+      padding: const EdgeInsets.only(left: 18, top: 10),
       child: TextFormField(
         onSaved: (value) {
           setState(() {
@@ -132,65 +194,8 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         decoration: InputDecoration(
           hintText: "Enter The Class",
           border: OutlineInputBorder(
-            borderRadius: Constants.borderRadius,
-            borderSide: BorderSide.none,
-          ),
-          filled: true,
-          fillColor: Constants.mainColor.withOpacity(0.3),
-        ),
-      ),
-    );
-  }
-
-  _buildTextFormFieldPreviousHours() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 18, top: 30),
-      child: TextFormField(
-        onSaved: (value) {
-          setState(() {
-            enteringValue = value!;
-          });
-        },
-        validator: (v) {
-          if (v!.length <= 0) {
-            return "Enter The previous Hours.";
-          } else
-            return null;
-        },
-        decoration: InputDecoration(
-          hintText: "Enter The previous Hours",
-          border: OutlineInputBorder(
-            borderRadius: Constants.borderRadius,
-            borderSide: BorderSide.none,
-          ),
-          filled: true,
-          fillColor: Constants.mainColor.withOpacity(0.3),
-        ),
-      ),
-    );
-  }
-
-  _buildTextFormFieldPreviousGPA() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 18, top: 30),
-      child: TextFormField(
-        onSaved: (value) {
-          setState(() {
-            enteringVal = value!;
-          });
-        },
-        validator: (v) {
-          if (v!.length <= 0) {
-            return "Enter The previous GPA.";
-          } else
-            return null;
-        },
-        decoration: InputDecoration(
-          hintText: "Enter The previous GPA",
-          border: OutlineInputBorder(
-            borderRadius: Constants.borderRadius,
-            borderSide: BorderSide.none,
-          ),
+              borderRadius: Constants.borderRadius,
+              borderSide: BorderSide.none),
           filled: true,
           fillColor: Constants.mainColor.withOpacity(0.3),
         ),
@@ -206,6 +211,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           letterGrade: selectedLetterValue,
           creditGrade: selectedCreditValue);
       DataHelper.addLesson(addingLesson);
+      print(DataHelper.calculateAvg());
       setState(() {});
     }
   }
