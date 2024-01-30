@@ -7,9 +7,14 @@ import 'package:gpa/presentation/profile/widget/my_account.dart';
 import '../../control.dart';
 import '../resources/color_manager.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
 
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final controller = Get.put(Controller());
 
   Widget buildDrawerListItem(
@@ -42,15 +47,20 @@ class ProfileScreen extends StatelessWidget {
   }
 
   @override
+  void initState() {
+    controller.getMe();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text("Profile"),
       ),
-      body: FutureBuilder(
-        future: controller.getMe(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
+      body: GetBuilder<Controller>(
+        builder: (_) {
+          if (controller.me!.name != null) {
             return ListView(
               padding: EdgeInsets.zero,
               children: [
@@ -58,9 +68,10 @@ class ProfileScreen extends StatelessWidget {
                     leading: Icons.person,
                     title: 'My account ',
                     onTap: () {
+                      print(controller.me!.name);
                       Get.to(
-                        MyAccount(userData: snapshot.data),
-                      );
+                        MyAccount(userData: controller.me!),
+                      )!.then((value) => controller.getMe());
                     }),
                 buildDrawerListItem(
                     leading: Icons.privacy_tip,

@@ -82,6 +82,27 @@ class ChangePassword extends StatelessWidget {
                                   currentPasswordController.text,
                                   newPasswordController.text,
                                   context);
+                                  showDialog(
+                                  context: context,
+                                  barrierDismissible: true,
+                                  builder: (_) => AlertDialog(
+                                        title: Text(
+                                            "password changed successfully"),
+                                        content: Icon(
+                                          Icons.task_alt,
+                                          size: 80,
+                                          color: Colors.green,
+                                        ),
+                                        actions: [
+                                          Center(
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                  Navigator.pop(context);
+                                                  Navigator.pop(context);
+                                                }, child: Text("Go Back")),
+                                          )
+                                        ],
+                                      ));
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(

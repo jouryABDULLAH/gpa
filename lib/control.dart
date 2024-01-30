@@ -11,7 +11,6 @@ import 'package:gpa/presentation/resources/constants.dart';
 import 'package:gpa/presentation/resources/extensions.dart';
 import 'package:gpa/widgets/create_event_dialog.dart';
 import 'package:gpa/widgets/day_events_bottom_sheet.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'model/user_model.dart';
 import 'shared/network/cache_helper.dart';
 
@@ -70,13 +69,14 @@ class Controller extends GetxController {
   }
 
   Future getMe() async {
+    print("################3");
     var ol = await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     me = (UserModel.fromJson(
         ol.data()!, FirebaseAuth.instance.currentUser!.uid, ""));
-    // update();
+     update();
     //
     // me?.children?.add(ol.data()?["children"]);
     return me;
@@ -105,9 +105,8 @@ class Controller extends GetxController {
       await FirebaseAuth.instance.signOut();
       await CacheHelper.removeData(key: 'uId');
 
-         Navigator.of(context).pushReplacement(MaterialPageRoute(
-               builder: (context) =>
-                const LogInWidget()));
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const LogInWidget()));
     } catch (e) {
       if (kDebugMode) {
         print(e);
@@ -208,23 +207,49 @@ class Controller extends GetxController {
     }
   }
 
-  Future updateUserData({
-    required String userName,
+  Future updateEmail({
     required String email,
+    required String password,
     required BuildContext context,
   }) async {
     print("+++++++++++++++++++++++++${FirebaseAuth.instance.currentUser!.uid}");
     try {
+      final user = FirebaseAuth.instance.currentUser;
       if (email.isNotEmpty) {
-        await FirebaseAuth.instance.currentUser?.updateEmail(email);
+
+        await user!.reauthenticateWithCredential(
+          EmailAuthProvider.credential(
+            email: user.email!,
+            password: "01099551686", // Replace with actual password
+          ),
+        );
+        // Update the email address
+        await user.updateEmail(email);
+        // Send a verification email
+        await user.sendEmailVerification();
       }
-      if (userName.isEmpty && email.isEmpty) return;
+      if ( email.isEmpty) return;
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        if (email.isNotEmpty) "email": email,
+      });
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+  Future updateName({
+    required String userName,
+    required BuildContext context,
+  }) async {
+    print("+++++++++++++++++++++++++${FirebaseAuth.instance.currentUser!.uid}");
+    try {
       await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .update({
         if (userName.isNotEmpty) "name": userName,
-        if (email.isNotEmpty) "email": email,
       });
     } catch (e) {
       print(e.toString());
