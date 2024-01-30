@@ -20,7 +20,7 @@ class DataHelper {
     return sumOfGrade / sumOfCredit;
   }
 
-  static double cumulativeAvg(double previousHours, double previousGPA) {
+  static double cumulativeAvg(int previousHours, double previousGPA) {
     double sumOfGrade = 0;
     double sumOfCredit = 0;
 
