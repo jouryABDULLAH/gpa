@@ -71,7 +71,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       print(controller.me!.name);
                       Get.to(
                         MyAccount(userData: controller.me!),
-                      )!.then((value) => controller.getMe());
+                      )!
+                          .then((value) => controller.getMe());
                     }),
                 buildDrawerListItem(
                     leading: Icons.privacy_tip,
