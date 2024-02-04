@@ -4,6 +4,7 @@ import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import '../../../control.dart';
+// import 'package:gpa/shared/component/bottom_navbar.dart';
 
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 
@@ -23,7 +24,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   int index = 0;
   final controller = Get.put(Controller());
-List screens = [const HomeWidget(), ServicisPage(),ServicisPage(),ProfileScreen(),ProfileScreen(),];  @override
+  List screens = [
+    const HomeWidget(),
+    ServicisPage(),
+    ServicisPage(),
+    ProfileScreen(),
+    ProfileScreen(),
+  ];
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
