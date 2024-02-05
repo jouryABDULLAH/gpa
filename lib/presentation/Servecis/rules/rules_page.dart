@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:url_launcher/url_launcher.dart';
 
+// ignore: camel_case_types
 class rulesPage extends StatefulWidget {
   const rulesPage({super.key});
 
@@ -10,6 +12,7 @@ class rulesPage extends StatefulWidget {
   State<rulesPage> createState() => _rulesPageState();
 }
 
+// ignore: camel_case_types
 class _rulesPageState extends State<rulesPage> {
   @override
   Widget build(BuildContext context) {
@@ -18,14 +21,14 @@ class _rulesPageState extends State<rulesPage> {
         elevation: 0,
         backgroundColor: ColorManager.primary,
         leading: IconButton(
-          onPressed: () => Get.to(HomeScreen()),
-          icon: Icon(
+          onPressed: () => Get.to(const HomeScreen()),
+          icon: const Icon(
             Icons.home,
             color: Colors.black,
             size: 32,
           ),
         ),
-        title: Text(
+        title: const Text(
           'خدمات وقوانين الجامعة',
           textAlign: TextAlign.center, // Align the text in the center
         ),
@@ -33,7 +36,8 @@ class _rulesPageState extends State<rulesPage> {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications, color: Colors.black, size: 25),
+            icon:
+                const Icon(Icons.notifications, color: Colors.black, size: 25),
           ),
         ],
         toolbarHeight: 90.0,
@@ -41,16 +45,16 @@ class _rulesPageState extends State<rulesPage> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(30, 50, 30, 10),
-            child: Column(children: [
-              const Text(' خدمات الجامعة'),
-              const Text('الخدمات المعروضة هي خدمات مقررة من الجامعة')
+            padding: const EdgeInsets.fromLTRB(30, 50, 30, 10),
+            child: const Column(children: [
+              Text(' خدمات الجامعة'),
+              Text('الخدمات المعروضة هي خدمات مقررة من الجامعة')
             ]),
           ),
           Container(
             height: 550,
-            child: RulesList(),
-            margin: EdgeInsets.fromLTRB(20, 5, 20, 30),
+            margin: const EdgeInsets.fromLTRB(20, 5, 20, 30),
+            child: const RulesList(),
           )
         ],
       ),
@@ -59,6 +63,39 @@ class _rulesPageState extends State<rulesPage> {
 }
 
 // stores ExpansionPanel state information
+
+class Rule {
+  Rule({
+    required this.title,
+    required this.description,
+    required this.videoLink,
+    this.isExpanded = false,
+  });
+
+  final String title;
+  final String description;
+  final String videoLink;
+  bool isExpanded;
+}
+
+final List<Rule> rules = [
+  Rule(
+    title: 'Title 1',
+    description: 'Description 1',
+    videoLink: 'Video Link 1',
+  ),
+  Rule(
+    title: 'Title 2',
+    description: 'Description 2',
+    videoLink: 'Video Link 2',
+  ),
+  // Add more rules as needed
+];
+
+List<Rule> academicRules() {
+  return List<Rule>.from(rules);
+}
+
 class Item {
   Item({
     required this.expandedValue,
@@ -71,14 +108,14 @@ class Item {
   bool isExpanded;
 }
 
-List<Item> generateItems(int numberOfItems) {
-  return List<Item>.generate(numberOfItems, (int index) {
-    return Item(
-      headerValue: 'خدمة $index',
-      expandedValue: 'هذه الخدمة رقم  $index',
-    );
-  });
-}
+// List<Item> generateItems(int numberOfItems) {
+//   return List<Item>.generate(numberOfItems, (int index) {
+//     return Item(
+//       headerValue: 'خدمة $index',
+//       expandedValue: 'هذه الخدمة رقم  $index',
+//     );
+//   });
+// }
 
 class RulesList extends StatefulWidget {
   const RulesList({super.key});
@@ -88,13 +125,13 @@ class RulesList extends StatefulWidget {
 }
 
 class _RulesListState extends State<RulesList> {
-  final List<Item> _data = generateItems(5);
+  final List<Rule> _data = academicRules();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         child: _buildPanel(),
       ),
     );
@@ -109,13 +146,13 @@ class _RulesListState extends State<RulesList> {
           _data[index].isExpanded = isExpanded;
         });
       },
-      children: _data.map<ExpansionPanel>((Item item) {
+      children: _data.map<ExpansionPanel>((Rule rule) {
         return ExpansionPanel(
           canTapOnHeader: true,
           backgroundColor: ColorManager.card,
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
-              title: Text(item.headerValue),
+              title: Text(rule.title),
             );
           },
           body: Column(
@@ -128,10 +165,10 @@ class _RulesListState extends State<RulesList> {
               ),
               ListTile(
                   hoverColor: ColorManager.blue,
-                  title: Text(item.expandedValue),
+                  title: Text(rule.description),
                   // هنا شرح الخدمة
-                  subtitle: const Text(
-                      'هنا نجد تفاصيل الخدمة وتوضيحها وماهيتها الخ الخ الخ الخ الخ الخ ...'),
+                  // subtitle: const Text(
+                  //     'هنا نجد تفاصيل الخدمة وتوضيحها وماهيتها الخ الخ الخ الخ الخ الخ ...'),
                   trailing: const Column(
                     children: [
                       Icon(Icons.video_camera_back),
@@ -139,15 +176,16 @@ class _RulesListState extends State<RulesList> {
                     ],
                   ),
                   onTap: () {
-                    setState(() {
-                      // show the video on youtube
-                      _data.removeWhere(
-                          (Item currentItem) => item == currentItem);
-                    });
+                    print(rule.videoLink);
+                    // setState(() {
+                    //   // show the video on youtube
+                    //   _data.removeWhere(
+                    //       (Rule currentItem) => rule == currentItem);
+                    // });
                   }),
             ],
           ),
-          isExpanded: item.isExpanded,
+          isExpanded: rule.isExpanded,
         );
       }).toList(),
     );
