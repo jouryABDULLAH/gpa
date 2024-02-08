@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:gpa/presentation/Servecis/rules/model/rules.dart';
 
 // ignore: camel_case_types
 class rulesPage extends StatefulWidget {
@@ -64,49 +64,39 @@ class _rulesPageState extends State<rulesPage> {
 
 // stores ExpansionPanel state information
 
-class Rule {
-  Rule({
-    required this.title,
-    required this.description,
-    required this.videoLink,
-    this.isExpanded = false,
-  });
+// class Rule {
+//   Rule({
+//     required this.title,
+//     required this.description,
+//     required this.videoLink,
+//     this.isExpanded = false,
+//   });
 
-  final String title;
-  final String description;
-  final String videoLink;
-  bool isExpanded;
-}
+//   final String title;
+//   final String description;
+//   final String videoLink;
+//   bool isExpanded;
+// }
 
-final List<Rule> rules = [
-  Rule(
-    title: 'Title 1',
-    description: 'Description 1',
-    videoLink: 'Video Link 1',
-  ),
-  Rule(
-    title: 'Title 2',
-    description: 'Description 2',
-    videoLink: 'Video Link 2',
-  ),
-  // Add more rules as needed
-];
+// final List<Rule> rules = [
+//   Rule(
+//     title: 'Title 1',
+//     description: 'Description 1',
+//     videoLink: 'Video Link 1',
+//   ),
+//   Rule(
+//     title: 'Title 2',
+//     description: 'Description 2',
+//     videoLink: 'Video Link 2',
+//   ),
+//   // Add more rules as needed
+// ];
 
-List<Rule> academicRules() {
-  return List<Rule>.from(rules);
-}
+final rules = Rule.fetchAll();
 
-class Item {
-  Item({
-    required this.expandedValue,
-    required this.headerValue,
-    this.isExpanded = false,
-  });
-
-  String expandedValue;
-  String headerValue;
-  bool isExpanded;
-}
+// List<Rule> academicRules() {
+//   return List<Rule>.from(rules);
+// }
 
 // List<Item> generateItems(int numberOfItems) {
 //   return List<Item>.generate(numberOfItems, (int index) {
@@ -125,7 +115,7 @@ class RulesList extends StatefulWidget {
 }
 
 class _RulesListState extends State<RulesList> {
-  final List<Rule> _data = academicRules();
+  final List<Rule> _data = rules;
 
   @override
   Widget build(BuildContext context) {
@@ -176,7 +166,8 @@ class _RulesListState extends State<RulesList> {
                     ],
                   ),
                   onTap: () {
-                    print(rule.videoLink);
+                    // ignore: avoid_print
+                    print(rule.steps);
                     // setState(() {
                     //   // show the video on youtube
                     //   _data.removeWhere(
