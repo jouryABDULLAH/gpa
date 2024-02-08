@@ -9,7 +9,10 @@ import 'home/home_screen.dart';
 
 class Si {
   final controller = Get.put(Controller());
+<<<<<<< HEAD
 
+=======
+>>>>>>> HI
   Future submitAuthForm(
       {required String email,
       required String password,
@@ -37,7 +40,10 @@ class Si {
         await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) async {
+<<<<<<< HEAD
           await value.user!.sendEmailVerification();
+=======
+>>>>>>> HI
           await FirebaseFirestore.instance
               .collection('users')
               .doc(value.user!.uid)

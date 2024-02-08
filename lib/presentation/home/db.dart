@@ -172,14 +172,22 @@ class _DbState extends State<Db> {
           ],
         ],
       ),
+<<<<<<< HEAD
       floatingActionButton: FloatingActionButton(
+=======
+      /*  floatingActionButton: FloatingActionButton(
+>>>>>>> HI
         onPressed: addEvent,
         backgroundColor: ColorManager.primary,
         child: const Icon(
           Icons.add,
           color: ColorManager.violet,
         ),
+<<<<<<< HEAD
       ),
+=======
+      ),*/
+>>>>>>> HI
     );
   }
 
