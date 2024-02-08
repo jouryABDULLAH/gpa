@@ -30,14 +30,14 @@ class LessonList extends StatelessWidget {
                                   DataHelper.allAddedLessons[index].creditGrade)
                               .toStringAsFixed(0))),
                       subtitle: Text(
-                          "Credit: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
+                          "الساعات: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
                     ),
                   ),
                 ),
               );
             })
         : Container(
-            child: Text("Please Add Lesson.",
+            child: Text("الرجاء اضافة مادة.",
                 textAlign: TextAlign.center, style: Constants.titleStyle),
             alignment: Alignment.center,
           );
