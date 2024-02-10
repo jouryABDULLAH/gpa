@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
->>>>>>> HI
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 import 'package:gpa/presentation/Servecis/GPA/model/lesson.dart';
@@ -11,66 +8,47 @@ import 'package:gpa/presentation/Servecis/GPA/widgets/lesson_list.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/letter_dropdown_widget.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/show_average.dart';
 
-class GradeAveragePage extends StatefulWidget {
-  const GradeAveragePage({Key? key}) : super(key: key);
+class GradeAveragePageTR extends StatefulWidget {
+  const GradeAveragePageTR({Key? key}) : super(key: key);
 
   @override
   _GradeAveragePageState createState() => _GradeAveragePageState();
 }
 
-class _GradeAveragePageState extends State<GradeAveragePage> {
+class _GradeAveragePageState extends State<GradeAveragePageTR> {
   var formKey = GlobalKey<FormState>();
   double selectedLetterValue = 4;
   double selectedCreditValue = 1;
   var enteringValue = "";
+  int hours = 0;
+  double previousGPA = 0.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-<<<<<<< HEAD
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        title: Text(
-          Constants.title,
-          style: Constants.titleStyle,
-        ),
-        centerTitle: true,
-      ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-=======
-      /* appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        /* title: Text(
-          Constants.title,
-          style: Constants.titleStyle,
-        ),*/
-        centerTitle: true,
-      ),*/
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Upper(),
->>>>>>> HI
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: _buildForm(),
-              ),
-              Expanded(
-                flex: 1,
-                child: ShowAverage(
-                    average: DataHelper.calculateAvg(),
-                    numberOfClass: DataHelper.allAddedLessons.length),
-              ),
-            ],
+          Flexible(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: _buildForm(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: ShowAverage(
+                    average: DataHelper.cumulativeAvg(hours, previousGPA),
+                    numberOfClass: DataHelper.allAddedLessons.length,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Expanded(
+          Flexible(
             child: Container(
               child: LessonList(
                 onDismiss: (index) {
@@ -91,11 +69,9 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       child: Column(
         children: <Widget>[
           _buildTextFormField(),
-<<<<<<< HEAD
-          SizedBox(height: 5),
-=======
+          _buildTextFormFieldPreviousHours(),
+          _buildTextFormFieldPreviousGPA(),
           SizedBox(height: 25),
->>>>>>> HI
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -122,34 +98,87 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               IconButton(
                 onPressed: _addLessonAndCalAvg,
                 icon: Icon(Icons.arrow_forward_ios_sharp),
-<<<<<<< HEAD
-                color: Constants.mainColor,
-=======
                 color: const Color.fromRGBO(0, 168, 171, 1),
->>>>>>> HI
                 iconSize: 30,
               ),
             ],
           ),
           SizedBox(
-<<<<<<< HEAD
-            height: 5,
-=======
             height: 15,
->>>>>>> HI
           ),
         ],
       ),
     );
   }
 
+  _buildTextFormFieldPreviousHours() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 18, top: 10),
+      child: TextFormField(
+        keyboardType: TextInputType.number, // Set the keyboard type to number
+        onSaved: (value) {
+          setState(() {
+            // Parse the entered value to an integer and save it to the 'hours' variable
+            hours = int.tryParse(value!) ?? 0;
+          });
+        },
+        validator: (v) {
+          if (v!.isEmpty) {
+            return "Enter The Previous Hours.";
+          } else if (int.tryParse(v) == null) {
+            return "Enter a valid integer.";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Enter The Previous Hours",
+          border: OutlineInputBorder(
+            borderRadius: Constants.borderRadius,
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Constants.mainColor.withOpacity(0.3),
+        ),
+      ),
+    );
+  }
+
+  _buildTextFormFieldPreviousGPA() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 18, top: 10),
+      child: TextFormField(
+        keyboardType: TextInputType.numberWithOptions(
+            decimal: true), // Allow numeric input with decimal
+        onSaved: (value) {
+          setState(() {
+            // Parse the entered value to a double and save it to the 'previousGPA' variable
+            previousGPA = double.tryParse(value!) ?? 0.0;
+          });
+        },
+        validator: (v) {
+          if (v!.isEmpty) {
+            return "Enter The Previous GPA.";
+          } else if (double.tryParse(v) == null) {
+            return "Enter a valid number.";
+          }
+          return null;
+        },
+        decoration: InputDecoration(
+          hintText: "Enter The Previous GPA",
+          border: OutlineInputBorder(
+            borderRadius: Constants.borderRadius,
+            borderSide: BorderSide.none,
+          ),
+          filled: true,
+          fillColor: Constants.mainColor.withOpacity(0.3),
+        ),
+      ),
+    );
+  }
+
   _buildTextFormField() {
     return Padding(
-<<<<<<< HEAD
-      padding: const EdgeInsets.only(left: 8),
-=======
-      padding: const EdgeInsets.only(left: 18, top: 30),
->>>>>>> HI
+      padding: const EdgeInsets.only(left: 18, top: 10),
       child: TextFormField(
         onSaved: (value) {
           setState(() {
@@ -163,11 +192,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             return null;
         },
         decoration: InputDecoration(
-<<<<<<< HEAD
-          hintText: "Mathematics",
-=======
           hintText: "Enter The Class",
->>>>>>> HI
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -190,8 +215,6 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       setState(() {});
     }
   }
-<<<<<<< HEAD
-=======
 
   Widget Upper() {
     return Container(
@@ -225,7 +248,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "حساب المعدل الفصلي",
+              "حساب المعدل التراكمي",
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge!
@@ -236,5 +259,4 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       ),
     );
   }
->>>>>>> HI
 }
