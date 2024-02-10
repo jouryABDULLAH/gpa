@@ -192,6 +192,14 @@ class _DbState extends State<Db> {
             ),
           ),
         ]));
+
+//         onPressed: addEvent,
+//         backgroundColor: ColorManager.primary,
+//         child: const Icon(
+//           Icons.add,
+//           color: ColorManager.violet,
+//         ),
+//     );
   }
 
   Future<void> addEvent() async {
