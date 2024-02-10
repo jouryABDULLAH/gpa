@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-=======
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
->>>>>>> HI
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 import 'package:gpa/presentation/Servecis/GPA/model/lesson.dart';
@@ -28,7 +25,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-<<<<<<< HEAD
+// <<<<<<< HEAD
       appBar: AppBar(
         backgroundColor: Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
@@ -41,8 +38,8 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-=======
-      /* appBar: AppBar(
+// =======
+          /* appBar: AppBar(
         backgroundColor: Color.fromARGB(0, 255, 255, 255),
         elevation: 0,
         /* title: Text(
@@ -51,11 +48,12 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         ),*/
         centerTitle: true,
       ),*/
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Upper(),
->>>>>>> HI
+          // body:
+          //Column(
+          //crossAxisAlignment: CrossAxisAlignment.stretch,
+          //children: <Widget>[
+          // Upper(),
+// >>>>>>> HI
           Row(
             children: <Widget>[
               Expanded(
@@ -91,11 +89,11 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       child: Column(
         children: <Widget>[
           _buildTextFormField(),
-<<<<<<< HEAD
+// <<<<<<< HEAD
           SizedBox(height: 5),
-=======
-          SizedBox(height: 25),
->>>>>>> HI
+// =======
+//           SizedBox(height: 25),
+// >>>>>>> HI
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -122,21 +120,21 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               IconButton(
                 onPressed: _addLessonAndCalAvg,
                 icon: Icon(Icons.arrow_forward_ios_sharp),
-<<<<<<< HEAD
+// <<<<<<< HEAD
                 color: Constants.mainColor,
-=======
-                color: const Color.fromRGBO(0, 168, 171, 1),
->>>>>>> HI
+// =======
+//                 color: const Color.fromRGBO(0, 168, 171, 1),
+// >>>>>>> HI
                 iconSize: 30,
               ),
             ],
           ),
           SizedBox(
-<<<<<<< HEAD
+// <<<<<<< HEAD
             height: 5,
-=======
-            height: 15,
->>>>>>> HI
+// =======
+//             height: 15,
+// >>>>>>> HI
           ),
         ],
       ),
@@ -145,11 +143,11 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
 
   _buildTextFormField() {
     return Padding(
-<<<<<<< HEAD
+// <<<<<<< HEAD
       padding: const EdgeInsets.only(left: 8),
-=======
-      padding: const EdgeInsets.only(left: 18, top: 30),
->>>>>>> HI
+// =======
+//       padding: const EdgeInsets.only(left: 18, top: 30),
+// >>>>>>> HI
       child: TextFormField(
         onSaved: (value) {
           setState(() {
@@ -163,11 +161,11 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             return null;
         },
         decoration: InputDecoration(
-<<<<<<< HEAD
+// <<<<<<< HEAD
           hintText: "Mathematics",
-=======
-          hintText: "Enter The Class",
->>>>>>> HI
+// =======
+//           hintText: "Enter The Class",
+// >>>>>>> HI
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -190,8 +188,6 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       setState(() {});
     }
   }
-<<<<<<< HEAD
-=======
 
   Widget Upper() {
     return Container(
@@ -236,5 +232,5 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       ),
     );
   }
->>>>>>> HI
+// >>>>>>> HI
 }

@@ -1,13 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../shared/network/cache_helper.dart';
 
-<<<<<<< HEAD
-
 class AppTextFormField extends StatelessWidget {
-
-=======
-class AppTextFormField extends StatelessWidget {
->>>>>>> HI
   AppTextFormField(
       {Key? key,
       this.head,
@@ -48,19 +42,11 @@ class AppTextFormField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-<<<<<<< HEAD
-      padding: EdgeInsets.all(padding??0.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(head??""),
-=======
       padding: EdgeInsets.all(padding ?? 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(head ?? ""),
->>>>>>> HI
           Row(
             children: [
               Expanded(
@@ -70,11 +56,7 @@ class AppTextFormField extends StatelessWidget {
                   validator: validate,
                   controller: controller,
                   textDirection: direction,
-<<<<<<< HEAD
-                  obscureText: secure??false,
-=======
                   obscureText: secure ?? false,
->>>>>>> HI
                   style: Theme.of(context).inputDecorationTheme.hintStyle,
                   keyboardType: textInputType,
                   decoration: InputDecoration(
@@ -117,13 +99,9 @@ class AppTextFormField extends StatelessWidget {
               ),
             ],
           ),
-<<<<<<< HEAD
-          const SizedBox(height: 10,)
-=======
           const SizedBox(
             height: 10,
           )
->>>>>>> HI
         ],
       ),
     );

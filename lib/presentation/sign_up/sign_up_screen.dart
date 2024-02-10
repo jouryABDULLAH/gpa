@@ -85,12 +85,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           if (name.text.trim().isEmpty) {
                             return "cannot empty".tr;
                           }
-<<<<<<< HEAD
                           if (c!.contains(RegExp("[a-z,A-Z]"))) {
                             return "يجب ان يكون الاسم باللغة العربية".tr;
                           }
-=======
->>>>>>> HI
+
                           return null;
                         },
                       ),
@@ -99,21 +97,21 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         head: "Email",
                         controller: email,
                         validate: (c) {
-<<<<<<< HEAD
-                          if (!email.text.contains("@qu.edu.sa")) {
-                            return "must contains @qu.edu.sa".tr;
-                          }
-                          return null;
-                        },
-                        hint: '0000000000@qu.edu.sa',
-=======
+// <<<<<<< HEAD
+//                           if (!email.text.contains("@qu.edu.sa")) {
+//                             return "must contains @qu.edu.sa".tr;
+//                           }
+//                           return null;
+//                         },
+//                         hint: '0000000000@qu.edu.sa',
+// =======
                           if (!email.text.contains("@")) {
                             return "wrong email".tr;
                           }
                           return null;
                         },
                         hint: 'email',
->>>>>>> HI
+// >>>>>>> HI
                       ),
                       AppTextFormField(
                         padding: 10,

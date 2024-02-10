@@ -15,12 +15,8 @@ class DayItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-<<<<<<< HEAD
-          border: Border.all(color: ColorManager.violet.withOpacity(0.3), width: 0.3)),
-=======
           border: Border.all(
               color: ColorManager.violet.withOpacity(0.3), width: 0.3)),
->>>>>>> HI
       child: Stack(
         children: [
           Container(
@@ -30,13 +26,9 @@ class DayItemWidget extends StatelessWidget {
               height: 18,
               width: 18,
               decoration: BoxDecoration(
-<<<<<<< HEAD
-                color: properties.isCurrentDay ? ColorManager.violet : Colors.transparent,
-=======
                 color: properties.isCurrentDay
                     ? ColorManager.violet
                     : Colors.transparent,
->>>>>>> HI
                 shape: BoxShape.circle,
               ),
               child: Center(
@@ -56,13 +48,8 @@ class DayItemWidget extends StatelessWidget {
               child: Text('+${properties.notFittedEventsCount}',
                   style: TextStyle(
                       fontSize: 10,
-<<<<<<< HEAD
-                      color:
-                          ColorManager.violet.withOpacity(properties.isInMonth ? 1 : 0.5))),
-=======
                       color: ColorManager.violet
                           .withOpacity(properties.isInMonth ? 1 : 0.5))),
->>>>>>> HI
             ),
         ],
       ),

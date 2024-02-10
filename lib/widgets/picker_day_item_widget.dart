@@ -34,12 +34,9 @@ class PickerDayItemWidget extends StatelessWidget {
                     child: Container(
                         color: properties.isLastInRange
                             ? Colors.transparent
-<<<<<<< HEAD
                             : ColorManager.violet.withOpacity(0.4))),
-=======
-                            : const Color.fromARGB(255, 246, 246, 246)
-                                .withOpacity(0.4))),
->>>>>>> HI
+                // : const Color.fromARGB(255, 246, 246, 246)
+                //     .withOpacity(0.4))),
               ],
             ),
           Container(
