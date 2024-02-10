@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
+import 'package:gpa/presentation/Servecis/rules/rules_page.dart';
 
 class ServicisPage extends StatefulWidget {
   const ServicisPage({super.key});
@@ -75,7 +76,7 @@ class _ServicisPage extends State<ServicisPage> {
                 );
               } else if (index == 1) {
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const GPAPage()),
+                  MaterialPageRoute(builder: (context) => const rulesPage()),
                 );
               }
             },
