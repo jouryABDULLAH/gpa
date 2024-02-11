@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:gpa/presentation/chatbot/chatbot_welcome_screen.dart';
 import '../../../control.dart';
 // import 'package:gpa/shared/component/bottom_navbar.dart';
 
@@ -26,13 +27,12 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = Get.put(Controller());
   List screens = [
     const HomeWidget(),
-    ServicisPage(),
-    ServicisPage(),
-    ProfileScreen(),
+    const ServicisPage(),
+    const ServicisPage(),
+    const chatbo_welcome(),
     ProfileScreen(),
   ];
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
