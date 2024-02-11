@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page.dart';
+import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page_TR.dart';
 
 class GPAPage extends StatefulWidget {
   const GPAPage({super.key});
@@ -84,7 +85,7 @@ class _GPAPage extends State<GPAPage> {
               } else if (index == 1) {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                      builder: (context) => const GradeAveragePage()),
+                      builder: (context) => const GradeAveragePageTR()),
                 );
               }
             },
