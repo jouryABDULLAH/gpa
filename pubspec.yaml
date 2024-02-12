@@ -81,6 +81,7 @@ flutter:
     - assets/images/back_card.png
     - assets/images/logo.png
     - assets/images/Acadmic Servecis.png
+    - assets/images/captine.jpg
     - assets/data_encoded.json
     - assets/data.json
   #   - images/a_dot_ham.jpeg
