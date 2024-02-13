@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gpa/presentation/Map/Map_screen.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
@@ -28,11 +29,10 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeWidget(),
     ServicisPage(),
     ServicisPage(),
-    ProfileScreen(),
+    MapScreen(),
     ProfileScreen(),
   ];
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
