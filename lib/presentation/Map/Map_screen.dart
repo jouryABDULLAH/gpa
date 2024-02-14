@@ -14,7 +14,7 @@ class _MapScreenState extends State<MapScreen> {
 
   static CameraPosition _initialPosition = const CameraPosition(
     target: LatLng(26.34847508549134, 43.767713423546866),
-    zoom: 24,
+    zoom: 14,
   );
 
   final List<Marker> myMarker = [];
