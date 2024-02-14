@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/create_event_dialog.dart';
 import '../../widgets/day_item_widget.dart';
@@ -41,7 +42,7 @@ class _DbState extends State<Db> {
     return Scaffold(
       body: Column(
         children: [
-          const Image(image: AssetImage("assets/images/app_bar.png")),
+          Upper(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -59,9 +60,15 @@ class _DbState extends State<Db> {
                         });
                       },
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              index == 0 ? Colors.white : null)),
-                      child: const Text("List"),
+                          backgroundColor: MaterialStateProperty.all(index == 0
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "قائمة",
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -72,9 +79,15 @@ class _DbState extends State<Db> {
                         });
                       },
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              index == 1 ? Colors.white : null)),
-                      child: const Text("Calender"),
+                          backgroundColor: MaterialStateProperty.all(index == 1
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "تقويم",
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
                   ),
                 ],
@@ -134,10 +147,13 @@ class _DbState extends State<Db> {
                   valueListenable: controller.monthNameNotifier,
                   builder: (ctx, value, child) => Text(
                     value,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        fontWeight: FontWeight.w600),
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 109, 109, 109),
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
                   ),
                 ),
                 IconButton(
@@ -177,7 +193,7 @@ class _DbState extends State<Db> {
         backgroundColor: ColorManager.primary,
         child: const Icon(
           Icons.add,
-          color: ColorManager.violet,
+          color: Color.fromARGB(255, 255, 198, 34),
         ),
       ),
     );
@@ -199,5 +215,33 @@ class _DbState extends State<Db> {
         "color": event.eventColor.value,
       });
     }
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 50),
+      height: 100,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 167, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              "التقويم الاكاديمي",
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

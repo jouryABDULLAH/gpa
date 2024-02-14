@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 
@@ -10,30 +11,24 @@ class ServicisPage extends StatefulWidget {
 }
 
 class _ServicisPage extends State<ServicisPage> {
+  final style = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorManager.primary,
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.list,
-            color: Colors.black,
-            size: 32,
-          ),
-        ),
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.notifications, color: Colors.black, size: 25),
+            icon: Icon(Icons.notifications,
+                color: Color.fromARGB(255, 255, 198, 34), size: 25),
           ),
         ],
       ),
       body: Column(
         children: [
-          const Image(image: AssetImage("assets/images/Acadmic Servecis.png")),
+          Upper(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MyList(),
@@ -45,15 +40,15 @@ class _ServicisPage extends State<ServicisPage> {
 
   Widget MyList() {
     List<String> Titles = [
-      "GPA",
-      "RULES",
+      "الحاسبة",
+      "القواعد ",
     ];
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
+          bottomLeft: Radius.circular(19),
+          bottomRight: Radius.circular(19),
         ),
         color: Colors.white,
       ),
@@ -82,19 +77,53 @@ class _ServicisPage extends State<ServicisPage> {
             child: Container(
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Color.fromARGB(90, 0, 168, 171),
+                borderRadius: BorderRadius.circular(19),
+                color: Color.fromARGB(90, 0, 167, 171),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   //Icon(IconsItems[index]),
-                  Text(Titles[index]),
+                  Text(
+                    Titles[index],
+                    style: GoogleFonts.tajawal(
+                      textStyle: style,
+                      color: Color.fromARGB(255, 255, 255, 255),
+                    ),
+                  ),
                 ],
               ),
             ),
           );
         },
+      ),
+    );
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 50),
+      height: 100,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "الخدمات",
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
       ),
     );
   }
