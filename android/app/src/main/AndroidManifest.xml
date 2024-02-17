@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:enableOnBackInvokedCallback="true"
         android:label="gpa"
@@ -6,7 +8,13 @@
         android:icon="@mipmap/ic_launcher">
 
         <meta-data android:name="com.google.android.geo.API_KEY"
+<<<<<<< HEAD
                android:value="AIzaSyCb8eLfGlu-Ckpmu9uDuzW5tmNAIzTAU1I"/>
+=======
+                   android:value="AIzaSyCd1i5ySZMzjBiaHmnVVby9gQQUnnyWyto"/>
+      
+
+>>>>>>> origin/test
         <activity
             android:name=".MainActivity"
             android:exported="true"

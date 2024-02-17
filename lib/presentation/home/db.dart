@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:gpa/control.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/create_event_dialog.dart';
 import '../../widgets/day_item_widget.dart';
@@ -40,6 +41,7 @@ class _DbState extends State<Db> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< HEAD
         body: Column(
           children: [
             const Image(image: AssetImage("assets/images/app_bar.png")),
@@ -147,6 +149,57 @@ class _DbState extends State<Db> {
                     onPressed: () {
                       controller.changeCalendarPage(showNext: true);
                     },
+=======
+      body: Column(
+        children: [
+          Upper(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  color: ColorManager.primary,
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          index = 0;
+                        });
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(index == 0
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "قائمة",
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          index = 1;
+                        });
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(index == 1
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "تقويم",
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                    ),
+>>>>>>> origin/test
                   ),
                 ],
               ),
@@ -170,9 +223,63 @@ class _DbState extends State<Db> {
                   // weeksToShow: [0,1,2].toList(),
                   //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
                 ),
+<<<<<<< HEAD
+=======
+                ValueListenableBuilder(
+                  valueListenable: controller.monthNameNotifier,
+                  builder: (ctx, value, child) => Text(
+                    value,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 109, 109, 109),
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios),
+                  onPressed: () {
+                    controller.changeCalendarPage(showNext: true);
+                  },
+                ),
+              ],
+            ),
+
+            /// Calendar view.
+            Expanded(
+              child: CrCalendar(
+                firstDayOfWeek: WeekDay.sunday,
+                eventsTopPadding: 32,
+                initialDate: controller.currentDate,
+                maxEventLines: 3,
+                controller: controller.calendarController,
+                forceSixWeek: true,
+                dayItemBuilder: (builderArgument) =>
+                    DayItemWidget(properties: builderArgument),
+                weekDaysBuilder: (day) => WeekDaysWidget(day: day),
+                eventBuilder: (drawer) => EventWidget(drawer: drawer),
+                // onDayClicked: controller.showDayEventsInModalSheet(context),
+                minDate: DateTime.now().subtract(const Duration(days: 1000)),
+                maxDate: DateTime.now().add(const Duration(days: 180)),
+                // weeksToShow: [0,1,2].toList(),
+                //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
+>>>>>>> origin/test
               ),
             ],
           ],
+<<<<<<< HEAD
+=======
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: addEvent,
+        backgroundColor: ColorManager.primary,
+        child: const Icon(
+          Icons.add,
+          color: Color.fromARGB(255, 255, 198, 34),
+>>>>>>> origin/test
         ),
         floatingActionButton:
             Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
@@ -218,5 +325,33 @@ class _DbState extends State<Db> {
         "color": event.eventColor.value,
       });
     }
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(bottom: 50),
+      height: 100,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 167, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              "التقويم الاكاديمي",
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

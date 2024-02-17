@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/profile/widget/about_us.dart';
 import 'package:gpa/presentation/profile/widget/change_password.dart';
 import 'package:gpa/presentation/profile/widget/my_account.dart';
-
+import 'package:boxicons/boxicons.dart';
 import '../../control.dart';
 import '../resources/color_manager.dart';
+import 'package:ionicons/ionicons.dart';
 
 class ProfileScreen extends StatefulWidget {
   ProfileScreen({super.key});
@@ -15,6 +17,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final style = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   final controller = Get.put(Controller());
 
   Widget buildDrawerListItem(
@@ -28,7 +31,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading,
         color: ColorManager.primary,
       ),
-      title: Text(title),
+      title: Text(
+        title,
+        style: GoogleFonts.tajawal(
+          textStyle: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+          ),
+        ),
+      ),
       onTap: onTap,
       trailing: trailing ??= Icon(
         Icons.arrow_forward_ios,
@@ -56,15 +67,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        actions: [
+          Container(
+            padding: EdgeInsets.only(right: 30, top: 5),
+            child: Text(
+              "حسابي",
+              style: GoogleFonts.tajawal(
+                textStyle: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
+                    color: Color.fromARGB(255, 0, 167, 171)),
+              ),
+            ),
+          ),
+        ],
       ),
       body: GetBuilder<Controller>(
         builder: (_) {
           if (controller.me!.name != null) {
             return ListView(
-              padding: EdgeInsets.zero,
+              padding: EdgeInsets.only(top: 30),
               children: [
                 buildDrawerListItem(
+<<<<<<< HEAD
                     leading: Icons.person,
                     title: 'My account ',
                     onTap: () {
@@ -74,24 +99,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       )!
                           .then((value) => controller.getMe());
                     }),
+=======
+                  leading: Boxicons.bx_user_circle,
+                  title: 'معلوماتي',
+                  onTap: () {
+                    print(controller.me!.name);
+                    Get.to(
+                      MyAccount(userData: controller.me!),
+                    )!
+                        .then((value) => controller.getMe());
+                  },
+                ),
+>>>>>>> origin/test
                 buildDrawerListItem(
-                    leading: Icons.privacy_tip,
-                    title: 'change password',
-                    onTap: () {
-                      Get.to(ChangePassword());
-                    }),
+                  leading: Boxicons.bx_refresh,
+                  title: 'تغيير كلمة المرور',
+                  onTap: () {
+                    Get.to(ChangePassword());
+                  },
+                ),
                 buildDrawerListItem(
-                    leading: Icons.info_outline,
-                    title: 'About us',
-                    onTap: () {
-                      Get.to(const AboutUs());
-                    }),
+                  leading: Boxicons.bx_info_circle,
+                  title: 'من نحن',
+                  onTap: () {
+                    Get.to(const AboutUs());
+                  },
+                ),
                 buildDrawerListItem(
-                    leading: Icons.logout,
-                    title: 'LogOut',
-                    onTap: () {
-                      controller.logout(context);
-                    }),
+                  leading: Icons.logout,
+                  title: 'تسجيل خروج',
+                  onTap: () {
+                    controller.logout(context);
+                  },
+                ),
               ],
             );
           } else {
