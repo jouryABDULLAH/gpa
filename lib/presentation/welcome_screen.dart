@@ -53,21 +53,31 @@ class _WelcomeState extends State<Welcome> {
                   child: Column(
                     children: [
                       AppButton(
-                        content: 'Login',
+                        content: "Login".tr,
                         contentClr: Colors.white,
                         clr: ColorManager.blueGray,
                         onPressed: () {
                           Get.to(const LogInWidget());
                         },
                       ),
-                      const SizedBox(height: 10,),
-                      const Text("Don 't Have Account?"),
-                      const SizedBox(height: 10,),
-                      TextButton(onPressed: (){
-                        Get.to(const SignUpWidget());
-                      }, child: const Text(
-                        "Sign Up",style: TextStyle(color: Colors.red,decoration: TextDecoration.underline,),
-                      ))
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      Text("Dacc".tr),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Get.to(const SignUpWidget());
+                          },
+                          child: Text(
+                            "sign up".tr,
+                            style: TextStyle(
+                              color: Colors.red,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ))
                     ],
                   ),
                 ),

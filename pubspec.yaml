@@ -58,9 +58,6 @@ dependencies:
   google_sign_in:
   intl:
   cr_calendar:
-  url_launcher: ^6.2.4
-  http: ^1.2.0
-  google_maps_flutter: ^2.5.3
 
 dev_dependencies:
   flutter_test:
@@ -91,11 +88,6 @@ flutter:
     - assets/images/app_bar.png
     - assets/images/back_card.png
     - assets/images/logo.png
-<<<<<<< HEAD
-    - assets/images/Acadmic Servecis.png
-    - assets/data_encoded.json
-    - assets/data.json
-=======
     - lib/icons/home.png
     - lib/icons/chatbot-speech-bubble.png
     - lib/icons/marker.png
@@ -105,7 +97,6 @@ flutter:
     - lib/icons/user.png
   # - assets/images/AcadmicServecis.png
   
->>>>>>> origin/test
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

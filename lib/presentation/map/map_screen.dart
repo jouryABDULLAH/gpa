@@ -25,41 +25,49 @@ class _MapScreenState extends State<MapScreen> {
 
   late GoogleMapController _mapController;
   @override
+  @override
   Widget build(BuildContext context) {
-    return GetBuilder<LocationController>(
-      builder: (locationController) {
-        return Scaffold(
-            appBar: AppBar(
-              title: Text(
-                'خريطة جامعة القصيم',
-                style: GoogleFonts.tajawal(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          'خريطة جامعة القصيم',
+          style: GoogleFonts.tajawal(),
+        ),
+        backgroundColor: Color.fromARGB(255, 0, 167, 171),
+      ),
+      body: GetBuilder<LocationController>(
+        builder: (locationController) {
+          return Stack(
+            children: <Widget>[
+              GoogleMap(
+                onMapCreated: (GoogleMapController mapController) {
+                  _mapController = mapController;
+                  //locationController.setMapController(mapController);
+                },
+                initialCameraPosition: _cameraPosition,
               ),
-              backgroundColor: Color.fromARGB(255, 0, 167, 171),
-            ),
-            body: Stack(
-              children: <Widget>[
-                GoogleMap(
-                    onMapCreated: (GoogleMapController mapController) {
-                      _mapController = mapController;
-                      //locationController.setMapController(mapController);
-                    },
-                    initialCameraPosition: _cameraPosition),
-                Positioned(
-                  top: 100,
-                  left: 10,
-                  right: 20,
-                  child: GestureDetector(
-                    onTap: () => Get.dialog(
-                        LocationSearchDialog(mapController: _mapController)),
-                    child: Container(
-                      height: 50,
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      decoration: BoxDecoration(
-                          color: Theme.of(context).cardColor,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(children: [
-                        Icon(Icons.location_on,
-                            size: 25, color: Theme.of(context).primaryColor),
+              Positioned(
+                top: 100,
+                left: 10,
+                right: 20,
+                child: GestureDetector(
+                  onTap: () => Get.dialog(
+                    LocationSearchDialog(mapController: _mapController),
+                  ),
+                  child: Container(
+                    height: 50,
+                    padding: EdgeInsets.symmetric(horizontal: 5),
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.location_on,
+                          size: 25,
+                          color: Theme.of(context).primaryColor,
+                        ),
                         SizedBox(width: 5),
                         //here we show the address on the top
                         Expanded(
@@ -72,17 +80,20 @@ class _MapScreenState extends State<MapScreen> {
                           ),
                         ),
                         SizedBox(width: 10),
-                        Icon(Icons.search,
-                            size: 25,
-                            color:
-                                Theme.of(context).textTheme.bodyText1!.color),
-                      ]),
+                        Icon(
+                          Icons.search,
+                          size: 25,
+                          color: Theme.of(context).textTheme.bodyText1!.color,
+                        ),
+                      ],
                     ),
                   ),
                 ),
-              ],
-            ));
-      },
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 }

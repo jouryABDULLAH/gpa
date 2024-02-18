@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gpa/presentation/Map/Map_screen.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import '../../../control.dart';
-<<<<<<< HEAD
-// import 'package:gpa/shared/component/bottom_navbar.dart';
-
-=======
 import 'package:google_fonts/google_fonts.dart';
->>>>>>> origin/test
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:boxicons/boxicons.dart';
@@ -35,11 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List screens = [
     const HomeWidget(),
     ServicisPage(),
-<<<<<<< HEAD
-    ServicisPage(),
-=======
     ProfileScreen(),
->>>>>>> origin/test
     MapScreen(),
     ProfileScreen(),
   ];
@@ -70,11 +60,11 @@ class _HomeScreenState extends State<HomeScreen> {
         items: [
           BottomNavigationBarItem(
             icon: Icon(Boxicons.bxs_home),
-            label: "الرئيسية",
+            label: "home".tr,
           ),
           BottomNavigationBarItem(
             icon: Icon(Boxicons.bxs_grid_alt),
-            label: "الخدمات",
+            label: "Services".tr,
           ),
           BottomNavigationBarItem(
               icon: Icon(Boxicons.bxs_bot),
@@ -84,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 height: 25,
                 color: Color.fromARGB(255, 255, 198, 34),
               ),*/
-              label: "نامق"),
+              label: "namik".tr),
           BottomNavigationBarItem(
               icon: Icon(Ionicons.location), label: "الخريطة"),
           BottomNavigationBarItem(icon: Icon(Ionicons.person), label: "حسابي"),

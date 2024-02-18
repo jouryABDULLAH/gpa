@@ -70,7 +70,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         height: 5,
                       ),
                       Text(
-                        "Nice To Meet You!",
+                        "Nice".tr,
                         style: TextStyle(color: ColorManager.primary),
                       ),
                       const SizedBox(
@@ -78,9 +78,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Name",
+                        head: "Name".tr,
                         controller: name,
-                        hint: "name",
+                        hint: "Name".tr,
                         validate: (c) {
                           if (name.text.trim().isEmpty) {
                             return "cannot empty".tr;

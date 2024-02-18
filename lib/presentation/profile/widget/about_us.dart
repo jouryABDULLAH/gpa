@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AboutUs extends StatelessWidget {
@@ -11,7 +12,7 @@ class AboutUs extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "من نحن",
+          "who".tr,
           style: GoogleFonts.tajawal(
               fontSize: 20,
               fontWeight: FontWeight.bold,

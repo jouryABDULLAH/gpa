@@ -39,7 +39,7 @@ class _MyAccountState extends State<MyAccount> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "معلوماتي",
+          "info".tr,
           style: GoogleFonts.tajawal(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -72,7 +72,7 @@ class _MyAccountState extends State<MyAccount> {
                                 decoration:
                                     BoxDecoration(color: ColorManager.primary),
                                 child: Text(
-                                  "تغيير الايميل",
+                                  "change e".tr,
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.tajawal(
                                       fontSize: 25,
@@ -95,7 +95,7 @@ class _MyAccountState extends State<MyAccount> {
                                   ),
                                   AppTextFormField(
                                     controller: passwordController,
-                                    hint: "كلمة المرور",
+                                    hint: "password",
                                   ),
                                   SizedBox(
                                       width: double.infinity,
@@ -125,7 +125,7 @@ class _MyAccountState extends State<MyAccount> {
                                             }
                                           },
                                           child: Text(
-                                            "حفظ",
+                                            "Save".tr,
                                             style: GoogleFonts.tajawal(
                                                 fontSize: 20),
                                           ))),
@@ -138,7 +138,7 @@ class _MyAccountState extends State<MyAccount> {
                     },
                   );
                 },
-                title: Text("تغيير الايميل",
+                title: Text("change e".tr,
                     style: GoogleFonts.tajawal(fontSize: 17)),
                 leading: const Icon(Icons.email),
                 trailing: Icon(
@@ -161,7 +161,7 @@ class _MyAccountState extends State<MyAccount> {
                                 decoration:
                                     BoxDecoration(color: ColorManager.primary),
                                 child: Text(
-                                  "تغيير الاسم",
+                                  "change n".tr,
                                   textAlign: TextAlign.center,
                                   style: GoogleFonts.tajawal(
                                       fontSize: 25,
@@ -211,7 +211,7 @@ class _MyAccountState extends State<MyAccount> {
                                                           "account updated success")));*/
                                             }
                                           },
-                                          child: Text("حفظ",
+                                          child: Text("Save".tr,
                                               style: GoogleFonts.tajawal(
                                                   fontSize: 20)))),
                                 ],
@@ -224,7 +224,7 @@ class _MyAccountState extends State<MyAccount> {
                   );
                 },
                 title: Text(
-                  "تغيير الاسم",
+                  "change n".tr,
                   style: GoogleFonts.tajawal(fontSize: 17),
                 ),
                 leading: const Icon(Icons.person),

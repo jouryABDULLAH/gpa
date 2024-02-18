@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
@@ -41,8 +42,8 @@ class _ServicisPage extends State<ServicisPage> {
 
   Widget MyList() {
     List<String> Titles = [
-      "الحاسبة",
-      "القواعد ",
+      "GPA".tr,
+      "rules".tr,
     ];
 
     return Container(
@@ -116,7 +117,7 @@ class _ServicisPage extends State<ServicisPage> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "الخدمات",
+              "Services".tr,
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                   fontFamily: GoogleFonts.tajawal().fontFamily,
                   color: Colors.white,

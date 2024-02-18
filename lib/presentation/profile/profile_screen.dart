@@ -71,7 +71,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             padding: EdgeInsets.only(right: 30, top: 5),
             child: Text(
-              "حسابي",
+              "account".tr,
               style: GoogleFonts.tajawal(
                 textStyle: TextStyle(
                     fontSize: 40,
@@ -89,19 +89,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               padding: EdgeInsets.only(top: 30),
               children: [
                 buildDrawerListItem(
-<<<<<<< HEAD
-                    leading: Icons.person,
-                    title: 'My account ',
-                    onTap: () {
-                      print(controller.me!.name);
-                      Get.to(
-                        MyAccount(userData: controller.me!),
-                      )!
-                          .then((value) => controller.getMe());
-                    }),
-=======
                   leading: Boxicons.bx_user_circle,
-                  title: 'معلوماتي',
+                  title: "info".tr,
                   onTap: () {
                     print(controller.me!.name);
                     Get.to(
@@ -110,24 +99,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         .then((value) => controller.getMe());
                   },
                 ),
->>>>>>> origin/test
                 buildDrawerListItem(
                   leading: Boxicons.bx_refresh,
-                  title: 'تغيير كلمة المرور',
+                  title: "pass".tr,
                   onTap: () {
                     Get.to(ChangePassword());
                   },
                 ),
                 buildDrawerListItem(
                   leading: Boxicons.bx_info_circle,
-                  title: 'من نحن',
+                  title: "who".tr,
                   onTap: () {
                     Get.to(const AboutUs());
                   },
                 ),
                 buildDrawerListItem(
                   leading: Icons.logout,
-                  title: 'تسجيل خروج',
+                  title: "out".tr,
                   onTap: () {
                     controller.logout(context);
                   },

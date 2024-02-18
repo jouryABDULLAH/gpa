@@ -20,7 +20,7 @@ class ChangePassword extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'تغيير كلمة المرور',
+          "pass".tr,
           style: GoogleFonts.tajawal(
             textStyle: TextStyle(
               fontSize: 20,
@@ -39,41 +39,41 @@ class ChangePassword extends StatelessWidget {
                 AppTextFormField(
                   validate: (val) {
                     if (val!.isEmpty) {
-                      return "يجب تعبئة هذا الحقل";
+                      return "fill".tr;
                     }
                     if (val.length < 8) {
-                      return "طول كلمة المرور لا يمكن ان يكون اقل من 8 ";
+                      return "less".tr;
                     }
                     return null;
                   },
                   controller: currentPasswordController,
-                  hint: "كلمة المرور الحالية",
+                  hint: "curr pass".tr,
                 ),
                 AppTextFormField(
                   validate: (val) {
                     if (val!.isEmpty) {
-                      return "يجب تعبئة هذا الحقل";
+                      return "fill".tr;
                     }
                     if (val.length < 8) {
-                      return "طول كلمة المرور لا يمكن ان يكون اقل من 8";
+                      return "less".tr;
                     }
                     return null;
                   },
                   controller: newPasswordController,
-                  hint: "كلمة المرور الجديدة",
+                  hint: "fill".tr,
                 ),
                 AppTextFormField(
                   validate: (val) {
                     if (val!.isEmpty) {
-                      return "يجب تعبئة هذا الحقل";
+                      return "fill".tr;
                     }
                     if (val.length < 8) {
-                      return "طول كلمة المرور لا يمكن ان يكون اقل من 8";
+                      return "less".tr;
                     }
                     return null;
                   },
                   controller: confirmPasswordController,
-                  hint: "تأكيد كلمة المرور",
+                  hint: "conf".tr,
                 ),
                 SizedBox(
                     width: double.infinity,
@@ -122,13 +122,11 @@ class ChangePassword extends StatelessWidget {
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        "يجب ان تكون كلمة المرور المدخلة متساوية ")));
+                                SnackBar(content: Text("ent pass".tr)));
                           }
                         },
                         child: Text(
-                          "حفظ",
+                          "Save".tr,
                           style: GoogleFonts.tajawal(fontSize: 20),
                         )))
               ],

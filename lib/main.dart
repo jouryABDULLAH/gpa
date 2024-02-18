@@ -1,4 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/shared/network/cache_helper.dart';
 import 'package:gpa/splash_screen/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -29,6 +30,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const SplashScreen(),
+      locale: Get.deviceLocale,
+      translations: MyLocal(),
     );
   }
 }

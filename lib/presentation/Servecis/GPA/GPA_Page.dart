@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
-import 'package:gpa/presentation/Servecis/ServecisPage.dart';
-=======
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
->>>>>>> origin/test
+import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page_TR.dart';
@@ -21,7 +19,7 @@ class _GPAPage extends State<GPAPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorManager.primary,
         leading: IconButton(
@@ -32,37 +30,23 @@ class _GPAPage extends State<GPAPage> {
             );
           },
           icon: Icon(
-<<<<<<< HEAD
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 25.0,
-=======
             Icons.list,
             color: Color.fromARGB(255, 255, 255, 255),
             size: 32,
->>>>>>> origin/test
           ),
           padding: EdgeInsets.all(0),
         ),
         actions: [
           IconButton(
             onPressed: () {},
-<<<<<<< HEAD
-            icon: Icon(Icons.notifications, color: Colors.white, size: 25),
-=======
             icon: Icon(Icons.notifications,
                 color: Color.fromARGB(255, 255, 255, 255), size: 25),
->>>>>>> origin/test
           ),
         ],
-      ),
+      ),*/
       body: Column(
         children: [
-<<<<<<< HEAD
-          Upper(), // const Image(image: AssetImage("assets/images/Acadmic Servecis.png")),
-=======
-          Upper("المعدل"), // Place Upper widget at the top
->>>>>>> origin/test
+          Upper(), // Place Upper widget at the top
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MyList(),
@@ -74,8 +58,8 @@ class _GPAPage extends State<GPAPage> {
 
   Widget MyList() {
     List<String> Titles = [
-      "فصلي",
-      "تراكمي",
+      "GPA_1".tr,
+      "GPA_2".tr,
     ];
 
     return Container(
@@ -135,14 +119,10 @@ class _GPAPage extends State<GPAPage> {
     );
   }
 
-<<<<<<< HEAD
   Widget Upper() {
-=======
-  Widget Upper(String text) {
->>>>>>> origin/test
     return Container(
-      padding: const EdgeInsets.only(bottom: 50),
-      height: 100,
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 200,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 168, 171),
@@ -152,34 +132,34 @@ class _GPAPage extends State<GPAPage> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ServicisPage()),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
+            ),
+          ),
+          Align(
             alignment: Alignment.center,
             child: Text(
-<<<<<<< HEAD
-              " المعدل ",
+              "GPA".tr,
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge!
                   .copyWith(color: Colors.white),
-=======
-              upper(text), // Use the custom function
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.tajawal().fontFamily,
-                  color: Colors.white,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold),
->>>>>>> origin/test
             ),
           ),
         ],
       ),
     );
   }
-<<<<<<< HEAD
-=======
-
-  String upper(String text) {
-    // Your custom function to convert text to uppercase
-    return text.toUpperCase();
-  }
->>>>>>> origin/test
 }

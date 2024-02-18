@@ -22,55 +22,6 @@ class _HomeWidgetState extends State<HomeWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      body: FutureBuilder(
-        future: controller.getEvents(),
-        builder: (co, da) => da.hasData
-            ? Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Icon(Icons.list),
-                        Icon(Icons.notifications),
-                      ],
-                    ),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 260, // Set a fixed height for the SizedBox
-                            child: Container(
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/back_card.png'),
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    const Center(
-                                      child: Image(
-                                        image: AssetImage(
-                                            'assets/images/logo.png'),
-                                        height: 100,
-                                      ),
-                                    ),
-                                    Text("Name: ${controller.me?.name}" ?? ""),
-                                    const Text("University Number: #565652"),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-=======
       body: Container(
         color: Color.fromARGB(255, 17, 53, 91),
         child: FutureBuilder(
@@ -87,7 +38,6 @@ class _HomeWidgetState extends State<HomeWidget> {
                           Icon(Icons.notifications,
                               color: Color.fromARGB(255, 255, 198, 34),
                               size: 25),
->>>>>>> origin/test
                         ],
                       ),
                       Expanded(
@@ -155,7 +105,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 children: [
                                   TextButton(
                                     child: Text(
-                                      "المزيد",
+                                      "more".tr,
                                       style: GoogleFonts.almarai(
                                         color: Color.fromRGBO(0, 168, 171, 1),
                                         decoration: TextDecoration.underline,

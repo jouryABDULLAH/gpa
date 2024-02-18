@@ -36,8 +36,8 @@ class _rulesPageState extends State<rulesPage> {
             size: 32,
           ),
         ),
-        title: const Text(
-          'خدمات وقوانين الجامعة',
+        title: Text(
+          "rules_2".tr,
           textAlign: TextAlign.center, // Align the text in the center
         ),
         centerTitle: true,
@@ -54,10 +54,7 @@ class _rulesPageState extends State<rulesPage> {
         children: [
           Container(
             padding: const EdgeInsets.fromLTRB(30, 50, 30, 10),
-            child: const Column(children: [
-              Text(' خدمات الجامعة'),
-              Text('الخدمات المعروضة هي خدمات مقررة من الجامعة')
-            ]),
+            child: Column(children: [Text("serv".tr), Text("serv_2".tr)]),
           ),
           Container(
             height: 550,
@@ -133,7 +130,7 @@ class _RulesListState extends State<RulesList> {
                     const SizedBox(
                         height:
                             8), // Add some space between description and steps
-                    Text('خطوات تنفيذ الخدمة:',
+                    Text("serv_st".tr,
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     for (int i = 0; i < rule.steps.length; i++)
                       Padding(
