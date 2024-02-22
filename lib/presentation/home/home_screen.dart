@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:boxicons/boxicons.dart';
-import 'package:gpa/presentation/map/map_screen.dart';
+import 'package:gpa/presentation/map/map.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeWidget(),
     ServicisPage(),
     ProfileScreen(),
-    MapScreen(),
+    Map(),
     ProfileScreen(),
   ];
   @override
