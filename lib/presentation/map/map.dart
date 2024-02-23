@@ -1,8 +1,11 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+//import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:gpa/presentation/resources/constants.dart';
-import 'package:location/location.dart';
-import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:gpa/presentation/Map/FAB.dart';
+import 'package:gpa/presentation/resources/color_manager.dart';
+//import 'package:gpa/presentation/resources/constants.dart';
+//import 'package:location/location.dart';
 
 class Map extends StatefulWidget {
   const Map({Key? key}) : super(key: key);
@@ -12,6 +15,46 @@ class Map extends StatefulWidget {
 }
 
 class _MapState extends State<Map> {
+  Completer<GoogleMapController> _controller = Completer();
+
+  @override
+  Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
+    const LatLng _sourceLocation =
+        LatLng(26.34847508549134, 43.767713423546866);
+
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: screenHeight,
+                  width: screenWidth,
+                  child: GoogleMap(
+                    mapType: MapType.normal,
+                    initialCameraPosition:
+                        CameraPosition(target: _sourceLocation, zoom: 14.5),
+                    onMapCreated: (GoogleMapController controller) {
+                      _controller.complete(controller);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FAB(),
+    );
+  }
+
+  Widget buildFBA(IconData icon) => SizedBox();
+}
+/*
   static const LatLng _sourceLocation =
       LatLng(26.34847508549134, 43.767713423546866);
   static const LatLng _destination = LatLng(26.3309777, 43.7598077);
@@ -24,37 +67,26 @@ class _MapState extends State<Map> {
 
     location.getLocation().then(
       (location) {
-        setState(() {
-          currentLocation = location;
-        });
+        currentLocation = location;
       },
     );
   }
 
   @override
   void initState() {
-    super.initState();
     getCurrentLocation();
-    _getPolyline();
+    super.initState();
   }
 
-  Future<void> _getPolyline() async {
-    PolylinePoints polylinePoints = PolylinePoints();
-    PolylineResult result = await polylinePoints.getRouteBetweenCoordinates(
-      google_api_key, // Google Maps API Key
-      PointLatLng(_sourceLocation.latitude, _sourceLocation.longitude),
-      PointLatLng(_destination.latitude, _destination.longitude),
-      travelMode: TravelMode.driving,
-    );
-
-    if (result.points.isNotEmpty) {
-      result.points.forEach((PointLatLng point) {
-        polylineCoordinates.add(LatLng(point.latitude, point.longitude));
-      });
-    }
-
-    setState(() {});
-  }
+  static final Polyline _MyLine = Polyline(
+    polylineId: PolylineId("_MyLine"),
+    points: [
+      LatLng(26.34847508549134, 43.767713423546866),
+      LatLng(26.3309777, 43.7598077),
+    ],
+    color: Color.fromARGB(255, 0, 168, 171),
+    width: 5,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -63,27 +95,30 @@ class _MapState extends State<Map> {
         children: [
           Upper(),
           Expanded(
-            child: GoogleMap(
+            child: /* currentLocation == null
+                ? Text("Loading")
+                :*/
+                GoogleMap(
               initialCameraPosition:
                   CameraPosition(target: _sourceLocation, zoom: 14.5),
-              markers: {
-                Marker(
-                  markerId: MarkerId("Main Building"),
+              markers: {  
+                const Marker(
+                  markerId: MarkerId("Main Bulding"),
+                  //infoWindow: InfoWindow,
+                  //icon: BitmapDescriptor.defultMarker,
                   position: _sourceLocation,
                 ),
-                Marker(
-                  markerId: MarkerId("Destination"),
+                const Marker(
+                  markerId: MarkerId("dest"),
                   position: _destination,
                 ),
+                /* Marker(
+                        markerId: const MarkerId("currentLocation"),
+                        position: LatLng(currentLocation!.latitude!,
+                            currentLocation!.longitude!),
+                      ),*/
               },
-              polylines: {
-                Polyline(
-                  polylineId: PolylineId("drivingRoute"),
-                  color: Colors.blue,
-                  width: 5,
-                  points: polylineCoordinates,
-                ),
-              },
+              polylines: {_MyLine},
             ),
           ),
         ],
@@ -132,3 +167,4 @@ class _MapState extends State<Map> {
     );
   }
 }
+*/
