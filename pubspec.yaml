@@ -33,6 +33,7 @@ dependencies:
   google_fonts: ^6.1.0
   flutter_polyline_points: ^2.0.0
   google_maps_flutter: ^2.5.3
+  flutter_riverpod: ^2.4.10
   location: ^5.0.3
   icons_plus: ^5.0.0
   ionicons: ^0.2.2

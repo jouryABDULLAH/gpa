@@ -11,6 +11,12 @@ class FAB extends StatefulWidget {
 }
 
 class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
+  bool searchToggle = false;
+  bool radiusSlider = false;
+  bool cardTapped = false;
+  bool pressedNear = false;
+  bool getDirections = false;
+
   late AnimationController controller;
   @override
   void initState() {
@@ -30,29 +36,55 @@ class _FABState extends State<FAB> with SingleTickerProviderStateMixin {
   Widget build(BuildContext context) => Flow(
         delegate: FlowMinuDelegate(controller: controller),
         children: <IconData>[
-          Icons.mail,
-          Icons.call,
+          Icons.search,
+          Icons.navigation,
           Icons.menu,
-          Icons.add,
         ].map<Widget>(buildFAB).toList(),
       );
 
-  Widget buildFAB(IconData icon) => SizedBox(
-        width: buttonSize,
-        height: buttonSize,
-        child: FloatingActionButton(
-          elevation: 0,
-          splashColor: Colors.black,
-          onPressed: () {
-            if (controller.status == AnimationStatus.completed) {
-              controller.reverse();
-            } else {
-              controller.forward();
-            }
-          },
-          child: Icon(icon, color: Colors.red, size: 45),
-        ),
-      );
+  Widget buildFAB(IconData icon) {
+    void onPressedAction() {
+      // Define actions for each icon
+      switch (icon) {
+        case Icons.search:
+          setState(() {
+            searchToggle = true;
+            radiusSlider = false;
+            pressedNear = false;
+            cardTapped = false;
+            getDirections = false;
+          });
+          print('search icon pressed');
+          break;
+        case Icons.navigation:
+          // Action for navigation icon
+          print('Navigation icon pressed');
+          break;
+        case Icons.menu:
+          // // Animation control
+          if (controller.status == AnimationStatus.completed) {
+            controller.reverse();
+          } else {
+            controller.forward();
+          }
+          break;
+        default:
+          break;
+      }
+    }
+
+    return SizedBox(
+      width: buttonSize,
+      height: buttonSize,
+      child: FloatingActionButton(
+        elevation: 0,
+        splashColor: Colors.black,
+        onPressed: onPressedAction,
+        child: Icon(icon,
+            color: const Color.fromARGB(255, 143, 54, 244), size: 45),
+      ),
+    );
+  }
 }
 
 class FlowMinuDelegate extends FlowDelegate {
