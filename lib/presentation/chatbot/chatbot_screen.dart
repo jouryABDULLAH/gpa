@@ -46,7 +46,11 @@ class _chatbot_screenState extends State<chatbot_screen> {
   }
 
   Future<void> initializeDialogFlowtter() async {
-    dialogFlowtter = await DialogFlowtter.fromFile();
+    try {
+      dialogFlowtter = await DialogFlowtter.fromFile();
+    } catch (e) {
+      print('Error initializing DialogFlowtter: $e');
+    }
   }
 
   @override
