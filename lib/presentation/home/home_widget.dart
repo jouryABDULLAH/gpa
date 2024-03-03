@@ -7,7 +7,6 @@ import 'package:gpa/presentation/home/db.dart';
 import '../../widgets/day_item_widget.dart';
 import '../../widgets/event_widget.dart';
 import '../../widgets/week_days_widget.dart';
-// ignore: unused_import
 import 'package:gpa/presentation/resources/color_manager.dart';
 
 class HomeWidget extends StatefulWidget {

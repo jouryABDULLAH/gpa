@@ -34,37 +34,39 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: FutureBuilder(
-        future: controller.getMe(),
-        builder: (_, da) {
-          if (da.hasData) {
-            return screens[index];
-          } else {
-            return const Center(child: CircularProgressIndicator());
-          }
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: index,
-        selectedItemColor: ColorManager.primary,
-        onTap: (i) {
-          setState(() {
-            if (i >= 0 && i < screens.length) {
-              index = i;
+    return SafeArea(
+      child: Scaffold(
+        //appBar: AppBar(),
+        body: FutureBuilder(
+          future: controller.getMe(),
+          builder: (_, da) {
+            if (da.hasData) {
+              return screens[index];
+            } else {
+              return const Center(child: CircularProgressIndicator());
             }
-          });
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.cleaning_services), label: "Services"),
-          BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: "namik"),
-          BottomNavigationBarItem(icon: Icon(Icons.circle), label: "profile"),
-        ],
+          },
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: index,
+          selectedItemColor: ColorManager.primary,
+          onTap: (i) {
+            setState(() {
+              if (i >= 0 && i < screens.length) {
+                index = i;
+              }
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.cleaning_services), label: "Services"),
+            BottomNavigationBarItem(icon: Icon(Icons.map), label: "Map"),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "namik"),
+            BottomNavigationBarItem(icon: Icon(Icons.circle), label: "profile"),
+          ],
+        ),
       ),
     );
   }
