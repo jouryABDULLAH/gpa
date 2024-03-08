@@ -37,30 +37,39 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ],
                     ),
                     Expanded(
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Container(
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 260, // Set a fixed height for the SizedBox
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                image: DecorationImage(
                                   image:
                                       AssetImage('assets/images/back_card.png'),
-                                  fit: BoxFit.fill)),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Center(
-                                    child: Image(
-                                  image: AssetImage('assets/images/logo.png'),
-                                  height: 100,
-                                )),
-                                Text("Name: ${controller.me?.name}" ?? ""),
-                                const Text("Universty Number: #565652"),
-                              ],
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Center(
+                                      child: Image(
+                                        image: AssetImage(
+                                            'assets/images/logo.png'),
+                                        height: 100,
+                                      ),
+                                    ),
+                                    Text("Name: ${controller.me?.name}" ?? ""),
+                                    const Text("University Number: #565652"),
+                                  ],
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
                     Expanded(
