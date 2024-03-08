@@ -49,7 +49,7 @@ dependencies:
   intl:
   cr_calendar:
   url_launcher: ^6.2.4
-  http: ^1.2.0
+  http: 1.1.0
 
 dev_dependencies:
   flutter_test:
