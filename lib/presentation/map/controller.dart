@@ -1,4 +1,4 @@
-import 'package:get/get.dart';
+/*import 'package:get/get.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:gpa/presentation/map/loc_services.dart';
@@ -30,4 +30,4 @@ class LocationController extends GetxController {
     }
     return _predictionList;
   }
-}
+}*/

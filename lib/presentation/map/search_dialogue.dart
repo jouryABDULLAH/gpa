@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_places_flutter/model/prediction.dart';
@@ -83,4 +83,4 @@ class LocationSearchDialog extends StatelessWidget {
       ),
     );
   }
-}
+}*/
