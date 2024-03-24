@@ -36,17 +36,21 @@ class _HomeWidgetState extends State<HomeWidget> {
                         Icon(Icons.notifications),
                       ],
                     ),
-                    Expanded(
+                    Container(
+                      height: 270.0,
+                      margin: const EdgeInsets.only(top: 10, right: 5, left: 5),
                       child: SizedBox(
                         width: double.infinity,
                         child: Container(
-                          decoration: const BoxDecoration(
-                              image: DecorationImage(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          decoration: BoxDecoration(
+                              image: const DecorationImage(
                                   image:
                                       AssetImage('assets/images/back_card.png'),
-                                  fit: BoxFit.fill)),
+                                  fit: BoxFit.cover),
+                              borderRadius: BorderRadius.circular(15)),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(11.0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
