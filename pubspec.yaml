@@ -47,9 +47,7 @@ dependencies:
   cr_calendar:
   #url_launcher: ^6.2.4
   http: ^0.13.1
-  #dialog_flowtter: ^0.2.0-nullsafety.0
   dialog_flowtter: ^0.3.3
-  # dialogflow_grpc: ^0.2.9
 
 #dependency_overrides:
  # http: ^1.2.1
@@ -91,6 +89,9 @@ flutter:
     - assets/data_encoded.json
     - assets/data.json
     - assets/dialog_flow_auth.json
+    - assets/faculty_data.json
+    - assets/rules_data.json
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
