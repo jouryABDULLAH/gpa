@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:gpa/presentation/Map/models/auto_complate_results.dart';
-import 'package:gpa/presentation/Map/searchmap.dart';
+import 'package:gpa/presentation/Map/markers.dart';
 import 'package:gpa/presentation/Map/serveses/map_services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -42,23 +42,10 @@ class _MapState extends ConsumerState<Map> {
   Set<Marker> _markers = Set<Marker>();
   Set<Polyline> _polylines = Set<Polyline>();
 
-  late Set<Marker> buildings = {
-    Marker(
-      markerId: MarkerId("Qassim University"),
-      position: LatLng(26.34900306634682, 43.76681242106987),
-      infoWindow: InfoWindow(title: "Qassim University"),
-    ),
-    Marker(
-      markerId: MarkerId("Qassim University Grand Mosque"),
-      position: LatLng(26.34864615733482, 43.764528904833334),
-      infoWindow: InfoWindow(title: "Qassim University Grand Mosque"),
-    ),
-    Marker(
-      markerId: MarkerId("College of Languages & Humanities"),
-      position: LatLng(26.349387167211944, 43.765018229733535),
-      infoWindow: InfoWindow(title: "College of Languages & Humanities"),
-    ),
-  };
+  late Set<Marker> buildings = Set.from(Qbuildings);
+  late List<String> buildingNames =
+      Qbuildings.map((marker) => marker.markerId.value.toString()).toList();
+  late List<String> suggestions = [];
 
 //Circle
   Set<Circle> _circles = Set<Circle>();
@@ -102,18 +89,6 @@ class _MapState extends ConsumerState<Map> {
 
     controller.animateCamera(CameraUpdate.newCameraPosition(
         CameraPosition(target: point, zoom: 12)));
-    setState(() {
-      _circles.add(Circle(
-          circleId: CircleId('raj'),
-          center: point,
-          fillColor: Color.fromARGB(255, 214, 69, 16).withOpacity(0.1),
-          radius: radiusValue,
-          strokeColor: Color.fromARGB(255, 224, 122, 49),
-          strokeWidth: 1));
-      getDirections = false;
-      searchToggle = false;
-      radiusSlider = true;
-    });
   }
 
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
@@ -148,8 +123,7 @@ class _MapState extends ConsumerState<Map> {
                   width: screenWidth,
                   child: GoogleMap(
                     mapType: MapType.normal,
-                    markers: Set<Marker>.of(_markers)..addAll(buildings),
-                    circles: _circles,
+                    markers: Set<Marker>.of(_markers)..addAll(Qbuildings),
                     polylines: _polylines,
                     initialCameraPosition:
                         CameraPosition(target: _sourceLocation, zoom: 14.5),
@@ -168,49 +142,23 @@ class _MapState extends ConsumerState<Map> {
                           borderRadius: BorderRadius.circular(10.0),
                           color: Colors.white,
                         ),
-                        child: TextFormField(
+                        child: TextField(
                           controller: searchController,
-                          onTap: () {
-                            setState(() {
-                              searchToggle = true; // Toggle search
-                            });
-                          },
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.symmetric(
                                 horizontal: 20.0, vertical: 15.0),
-                            border: InputBorder.none,
+                            border: OutlineInputBorder(),
                             hintText: 'Search',
-                            /* suffixIcon: IconButton(
-                              onPressed: () {
-                                setState(() {
-                                  // Handle closing search
-                                });
-                              },
-                              icon: Icon(Icons.close),
-                            ), */
                           ),
-                          onChanged:
-                              seearchBuilding, /*(value) {
-                            if (_debounce?.isActive ?? false)
-                              _debounce?.cancel();
-                            _debounce =
-                                Timer(Duration(milliseconds: 700), () async {
-                              if (value.length > 2) {
-                                if (!searchFlag.searchToggle) {
-                                  searchFlag.toggleSearch();
-                                  _markers = {};
-                                }
-
-                                List<AutoCompleteResult> searchResults =
-                                    await MapServices().searchPlaces(value);
-
-                                allSearchResults.setResults(searchResults);
-                              } else {
-                                List<AutoCompleteResult> emptyList = [];
-                                allSearchResults.setResults(emptyList);
-                              }
+                          onChanged: (query) {
+                            setState(() {
+                              suggestions = buildingNames
+                                  .where((option) => option
+                                      .toLowerCase()
+                                      .contains(query.toLowerCase()))
+                                  .toList();
                             });
-                          },*/
+                          },
                         ),
                       ),
                     ],
@@ -220,37 +168,66 @@ class _MapState extends ConsumerState<Map> {
                     ? allSearchResults.allReturnedResults.length != 0
                         ? */
                 Positioned(
-                    top: 100.0,
-                    left: 15.0,
-                    child: Container(
-                      height: 200.0,
-                      width: screenWidth - 30.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: Colors.white.withOpacity(0.7),
-                      ),
-                      child: ListView.builder(
-                        itemCount: buildings
-                            .length, // Update to the correct list length
-                        itemBuilder: (context, index) {
-                          final build = buildings.elementAt(
-                              index); // Use allbuilding instead of buildings
-                          return ListTile(
-                            leading: Icon(Icons.location_on,
-                                color: Color.fromRGBO(0, 168, 171, 1),
-                                size: 25.0),
-                            title: Text(build.markerId.value.toString()),
-                          );
-                        },
-                      ),
+                  top: 80.0,
+                  left: 15.0,
+                  child: Container(
+                    height: 200.0,
+                    width: screenWidth - 30.0,
+                    child: ListView.builder(
+                      itemCount: suggestions.length,
+                      itemBuilder: (context, index) {
+                        final suggestion = suggestions[index];
+                        return Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.0),
+                            color: const Color.fromARGB(255, 255, 255, 255)
+                                .withOpacity(0.7),
+                          ),
+                          child: ListTile(
+                            title: Text(suggestion),
+                            leading: Icon(
+                              Icons.location_on,
+                              color: Color.fromARGB(255, 0, 168, 171),
+                            ),
+                            onTap: () async {
+                              searchController.text = suggestion;
+                              seearchBuilding(suggestion);
+                              final selectedMarker = Qbuildings.firstWhere(
+                                (marker) =>
+                                    marker.markerId.value.toString() ==
+                                    suggestion,
+                                orElse: () => Marker(
+                                  markerId: MarkerId(""),
+                                  position: LatLng(
+                                      0, 0), // Default position if not found
+                                ),
+                              );
 
-                      /*(
+                              // Move the camera to the selected marker's position
+                              GoogleMapController controller =
+                                  await _controller.future;
+                              controller.animateCamera(
+                                CameraUpdate.newCameraPosition(
+                                  CameraPosition(
+                                    target: selectedMarker.position,
+                                    zoom: 15,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+
+                /*(
                                 
                                    ...allSearchResults.allReturnedResults
                                       .map((e) => buildListItem(e, searchFlag))
                                 ],
                               ),*/
-                    ))
 
                 /*Positioned(
                     top: 100.0,
@@ -290,7 +267,7 @@ class _MapState extends ConsumerState<Map> {
                         ]),
                       ),
                     )),*/
-                ,
+
                 getDirections
                     ? Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
@@ -464,8 +441,8 @@ class _MapState extends ConsumerState<Map> {
         onTap: () async {
           var place = await MapServices().getPlace(placeItem.placeId);
           // Check if the selected place is a building
-          if (buildings
-              .any((marker) => marker.markerId.value == place['place_id'])) {
+          if (Qbuildings.any(
+              (marker) => marker.markerId.value == place['place_id'])) {
             // Move to the selected building
             gotoSearchedPlace(place['geometry']['location']['lat'],
                 place['geometry']['location']['lng']);
@@ -496,13 +473,13 @@ class _MapState extends ConsumerState<Map> {
   }
 
   void seearchBuilding(String query) {
-    final suggestions = allbuilding.where((build) {
+    final suggestions = Qbuildings.where((build) {
       final buildingName = build.markerId.value.toString().toLowerCase();
       final input = query.toLowerCase();
       return buildingName.contains(input);
     }).toSet();
 
-    setState(() => buildings = suggestions);
+    setState(() => Qbuildings = suggestions);
   }
 }
 
@@ -517,21 +494,3 @@ class Buildings {
     required this.position,
   });
 }
-
-const allbuilding = [
-  Marker(
-    markerId: MarkerId("Qassim University"),
-    position: LatLng(26.34900306634682, 43.76681242106987),
-    infoWindow: InfoWindow(title: "Qassim University"),
-  ),
-  Marker(
-    markerId: MarkerId("Qassim University Grand Mosque"),
-    position: LatLng(26.34864615733482, 43.764528904833334),
-    infoWindow: InfoWindow(title: "Qassim University Grand Mosque"),
-  ),
-  Marker(
-    markerId: MarkerId("College of Languages & Humanities"),
-    position: LatLng(26.349387167211944, 43.765018229733535),
-    infoWindow: InfoWindow(title: "College of Languages & Humanities"),
-  ),
-];
