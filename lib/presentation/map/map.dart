@@ -216,43 +216,43 @@ class _MapState extends ConsumerState<Map> {
                     ],
                   ),
                 ),
-                searchFlag.searchToggle
+                /*searchFlag.searchToggle
                     ? allSearchResults.allReturnedResults.length != 0
-                        ? Positioned(
-                            top: 100.0,
-                            left: 15.0,
-                            child: Container(
-                              height: 200.0,
-                              width: screenWidth - 30.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white.withOpacity(0.7),
-                              ),
-                              child: ListView.builder(
-                                itemCount: buildings
-                                    .length, // Update to the correct list length
-                                itemBuilder: (context, index) {
-                                  final build = buildings.elementAt(
-                                      index); // Use allbuilding instead of buildings
-                                  return ListTile(
-                                    leading: Icon(Icons.location_on,
-                                        color: Color.fromRGBO(0, 168, 171, 1),
-                                        size: 25.0),
-                                    title:
-                                        Text(build.markerId.value.toString()),
-                                  );
-                                },
-                              ),
+                        ? */
+                Positioned(
+                    top: 100.0,
+                    left: 15.0,
+                    child: Container(
+                      height: 200.0,
+                      width: screenWidth - 30.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: Colors.white.withOpacity(0.7),
+                      ),
+                      child: ListView.builder(
+                        itemCount: buildings
+                            .length, // Update to the correct list length
+                        itemBuilder: (context, index) {
+                          final build = buildings.elementAt(
+                              index); // Use allbuilding instead of buildings
+                          return ListTile(
+                            leading: Icon(Icons.location_on,
+                                color: Color.fromRGBO(0, 168, 171, 1),
+                                size: 25.0),
+                            title: Text(build.markerId.value.toString()),
+                          );
+                        },
+                      ),
 
-                              /*(
+                      /*(
                                 
                                    ...allSearchResults.allReturnedResults
                                       .map((e) => buildListItem(e, searchFlag))
                                 ],
                               ),*/
-                            ))
-                        : Container()
-                    /*Positioned(
+                    ))
+
+                /*Positioned(
                     top: 100.0,
                     left: 15.0,
                     child: Container(
@@ -290,88 +290,83 @@ class _MapState extends ConsumerState<Map> {
                         ]),
                       ),
                     )),*/
-                    : getDirections
-                        ? Padding(
-                            padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
-                            child: Column(children: [
-                              Container(
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.white,
-                                ),
-                                child: TextFormField(
-                                  controller: _originController,
-                                  decoration: InputDecoration(
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 20.0, vertical: 15.0),
-                                      border: InputBorder.none,
-                                      hintText: 'Origin'),
-                                ),
-                              ),
-                              SizedBox(height: 3.0),
-                              Container(
-                                height: 50.0,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: Colors.white,
-                                ),
-                                child: TextFormField(
-                                  controller: _destinationController,
-                                  decoration: InputDecoration(
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 20.0, vertical: 15.0),
-                                    border: InputBorder.none,
-                                    hintText: 'Destination',
-                                    suffixIcon: Container(
-                                        width: 96.0,
-                                        child: Row(children: [
-                                          IconButton(
-                                            onPressed: () async {
-                                              var directions =
-                                                  await MapServices()
-                                                      .getDirections(
-                                                          _originController
-                                                              .text,
-                                                          _destinationController
-                                                              .text);
+                ,
+                getDirections
+                    ? Padding(
+                        padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
+                        child: Column(children: [
+                          Container(
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.white,
+                            ),
+                            child: TextFormField(
+                              controller: _originController,
+                              decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.symmetric(
+                                      horizontal: 20.0, vertical: 15.0),
+                                  border: InputBorder.none,
+                                  hintText: 'Origin'),
+                            ),
+                          ),
+                          SizedBox(height: 3.0),
+                          Container(
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.0),
+                              color: Colors.white,
+                            ),
+                            child: TextFormField(
+                              controller: _destinationController,
+                              decoration: InputDecoration(
+                                contentPadding: EdgeInsets.symmetric(
+                                    horizontal: 20.0, vertical: 15.0),
+                                border: InputBorder.none,
+                                hintText: 'Destination',
+                                suffixIcon: Container(
+                                    width: 96.0,
+                                    child: Row(children: [
+                                      IconButton(
+                                        onPressed: () async {
+                                          var directions = await MapServices()
+                                              .getDirections(
+                                                  _originController.text,
+                                                  _destinationController.text);
+                                          _markers = {};
+                                          _polylines = {};
+                                          gotoPlace(
+                                              directions['start_location']
+                                                  ['lat'],
+                                              directions['start_location']
+                                                  ['lng'],
+                                              directions['end_location']['lat'],
+                                              directions['end_location']['lng'],
+                                              directions['bounds_ne'],
+                                              directions['bounds_sw']);
+                                          _setPolyline(
+                                              directions['polyline_decoded']);
+                                        },
+                                        icon: Icon(Icons.search),
+                                      ),
+                                      IconButton(
+                                          onPressed: () {
+                                            setState(() {
+                                              getDirections = false;
+                                              _originController.text = '';
+                                              _destinationController.text = '';
                                               _markers = {};
                                               _polylines = {};
-                                              gotoPlace(
-                                                  directions['start_location']
-                                                      ['lat'],
-                                                  directions['start_location']
-                                                      ['lng'],
-                                                  directions['end_location']
-                                                      ['lat'],
-                                                  directions['end_location']
-                                                      ['lng'],
-                                                  directions['bounds_ne'],
-                                                  directions['bounds_sw']);
-                                              _setPolyline(directions[
-                                                  'polyline_decoded']);
-                                            },
-                                            icon: Icon(Icons.search),
-                                          ),
-                                          IconButton(
-                                              onPressed: () {
-                                                setState(() {
-                                                  getDirections = false;
-                                                  _originController.text = '';
-                                                  _destinationController.text =
-                                                      '';
-                                                  _markers = {};
-                                                  _polylines = {};
-                                                });
-                                              },
-                                              icon: Icon(Icons.close))
-                                        ])),
-                                  ),
-                                ),
-                              )
-                            ]),
+                                            });
+                                          },
+                                          icon: Icon(Icons.close))
+                                    ])),
+                              ),
+                            ),
                           )
-                        : Container(),
+                        ]),
+                      )
+                    : Container(),
               ],
             )
           ],
