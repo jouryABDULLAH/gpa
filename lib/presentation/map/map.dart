@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:gpa/presentation/Map/models/auto_complate_results.dart';
+import 'package:gpa/presentation/Map/searchmap.dart';
 import 'package:gpa/presentation/Map/serveses/map_services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -39,7 +40,6 @@ class _MapState extends ConsumerState<Map> {
   int polylineIdCounter = 1;
 
   Set<Marker> _markers = Set<Marker>();
-  Set<Marker> _markersDupe = Set<Marker>();
   Set<Polyline> _polylines = Set<Polyline>();
 
   late Set<Marker> buildings = {
@@ -116,42 +116,6 @@ class _MapState extends ConsumerState<Map> {
     });
   }
 
-  _setNearMarker(LatLng point, String label, List types, String status) async {
-    var counter = markerIdCounter++;
-
-    final Uint8List markerIcon;
-
-    if (types.contains('restaurants'))
-      markerIcon =
-          await getBytesFromAsset('assets/mapicons/restaurants.png', 75);
-    else if (types.contains('food'))
-      markerIcon = await getBytesFromAsset('assets/mapicons/food.png', 75);
-    else if (types.contains('school'))
-      markerIcon = await getBytesFromAsset('assets/mapicons/schools.png', 75);
-    else if (types.contains('bar'))
-      markerIcon = await getBytesFromAsset('assets/mapicons/bars.png', 75);
-    else if (types.contains('lodging'))
-      markerIcon = await getBytesFromAsset('assets/mapicons/hotels.png', 75);
-    else if (types.contains('store'))
-      markerIcon =
-          await getBytesFromAsset('assets/mapicons/retail-stores.png', 75);
-    else if (types.contains('locality'))
-      markerIcon =
-          await getBytesFromAsset('assets/mapicons/local-services.png', 75);
-    else
-      markerIcon = await getBytesFromAsset('assets/mapicons/places.png', 75);
-
-    final Marker marker = Marker(
-        markerId: MarkerId('marker_$counter'),
-        position: point,
-        onTap: () {},
-        icon: BitmapDescriptor.fromBytes(markerIcon));
-
-    setState(() {
-      _markers.add(marker);
-    });
-  }
-
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(path);
 
@@ -192,75 +156,66 @@ class _MapState extends ConsumerState<Map> {
                     onMapCreated: (GoogleMapController controller) {
                       _controller.complete(controller);
                     },
-                    onTap: (point) {
-                      tappedPoint = point;
-                      _setCircle(point);
-                    },
                   ),
                 ),
-                searchToggle
-                    ? Padding(
-                        padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5.0),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 50.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white,
-                              ),
-                              child: TextFormField(
-                                controller: searchController,
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20.0, vertical: 15.0),
-                                  border: InputBorder.none,
-                                  hintText: 'Search',
-                                  suffixIcon: IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        searchToggle = false;
-
-                                        searchController.text = '';
-
-                                        searchController.text = '';
-                                        _markers = {};
-                                        if (searchFlag.searchToggle)
-                                          searchFlag.toggleSearch();
-                                      });
-                                    },
-                                    icon: Icon(Icons.close),
-                                  ),
-                                ),
-                                onChanged: (value) {
-                                  if (_debounce?.isActive ?? false)
-                                    _debounce?.cancel();
-                                  _debounce = Timer(Duration(milliseconds: 700),
-                                      () async {
-                                    if (value.length > 2) {
-                                      if (!searchFlag.searchToggle) {
-                                        searchFlag.toggleSearch();
-                                        _markers = {};
-                                      }
-
-                                      List<AutoCompleteResult> searchResults =
-                                          await MapServices()
-                                              .searchPlaces(value);
-
-                                      allSearchResults
-                                          .setResults(searchResults);
-                                    } else {
-                                      List<AutoCompleteResult> emptyList = [];
-                                      allSearchResults.setResults(emptyList);
-                                    }
-                                  });
-                                },
-                              ),
-                            ),
-                          ],
+                Padding(
+                  padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5.0),
+                  child: Column(
+                    children: [
+                      Container(
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.white,
                         ),
-                      )
-                    : Container(),
+                        child: TextFormField(
+                          controller: searchController,
+                          onTap: () {
+                            setState(() {
+                              searchToggle = true; // Toggle search
+                            });
+                          },
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 15.0),
+                            border: InputBorder.none,
+                            hintText: 'Search',
+                            /* suffixIcon: IconButton(
+                              onPressed: () {
+                                setState(() {
+                                  // Handle closing search
+                                });
+                              },
+                              icon: Icon(Icons.close),
+                            ), */
+                          ),
+                          onChanged:
+                              seearchBuilding, /*(value) {
+                            if (_debounce?.isActive ?? false)
+                              _debounce?.cancel();
+                            _debounce =
+                                Timer(Duration(milliseconds: 700), () async {
+                              if (value.length > 2) {
+                                if (!searchFlag.searchToggle) {
+                                  searchFlag.toggleSearch();
+                                  _markers = {};
+                                }
+
+                                List<AutoCompleteResult> searchResults =
+                                    await MapServices().searchPlaces(value);
+
+                                allSearchResults.setResults(searchResults);
+                              } else {
+                                List<AutoCompleteResult> emptyList = [];
+                                allSearchResults.setResults(emptyList);
+                              }
+                            });
+                          },*/
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 searchFlag.searchToggle
                     ? allSearchResults.allReturnedResults.length != 0
                         ? Positioned(
@@ -273,186 +228,150 @@ class _MapState extends ConsumerState<Map> {
                                 borderRadius: BorderRadius.circular(10.0),
                                 color: Colors.white.withOpacity(0.7),
                               ),
-                              child: ListView(
-                                children: [
-                                  ...allSearchResults.allReturnedResults
+                              child: ListView.builder(
+                                itemCount: buildings
+                                    .length, // Update to the correct list length
+                                itemBuilder: (context, index) {
+                                  final build = buildings.elementAt(
+                                      index); // Use allbuilding instead of buildings
+                                  return ListTile(
+                                    leading: Icon(Icons.location_on,
+                                        color: Color.fromRGBO(0, 168, 171, 1),
+                                        size: 25.0),
+                                    title:
+                                        Text(build.markerId.value.toString()),
+                                  );
+                                },
+                              ),
+
+                              /*(
+                                
+                                   ...allSearchResults.allReturnedResults
                                       .map((e) => buildListItem(e, searchFlag))
                                 ],
-                              ),
+                              ),*/
                             ))
-                        : Positioned(
-                            top: 100.0,
-                            left: 15.0,
-                            child: Container(
-                              height: 200.0,
-                              width: screenWidth - 30.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: Colors.white.withOpacity(0.7),
-                              ),
-                              child: Center(
-                                child: Column(children: [
-                                  Text('No results to show',
-                                      style: TextStyle(
-                                          fontFamily: 'WorkSans',
-                                          fontWeight: FontWeight.w400)),
-                                  SizedBox(height: 5.0),
-                                  Container(
-                                    width: 125.0,
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        searchFlag.toggleSearch();
-                                      },
-                                      child: Center(
-                                        child: Text(
-                                          'Close this',
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontFamily: 'WorkSans',
-                                              fontWeight: FontWeight.w300),
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                ]),
-                              ),
-                            ))
-                    : Container(),
-                getDirections
-                    ? Padding(
-                        padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
+                        : Container()
+                    /*Positioned(
+                    top: 100.0,
+                    left: 15.0,
+                    child: Container(
+                      height: 200.0,
+                      width: screenWidth - 30.0,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.0),
+                        color: const Color.fromARGB(255, 255, 255, 255)
+                            .withOpacity(0.7),
+                      ),
+                      child: Center(
                         child: Column(children: [
+                          Text('No results to show',
+                              style: TextStyle(
+                                  fontFamily: 'WorkSans',
+                                  fontWeight: FontWeight.w400)),
+                          SizedBox(height: 5.0),
                           Container(
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white,
-                            ),
-                            child: TextFormField(
-                              controller: _originController,
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20.0, vertical: 15.0),
-                                  border: InputBorder.none,
-                                  hintText: 'Origin'),
-                            ),
-                          ),
-                          SizedBox(height: 3.0),
-                          Container(
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white,
-                            ),
-                            child: TextFormField(
-                              controller: _destinationController,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 15.0),
-                                border: InputBorder.none,
-                                hintText: 'Destination',
-                                suffixIcon: Container(
-                                    width: 96.0,
-                                    child: Row(children: [
-                                      IconButton(
-                                        onPressed: () async {
-                                          var directions = await MapServices()
-                                              .getDirections(
-                                                  _originController.text,
-                                                  _destinationController.text);
-                                          _markers = {};
-                                          _polylines = {};
-                                          gotoPlace(
-                                              directions['start_location']
-                                                  ['lat'],
-                                              directions['start_location']
-                                                  ['lng'],
-                                              directions['end_location']['lat'],
-                                              directions['end_location']['lng'],
-                                              directions['bounds_ne'],
-                                              directions['bounds_sw']);
-                                          _setPolyline(
-                                              directions['polyline_decoded']);
-                                        },
-                                        icon: Icon(Icons.search),
-                                      ),
-                                      IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              getDirections = false;
-                                              _originController.text = '';
-                                              _destinationController.text = '';
-                                              _markers = {};
-                                              _polylines = {};
-                                            });
-                                          },
-                                          icon: Icon(Icons.close))
-                                    ])),
+                            width: 125.0,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                searchFlag.toggleSearch();
+                              },
+                              child: Center(
+                                child: Text(
+                                  'Close this',
+                                  style: TextStyle(
+                                      color: Color.fromARGB(255, 7, 31, 110),
+                                      fontFamily: 'WorkSans',
+                                      fontWeight: FontWeight.w300),
+                                ),
                               ),
                             ),
                           )
                         ]),
-                      )
-                    : Container(),
-                radiusSlider
-                    ? Padding(
-                        padding: EdgeInsets.fromLTRB(15.0, 30.0, 15.0, 0.0),
-                        child: Container(
-                            height: 50.0,
-                            color: Colors.black.withOpacity(0.2),
-                            child: Row(children: [
-                              Expanded(
-                                  child: Slider(
-                                      max: 7000.0,
-                                      min: 1000.0,
-                                      value: radiusValue,
-                                      onChanged: (newVal) {
-                                        radiusValue = newVal;
-                                        pressedNear = false;
-                                        _setCircle(tappedPoint);
-                                      })),
-                              IconButton(
-                                  onPressed: () {
-                                    if (_debounce?.isActive ?? false)
-                                      _debounce?.cancel();
-                                    _debounce =
-                                        Timer(Duration(seconds: 2), () async {
-                                      var placesResult = await MapServices()
-                                          .getPlaceDetails(
-                                              tappedPoint, radiusValue.toInt());
-
-                                      List<dynamic> placesWithin =
-                                          placesResult['results'] as List;
-
-                                      allFavoritePlaces = placesWithin;
-
-                                      tokenKey =
-                                          placesResult['next_page_token'] ??
-                                              'none';
-                                      _markers = {};
-                                      placesWithin.forEach((element) {
-                                        _setNearMarker(
-                                          LatLng(
-                                              element['geometry']['location']
-                                                  ['lat'],
-                                              element['geometry']['location']
-                                                  ['lng']),
-                                          element['name'],
-                                          element['types'],
-                                          element['business_status'] ??
-                                              'not available',
-                                        );
-                                      });
-                                      _markersDupe = _markers;
-                                      pressedNear = true;
-                                    });
-                                  },
-                                  icon: Icon(
-                                    Icons.near_me,
-                                    color: Colors.blue,
-                                  ))
-                            ])))
-                    : Container()
+                      ),
+                    )),*/
+                    : getDirections
+                        ? Padding(
+                            padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
+                            child: Column(children: [
+                              Container(
+                                height: 50.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.white,
+                                ),
+                                child: TextFormField(
+                                  controller: _originController,
+                                  decoration: InputDecoration(
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 20.0, vertical: 15.0),
+                                      border: InputBorder.none,
+                                      hintText: 'Origin'),
+                                ),
+                              ),
+                              SizedBox(height: 3.0),
+                              Container(
+                                height: 50.0,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  color: Colors.white,
+                                ),
+                                child: TextFormField(
+                                  controller: _destinationController,
+                                  decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 20.0, vertical: 15.0),
+                                    border: InputBorder.none,
+                                    hintText: 'Destination',
+                                    suffixIcon: Container(
+                                        width: 96.0,
+                                        child: Row(children: [
+                                          IconButton(
+                                            onPressed: () async {
+                                              var directions =
+                                                  await MapServices()
+                                                      .getDirections(
+                                                          _originController
+                                                              .text,
+                                                          _destinationController
+                                                              .text);
+                                              _markers = {};
+                                              _polylines = {};
+                                              gotoPlace(
+                                                  directions['start_location']
+                                                      ['lat'],
+                                                  directions['start_location']
+                                                      ['lng'],
+                                                  directions['end_location']
+                                                      ['lat'],
+                                                  directions['end_location']
+                                                      ['lng'],
+                                                  directions['bounds_ne'],
+                                                  directions['bounds_sw']);
+                                              _setPolyline(directions[
+                                                  'polyline_decoded']);
+                                            },
+                                            icon: Icon(Icons.search),
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                setState(() {
+                                                  getDirections = false;
+                                                  _originController.text = '';
+                                                  _destinationController.text =
+                                                      '';
+                                                  _markers = {};
+                                                  _polylines = {};
+                                                });
+                                              },
+                                              icon: Icon(Icons.close))
+                                        ])),
+                                  ),
+                                ),
+                              )
+                            ]),
+                          )
+                        : Container(),
               ],
             )
           ],
@@ -467,41 +386,56 @@ class _MapState extends ConsumerState<Map> {
             IconButton(
               onPressed: () {
                 setState(() {
+                  /*
                   searchToggle = false;
                   radiusSlider = false;
                   pressedNear = false;
                   cardTapped = false;
-                  getDirections = true;
+                  getDirections = true;*/
                 });
               },
               icon: Icon(Icons.navigation),
             ),
             SizedBox(height: 16),
-            FloatingActionButton(
+            /*FloatingActionButton(
               onPressed: () {
-                setState(() {
-                  searchToggle = true;
-                  radiusSlider = false;
-                  pressedNear = false;
-                  cardTapped = false;
-                  getDirections = false;
-                });
+                setState(
+                  () {
+                    /*  searchToggle = true;
+                    radiusSlider = false;
+                    pressedNear = false;
+                    cardTapped = false;
+                    getDirections = false;*/
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const SearchMap()));
+                  },
+                );
               },
               backgroundColor: Color.fromARGB(255, 34, 137, 255),
               child: Icon(
                 Icons.search,
                 color: Colors.black,
               ),
+            ),*/
+            IconButton(
+              onPressed: () async {
+                GoogleMapController controller = await _controller.future;
+                controller.animateCamera(CameraUpdate.newCameraPosition(
+                    CameraPosition(
+                        target: LatLng(26.34900306634682, 43.76681242106987),
+                        zoom: 15)));
+              },
+              icon: Icon(
+                Icons.place,
+                color: Colors.black,
+              ),
             ),
           ],
         ),
       ),
-
-// Pass searchToggle value to FAB
     );
   }
 
-//**//**هنا مهممممممممممممممممممممم */ */
   gotoPlace(double lat, double lng, double endLat, double endLng, boundsNe,
       boundsSw) async {
     final GoogleMapController controller = await _controller.future;
@@ -534,8 +468,17 @@ class _MapState extends ConsumerState<Map> {
         },
         onTap: () async {
           var place = await MapServices().getPlace(placeItem.placeId);
-          gotoSearchedPlace(place['geometry']['location']['lat'],
-              place['geometry']['location']['lng']);
+          // Check if the selected place is a building
+          if (buildings
+              .any((marker) => marker.markerId.value == place['place_id'])) {
+            // Move to the selected building
+            gotoSearchedPlace(place['geometry']['location']['lat'],
+                place['geometry']['location']['lng']);
+          } else {
+            // Handle non-building places
+            // You can implement this based on your requirements
+            // For example, showing a message or taking a different action
+          }
           searchFlag.toggleSearch();
         },
         child: Row(
@@ -556,4 +499,44 @@ class _MapState extends ConsumerState<Map> {
       ),
     );
   }
+
+  void seearchBuilding(String query) {
+    final suggestions = allbuilding.where((build) {
+      final buildingName = build.markerId.value.toString().toLowerCase();
+      final input = query.toLowerCase();
+      return buildingName.contains(input);
+    }).toSet();
+
+    setState(() => buildings = suggestions);
+  }
 }
+
+class Buildings {
+  late final String title;
+  late final String id;
+  late LatLng position;
+
+  Buildings({
+    required this.title,
+    required this.id,
+    required this.position,
+  });
+}
+
+const allbuilding = [
+  Marker(
+    markerId: MarkerId("Qassim University"),
+    position: LatLng(26.34900306634682, 43.76681242106987),
+    infoWindow: InfoWindow(title: "Qassim University"),
+  ),
+  Marker(
+    markerId: MarkerId("Qassim University Grand Mosque"),
+    position: LatLng(26.34864615733482, 43.764528904833334),
+    infoWindow: InfoWindow(title: "Qassim University Grand Mosque"),
+  ),
+  Marker(
+    markerId: MarkerId("College of Languages & Humanities"),
+    position: LatLng(26.349387167211944, 43.765018229733535),
+    infoWindow: InfoWindow(title: "College of Languages & Humanities"),
+  ),
+];

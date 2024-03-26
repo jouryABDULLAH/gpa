@@ -41,6 +41,62 @@ class _HomeWidgetState extends State<HomeWidget> {
                         ],
                       ),
                       Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment
+                              .center, // Center items horizontally
+                          mainAxisAlignment: MainAxisAlignment.center,
+
+                          children: [
+                            SizedBox(
+                              height:
+                                  260, // Set a fixed height for the SizedBox
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/back_card.png'),
+                                    fit: BoxFit.fill,
+                                  ),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Directionality(
+                                    textDirection: TextDirection.rtl,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Center(
+                                          child: Image(
+                                            image: AssetImage(
+                                                'assets/images/logo.png'),
+                                            height: 100,
+                                          ),
+                                        ),
+                                        Text(
+                                          "الاسم: ${controller.me?.name}" ?? "",
+                                          style: GoogleFonts.almarai(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        Text(
+                                          " الرقم الجامعي : 392206301",
+                                          style: GoogleFonts.almarai(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      /*Expanded(
                         child: SizedBox(
                           width: 500,
                           height: 100,
@@ -92,7 +148,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                             ),
                           ),
                         ),
-                      ),
+                      ),*/
                       Expanded(
                         child: SizedBox(
                           width: 500.0,

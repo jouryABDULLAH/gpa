@@ -3,6 +3,7 @@ import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
+import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -219,26 +220,41 @@ class _DbState extends State<Db> {
 
   Widget Upper() {
     return Container(
-      padding: const EdgeInsets.only(bottom: 50),
-      height: 100,
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 150,
       width: double.infinity,
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 0, 167, 171),
+        color: Color.fromARGB(255, 0, 168, 171),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              "Acadmic".tr,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.tajawal().fontFamily,
-                  color: Colors.white,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold),
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeWidget()),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
             ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text("Acadmic".tr,
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    color: Colors.white,
+                    fontFamily: GoogleFonts.tajawal().fontFamily,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold)),
           ),
         ],
       ),

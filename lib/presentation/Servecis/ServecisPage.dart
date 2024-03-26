@@ -21,11 +21,11 @@ class _ServicisPage extends State<ServicisPage> {
         elevation: 0,
         backgroundColor: ColorManager.primary,
         actions: [
-          IconButton(
+          /*  IconButton(
             onPressed: () {},
             icon: Icon(Icons.notifications,
                 color: Color.fromARGB(255, 255, 198, 34), size: 25),
-          ),
+          ),*/
         ],
       ),
       body: Column(

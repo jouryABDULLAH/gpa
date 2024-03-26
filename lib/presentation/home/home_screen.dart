@@ -76,8 +76,9 @@ class _HomeScreenState extends State<HomeScreen> {
               ),*/
               label: "namik".tr),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.location), label: "الخريطة"),
-          BottomNavigationBarItem(icon: Icon(Ionicons.person), label: "حسابي"),
+              icon: Icon(Ionicons.location), label: "map".tr),
+          BottomNavigationBarItem(
+              icon: Icon(Ionicons.person), label: "account".tr),
         ],
         selectedLabelStyle: GoogleFonts.almarai(),
         unselectedLabelStyle: GoogleFonts.almarai(),
