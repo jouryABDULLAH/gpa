@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gpa/presentation/Map/searchmap.dart';
+import 'package:gpa/presentation/Map/map.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
@@ -9,7 +9,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:boxicons/boxicons.dart';
-import 'package:gpa/presentation/map/map.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -31,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeWidget(),
     ServicisPage(),
     ProfileScreen(),
-    Map(),
+    screen_Map(),
     ProfileScreen(),
   ];
   @override

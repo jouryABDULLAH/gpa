@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:gpa/presentation/Map/mapkey.dart';
 import 'package:gpa/presentation/Map/models/auto_complate_results.dart';
 import 'package:gpa/presentation/Map/markers.dart';
 import 'package:gpa/presentation/Map/serveses/map_services.dart';
@@ -11,17 +12,51 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:gpa/presentation/Map/providers/search_plases.dart';
 import 'dart:ui' as ui;
 
+import 'package:location/location.dart';
+
 //import 'package:gpa/presentation/Map/FAB.dart';
 
-class Map extends ConsumerStatefulWidget {
-  const Map({Key? key}) : super(key: key);
+class screen_Map extends ConsumerStatefulWidget {
+  const screen_Map({Key? key}) : super(key: key);
 
   @override
-  _MapState createState() => _MapState();
+  _screen_Map createState() => _screen_Map();
 }
 
-class _MapState extends ConsumerState<Map> {
+class _screen_Map extends ConsumerState<screen_Map> {
   Completer<GoogleMapController> _controller = Completer();
+  final locationController = Location();
+  LatLng? currentPosition;
+  Map<PolylineId, Polyline> polylines = {};
+
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance
+        .addPostFrameCallback((_) async => await initializeMap());
+  }
+
+  static const B = LatLng(26.34900306634682, 43.76681242106987);
+
+  Future<void> initializeMap() async {
+    await fetchLocationUpdates();
+    if (currentPosition != null) {
+      final coordinates = await fetchPolylinePoints(
+        currentPosition!,
+        B, // Provide the destination location here
+      );
+      generatePolyLineFromPoints(coordinates);
+    }
+  }
+
+  void onDestinationSelected(LatLng destination) async {
+    if (currentPosition != null) {
+      final List<LatLng> polylineCoordinates = await fetchPolylinePoints(
+        currentPosition!,
+        destination,
+      );
+      generatePolyLineFromPoints(polylineCoordinates);
+    }
+  }
 
 //Text Editing Controllers
   TextEditingController searchController = TextEditingController();
@@ -30,11 +65,10 @@ class _MapState extends ConsumerState<Map> {
 
   Timer? _debounce;
 
-  bool searchToggle = false;
-  bool radiusSlider = false;
-  bool cardTapped = false;
-  bool pressedNear = false;
   bool getDirections = false;
+
+  bool showSearchMarker = false;
+  bool showNavigationMarkers = false;
 
   int markerIdCounter = 1;
   int polylineIdCounter = 1;
@@ -71,7 +105,7 @@ class _MapState extends ConsumerState<Map> {
       _markers.add(marker);
     });
   }
-
+/*
   void _setPolyline(List<PointLatLng> points) {
     final String polylineIdVal = 'polyline_$polylineIdCounter';
 
@@ -82,7 +116,7 @@ class _MapState extends ConsumerState<Map> {
         width: 2,
         color: const Color.fromRGBO(33, 150, 243, 1),
         points: points.map((e) => LatLng(e.latitude, e.longitude)).toList()));
-  }
+  }*/
 
   void _setCircle(LatLng point) async {
     final GoogleMapController controller = await _controller.future;
@@ -100,6 +134,79 @@ class _MapState extends ConsumerState<Map> {
     return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
         .buffer
         .asUint8List();
+  }
+
+  Future<void> fetchLocationUpdates() async {
+    bool serviceEnbled;
+    PermissionStatus permissionGranted;
+
+    serviceEnbled = await locationController.serviceEnabled();
+
+    if (serviceEnbled) {
+      serviceEnbled = await locationController.requestService();
+    } else {
+      return;
+    }
+
+    permissionGranted = await locationController.hasPermission();
+    if (permissionGranted == PermissionStatus.denied) {
+      permissionGranted = await locationController.requestPermission();
+      if (permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    locationController.onLocationChanged.listen((currentLocation) {
+      if (currentLocation.latitude != null &&
+          currentLocation.longitude != null) {
+        setState(() {
+          currentPosition = LatLng(
+            currentLocation.latitude!,
+            currentLocation.longitude!,
+          );
+        });
+      }
+    });
+  }
+
+  LatLng ocation = LatLng(26.34847508549134, 43.767713423546866);
+
+  Future<List<LatLng>> fetchPolylinePoints(
+      LatLng origin, LatLng destination) async {
+    final polylinePoints = PolylinePoints();
+
+    final result = await polylinePoints.getRouteBetweenCoordinates(
+      googleMapsApiKey,
+      PointLatLng(origin.latitude, origin.longitude),
+      PointLatLng(destination.latitude, destination.longitude),
+    );
+    if (result.points.isNotEmpty) {
+      return result.points
+          .map((point) => LatLng(point.latitude, point.longitude))
+          .toList();
+    } else {
+      debugPrint(result.errorMessage);
+      return [];
+    }
+  }
+
+  Future<void> generatePolyLineFromPoints(
+      List<LatLng> polylineCoordinates) async {
+    const id = PolylineId('polyline');
+
+    final polyline = Polyline(
+      polylineId: id,
+      color: Colors.blueAccent,
+      points: polylineCoordinates,
+      width: 5,
+    );
+
+    setState(() => polylines[id] = polyline);
+  }
+
+  BitmapDescriptor customMarkerIcon(Color color) {
+    return BitmapDescriptor.defaultMarkerWithHue(color != Colors.red
+        ? BitmapDescriptor.hueGreen
+        : BitmapDescriptor.hueRed);
   }
 
   @override
@@ -121,16 +228,38 @@ class _MapState extends ConsumerState<Map> {
                 Container(
                   height: screenHeight,
                   width: screenWidth,
-                  child: GoogleMap(
-                    mapType: MapType.normal,
-                    markers: Set<Marker>.of(_markers)..addAll(Qbuildings),
-                    polylines: _polylines,
-                    initialCameraPosition:
-                        CameraPosition(target: _sourceLocation, zoom: 14.5),
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                  ),
+                  child: currentPosition == null
+                      ? const Center(child: CircularProgressIndicator())
+                      : GoogleMap(
+                          mapType: MapType.normal,
+                          markers: Set<Marker>.of(_markers)
+                            ..addAll(Qbuildings)
+                            ..addAll({
+                              Marker(
+                                markerId: const MarkerId('currentLocation'),
+                                icon: customMarkerIcon(Colors.blue),
+                                position: currentPosition!,
+                              ),
+                              Marker(
+                                markerId: const MarkerId('sourceLocation'),
+                                icon: BitmapDescriptor.defaultMarker,
+                                position: const LatLng(
+                                    26.36381418346422, 43.742127942805475),
+                              ),
+                              Marker(
+                                markerId: const MarkerId('destinationLocation'),
+                                icon: BitmapDescriptor.defaultMarker,
+                                position: const LatLng(
+                                    26.34900306634682, 43.76681242106987),
+                              )
+                            }),
+                          polylines: Set<Polyline>.of(polylines.values),
+                          initialCameraPosition: CameraPosition(
+                              target: _sourceLocation, zoom: 14.5),
+                          onMapCreated: (GoogleMapController controller) {
+                            _controller.complete(controller);
+                          },
+                        ),
                 ),
                 Padding(
                   padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5.0),
@@ -145,11 +274,20 @@ class _MapState extends ConsumerState<Map> {
                         child: TextField(
                           controller: searchController,
                           decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 20.0, vertical: 15.0),
-                            border: OutlineInputBorder(),
-                            hintText: 'Search',
-                          ),
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 20.0, vertical: 15.0),
+                              border: OutlineInputBorder(),
+                              hintText: 'Search',
+                              suffixIcon: IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                      searchController.text = '';
+
+                                      if (searchFlag.searchToggle)
+                                        searchFlag.toggleSearch();
+                                    });
+                                  },
+                                  icon: Icon(Icons.close))),
                           onChanged: (query) {
                             setState(() {
                               suggestions = buildingNames
@@ -164,9 +302,6 @@ class _MapState extends ConsumerState<Map> {
                     ],
                   ),
                 ),
-                /*searchFlag.searchToggle
-                    ? allSearchResults.allReturnedResults.length != 0
-                        ? */
                 Positioned(
                   top: 80.0,
                   left: 15.0,
@@ -191,7 +326,6 @@ class _MapState extends ConsumerState<Map> {
                             ),
                             onTap: () async {
                               searchController.text = suggestion;
-                              seearchBuilding(suggestion);
                               final selectedMarker = Qbuildings.firstWhere(
                                 (marker) =>
                                     marker.markerId.value.toString() ==
@@ -214,6 +348,9 @@ class _MapState extends ConsumerState<Map> {
                                   ),
                                 ),
                               );
+
+                              // Draw polyline between current position and selected place
+                              onDestinationSelected(selectedMarker.position);
                             },
                           ),
                         );
@@ -221,53 +358,6 @@ class _MapState extends ConsumerState<Map> {
                     ),
                   ),
                 ),
-
-                /*(
-                                
-                                   ...allSearchResults.allReturnedResults
-                                      .map((e) => buildListItem(e, searchFlag))
-                                ],
-                              ),*/
-
-                /*Positioned(
-                    top: 100.0,
-                    left: 15.0,
-                    child: Container(
-                      height: 200.0,
-                      width: screenWidth - 30.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.0),
-                        color: const Color.fromARGB(255, 255, 255, 255)
-                            .withOpacity(0.7),
-                      ),
-                      child: Center(
-                        child: Column(children: [
-                          Text('No results to show',
-                              style: TextStyle(
-                                  fontFamily: 'WorkSans',
-                                  fontWeight: FontWeight.w400)),
-                          SizedBox(height: 5.0),
-                          Container(
-                            width: 125.0,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                searchFlag.toggleSearch();
-                              },
-                              child: Center(
-                                child: Text(
-                                  'Close this',
-                                  style: TextStyle(
-                                      color: Color.fromARGB(255, 7, 31, 110),
-                                      fontFamily: 'WorkSans',
-                                      fontWeight: FontWeight.w300),
-                                ),
-                              ),
-                            ),
-                          )
-                        ]),
-                      ),
-                    )),*/
-
                 getDirections
                     ? Padding(
                         padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
@@ -321,8 +411,8 @@ class _MapState extends ConsumerState<Map> {
                                               directions['end_location']['lng'],
                                               directions['bounds_ne'],
                                               directions['bounds_sw']);
-                                          _setPolyline(
-                                              directions['polyline_decoded']);
+                                          /*_setPolyline(
+                                              directions['polyline_decoded']);*/
                                         },
                                         icon: Icon(Icons.search),
                                       ),
@@ -357,14 +447,7 @@ class _MapState extends ConsumerState<Map> {
           children: [
             IconButton(
               onPressed: () {
-                setState(() {
-                  /*
-                  searchToggle = false;
-                  radiusSlider = false;
-                  pressedNear = false;
-                  cardTapped = false;
-                  getDirections = true;*/
-                });
+                setState(() {});
               },
               icon: Icon(Icons.navigation),
             ),
@@ -481,16 +564,4 @@ class _MapState extends ConsumerState<Map> {
 
     setState(() => Qbuildings = suggestions);
   }
-}
-
-class Buildings {
-  late final String title;
-  late final String id;
-  late LatLng position;
-
-  Buildings({
-    required this.title,
-    required this.id,
-    required this.position,
-  });
 }
