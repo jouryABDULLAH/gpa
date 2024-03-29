@@ -105,18 +105,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
       _markers.add(marker);
     });
   }
-/*
-  void _setPolyline(List<PointLatLng> points) {
-    final String polylineIdVal = 'polyline_$polylineIdCounter';
-
-    polylineIdCounter++;
-
-    _polylines.add(Polyline(
-        polylineId: PolylineId(polylineIdVal),
-        width: 2,
-        color: const Color.fromRGBO(33, 150, 243, 1),
-        points: points.map((e) => LatLng(e.latitude, e.longitude)).toList()));
-  }*/
 
   void _setCircle(LatLng point) async {
     final GoogleMapController controller = await _controller.future;
@@ -358,82 +346,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
                     ),
                   ),
                 ),
-                getDirections
-                    ? Padding(
-                        padding: EdgeInsets.fromLTRB(15.0, 40.0, 15.0, 5),
-                        child: Column(children: [
-                          Container(
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white,
-                            ),
-                            child: TextFormField(
-                              controller: _originController,
-                              decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.symmetric(
-                                      horizontal: 20.0, vertical: 15.0),
-                                  border: InputBorder.none,
-                                  hintText: 'Origin'),
-                            ),
-                          ),
-                          SizedBox(height: 3.0),
-                          Container(
-                            height: 50.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.white,
-                            ),
-                            child: TextFormField(
-                              controller: _destinationController,
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(
-                                    horizontal: 20.0, vertical: 15.0),
-                                border: InputBorder.none,
-                                hintText: 'Destination',
-                                suffixIcon: Container(
-                                    width: 96.0,
-                                    child: Row(children: [
-                                      IconButton(
-                                        onPressed: () async {
-                                          var directions = await MapServices()
-                                              .getDirections(
-                                                  _originController.text,
-                                                  _destinationController.text);
-                                          _markers = {};
-                                          _polylines = {};
-                                          gotoPlace(
-                                              directions['start_location']
-                                                  ['lat'],
-                                              directions['start_location']
-                                                  ['lng'],
-                                              directions['end_location']['lat'],
-                                              directions['end_location']['lng'],
-                                              directions['bounds_ne'],
-                                              directions['bounds_sw']);
-                                          /*_setPolyline(
-                                              directions['polyline_decoded']);*/
-                                        },
-                                        icon: Icon(Icons.search),
-                                      ),
-                                      IconButton(
-                                          onPressed: () {
-                                            setState(() {
-                                              getDirections = false;
-                                              _originController.text = '';
-                                              _destinationController.text = '';
-                                              _markers = {};
-                                              _polylines = {};
-                                            });
-                                          },
-                                          icon: Icon(Icons.close))
-                                    ])),
-                              ),
-                            ),
-                          )
-                        ]),
-                      )
-                    : Container(),
               ],
             )
           ],
@@ -445,33 +357,13 @@ class _screen_Map extends ConsumerState<screen_Map> {
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            IconButton(
+            /*  IconButton(
               onPressed: () {
                 setState(() {});
               },
               icon: Icon(Icons.navigation),
-            ),
-            SizedBox(height: 16),
-            /*FloatingActionButton(
-              onPressed: () {
-                setState(
-                  () {
-                    /*  searchToggle = true;
-                    radiusSlider = false;
-                    pressedNear = false;
-                    cardTapped = false;
-                    getDirections = false;*/
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const SearchMap()));
-                  },
-                );
-              },
-              backgroundColor: Color.fromARGB(255, 34, 137, 255),
-              child: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
             ),*/
+            SizedBox(height: 16),
             IconButton(
               onPressed: () async {
                 GoogleMapController controller = await _controller.future;
@@ -512,47 +404,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
         CameraPosition(target: LatLng(lat, lng), zoom: 12)));
 
     _setMarker(LatLng(lat, lng));
-  }
-
-  Widget buildListItem(AutoCompleteResult placeItem, searchFlag) {
-    return Padding(
-      padding: EdgeInsets.all(5.0),
-      child: GestureDetector(
-        onTapDown: (_) {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        onTap: () async {
-          var place = await MapServices().getPlace(placeItem.placeId);
-          // Check if the selected place is a building
-          if (Qbuildings.any(
-              (marker) => marker.markerId.value == place['place_id'])) {
-            // Move to the selected building
-            gotoSearchedPlace(place['geometry']['location']['lat'],
-                place['geometry']['location']['lng']);
-          } else {
-            // Handle non-building places
-            // You can implement this based on your requirements
-            // For example, showing a message or taking a different action
-          }
-          searchFlag.toggleSearch();
-        },
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Icon(Icons.location_on, color: Colors.green, size: 25.0),
-            SizedBox(width: 4.0),
-            Container(
-              height: 40.0,
-              width: MediaQuery.of(context).size.width - 75.0,
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(placeItem.description ?? ''),
-              ),
-            )
-          ],
-        ),
-      ),
-    );
   }
 
   void seearchBuilding(String query) {

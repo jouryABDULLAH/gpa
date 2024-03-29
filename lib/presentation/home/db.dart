@@ -234,9 +234,8 @@ class _DbState extends State<Db> {
             alignment: Alignment.topLeft,
             child: IconButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pop(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeWidget()),
                 );
               },
               icon: Icon(
