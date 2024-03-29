@@ -135,9 +135,8 @@ class _GPAPage extends State<GPAPage> {
             alignment: Alignment.topLeft,
             child: IconButton(
               onPressed: () {
-                Navigator.push(
+                Navigator.pop(
                   context,
-                  MaterialPageRoute(builder: (context) => ServicisPage()),
                 );
               },
               icon: Icon(
