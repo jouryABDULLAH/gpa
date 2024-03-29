@@ -3,8 +3,9 @@ import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
-import 'package:gpa/presentation/home/home_screen.dart';
+import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../widgets/create_event_dialog.dart';
 import '../../widgets/day_item_widget.dart';
@@ -40,166 +41,163 @@ class _DbState extends State<Db> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Column(
-          children: [
-            const Image(image: AssetImage("assets/images/app_bar.png")),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 5),
-                decoration: BoxDecoration(
-                    color: ColorManager.primary,
-                    borderRadius: BorderRadius.circular(20)),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            index = 0;
-                          });
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                index == 0 ? Colors.white : null)),
-                        child: const Text("List"),
-                      ),
-                    ),
-                    Expanded(
-                      child: TextButton(
-                        onPressed: () {
-                          setState(() {
-                            index = 1;
-                          });
-                        },
-                        style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(
-                                index == 1 ? Colors.white : null)),
-                        child: const Text("Calender"),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            if (index == 0)
-              Expanded(
-                // height: 500,
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ListView.separated(
-                      itemBuilder: (c, i) => Container(
-                            decoration: BoxDecoration(
-                                color: controller
-                                    .calendarController.events?[i].eventColor,
-                                borderRadius: BorderRadius.circular(80)),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(controller
-                                          .calendarController.events?[i].name ??
-                                      ""),
-                                  CircleAvatar(
-                                      radius: 30,
-                                      child: Text(
-                                          "${controller.calendarController.events?[i].begin.day} - ${controller.calendarController.events?[i].end.day}")),
-                                ],
-                              ),
-                            ),
-                          ),
-                      separatorBuilder: (pp, dd) => const SizedBox(
-                            height: 10,
-                          ),
-                      itemCount:
-                          controller.calendarController.events?.length ?? 0),
-                ),
-              ),
-
-            /// Calendar control row.
-            if (index == 1) ...[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: Column(
+        children: [
+          Upper(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              decoration: BoxDecoration(
+                  color: ColorManager.primary,
+                  borderRadius: BorderRadius.circular(20)),
+              child: Row(
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () {
-                      controller.changeCalendarPage(showNext: false);
-                    },
-                  ),
-                  ValueListenableBuilder(
-                    valueListenable: controller.monthNameNotifier,
-                    builder: (ctx, value, child) => Text(
-                      value,
-                      style: TextStyle(
-                          fontSize: 16,
-                          color: const Color.fromARGB(255, 0, 0, 0),
-                          fontWeight: FontWeight.w600),
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          index = 0;
+                        });
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(index == 0
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "List".tr,
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios),
-                    onPressed: () {
-                      controller.changeCalendarPage(showNext: true);
-                    },
+                  Expanded(
+                    child: TextButton(
+                      onPressed: () {
+                        setState(() {
+                          index = 1;
+                        });
+                      },
+                      style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(index == 1
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "Calendar".tr,
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
+                    ),
                   ),
                 ],
               ),
-
-              /// Calendar view.
-              Expanded(
-                child: CrCalendar(
-                  firstDayOfWeek: WeekDay.sunday,
-                  eventsTopPadding: 32,
-                  initialDate: controller.currentDate,
-                  maxEventLines: 3,
-                  controller: controller.calendarController,
-                  forceSixWeek: true,
-                  dayItemBuilder: (builderArgument) =>
-                      DayItemWidget(properties: builderArgument),
-                  weekDaysBuilder: (day) => WeekDaysWidget(day: day),
-                  eventBuilder: (drawer) => EventWidget(drawer: drawer),
-                  // onDayClicked: controller.showDayEventsInModalSheet(context),
-                  minDate: DateTime.now().subtract(const Duration(days: 1000)),
-                  maxDate: DateTime.now().add(const Duration(days: 180)),
-                  // weeksToShow: [0,1,2].toList(),
-                  //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
-                ),
-              ),
-            ],
-          ],
-        ),
-        floatingActionButton:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-          FloatingActionButton(
-            onPressed: () => Get.to(const HomeScreen()),
-            backgroundColor: ColorManager.primary,
-            heroTag: "fab2",
-            child: const Icon(Icons.arrow_back),
-          ),
-          FloatingActionButton(
-            onPressed: addEvent,
-            backgroundColor: ColorManager.primary,
-            heroTag: "fab1",
-            child: const Icon(
-              Icons.add,
-              color: ColorManager.violet,
             ),
           ),
-        ]));
+          const SizedBox(
+            height: 10,
+          ),
+          if (index == 0)
+            Expanded(
+              // height: 500,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ListView.separated(
+                    itemBuilder: (c, i) => Container(
+                          decoration: BoxDecoration(
+                              color: controller
+                                  .calendarController.events?[i].eventColor,
+                              borderRadius: BorderRadius.circular(80)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(controller
+                                        .calendarController.events?[i].name ??
+                                    ""),
+                                CircleAvatar(
+                                    radius: 30,
+                                    child: Text(
+                                        "${controller.calendarController.events?[i].begin.day} - ${controller.calendarController.events?[i].end.day}")),
+                              ],
+                            ),
+                          ),
+                        ),
+                    separatorBuilder: (pp, dd) => const SizedBox(
+                          height: 10,
+                        ),
+                    itemCount:
+                        controller.calendarController.events?.length ?? 0),
+              ),
+            ),
 
-//         onPressed: addEvent,
-//         backgroundColor: ColorManager.primary,
-//         child: const Icon(
-//           Icons.add,
-//           color: ColorManager.violet,
-//         ),
-//     );
+          /// Calendar control row.
+          if (index == 1) ...[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () {
+                    controller.changeCalendarPage(showNext: false);
+                  },
+                ),
+                ValueListenableBuilder(
+                  valueListenable: controller.monthNameNotifier,
+                  builder: (ctx, value, child) => Text(
+                    value,
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 109, 109, 109),
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.arrow_forward_ios),
+                  onPressed: () {
+                    controller.changeCalendarPage(showNext: true);
+                  },
+                ),
+              ],
+            ),
+
+            /// Calendar view.
+            Expanded(
+              child: CrCalendar(
+                firstDayOfWeek: WeekDay.sunday,
+                eventsTopPadding: 32,
+                initialDate: controller.currentDate,
+                maxEventLines: 3,
+                controller: controller.calendarController,
+                forceSixWeek: true,
+                dayItemBuilder: (builderArgument) =>
+                    DayItemWidget(properties: builderArgument),
+                weekDaysBuilder: (day) => WeekDaysWidget(day: day),
+                eventBuilder: (drawer) => EventWidget(drawer: drawer),
+                // onDayClicked: controller.showDayEventsInModalSheet(context),
+                minDate: DateTime.now().subtract(const Duration(days: 1000)),
+                maxDate: DateTime.now().add(const Duration(days: 180)),
+                // weeksToShow: [0,1,2].toList(),
+                //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
+              ),
+            ),
+          ],
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: addEvent,
+        backgroundColor: ColorManager.primary,
+        child: const Icon(
+          Icons.add,
+          color: Color.fromARGB(255, 255, 198, 34),
+        ),
+      ),
+    );
   }
 
   Future<void> addEvent() async {
@@ -218,5 +216,47 @@ class _DbState extends State<Db> {
         "color": event.eventColor.value,
       });
     }
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 150,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(
+                  context,
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text("Acadmic".tr,
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    color: Colors.white,
+                    fontFamily: GoogleFonts.tajawal().fontFamily,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
   }
 }

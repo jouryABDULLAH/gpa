@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
@@ -124,14 +125,14 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         },
         validator: (v) {
           if (v!.isEmpty) {
-            return "Enter The Previous Hours.";
+            return "ph".tr;
           } else if (int.tryParse(v) == null) {
-            return "Enter a valid integer.";
+            return "vi".tr;
           }
           return null;
         },
         decoration: InputDecoration(
-          hintText: "Enter The Previous Hours",
+          hintText: "ph".tr,
           border: OutlineInputBorder(
             borderRadius: Constants.borderRadius,
             borderSide: BorderSide.none,
@@ -159,12 +160,12 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           if (v!.isEmpty) {
             return "Enter The Previous GPA.";
           } else if (double.tryParse(v) == null) {
-            return "Enter a valid number.";
+            return "vi".tr;
           }
           return null;
         },
         decoration: InputDecoration(
-          hintText: "Enter The Previous GPA",
+          hintText: "pg".tr,
           border: OutlineInputBorder(
             borderRadius: Constants.borderRadius,
             borderSide: BorderSide.none,
@@ -187,12 +188,12 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         },
         validator: (v) {
           if (v!.length <= 0) {
-            return "Enter The Lesson Name.";
+            return "LN".tr;
           } else
             return null;
         },
         decoration: InputDecoration(
-          hintText: "Enter The Class",
+          hintText: "LN".tr,
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -248,7 +249,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "حساب المعدل التراكمي",
+              "GPA_22".tr,
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge!
