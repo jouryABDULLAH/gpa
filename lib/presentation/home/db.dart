@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../cubit/send_alarm_cubit.dart';
 import '../../widgets/create_event_dialog.dart';
 import '../../widgets/day_item_widget.dart';
 import '../../widgets/event_widget.dart';
 import '../../widgets/week_days_widget.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class Db extends StatefulWidget {
   const Db({super.key});
@@ -200,6 +203,31 @@ class _DbState extends State<Db> {
     );
   }
 
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  FlutterLocalNotificationsPlugin();
+
+  Future<void> _zonedScheduleNotification(
+      String name, String duration, DateTime dateEnd) async {
+    final android = AndroidNotificationDetails(
+      "${DateTime.now()}",
+      "Default",
+      priority: Priority.high,
+      importance: Importance.max,
+      shortcutId: DateTime.now().toIso8601String(),
+    );
+    const ios = DarwinNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: ios);
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        name,
+        duration,
+        tz.TZDateTime.now(tz.local).add(dateEnd.difference(DateTime.now())),
+        platform,
+        androidScheduleMode: AndroidScheduleMode.inexact,
+        uiLocalNotificationDateInterpretation:
+        UILocalNotificationDateInterpretation.absoluteTime);
+  }
+
   Future<void> addEvent() async {
     final event = await showDialog(
         context: context, builder: (context) => const CreateEventDialog());
@@ -215,9 +243,16 @@ class _DbState extends State<Db> {
         "end": event.end.toString().split(" ")[0],
         "color": event.eventColor.value,
       });
+      await SendAlarmCubit.get(context).sendNotification(
+          event.name,
+          "Start ${event.begin.toString().split(" ")[0]}: End ${event.end.toString().split(" ")[0]}",
+          "event");
+      _zonedScheduleNotification(
+          event.name,
+          "Start ${event.begin.toString().split(" ")[0]}: End ${event.end.toString().split(" ")[0]}",
+          (event.end as DateTime).subtract(const Duration(days: 1)));
     }
   }
-
   Widget Upper() {
     return Container(
       padding: const EdgeInsets.only(left: 0, right: 0),

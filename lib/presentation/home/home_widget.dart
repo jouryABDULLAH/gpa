@@ -80,7 +80,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
-                                          " الرقم الجامعي : 392206301",
+                                          " الرقم الجامعي : ${controller.me?.id}",
                                           style: GoogleFonts.almarai(
                                             fontSize: 20,
                                             fontWeight: FontWeight.bold,

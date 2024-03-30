@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cr_calendar/cr_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -117,7 +118,7 @@ class Controller extends GetxController {
       // await FirebaseMessaging.instance.deleteToken();
       await FirebaseAuth.instance.signOut();
       await CacheHelper.removeData(key: 'uId');
-
+      await FirebaseMessaging.instance.unsubscribeFromTopic("event");
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const LogInWidget()));
     } catch (e) {
@@ -137,10 +138,10 @@ class Controller extends GetxController {
   }
 
   /// Set app bar text and month name over calendar.
-  void setTexts(int year, int month) {
+  Future<void> setTexts(int year, int month)async {
     final date = DateTime(year, month);
-    appbarTitleNotifier.value = date.format(kAppBarDateFormat);
-    monthNameNotifier.value = date.format(kMonthFormat);
+    appbarTitleNotifier.value =await date.format(kAppBarDateFormat);
+    monthNameNotifier.value = await date.format(kMonthFormat);
   }
 
   /// Show current month page.
