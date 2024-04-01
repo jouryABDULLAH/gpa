@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/shared/component/text_form_field.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../../control.dart';
 
@@ -18,7 +19,16 @@ class ChangePassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Change Password"),
+        title: Text(
+          "pass".tr,
+          style: GoogleFonts.tajawal(
+            textStyle: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 0, 167, 171),
+            ),
+          ),
+        ),
       ),
       body: Form(
         key: formState,
@@ -29,41 +39,41 @@ class ChangePassword extends StatelessWidget {
                 AppTextFormField(
                   validate: (val) {
                     if (val!.isEmpty) {
-                      return "this field cant be empty";
+                      return "fill".tr;
                     }
                     if (val.length < 8) {
-                      return "password cant be less than 8 letter";
+                      return "less".tr;
                     }
                     return null;
                   },
                   controller: currentPasswordController,
-                  hint: "current password",
+                  hint: "curr pass".tr,
                 ),
                 AppTextFormField(
                   validate: (val) {
                     if (val!.isEmpty) {
-                      return "this field cant be empty";
+                      return "fill".tr;
                     }
                     if (val.length < 8) {
-                      return "password cant be less than 8 letter";
+                      return "less".tr;
                     }
                     return null;
                   },
                   controller: newPasswordController,
-                  hint: "new password",
+                  hint: "fill".tr,
                 ),
                 AppTextFormField(
                   validate: (val) {
                     if (val!.isEmpty) {
-                      return "this field cant be empty";
+                      return "fill".tr;
                     }
                     if (val.length < 8) {
-                      return "password cant be less than 8 letter";
+                      return "less".tr;
                     }
                     return null;
                   },
                   controller: confirmPasswordController,
-                  hint: "confirm password",
+                  hint: "conf".tr,
                 ),
                 SizedBox(
                     width: double.infinity,
@@ -82,12 +92,14 @@ class ChangePassword extends StatelessWidget {
                                   currentPasswordController.text,
                                   newPasswordController.text,
                                   context);
-                                  showDialog(
+                              showDialog(
                                   context: context,
                                   barrierDismissible: true,
                                   builder: (_) => AlertDialog(
                                         title: Text(
-                                            "password changed successfully"),
+                                          "تم تغيير كلمة المرور بنجاح",
+                                          style: GoogleFonts.tajawal(),
+                                        ),
                                         content: Icon(
                                           Icons.task_alt,
                                           size: 80,
@@ -99,19 +111,24 @@ class ChangePassword extends StatelessWidget {
                                                 onPressed: () {
                                                   Navigator.pop(context);
                                                   Navigator.pop(context);
-                                                }, child: Text("Go Back")),
+                                                },
+                                                child: Text(
+                                                  "العودة للخلف",
+                                                  style: GoogleFonts.tajawal(),
+                                                )),
                                           )
                                         ],
                                       ));
                             }
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text(
-                                        "new password must equal confirm password")));
+                                SnackBar(content: Text("ent pass".tr)));
                           }
                         },
-                        child: const Text("Save")))
+                        child: Text(
+                          "Save".tr,
+                          style: GoogleFonts.tajawal(fontSize: 20),
+                        )))
               ],
             )),
       ),

@@ -21,6 +21,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   TextEditingController password = TextEditingController();
 
   TextEditingController name = TextEditingController();
+  TextEditingController id = TextEditingController();
 
   TextEditingController username = TextEditingController();
 
@@ -70,7 +71,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         height: 5,
                       ),
                       Text(
-                        "Nice To Meet You!",
+                        "Nice".tr,
                         style: TextStyle(color: ColorManager.primary),
                       ),
                       const SizedBox(
@@ -78,9 +79,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Name",
+                        head: "Name".tr,
                         controller: name,
-                        hint: "name",
+                        hint: "Name".tr,
                         validate: (c) {
                           if (name.text.trim().isEmpty) {
                             return "cannot empty".tr;
@@ -112,6 +113,28 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         },
                         hint: 'email',
 // >>>>>>> HI
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      AppTextFormField(
+                        padding: 10,
+                        head: "id".tr,
+                        controller: id,
+                        hint: "id".tr,
+                        validate: (c) {
+                          if (id.text.trim().isEmpty) {
+                            return "cannot empty".tr;
+                          }
+                          if (c!.isEmpty) {
+                            return "لا يجب ان يكون الحقل فارغ".tr;
+                          }
+
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -147,6 +170,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       isLogin: false,
                                       ctx: context,
                                       name: name.text.trim(),
+                                      id: id.text.trim(),
                                       signWith: "email",
                                     )
                                         .then((value) {

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 
@@ -44,7 +45,7 @@ class LessonList extends StatelessWidget {
 // <<<<<<< HEAD
             alignment: Alignment.center,
 // <<<<<<< HEAD
-            child: Text("الرجاء اضافة مادة.",
+            child: Text("pa".tr,
 // =======
 //             child: Text("Please Add Lesson.",
 // >>>>>>> HI

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/rules/model/rules.dart';
+import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 
 // ignore: camel_case_types
 class rulesPage extends StatefulWidget {
@@ -25,7 +27,7 @@ class _rulesPageState extends State<rulesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /* appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorManager.primary,
         leading: IconButton(
@@ -36,8 +38,8 @@ class _rulesPageState extends State<rulesPage> {
             size: 32,
           ),
         ),
-        title: const Text(
-          'خدمات وقوانين الجامعة',
+        title: Text(
+          "rules_2".tr,
           textAlign: TextAlign.center, // Align the text in the center
         ),
         centerTitle: true,
@@ -49,15 +51,13 @@ class _rulesPageState extends State<rulesPage> {
           ),
         ],
         toolbarHeight: 90.0,
-      ),
+      ),*/
       body: Column(
         children: [
+          //Upper(),
           Container(
             padding: const EdgeInsets.fromLTRB(30, 50, 30, 10),
-            child: const Column(children: [
-              Text(' خدمات الجامعة'),
-              Text('الخدمات المعروضة هي خدمات مقررة من الجامعة')
-            ]),
+            child: Column(children: [Text("serv".tr), Text("serv_2".tr)]),
           ),
           Container(
             height: 550,
@@ -76,6 +76,51 @@ class _rulesPageState extends State<rulesPage> {
     setState(() {
       rules = fetchedRules;
     });
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 150,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ServicisPage()),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "rules_2".tr,
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  color: Colors.white,
+                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -133,7 +178,7 @@ class _RulesListState extends State<RulesList> {
                     const SizedBox(
                         height:
                             8), // Add some space between description and steps
-                    Text('خطوات تنفيذ الخدمة:',
+                    Text("serv_st".tr,
                         style: TextStyle(fontWeight: FontWeight.bold)),
                     for (int i = 0; i < rule.steps.length; i++)
                       Padding(

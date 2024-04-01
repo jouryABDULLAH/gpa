@@ -81,7 +81,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             )
                           : Center(
                               child: AppButton(
-                                content: 'Forget',
+                                content: "forge".tr,
                                 contentClr: Colors.white,
                                 clr: ColorManager.primary,
                                 onPressed: () async {},

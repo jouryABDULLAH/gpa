@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
@@ -25,48 +26,25 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-// <<<<<<< HEAD
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        title: Text(
-          Constants.title,
-          style: Constants.titleStyle,
-        ),
-        centerTitle: true,
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-// =======
-          /* appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        /* title: Text(
-          Constants.title,
-          style: Constants.titleStyle,
-        ),*/
-        centerTitle: true,
-      ),*/
-          // body:
-          //Column(
-          //crossAxisAlignment: CrossAxisAlignment.stretch,
-          //children: <Widget>[
-          // Upper(),
-// >>>>>>> HI
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: _buildForm(),
-              ),
-              Expanded(
-                flex: 1,
-                child: ShowAverage(
-                    average: DataHelper.calculateAvg(),
-                    numberOfClass: DataHelper.allAddedLessons.length),
-              ),
-            ],
+          Upper(),
+          Flexible(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: _buildForm(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: ShowAverage(
+                      average: DataHelper.calculateAvg(),
+                      numberOfClass: DataHelper.allAddedLessons.length),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: Container(
@@ -156,16 +134,16 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         },
         validator: (v) {
           if (v!.length <= 0) {
-            return "Enter The Lesson Name.";
+            return "LN".tr;
           } else
             return null;
         },
         decoration: InputDecoration(
 // <<<<<<< HEAD
-          hintText: "Mathematics",
+          hintText: "LN".tr,
 // =======
 //           hintText: "Enter The Class",
-// >>>>>>> HI
+
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -221,7 +199,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "حساب المعدل الفصلي",
+              "GPA_11".tr,
               style: Theme.of(context)
                   .textTheme
                   .headlineLarge!
@@ -232,5 +210,4 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       ),
     );
   }
-// >>>>>>> HI
 }

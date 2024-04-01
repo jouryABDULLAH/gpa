@@ -5,6 +5,7 @@ class UserModel {
   String? name;
   String? userName;
   String? email;
+  String? id;
   String? password;
   GeoPoint? location;
   String? uId;
@@ -17,6 +18,7 @@ class UserModel {
 
   UserModel({
     this.name,
+    this.id,
     this.userName,
     this.email,
     this.password,
@@ -33,6 +35,7 @@ class UserModel {
   factory UserModel.fromJson(Map<String, dynamic> json, String uId, String stringAsFixed) {
     return UserModel(
       name: json["name"],
+      id: json["id"],
       uId: uId,
       email: json["email"],
       children: json["children"],
@@ -54,6 +57,7 @@ class UserModel {
       'name': name,
       'email': email,
       'uId': uId,
+      'id': id,
     };
   }
 //

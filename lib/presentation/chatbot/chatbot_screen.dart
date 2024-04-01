@@ -42,16 +42,16 @@ class _chatbot_screenState extends State<chatbot_screen> {
     //   credentials: credentials,
     // );
     //DialogFlowtter.fromFile().then((instance) => dialogFlowtter = instance);
-    initializeDialogFlowtter();
+    //  initializeDialogFlowtter();
   }
-
+  /*                                                           
   Future<void> initializeDialogFlowtter() async {
     try {
       dialogFlowtter = await DialogFlowtter.fromFile();
     } catch (e) {
       print('Error initializing DialogFlowtter: $e');
     }
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -152,3 +152,4 @@ class _chatbot_screenState extends State<chatbot_screen> {
     messages.add({"message": message, "isUserMessage": isUserMessage});
   }
 }
+// Hellos

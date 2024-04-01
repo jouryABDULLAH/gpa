@@ -35,8 +35,7 @@ class _LogInWidgetState extends State<LogInWidget> {
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/Sign_up_page.png"),
-                  fit: BoxFit.fill)
-          ),
+                  fit: BoxFit.fill)),
           child: Align(
             alignment: Alignment.bottomLeft,
             child: Container(
@@ -55,22 +54,32 @@ class _LogInWidgetState extends State<LogInWidget> {
                     children: [
                       Align(
                         alignment: Alignment.centerLeft,
-                        child: CircleAvatar(backgroundColor: ColorManager.primary,child: IconButton(icon: const Icon(Icons.arrow_back),onPressed: (){
-                          Get.back();
-                        }),),
+                        child: CircleAvatar(
+                          backgroundColor: ColorManager.primary,
+                          child: IconButton(
+                              icon: const Icon(Icons.arrow_back),
+                              onPressed: () {
+                                Get.back();
+                              }),
+                        ),
                       ),
-                      const SizedBox(height: 5,),
-                      Text("Welcome Back!",
-                        style: TextStyle(color: ColorManager.primary),),
-                      const SizedBox(height: 5,),
-
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Text(
+                        "welcome".tr,
+                        style: TextStyle(color: ColorManager.primary),
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
                       AppTextFormField(
                         padding: 10,
                         head: "Email",
                         controller: email,
                         validate: (c) {
                           if (!email.text.contains("@")) {
-                            return "wrong email".tr;
+                            return "wrong".tr;
                           }
                           return null;
                         },
@@ -88,53 +97,65 @@ class _LogInWidgetState extends State<LogInWidget> {
                       ),
                       controller.isLoading
                           ? Center(
-                        child: CircularProgressIndicator(
-                          color: ColorManager.perf,
-                        ),
-                      )
+                              child: CircularProgressIndicator(
+                                color: ColorManager.perf,
+                              ),
+                            )
                           : Center(
-                        child: AppButton(
-                          content: 'Login',
-                          contentClr: Colors.white,
-                          clr: ColorManager.primary,
-                          onPressed: () async {
-                            if (nameKey.currentState?.validate() ==
-                                true) {
-                              setState(() {
-                                controller.isLoading = true;
-                              });
-                              await Si()
-                                  .submitAuthForm(
-                                email: email.text.trim(),
-                                password: password.text.trim(),
-                                isLogin: true,
-                                ctx: context,
-                                signWith: "email",
-                              )
-                                  .then((value) {
-                                if (mounted) {
-                                  setState(() {
-                                    controller.isLoading = false;
-                                  });
-                                }
-                              });
-                            }
-                          },
-                        ),
+                              child: AppButton(
+                                content: 'Login'.tr,
+                                contentClr: Colors.white,
+                                clr: ColorManager.primary,
+                                onPressed: () async {
+                                  if (nameKey.currentState?.validate() ==
+                                      true) {
+                                    setState(() {
+                                      controller.isLoading = true;
+                                    });
+                                    await Si()
+                                        .submitAuthForm(
+                                      email: email.text.trim(),
+                                      password: password.text.trim(),
+                                      isLogin: true,
+                                      ctx: context,
+                                      signWith: "email",
+                                    )
+                                        .then((value) {
+                                      if (mounted) {
+                                        setState(() {
+                                          controller.isLoading = false;
+                                        });
+                                      }
+                                    });
+                                  }
+                                },
+                              ),
+                            ),
+                      Center(
+                        child: TextButton(
+                            onPressed: () {
+                              Get.to(const ForgetPassword());
+                            },
+                            child: Text(
+                              "forge".tr,
+                              style: TextStyle(
+                                color: Colors.red,
+                                decoration: TextDecoration.underline,
+                              ),
+                            )),
                       ),
                       Center(
-                        child: TextButton(onPressed: (){
-                          Get.to(const ForgetPassword());
-                        }, child: const Text(
-                          "Forget  Password",style: TextStyle(color: Colors.red,decoration: TextDecoration.underline,),
-                        )),
-                      ),
-                      Center(
-                        child: TextButton(onPressed: (){
-                          Get.to(const SignUpWidget());
-                        }, child: const Text(
-                          "Sign Up",style: TextStyle(color: Colors.red,decoration: TextDecoration.underline,),
-                        )),
+                        child: TextButton(
+                            onPressed: () {
+                              Get.to(const SignUpWidget());
+                            },
+                            child: Text(
+                              "sign up".tr,
+                              style: TextStyle(
+                                color: Colors.red,
+                                decoration: TextDecoration.underline,
+                              ),
+                            )),
                       )
                     ],
                   ),
