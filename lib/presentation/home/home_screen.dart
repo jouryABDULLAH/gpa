@@ -30,9 +30,9 @@ class _HomeScreenState extends State<HomeScreen> {
   final controller = Get.put(Controller());
   List screens = [
     const HomeWidget(),
-    ServicisPage(),
-    chatbo_welcome(),
-    screen_Map(),
+    const ServicisPage(),
+    const chatbot_welcome(),
+    const screen_Map(),
     ProfileScreen(),
   ];
   @override
