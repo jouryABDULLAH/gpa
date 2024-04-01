@@ -25,13 +25,6 @@ class Faculty {
   }
 }
 
-// Future<List<Faculty>> loadFacultysFromAsset(String path) async {
-//   String jsonData = await rootBundle.loadString(path);
-//   Map<String, dynamic> jsonMap = json.decode(jsonData);
-//   List<dynamic> facultyData = jsonMap['faculty'];
-//   return facultyData.map((json) => Faculty.fromJson(json)).toList();
-// }
-
 Future<List<Faculty>> loadFacultyFromAsset(String path) async {
   String jsonData = await rootBundle.loadString(path);
   List<dynamic> facultyData = json.decode(jsonData);

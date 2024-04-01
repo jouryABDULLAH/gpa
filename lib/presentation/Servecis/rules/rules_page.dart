@@ -18,7 +18,6 @@ class _rulesPageState extends State<rulesPage> {
   @override
   void initState() {
     super.initState();
-    // Fetch the rules data when the screen is initialized
     fetchRulesData();
   }
 

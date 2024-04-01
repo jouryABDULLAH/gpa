@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:gpa/presentation/chatbot/chatbot_screen.dart';
+import 'package:gpa/presentation/chatbot/chatbotScreen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 
-class chatbo_welcome extends StatefulWidget {
-  const chatbo_welcome({super.key});
+class chatbot_welcome extends StatefulWidget {
+  const chatbot_welcome({super.key});
 
   @override
-  State<chatbo_welcome> createState() => _chatbo_welcomeState();
+  State<chatbot_welcome> createState() => _chatbot_welcomeState();
 }
 
-class _chatbo_welcomeState extends State<chatbo_welcome> {
+class _chatbot_welcomeState extends State<chatbot_welcome> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -37,7 +37,6 @@ class _chatbo_welcomeState extends State<chatbo_welcome> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        // padding: const EdgeInsets.only(left: 15, right: 50),
                         margin: const EdgeInsets.only(bottom: 10),
                         width: 150,
                         height: 150,
@@ -67,7 +66,9 @@ class _chatbo_welcomeState extends State<chatbo_welcome> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10))),
                 onPressed: () {
-                  Get.to(() => const chatbot_screen());
+                  Get.to(() => const chatbotScreen());
+                  // Get.to(() => const chatbot_screen());
+                  // Get.to(() => const grpc_chatbot());
                   print('clicked');
                 },
                 child: const Text(

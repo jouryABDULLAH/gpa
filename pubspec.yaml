@@ -86,9 +86,6 @@ flutter:
     - assets/images/logo.png
     - assets/images/Acadmic Servecis.png
     - assets/images/captine.jpg
-    - assets/data_encoded.json
-    - assets/data.json
-    - assets/dialog_flow_auth.json
     - assets/faculty_data.json
     - assets/rules_data.json
     

@@ -28,19 +28,31 @@ class Rules {
     return {
       'title': title,
       'url': url,
-      'service-target': service_target,
+      'service_target': service_target,
       'description': description,
       'steps': steps
     };
   }
-}
 
-// Future<List<Rules>> loadRulessFromAsset(String path) async {
-//   String jsonData = await rootBundle.loadString(path);
-//   Map<String, dynamic> jsonMap = json.decode(jsonData);
-//   List<dynamic> rulesData = jsonMap['rules'];
-//   return rulesData.map((json) => Rules.fromJson(json)).toList();
-// }
+  static Future<List<Rules>> fetchAll() async {
+    // Load JSON data from the assets folder
+    String jsonData = await rootBundle.loadString('assets/rules_data.json');
+    // Parse the JSON data
+    List<dynamic> jsonList = json.decode(jsonData);
+    // Convert JSON data into a list of Rule objects
+    List<Rules> rules = jsonList.map((json) {
+      List<String> steps = List<String>.from(json['steps']);
+      return Rules(
+        title: json['title'],
+        description: json['description'],
+        steps: steps,
+        url: json['url'],
+        service_target: json['service_target'],
+      );
+    }).toList();
+    return rules;
+  }
+}
 
 Future<List<Rules>> loadRulessFromAsset(String path) async {
   String jsonData = await rootBundle.loadString(path);

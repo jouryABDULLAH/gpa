@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     const HomeWidget(),
     const ServicisPage(),
     const ServicisPage(),
-    const chatbo_welcome(),
+    const chatbot_welcome(),
     ProfileScreen(),
   ];
   @override
