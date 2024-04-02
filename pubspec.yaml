@@ -50,7 +50,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  shared_preferences:
+  shared_preferences: ^2.2.2
   dio:
   pretty_dio_logger:
   get: ^4.6.6
@@ -104,8 +104,11 @@ flutter:
     - lib/icons/hand-holding-heart.png
     - lib/icons/apps.png
     - lib/icons/user.png
-  # - assets/images/AcadmicServecis.png
-  
+    - assets/images/Acadmic Servecis.png
+    - assets/images/captine.jpg
+    - assets/faculty_data.json
+    - assets/rules_data.json
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

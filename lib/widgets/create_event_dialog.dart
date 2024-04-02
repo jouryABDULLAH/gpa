@@ -154,7 +154,8 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
                           Navigator.of(context).pop();
                         },
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: ColorManager.violet),
+                          foregroundColor: ColorManager.violet,
+                        ),
                         child: const Text('CANCEL'),
                       ),
                     ),
@@ -167,7 +168,8 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
                             _validateEventData() ? _onEventCreation : null,
                         child: const Text('OK'),
                         style: OutlinedButton.styleFrom(
-                            backgroundColor: ColorManager.violet),
+                          foregroundColor: ColorManager.violet,
+                        ),
                       ),
                     ),
                   ],
@@ -269,12 +271,16 @@ class _CreateEventDialogState extends State<CreateEventDialog> {
         okButtonBuilder: (onPress) => ElevatedButton(
           onPressed: () => onPress?.call(),
           child: const Text('OK'),
-          style: OutlinedButton.styleFrom(backgroundColor: ColorManager.violet),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: ColorManager.violet,
+          ),
         ),
         cancelButtonBuilder: (onPress) => OutlinedButton(
           onPressed: () => onPress?.call(),
           child: const Text('CANCEL'),
-          style: OutlinedButton.styleFrom(backgroundColor: ColorManager.violet),
+          style: OutlinedButton.styleFrom(
+            foregroundColor: ColorManager.violet,
+          ),
         ),
       ),
     );

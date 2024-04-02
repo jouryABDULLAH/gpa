@@ -1,0 +1,467 @@
+[
+    {
+        "name": "أ.د. خليل حمدي الشقيرات",
+        "email": "kh.alshqeerat@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ.د. سليمان عبدالله السحيباني",
+        "email": "salsuhibany@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ.د. محمد الطاهر بن عثمان",
+        "email": "maathaman@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ.د. محمد عبد الله الهاجري",
+        "email": "hajry@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. ابراهيم سليمان السكيتي",
+        "email": "skiety@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. سليمان عمرو العمرو",
+        "email": "samro@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. عبداللطيف عبدالرحمن العبداللطيف",
+        "email": "ab.alabdulatif@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. علي مصطفى قمر",
+        "email": "al.khan@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. فتحي نورالدين الفقي",
+        "email": "f.fki.qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. دلال حسين الهادي",
+        "email": "D.Rhouma@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. صالح ناصر السلمي",
+        "email": "snalsulmi@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. عبدالعزيز صالح الدريبي",
+        "email": "aaldribi@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. عبدالناصر محمد رشيد",
+        "email": "arshied@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. فيصل محمد الحويكم",
+        "email": "faisal.alhwikem@qu.edu",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. محمد عبدالرحمن السحيباني",
+        "email": "m.suhibani@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. هاديه الصادق زردي",
+        "email": "H.zardi@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "د. وليد محمد كرامتي",
+        "email": "w.karamti@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. عبدالله إبراهيم موسى",
+        "email": "ab.musa@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. مروان أحمد العيسى",
+        "email": "maiesy@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. إبراهيم جديد العنزي",
+        "email": "i.alenzy@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. أسامة سليمان الزاكان",
+        "email": "o.alzakan@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. سلطان علي السلطان",
+        "email": "s.alsultan@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. عبدالعزيز عبدالرحمن الهندي",
+        "email": "A.ALLHNDI@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. محمد سليمان الغشام",
+        "email": "m.alghasham@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ. موسى سليمان الزاكان",
+        "email": "m.alzakan@qu.edu.sa",
+        "department": "علوم الحاسب"
+    },
+    {
+        "name": "أ.د. صالح محمد الباهلي",
+        "email": "salbahli@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ.د. علي عبدالعزيز الخليفة",
+        "email": "a.alkhalifah@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. أمل عبدالغني الشرجبي",
+        "email": "a.alshargabi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. دينا محمود إبراهيم",
+        "email": "d.hussein@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. ريحان الله خان",
+        "email": "re.khan@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. سليم محمد الخذيري",
+        "email": "s.elkhediri@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. سليمان صالح العضاض",
+        "email": "s.aladhadh@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. شبانا حبيب إسلام",
+        "email": "s.habibullah@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. طارق أحمد مولاهي",
+        "email": "t.moulahi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عبدالله محمد العرج",
+        "email": "arj@u.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عبدالله محمد الناجم",
+        "email": "najim@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. محمد عبده هدوان",
+        "email": "m.hadwan@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. مراد عبده قاسم",
+        "email": "m.qasem@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. منال غيث الغيث",
+        "email": "mgietha@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. وليد صالح البطاح",
+        "email": "w.albattah@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. أسماء عبدالغني الشرجبي",
+        "email": "as.alshargabi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. إبراهيم عبدالله المبارك",
+        "email": "imbark@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. بتول رشيد الوطيان",
+        "email": "Bwtban@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. دانيه علي العقلاء",
+        "email": "d.aloqalaa@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. راقنه محمد الربيعة",
+        "email": "raqinah@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. زياد حمد السعيد",
+        "email": "zalsaeed@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. سمر ناصر الدعيجي",
+        "email": "daiejy@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. شعاع سليم الحربي",
+        "email": "shuaa.s.alharbi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عائشة علي المطيري",
+        "email": "Mtieryaa@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عبد العزيز صالح القبلان",
+        "email": "a.algablan@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عبدالرحمن محمد العريني",
+        "email": "A.Aloraini@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عبير إبراهيم الحجيلان",
+        "email": "a.alhujaylan@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عفاف محمد سالمي",
+        "email": "a.selmi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. فهد سليمان التويجري",
+        "email": "f.altuwaijri@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. محمد علي حمودة",
+        "email": "maah37@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. نبيل يونس خان",
+        "email": "n.khan@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. ندى مسعود الرحيلي",
+        "email": "nrhiely@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. هيفاء فهد الحسون",
+        "email": "hhson@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. وداد محمد العواد",
+        "email": "wmaoad@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. عبير سليمان الشعيبي",
+        "email": "a.alsheaibi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. منى نجيب السليم",
+        "email": "msliem@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "د. نورة ابراهيم العصيلي",
+        "email": "nalosily@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. جواهر علي الحربي",
+        "email": "j.harbi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. سماح ابراهيم الصقيهي",
+        "email": "2927@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. صالح سليمان العضاض",
+        "email": "s.ALadhad@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. عزة عبد الله الربدي",
+        "email": "a.alrebdi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. مشاعل محمد الشعيل",
+        "email": "m.alsheail@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. مها فهد العتيبي",
+        "email": "atiebymf@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. هديل فهد الراشد",
+        "email": "h_alrashed@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. بيان جهز المخلفي",
+        "email": "B.almkhelfy@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. تقية عبدالله القزلان",
+        "email": "tkzlan@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. ريم عبد العزيز السعيد",
+        "email": "r.reim@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. ساميه عبدالله العنزي",
+        "email": "sa.alanazi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. عبير محمد الغليقة",
+        "email": "amgliekh@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. فاتن عبدالكريم الرسيني",
+        "email": "frsieny@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. ندى ابراهيم الهذلي",
+        "email": "nhthly@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. نورة عبد العزيز الغشام",
+        "email": "n.alghasham@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. أروى عبدالعزيز البليهي",
+        "email": "A.albelaihi@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. رحاب عبدالله العوض",
+        "email": "R.alawadh@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ. نوره عبد الله البازعي",
+        "email": "n.albazzai@qu.edu.sa",
+        "department": "تقنية المعلومات"
+    },
+    {
+        "name": "أ.د. ابراهيم احمد الخطيب",
+        "email": "I.Kateeb@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "أ.د عبدالله إبراهيم الشوشان",
+        "email": "abd.alshoshan@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. صالح مصباح عبد الحفيظ",
+        "email": "s.abdelhafeez@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. محمد تنوير برويز",
+        "email": "M.Parvez@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. محمد نظر الإسلام خان",
+        "email": "m.nazrul@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. أنور حسين ساديال",
+        "email": "sadieal@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. جمال ناصر العتيبي",
+        "email": "j.alotabi@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. سيد سهيل أحمد",
+        "email": "s.sohail@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. محمد علي مرتضى",
+        "email": "m.martuza@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "د. ياسر عبدالباسط أحمد",
+        "email": "hsanien@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "أ. عمران أحمد أوان",
+        "email": "ia.muhammad@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "أ. البراء رميان محمد الرميان",
+        "email": "a.alromayyan@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    },
+    {
+        "name": "أ.محمد حسن المشيقح",
+        "email": "almushayqih@qu.edu.sa",
+        "department": "هندسة الحاسب"
+    }
+]

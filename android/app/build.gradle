@@ -5,6 +5,13 @@ plugins {
     id "com.google.gms.google-services"
 }
 
+plugins {
+    id "com.android.application"
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.gms.google-services"
+}
+
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -60,6 +67,12 @@ android {
         minifyEnabled true
         signingConfig signingConfigs.debug
     }
+
+        debug {
+        //minifyEnabled true fixes this issue and allows you to use minSdkVersion 21
+        minifyEnabled true
+        signingConfig signingConfigs.debug
+    }
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
@@ -74,8 +87,11 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.23"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.23"
     implementation platform('com.google.firebase:firebase-bom:32.0.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
 }
+
