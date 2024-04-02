@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/foreget_password.dart';
 import 'package:gpa/presentation/sign_up/sign_up_screen.dart';
 import '../create.dart';
@@ -44,7 +45,7 @@ class _LogInWidgetState extends State<LogInWidget> {
               width: responsive.sWidth(context) - 20,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(50)),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(90)),
               ),
               child: SingleChildScrollView(
                 child: Form(
@@ -57,7 +58,10 @@ class _LogInWidgetState extends State<LogInWidget> {
                         child: CircleAvatar(
                           backgroundColor: ColorManager.primary,
                           child: IconButton(
-                              icon: const Icon(Icons.arrow_back),
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 Get.back();
                               }),
@@ -68,7 +72,13 @@ class _LogInWidgetState extends State<LogInWidget> {
                       ),
                       Text(
                         "welcome".tr,
-                        style: TextStyle(color: ColorManager.primary),
+                        style: GoogleFonts.vidaloka(
+                          textStyle: TextStyle(
+                            fontSize: 39,
+                            color: Color.fromARGB(255, 0, 167, 171),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
@@ -83,7 +93,14 @@ class _LogInWidgetState extends State<LogInWidget> {
                           }
                           return null;
                         },
-                        hint: 'email',
+                        hint: '411900000@qu.edu.sa',
+                        textStyle: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 108, 108, 108),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -93,7 +110,17 @@ class _LogInWidgetState extends State<LogInWidget> {
                           if (password.text.length < 8) return "less 8".tr;
                           return null;
                         },
-                        hint: 'password',
+                        hint: '********',
+                        textStyle: GoogleFonts.poppins(
+                          textStyle: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 108, 108, 108),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 5,
                       ),
                       controller.isLoading
                           ? Center(
@@ -103,9 +130,20 @@ class _LogInWidgetState extends State<LogInWidget> {
                             )
                           : Center(
                               child: AppButton(
-                                content: 'Login'.tr,
+                                height: 48,
+                                width: 200,
+                                content: Text(
+                                  'Login'.tr,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
                                 contentClr: Colors.white,
-                                clr: ColorManager.primary,
+                                clr: Color.fromARGB(255, 0, 167, 171),
                                 onPressed: () async {
                                   if (nameKey.currentState?.validate() ==
                                       true) {
@@ -137,12 +175,19 @@ class _LogInWidgetState extends State<LogInWidget> {
                               Get.to(const ForgetPassword());
                             },
                             child: Text(
-                              "forge".tr,
-                              style: TextStyle(
-                                color: Colors.red,
-                                decoration: TextDecoration.underline,
+                              "forget".tr,
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontSize: 13,
+                                  color: Color.fromARGB(255, 0, 81, 154),
+                                  fontWeight: FontWeight.normal,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             )),
+                      ),
+                      SizedBox(
+                        height: 0,
                       ),
                       Center(
                         child: TextButton(
@@ -151,9 +196,13 @@ class _LogInWidgetState extends State<LogInWidget> {
                             },
                             child: Text(
                               "sign up".tr,
-                              style: TextStyle(
-                                color: Colors.red,
-                                decoration: TextDecoration.underline,
+                              style: GoogleFonts.poppins(
+                                textStyle: TextStyle(
+                                  fontSize: 13,
+                                  color: Color.fromARGB(255, 0, 81, 154),
+                                  fontWeight: FontWeight.normal,
+                                  decoration: TextDecoration.underline,
+                                ),
                               ),
                             )),
                       )

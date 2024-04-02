@@ -3,13 +3,11 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:get/get.dart';
 import 'package:gpa/presentation/Map/mapkey.dart';
-import 'package:gpa/presentation/Map/models/auto_complate_results.dart';
 import 'package:gpa/presentation/Map/markers.dart';
-import 'package:gpa/presentation/Map/serveses/map_services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:gpa/presentation/Map/providers/search_plases.dart';
 import 'dart:ui' as ui;
 
 import 'package:location/location.dart';
@@ -60,10 +58,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
 //Text Editing Controllers
   TextEditingController searchController = TextEditingController();
-  TextEditingController _originController = TextEditingController();
-  TextEditingController _destinationController = TextEditingController();
-
-  Timer? _debounce;
 
   bool getDirections = false;
 
@@ -74,7 +68,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
   int polylineIdCounter = 1;
 
   Set<Marker> _markers = Set<Marker>();
-  Set<Polyline> _polylines = Set<Polyline>();
 
   late Set<Marker> buildings = Set.from(Qbuildings);
   late List<String> buildingNames =
@@ -82,7 +75,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
   late List<String> suggestions = [];
 
 //Circle
-  Set<Circle> _circles = Set<Circle>();
 
   var radiusValue = 3000.0;
 
@@ -201,8 +193,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
-    final allSearchResults = ref.watch(placeResultsProvider);
-    final searchFlag = ref.watch(searchToggleProvider);
 
     const LatLng _sourceLocation =
         LatLng(26.34847508549134, 43.767713423546866);
@@ -265,14 +255,11 @@ class _screen_Map extends ConsumerState<screen_Map> {
                               contentPadding: EdgeInsets.symmetric(
                                   horizontal: 20.0, vertical: 15.0),
                               border: OutlineInputBorder(),
-                              hintText: 'Search',
+                              hintText: "search".tr,
                               suffixIcon: IconButton(
                                   onPressed: () {
                                     setState(() {
                                       searchController.text = '';
-
-                                      if (searchFlag.searchToggle)
-                                        searchFlag.toggleSearch();
                                     });
                                   },
                                   icon: Icon(Icons.close))),

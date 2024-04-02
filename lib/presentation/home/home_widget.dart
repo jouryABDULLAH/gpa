@@ -23,7 +23,10 @@ class _HomeWidgetState extends State<HomeWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        color: Color.fromARGB(255, 17, 53, 91),
+        decoration: const BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/Sign_up_page.png"),
+                fit: BoxFit.fill)),
         child: FutureBuilder(
           future: controller.getEvents(),
           builder: (co, da) => da.hasData
@@ -31,21 +34,23 @@ class _HomeWidgetState extends State<HomeWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
+                      SizedBox(
+                        height: 19,
+                      ),
                       const Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          //Icon(Icons.list),
                           Icon(Icons.notifications,
                               color: Color.fromARGB(255, 255, 198, 34),
                               size: 25),
                         ],
                       ),
+                      SizedBox(
+                        height: 25,
+                      ),
                       Expanded(
+                        flex: 0,
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment
-                              .center, // Center items horizontally
-                          mainAxisAlignment: MainAxisAlignment.center,
-
                           children: [
                             SizedBox(
                               height:
@@ -76,13 +81,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         Text(
                                           "الاسم: ${controller.me?.name}" ?? "",
                                           style: GoogleFonts.almarai(
-                                              fontSize: 20,
+                                              fontSize: 18,
                                               fontWeight: FontWeight.bold),
                                         ),
                                         Text(
                                           " الرقم الجامعي : ${controller.me?.id}",
                                           style: GoogleFonts.almarai(
-                                            fontSize: 20,
+                                            fontSize: 18,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -95,51 +100,92 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ],
                         ),
                       ),
-
-                      /*Expanded(
-                        child: SizedBox(
-                          width: 500,
-                          height: 100,
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              image: DecorationImage(
-                                image:
-                                    AssetImage('assets/images/back_card.png'),
-                                fit: BoxFit.fill,
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Directionality(
-                                textDirection:
-                                    TextDirection.rtl, // Add this line
+                      Expanded(
+                        child: Column(children: [
+                          SizedBox(height: 25),
+                          SizedBox(
+                            width: 500.0,
+                            height: 403.0,
+                            child: Card(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
                                 child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
-                                    const Center(
-                                      child: Image(
-                                        image: AssetImage(
-                                            'assets/images/logo.png'),
-                                        height: 110,
-                                        alignment: Alignment.topRight,
+                                    TextButton(
+                                      child: Text(
+                                        "more".tr,
+                                        style: GoogleFonts.almarai(
+                                          color: Color.fromRGBO(0, 168, 171, 1),
+                                          decoration: TextDecoration.underline,
+                                          fontSize: 16,
+                                        ),
                                       ),
+                                      onPressed: () {
+                                        Get.to(const Db());
+                                      },
                                     ),
-
-                                    Text(
-                                      "الاسم: ${controller.me?.name}" ?? "",
-                                      style: GoogleFonts.almarai(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        IconButton(
+                                          icon:
+                                              const Icon(Icons.arrow_back_ios),
+                                          onPressed: () {
+                                            controller.changeCalendarPage(
+                                                showNext: false);
+                                          },
+                                        ),
+                                        ValueListenableBuilder(
+                                          valueListenable:
+                                              controller.monthNameNotifier,
+                                          builder: (ctx, value, child) => Text(
+                                            value,
+                                            style: GoogleFonts.poppins(
+                                              textStyle: TextStyle(
+                                                fontSize: 20,
+                                                color: Color.fromARGB(
+                                                    255, 109, 109, 109),
+                                                fontWeight: FontWeight.normal,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        IconButton(
+                                          icon: const Icon(
+                                              Icons.arrow_forward_ios),
+                                          onPressed: () {
+                                            controller.changeCalendarPage(
+                                                showNext: true);
+                                          },
+                                        ),
+                                      ],
                                     ),
-
-                                    // const
-
-                                    Text(
-                                      "الرقم الجامعي: #565652",
-                                      style: GoogleFonts.almarai(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
+                                    Expanded(
+                                      child: CrCalendar(
+                                        firstDayOfWeek: WeekDay.monday,
+                                        eventsTopPadding: 32,
+                                        initialDate: controller.currentDate,
+                                        maxEventLines: 3,
+                                        controller:
+                                            controller.calendarController,
+                                        forceSixWeek: true,
+                                        dayItemBuilder: (builderArgument) =>
+                                            DayItemWidget(
+                                                properties: builderArgument),
+                                        weekDaysBuilder: (day) =>
+                                            WeekDaysWidget(day: day),
+                                        eventBuilder: (drawer) =>
+                                            EventWidget(drawer: drawer),
+                                        // onDayClicked: controller.showDayEventsInModalSheet(context),
+                                        minDate: DateTime.now().subtract(
+                                            const Duration(days: 1000)),
+                                        maxDate: DateTime.now()
+                                            .add(const Duration(days: 180)),
+                                        // weeksToShow: [0,1,2].toList(),
+                                        //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
                                       ),
                                     ),
                                   ],
@@ -147,96 +193,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                               ),
                             ),
                           ),
-                        ),
-                      ),*/
-                      Expanded(
-                        child: SizedBox(
-                          width: 500.0,
-                          child: Card(
-                            color: Color.fromARGB(255, 255, 255, 255),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  TextButton(
-                                    child: Text(
-                                      "more".tr,
-                                      style: GoogleFonts.almarai(
-                                        color: Color.fromRGBO(0, 168, 171, 1),
-                                        decoration: TextDecoration.underline,
-                                        fontSize: 16,
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Get.to(const Db());
-                                    },
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      IconButton(
-                                        icon: const Icon(Icons.arrow_back_ios),
-                                        onPressed: () {
-                                          controller.changeCalendarPage(
-                                              showNext: false);
-                                        },
-                                      ),
-                                      ValueListenableBuilder(
-                                        valueListenable:
-                                            controller.monthNameNotifier,
-                                        builder: (ctx, value, child) => Text(
-                                          value,
-                                          style: GoogleFonts.poppins(
-                                            textStyle: TextStyle(
-                                              fontSize: 20,
-                                              color: Color.fromARGB(
-                                                  255, 109, 109, 109),
-                                              fontWeight: FontWeight.normal,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      IconButton(
-                                        icon:
-                                            const Icon(Icons.arrow_forward_ios),
-                                        onPressed: () {
-                                          controller.changeCalendarPage(
-                                              showNext: true);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  Expanded(
-                                    child: CrCalendar(
-                                      firstDayOfWeek: WeekDay.monday,
-                                      eventsTopPadding: 32,
-                                      initialDate: controller.currentDate,
-                                      maxEventLines: 3,
-                                      controller: controller.calendarController,
-                                      forceSixWeek: true,
-                                      dayItemBuilder: (builderArgument) =>
-                                          DayItemWidget(
-                                              properties: builderArgument),
-                                      weekDaysBuilder: (day) =>
-                                          WeekDaysWidget(day: day),
-                                      eventBuilder: (drawer) =>
-                                          EventWidget(drawer: drawer),
-                                      // onDayClicked: controller.showDayEventsInModalSheet(context),
-                                      minDate: DateTime.now()
-                                          .subtract(const Duration(days: 1000)),
-                                      maxDate: DateTime.now()
-                                          .add(const Duration(days: 180)),
-                                      // weeksToShow: [0,1,2].toList(),
-                                      //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
+                        ]),
                       ),
                     ],
                   ),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ColorManager {
   static Color primary = const Color.fromARGB(255, 0, 167, 171);
   static Color splash = const Color(0xff021F4A);
-  static Color perf = const Color(0xffF36711);
+  static Color perf = Color.fromARGB(255, 255, 255, 255);
   static Color backGroundPerf = perf.withOpacity(0.1);
   static Color black = Colors.black;
   static Color yellow = Color.fromARGB(255, 255, 198, 34);

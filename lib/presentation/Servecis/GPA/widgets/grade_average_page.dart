@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
@@ -66,6 +67,9 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       key: formKey,
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           _buildTextFormField(),
 // <<<<<<< HEAD
           SizedBox(height: 5),
@@ -174,6 +178,14 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 168, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -200,10 +212,11 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             alignment: Alignment.center,
             child: Text(
               "GPA_11".tr,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineLarge!
-                  .copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.poppins().fontFamily,
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],

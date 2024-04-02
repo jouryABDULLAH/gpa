@@ -106,9 +106,11 @@ class _GPAPage extends State<GPAPage> {
                   //Icon(IconsItems[index]),
                   Text(
                     Titles[index],
-                    style: GoogleFonts.tajawal(
-                        textStyle: style,
-                        color: Color.fromARGB(255, 255, 255, 255)),
+                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                        fontFamily: GoogleFonts.poppins().fontFamily,
+                        color: Colors.white,
+                        fontSize: 27,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -126,6 +128,14 @@ class _GPAPage extends State<GPAPage> {
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 168, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -151,10 +161,11 @@ class _GPAPage extends State<GPAPage> {
             alignment: Alignment.center,
             child: Text(
               "GPA".tr,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineLarge!
-                  .copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.poppins().fontFamily,
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold),
             ),
           ),
         ],

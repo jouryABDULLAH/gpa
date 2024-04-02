@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../shared/component/app_button.dart';
 import '../../shared/component/text_form_field.dart';
 import 'resources/color_manager.dart';
@@ -45,7 +46,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               width: responsive.sWidth(context) - 20,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(50)),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(90)),
               ),
               child: SingleChildScrollView(
                 child: Form(
@@ -56,10 +57,44 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       CircleAvatar(
                         backgroundColor: ColorManager.primary,
                         child: IconButton(
-                            icon: const Icon(Icons.arrow_back),
+                            icon: const Icon(
+                              Icons.arrow_back,
+                              color: Colors.white,
+                            ),
                             onPressed: () {
                               Get.back();
                             }),
+                      ),
+                      SizedBox(
+                        height: 13,
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        "forgpage".tr,
+                        style: GoogleFonts.vidaloka(
+                          textStyle: TextStyle(
+                            fontSize: 39,
+                            color: Color.fromARGB(255, 0, 167, 171),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 3,
+                      ),
+                      Text(
+                        textAlign: TextAlign.center,
+                        "forgpage1".tr,
+                        style: GoogleFonts.vidaloka(
+                          textStyle: TextStyle(
+                            fontSize: 15,
+                            color: Color.fromARGB(255, 108, 108, 108),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -71,7 +106,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                           }
                           return null;
                         },
-                        hint: 'email',
+                        hint: ' enter your email',
                       ),
                       controller.isLoading
                           ? Center(
@@ -81,7 +116,18 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             )
                           : Center(
                               child: AppButton(
-                                content: "forge".tr,
+                                height: 48,
+                                width: 200,
+                                content: Text(
+                                  "send".tr,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
                                 contentClr: Colors.white,
                                 clr: ColorManager.primary,
                                 onPressed: () async {},

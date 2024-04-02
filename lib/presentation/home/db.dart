@@ -204,7 +204,7 @@ class _DbState extends State<Db> {
   }
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-  FlutterLocalNotificationsPlugin();
+      FlutterLocalNotificationsPlugin();
 
   Future<void> _zonedScheduleNotification(
       String name, String duration, DateTime dateEnd) async {
@@ -225,7 +225,7 @@ class _DbState extends State<Db> {
         platform,
         androidScheduleMode: AndroidScheduleMode.inexact,
         uiLocalNotificationDateInterpretation:
-        UILocalNotificationDateInterpretation.absoluteTime);
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<void> addEvent() async {
@@ -253,13 +253,22 @@ class _DbState extends State<Db> {
           (event.end as DateTime).subtract(const Duration(days: 1)));
     }
   }
+
   Widget Upper() {
     return Container(
       padding: const EdgeInsets.only(left: 0, right: 0),
-      height: 150,
+      height: 200,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 168, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

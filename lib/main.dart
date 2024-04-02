@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/cubit/send_alarm_cubit.dart';
 import 'package:gpa/local/local.dart';
+import 'package:gpa/local/local_controller.dart';
 import 'package:gpa/shared/network/cache_helper.dart';
 import 'package:gpa/splash_screen/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(MyLanguageController());
     return ProviderScope(
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

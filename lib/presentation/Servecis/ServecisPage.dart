@@ -31,6 +31,9 @@ class _ServicisPage extends State<ServicisPage> {
       body: Column(
         children: [
           Upper(),
+          SizedBox(
+            height: 25,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MyList(),
@@ -80,7 +83,7 @@ class _ServicisPage extends State<ServicisPage> {
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(19),
-                color: Color.fromARGB(90, 0, 167, 171),
+                color: Color.fromARGB(100, 0, 167, 171),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -88,7 +91,7 @@ class _ServicisPage extends State<ServicisPage> {
                   //Icon(IconsItems[index]),
                   Text(
                     Titles[index],
-                    style: GoogleFonts.tajawal(
+                    style: GoogleFonts.poppins(
                       textStyle: style,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
@@ -105,10 +108,18 @@ class _ServicisPage extends State<ServicisPage> {
   Widget Upper() {
     return Container(
       padding: const EdgeInsets.only(bottom: 50),
-      height: 100,
+      height: 120,
       width: double.infinity,
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 0, 168, 171),
+        color: Color.fromARGB(255, 0, 167, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -117,9 +128,9 @@ class _ServicisPage extends State<ServicisPage> {
           Align(
             alignment: Alignment.center,
             child: Text(
-              "Services".tr,
+              "servpage".tr,
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.tajawal().fontFamily,
+                  fontFamily: GoogleFonts.poppins().fontFamily,
                   color: Colors.white,
                   fontSize: 40,
                   fontWeight: FontWeight.bold),

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local_controller.dart';
 import 'package:gpa/presentation/profile/widget/about_us.dart';
 import 'package:gpa/presentation/profile/widget/change_password.dart';
 import 'package:gpa/presentation/profile/widget/my_account.dart';
 import 'package:boxicons/boxicons.dart';
 import '../../control.dart';
 import '../resources/color_manager.dart';
-import 'package:ionicons/ionicons.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({super.key});
+  ProfileScreen({Key? key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -33,7 +33,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       title: Text(
         title,
-        style: GoogleFonts.tajawal(
+        style: GoogleFonts.poppins(
           textStyle: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.normal,
@@ -65,6 +65,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    MyLanguageController languageController = Get.find();
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -72,7 +74,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             padding: EdgeInsets.only(right: 30, top: 5),
             child: Text(
               "account".tr,
-              style: GoogleFonts.tajawal(
+              style: GoogleFonts.poppins(
                 textStyle: TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.bold,
@@ -113,6 +115,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     Get.to(const AboutUs());
                   },
                 ),
+                Row(
+                  children: [
+                    SizedBox(width: 15),
+                    Icon(
+                      Icons.language,
+                      color: ColorManager.primary,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      "Lang".tr,
+                      style: GoogleFonts.poppins(
+                        textStyle: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 130),
+                    ToggleButtons(
+                      isSelected: isSelected,
+                      selectedColor: Colors.white,
+                      color: Colors.cyan,
+                      renderBorder: false,
+                      fillColor: Colors.cyan,
+                      borderRadius: BorderRadius.circular(20),
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text("Arabic"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                          child: Text("English"),
+                        )
+                      ],
+                      onPressed: (int newIndex) {
+                        setState(() {
+                          isSelected = isSelected.map((e) => false).toList();
+                          isSelected[newIndex] = true;
+                          if (newIndex == 0) {
+                            languageController.changLang("ar");
+                          } else {
+                            languageController.changLang("en");
+                          }
+                        });
+                      },
+                    ),
+                  ],
+                ),
                 buildDrawerListItem(
                   leading: Icons.logout,
                   title: "out".tr,
@@ -129,4 +180,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
     );
   }
+
+  List<bool> isSelected = [true, false];
 }
