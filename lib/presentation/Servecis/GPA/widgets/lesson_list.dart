@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 
@@ -30,16 +31,26 @@ class LessonList extends StatelessWidget {
                                   DataHelper.allAddedLessons[index].creditGrade)
                               .toStringAsFixed(0))),
                       subtitle: Text(
-                          "Credit: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
+// <<<<<<< HEAD
+                          "الساعات: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
+// =======
+//                           "Credit: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
+// >>>>>>> HI
                     ),
                   ),
                 ),
               );
             })
         : Container(
-            child: Text("Please Add Lesson.",
-                textAlign: TextAlign.center, style: Constants.titleStyle),
+// <<<<<<< HEAD
             alignment: Alignment.center,
+// <<<<<<< HEAD
+            child: Text("pa".tr,
+// =======
+//             child: Text("Please Add Lesson.",
+// >>>>>>> HI
+                textAlign: TextAlign.center,
+                style: Constants.titleStyle),
           );
   }
 }

@@ -14,6 +14,7 @@ class Si {
       {required String email,
       required String password,
       String? username,
+      String? id,
       String? name,
       String? signWith,
       int? photo,
@@ -45,6 +46,7 @@ class Si {
             'email': email,
             'password': password,
             'name': name,
+            "id": id
           }).then((valuee) async {
             bool i = await CacheHelper.saveData(
                 key: 'uId', value: FirebaseAuth.instance.currentUser!.uid);

@@ -30,14 +30,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_fonts: ^6.1.0
-
-
+  google_fonts: 6.1.0
+  flutter_polyline_points: ^2.0.0
+  google_maps_flutter: ^2.5.3
+  flutter_riverpod: ^2.4.10
+  location: ^5.0.3
+  icons_plus: ^5.0.0
+  ionicons: ^0.2.2
+  boxicons: ^2.1.3
+  uicons: ^1.0.1
+  geolocator: ^10.1.1
+  geocoding: ^2.1.1
+  flutter_typeahead: ^5.2.0
+  google_places_flutter: ^2.0.8
+  http: any
+  google_maps_flutter_web: ^0.5.4+3
+  flutter_keyboard_visibility: ^6.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  shared_preferences:
+  shared_preferences: ^2.2.2
   dio:
   pretty_dio_logger:
   get: ^4.6.6
@@ -48,6 +61,12 @@ dependencies:
   google_sign_in:
   intl:
   cr_calendar:
+  uuid: ^4.3.3
+  dialog_flowtter: ^0.2.0-nullsafety.0
+  firebase_messaging: ^14.6.8
+  flutter_local_notifications: ^15.1.1
+  flutter_bloc: ^8.1.3
+
 
 dev_dependencies:
   flutter_test:
@@ -78,7 +97,18 @@ flutter:
     - assets/images/app_bar.png
     - assets/images/back_card.png
     - assets/images/logo.png
+    - lib/icons/home.png
+    - lib/icons/chatbot-speech-bubble.png
+    - lib/icons/marker.png
+    - lib/icons/portrait.png
+    - lib/icons/hand-holding-heart.png
+    - lib/icons/apps.png
+    - lib/icons/user.png
     - assets/images/Acadmic Servecis.png
+    - assets/images/captine.jpg
+    - assets/faculty_data.json
+    - assets/rules_data.json
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -13,12 +13,18 @@ class LetterDropdownWidget extends StatefulWidget {
 
 class _LetterDropdownWidgetState extends State<LetterDropdownWidget> {
   double selectedLetterValue = 4;
+// =======
+//   double selectedLetterValue = 2;
+// >>>>>>> HI
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       padding: Constants.dropDownPadding,
+      decoration: BoxDecoration(
+          borderRadius: Constants.borderRadius,
+          color: Constants.mainColor.withOpacity(0.3)),
       child: DropdownButton<double>(
         value: selectedLetterValue,
         elevation: 16,
@@ -32,9 +38,6 @@ class _LetterDropdownWidgetState extends State<LetterDropdownWidget> {
         underline: Container(),
         items: DataHelper.allGradeLetters(),
       ),
-      decoration: BoxDecoration(
-          borderRadius: Constants.borderRadius,
-          color: Constants.mainColor.withOpacity(0.3)),
     );
   }
 }

@@ -1,28 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../shared/network/cache_helper.dart';
 
-
 class AppTextFormField extends StatelessWidget {
+  AppTextFormField({
+    Key? key,
+    this.head,
+    this.padding,
+    this.hint,
+    this.phone = false,
+    this.secure,
+    this.addMargin = false,
+    this.label,
+    this.prefix,
+    this.suffix,
+    this.controller,
+    this.validate,
+    this.onChanged,
+    this.initVal,
+    this.direction,
+    this.textInputType,
+    this.readonly,
+    this.textStyle, // New parameter for text style
+    this.fontSize, // New parameter for font size
+  }) : super(key: key);
 
-  AppTextFormField(
-      {Key? key,
-      this.head,
-      this.padding,
-      this.hint,
-      this.phone = false,
-      this.secure,
-      this.addMargin = false,
-      this.label,
-      this.prefix,
-      this.suffix,
-      this.controller,
-      this.validate,
-      this.onChanged,
-      this.initVal,
-      this.direction,
-      this.textInputType,
-      this.readonly})
-      : super(key: key);
   final String? hint;
   final String? head;
   final double? padding;
@@ -39,16 +41,28 @@ class AppTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextInputType? textInputType;
   final bool? readonly;
+  final TextStyle? textStyle; // Added parameter for text style
+  final double? fontSize; // Added parameter for font size
 
   String local = CacheHelper.getDate(key: 'local') ?? '';
+
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(padding??0.0),
+      padding: EdgeInsets.all(padding ?? 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(head??""),
+          Text(
+            head ?? "",
+            style: GoogleFonts.poppins(
+              textStyle: TextStyle(
+                fontSize: 18,
+                color: Color.fromARGB(255, 0, 81, 154),
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+          ),
           Row(
             children: [
               Expanded(
@@ -58,50 +72,42 @@ class AppTextFormField extends StatelessWidget {
                   validator: validate,
                   controller: controller,
                   textDirection: direction,
-                  obscureText: secure??false,
-                  style: Theme.of(context).inputDecorationTheme.hintStyle,
+                  obscureText: secure ?? false,
+                  style: textStyle ??
+                      Theme.of(context)
+                          .inputDecorationTheme
+                          .hintStyle, // Use custom or default text style
                   keyboardType: textInputType,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(5),
                     hintText: hint,
                     suffixIcon: suffix,
-                    // prefixIcon:addMargin? local == "ar"? Padding(
-                    //   padding: const EdgeInsets.only(left: 5),
-                    //   child: Container(
-                    //     margin: const EdgeInsets.only(right: 8),
-                    //     decoration: const BoxDecoration(
-                    //       border: Border(left: BorderSide(color: Colors.grey)),
-                    //     ),
-                    //     child:
-                    //       prefix,
-                    //   //  size: MediaQuery.of(context).size.width * 0.07,
-                    //   ),
-                    // ):
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 5),
-                    //   child: Container(
-                    //     margin: const EdgeInsets.only(left: 8),
-                    //     decoration: const BoxDecoration(
-                    //       border: Border(right: BorderSide(color: Colors.grey)),
-                    //     ),
-                    //     child:
-                    //     prefix,
-                    //     //  size: MediaQuery.of(context).size.width * 0.07,
-                    //   ),
-                    // ):null,
-                    // label: Text(label!),
                     border: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: Color.fromARGB(255, 0, 81, 154),
+                        ),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: Color.fromARGB(255, 0, 81, 154),
+                        ),
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                     focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 1.5,
+                          color: Color.fromARGB(255, 0, 81, 154),
+                        ), //
                         borderRadius: BorderRadius.all(Radius.circular(10))),
                   ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 10,)
+          const SizedBox(
+            height: 10,
+          )
         ],
       ),
     );

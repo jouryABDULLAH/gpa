@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 import 'package:gpa/presentation/Servecis/GPA/model/lesson.dart';
@@ -24,31 +27,25 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(0, 255, 255, 255),
-        elevation: 0,
-        title: Text(
-          Constants.title,
-          style: Constants.titleStyle,
-        ),
-        centerTitle: true,
-      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Expanded(
-                flex: 2,
-                child: _buildForm(),
-              ),
-              Expanded(
-                flex: 1,
-                child: ShowAverage(
-                    average: DataHelper.calculateAvg(),
-                    numberOfClass: DataHelper.allAddedLessons.length),
-              ),
-            ],
+          Upper(),
+          Flexible(
+            child: Row(
+              children: <Widget>[
+                Expanded(
+                  flex: 2,
+                  child: _buildForm(),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: ShowAverage(
+                      average: DataHelper.calculateAvg(),
+                      numberOfClass: DataHelper.allAddedLessons.length),
+                ),
+              ],
+            ),
           ),
           Expanded(
             child: Container(
@@ -70,8 +67,15 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       key: formKey,
       child: Column(
         children: <Widget>[
+          SizedBox(
+            height: 10,
+          ),
           _buildTextFormField(),
+// <<<<<<< HEAD
           SizedBox(height: 5),
+// =======
+//           SizedBox(height: 25),
+// >>>>>>> HI
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -98,13 +102,21 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               IconButton(
                 onPressed: _addLessonAndCalAvg,
                 icon: Icon(Icons.arrow_forward_ios_sharp),
+// <<<<<<< HEAD
                 color: Constants.mainColor,
+// =======
+//                 color: const Color.fromRGBO(0, 168, 171, 1),
+// >>>>>>> HI
                 iconSize: 30,
               ),
             ],
           ),
           SizedBox(
+// <<<<<<< HEAD
             height: 5,
+// =======
+//             height: 15,
+// >>>>>>> HI
           ),
         ],
       ),
@@ -113,7 +125,11 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
 
   _buildTextFormField() {
     return Padding(
+// <<<<<<< HEAD
       padding: const EdgeInsets.only(left: 8),
+// =======
+//       padding: const EdgeInsets.only(left: 18, top: 30),
+// >>>>>>> HI
       child: TextFormField(
         onSaved: (value) {
           setState(() {
@@ -122,12 +138,16 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         },
         validator: (v) {
           if (v!.length <= 0) {
-            return "Enter The Lesson Name.";
+            return "LN".tr;
           } else
             return null;
         },
         decoration: InputDecoration(
-          hintText: "Mathematics",
+// <<<<<<< HEAD
+          hintText: "LN".tr,
+// =======
+//           hintText: "Enter The Class",
+
           border: OutlineInputBorder(
               borderRadius: Constants.borderRadius,
               borderSide: BorderSide.none),
@@ -149,5 +169,58 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       print(DataHelper.calculateAvg());
       setState(() {});
     }
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 200,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => GPAPage()),
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text(
+              "GPA_11".tr,
+              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.poppins().fontFamily,
+                  color: Colors.white,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

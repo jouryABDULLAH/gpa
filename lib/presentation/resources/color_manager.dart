@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
 class ColorManager {
-  static Color primary = const Color.fromARGB(255, 0, 168, 171);
+  static Color primary = const Color.fromARGB(255, 0, 167, 171);
   static Color splash = const Color(0xff021F4A);
-  static Color perf = const Color(0xffF36711);
+  static Color perf = Color.fromARGB(255, 255, 255, 255);
   static Color backGroundPerf = perf.withOpacity(0.1);
   static Color black = Colors.black;
-  static Color yellow = Colors.yellow;
+  static Color yellow = Color.fromARGB(255, 255, 198, 34);
   static Color darkGrey = const Color(0xff525252);
   static Color grey = const Color(0xff737477);
   static Color lightBlack = const Color(0x86000000);
@@ -41,9 +41,9 @@ class ColorManager {
 
   /// Colors for [EventWidget].
   static const eventColors = [
-    Color.fromARGB(255, 0, 168, 171),
+    Color.fromARGB(255, 0, 167, 171),
     Color(0xff116d7a),
-    Color(0xff0D4296),
-    Color(0xffBEBEBE),
+    Color.fromARGB(255, 255, 198, 34),
+    Color.fromARGB(255, 17, 53, 91),
   ];
 }

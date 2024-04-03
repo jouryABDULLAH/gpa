@@ -1,8 +1,8 @@
 import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cr_calendar/cr_calendar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -69,19 +69,33 @@ class Controller extends GetxController {
   }
 
   Future getMe() async {
-    print("################3");
     var ol = await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .get();
     me = (UserModel.fromJson(
         ol.data()!, FirebaseAuth.instance.currentUser!.uid, ""));
-     update();
+    update();
     //
     // me?.children?.add(ol.data()?["children"]);
     return me;
   }
+// <<<<<<< HEAD
 
+//   Future getEvents() async {
+//     events.clear();
+//     var ol = await FirebaseFirestore.instance.collection('events').get();
+//     for (var element in ol.docs) {
+//       var begin = element["begin"].toString().split("-");
+//       var end = element["end"].toString().split("-");
+//       events.add(CalendarEventModel(
+//           eventColor: Color(element["color"]),
+//           name: element["name"],
+//           begin: DateTime(
+//               int.parse(begin[0]), int.parse(begin[1]), int.parse(begin[2])),
+//           end: DateTime(
+//               int.parse(end[0]), int.parse(end[1]), int.parse(end[2]))));
+// =======
   Future getEvents() async {
     events.clear();
     var ol = await FirebaseFirestore.instance.collection('events').get();
@@ -104,7 +118,7 @@ class Controller extends GetxController {
       // await FirebaseMessaging.instance.deleteToken();
       await FirebaseAuth.instance.signOut();
       await CacheHelper.removeData(key: 'uId');
-
+      await FirebaseMessaging.instance.unsubscribeFromTopic("event");
       Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (context) => const LogInWidget()));
     } catch (e) {
@@ -124,10 +138,10 @@ class Controller extends GetxController {
   }
 
   /// Set app bar text and month name over calendar.
-  void setTexts(int year, int month) {
+  Future<void> setTexts(int year, int month)async {
     final date = DateTime(year, month);
-    appbarTitleNotifier.value = date.format(kAppBarDateFormat);
-    monthNameNotifier.value = date.format(kMonthFormat);
+    appbarTitleNotifier.value =await date.format(kAppBarDateFormat);
+    monthNameNotifier.value = await date.format(kMonthFormat);
   }
 
   /// Show current month page.
@@ -216,7 +230,6 @@ class Controller extends GetxController {
     try {
       final user = FirebaseAuth.instance.currentUser;
       if (email.isNotEmpty) {
-
         await user!.reauthenticateWithCredential(
           EmailAuthProvider.credential(
             email: user.email!,
@@ -228,7 +241,7 @@ class Controller extends GetxController {
         // Send a verification email
         await user.sendEmailVerification();
       }
-      if ( email.isEmpty) return;
+      if (email.isEmpty) return;
       await FirebaseFirestore.instance
           .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -239,6 +252,7 @@ class Controller extends GetxController {
       print(e.toString());
     }
   }
+
   Future updateName({
     required String userName,
     required BuildContext context,
@@ -255,4 +269,12 @@ class Controller extends GetxController {
       print(e.toString());
     }
   }
+// =======
+//           events: events,
+//           day: day,
+//           screenHeight: MediaQuery.of(context).size.height,
+//         ));
+//   }
+
+// >>>>>>> HI
 }

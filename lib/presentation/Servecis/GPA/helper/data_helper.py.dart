@@ -20,30 +20,51 @@ class DataHelper {
     return sumOfGrade / sumOfCredit;
   }
 
+  static double cumulativeAvg(int previousHours, double previousGPA) {
+    double sumOfGrade = 0;
+    double sumOfCredit = 0;
+
+    if (allAddedLessons.isNotEmpty) {
+      allAddedLessons.forEach((element) {
+        sumOfGrade += (element.creditGrade * element.letterGrade);
+        sumOfCredit += element.creditGrade;
+      });
+
+      return (sumOfCredit + previousHours) != 0
+          ? (sumOfGrade + (previousGPA * previousHours)) /
+              (sumOfCredit + previousHours)
+          : 0.0;
+    } else {
+      return 0.0; // Handle the case where there are no lessons added
+    }
+  }
+
   static List<String> _gradeLetters() {
-    return ["AA", "BA", "BB", "CB", "CC", "DC", "DD", "FD", "FF"];
+    return ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "E", "F"];
   }
 
   static double _convertLetterToValue(String letter) {
     switch (letter) {
-      case "AA":
-        return 4;
-      case "BA":
+      case "A+":
+        return 5.0;
+      case "A":
+        return 4.75;
+      case "B+":
+        return 4.5;
+      case "B":
+        return 4.0;
+      case "C+":
         return 3.5;
-      case "BB":
+      case "C":
         return 3.0;
-      case "CB":
+      case "D+":
         return 2.5;
-      case "CC":
+      case "D":
+        return 2.5;
+      case "E":
         return 2.0;
-      case "DC":
-        return 1.5;
-      case "DD":
+      case "F":
         return 1.0;
-      case "FD":
-        return 0.5;
-      case "FF":
-        return 0.0;
       default:
         return 1;
     }

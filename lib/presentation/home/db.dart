@@ -1,14 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
+import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import '../../cubit/send_alarm_cubit.dart';
 import '../../widgets/create_event_dialog.dart';
 import '../../widgets/day_item_widget.dart';
 import '../../widgets/event_widget.dart';
 import '../../widgets/week_days_widget.dart';
+import 'package:timezone/timezone.dart' as tz;
 
 class Db extends StatefulWidget {
   const Db({super.key});
@@ -41,7 +46,7 @@ class _DbState extends State<Db> {
     return Scaffold(
       body: Column(
         children: [
-          const Image(image: AssetImage("assets/images/app_bar.png")),
+          Upper(),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
@@ -59,9 +64,15 @@ class _DbState extends State<Db> {
                         });
                       },
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              index == 0 ? Colors.white : null)),
-                      child: const Text("List"),
+                          backgroundColor: MaterialStateProperty.all(index == 0
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "List".tr,
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
                   ),
                   Expanded(
@@ -72,9 +83,15 @@ class _DbState extends State<Db> {
                         });
                       },
                       style: ButtonStyle(
-                          backgroundColor: MaterialStateProperty.all(
-                              index == 1 ? Colors.white : null)),
-                      child: const Text("Calender"),
+                          backgroundColor: MaterialStateProperty.all(index == 1
+                              ? Color.fromARGB(118, 219, 219, 219)
+                              : null)),
+                      child: Text(
+                        "Calendar".tr,
+                        style: GoogleFonts.tajawal(
+                            fontSize: 20,
+                            color: Color.fromARGB(255, 255, 255, 255)),
+                      ),
                     ),
                   ),
                 ],
@@ -134,10 +151,13 @@ class _DbState extends State<Db> {
                   valueListenable: controller.monthNameNotifier,
                   builder: (ctx, value, child) => Text(
                     value,
-                    style: TextStyle(
-                        fontSize: 16,
-                        color: const Color.fromARGB(255, 0, 0, 0),
-                        fontWeight: FontWeight.w600),
+                    style: GoogleFonts.poppins(
+                      textStyle: TextStyle(
+                        fontSize: 20,
+                        color: Color.fromARGB(255, 109, 109, 109),
+                        fontWeight: FontWeight.normal,
+                      ),
+                    ),
                   ),
                 ),
                 IconButton(
@@ -177,10 +197,35 @@ class _DbState extends State<Db> {
         backgroundColor: ColorManager.primary,
         child: const Icon(
           Icons.add,
-          color: ColorManager.violet,
+          color: Color.fromARGB(255, 255, 198, 34),
         ),
       ),
     );
+  }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  Future<void> _zonedScheduleNotification(
+      String name, String duration, DateTime dateEnd) async {
+    final android = AndroidNotificationDetails(
+      "${DateTime.now()}",
+      "Default",
+      priority: Priority.high,
+      importance: Importance.max,
+      shortcutId: DateTime.now().toIso8601String(),
+    );
+    const ios = DarwinNotificationDetails();
+    final platform = NotificationDetails(android: android, iOS: ios);
+    await flutterLocalNotificationsPlugin.zonedSchedule(
+        0,
+        name,
+        duration,
+        tz.TZDateTime.now(tz.local).add(dateEnd.difference(DateTime.now())),
+        platform,
+        androidScheduleMode: AndroidScheduleMode.inexact,
+        uiLocalNotificationDateInterpretation:
+            UILocalNotificationDateInterpretation.absoluteTime);
   }
 
   Future<void> addEvent() async {
@@ -198,6 +243,64 @@ class _DbState extends State<Db> {
         "end": event.end.toString().split(" ")[0],
         "color": event.eventColor.value,
       });
+      await SendAlarmCubit.get(context).sendNotification(
+          event.name,
+          "Start ${event.begin.toString().split(" ")[0]}: End ${event.end.toString().split(" ")[0]}",
+          "event");
+      _zonedScheduleNotification(
+          event.name,
+          "Start ${event.begin.toString().split(" ")[0]}: End ${event.end.toString().split(" ")[0]}",
+          (event.end as DateTime).subtract(const Duration(days: 1)));
     }
+  }
+
+  Widget Upper() {
+    return Container(
+      padding: const EdgeInsets.only(left: 0, right: 0),
+      height: 200,
+      width: double.infinity,
+      decoration: const BoxDecoration(
+        color: Color.fromARGB(255, 0, 168, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
+      ),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(
+                  context,
+                );
+              },
+              icon: Icon(
+                Icons.arrow_back,
+                color: Colors.white,
+                size: 25.0,
+              ),
+              padding: EdgeInsets.all(0),
+            ),
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: Text("Acadmic".tr,
+                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                    color: Colors.white,
+                    fontFamily: GoogleFonts.tajawal().fontFamily,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold)),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../../control.dart';
 import '../create.dart';
@@ -21,6 +22,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   TextEditingController password = TextEditingController();
 
   TextEditingController name = TextEditingController();
+  TextEditingController id = TextEditingController();
 
   TextEditingController username = TextEditingController();
 
@@ -43,11 +45,11 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             alignment: Alignment.bottomLeft,
             child: Container(
               padding: const EdgeInsets.all(10),
-              height: responsive.sHeight(context) / 1.55,
+              height: responsive.sHeight(context) / 1.25,
               width: responsive.sWidth(context) - 20,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.only(topRight: Radius.circular(50)),
+                borderRadius: BorderRadius.only(topRight: Radius.circular(90)),
               ),
               child: SingleChildScrollView(
                 child: Form(
@@ -60,7 +62,10 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         child: CircleAvatar(
                           backgroundColor: ColorManager.primary,
                           child: IconButton(
-                              icon: const Icon(Icons.arrow_back),
+                              icon: const Icon(
+                                Icons.arrow_back,
+                                color: Colors.white,
+                              ),
                               onPressed: () {
                                 Get.back();
                               }),
@@ -70,17 +75,23 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         height: 5,
                       ),
                       Text(
-                        "Nice To Meet You!",
-                        style: TextStyle(color: ColorManager.primary),
+                        "Nice".tr,
+                        style: GoogleFonts.vidaloka(
+                          textStyle: TextStyle(
+                            fontSize: 34,
+                            color: Color.fromARGB(255, 0, 167, 171),
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 12,
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Name",
+                        head: "Name".tr,
                         controller: name,
-                        hint: "name",
+                        hint: "Name".tr,
                         validate: (c) {
                           if (name.text.trim().isEmpty) {
                             return "cannot empty".tr;
@@ -88,6 +99,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           if (c!.contains(RegExp("[a-z,A-Z]"))) {
                             return "يجب ان يكون الاسم باللغة العربية".tr;
                           }
+
                           return null;
                         },
                       ),
@@ -96,12 +108,44 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         head: "Email",
                         controller: email,
                         validate: (c) {
-                          if (!email.text.contains("@qu.edu.sa")) {
-                            return "must contains @qu.edu.sa".tr;
+// <<<<<<< HEAD
+//                           if (!email.text.contains("@qu.edu.sa")) {
+//                             return "must contains @qu.edu.sa".tr;
+//                           }
+//                           return null;
+//                         },
+//                         hint: '0000000000@qu.edu.sa',
+// =======
+                          if (!email.text.contains("@")) {
+                            return "wrong email".tr;
                           }
                           return null;
                         },
-                        hint: '0000000000@qu.edu.sa',
+                        hint: 'email',
+
+// >>>>>>> HI
+                      ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      AppTextFormField(
+                        padding: 10,
+                        head: "id".tr,
+                        controller: id,
+                        hint: "id".tr,
+                        validate: (c) {
+                          if (id.text.trim().isEmpty) {
+                            return "cannot empty".tr;
+                          }
+                          if (c!.isEmpty) {
+                            return "لا يجب ان يكون الحقل فارغ".tr;
+                          }
+
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 5,
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -113,6 +157,9 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         },
                         hint: 'password',
                       ),
+                      SizedBox(
+                        height: 15,
+                      ),
                       controller.isLoading
                           ? Center(
                               child: CircularProgressIndicator(
@@ -121,7 +168,18 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                             )
                           : Center(
                               child: AppButton(
-                                content: 'Sign Up',
+                                height: 48,
+                                width: 200,
+                                content: Text(
+                                  "sign up".tr,
+                                  style: GoogleFonts.poppins(
+                                    textStyle: TextStyle(
+                                      fontSize: 16,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      fontWeight: FontWeight.normal,
+                                    ),
+                                  ),
+                                ),
                                 contentClr: Colors.white,
                                 clr: ColorManager.primary,
                                 onPressed: () async {
@@ -137,6 +195,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                       isLogin: false,
                                       ctx: context,
                                       name: name.text.trim(),
+                                      id: id.text.trim(),
                                       signWith: "email",
                                     )
                                         .then((value) {

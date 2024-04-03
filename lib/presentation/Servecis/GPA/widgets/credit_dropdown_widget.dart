@@ -20,6 +20,9 @@ class _CreditDropdownWidgetState extends State<CreditDropdownWidget> {
     return Container(
       alignment: Alignment.center,
       padding: Constants.dropDownPadding,
+      decoration: BoxDecoration(
+          borderRadius: Constants.borderRadius,
+          color: Constants.mainColor.withOpacity(0.3)),
       child: DropdownButton<double>(
         value: selectedCreditValue,
         elevation: 16,
@@ -33,9 +36,6 @@ class _CreditDropdownWidgetState extends State<CreditDropdownWidget> {
         underline: Container(),
         items: DataHelper.allClassesOfCredits(),
       ),
-      decoration: BoxDecoration(
-          borderRadius: Constants.borderRadius,
-          color: Constants.mainColor.withOpacity(0.3)),
     );
   }
 }

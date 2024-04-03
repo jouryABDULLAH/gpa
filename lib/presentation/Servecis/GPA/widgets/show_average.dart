@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 
 class ShowAverage extends StatelessWidget {
@@ -19,6 +20,9 @@ class ShowAverage extends StatelessWidget {
           numberOfClass > 0
               ? "$numberOfClass classes entered"
               : "Enter The Class",
+// =======
+//           numberOfClass > 0 ? "$numberOfClass classes entered" : " ",
+// >>>>>>> HI
           style: Constants.numberOfClassesStyle,
         ),
         Text(
@@ -26,7 +30,7 @@ class ShowAverage extends StatelessWidget {
           style: Constants.averageStyle,
         ),
         Text(
-          "points",
+          "points".tr,
           style: Constants.pointsStyle,
         )
       ],

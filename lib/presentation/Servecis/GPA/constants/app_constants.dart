@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:gpa/presentation/resources/color_manager.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Constants {
   static const mainColor = Color.fromARGB(255, 0, 168, 171);
-  static const String title = "Grade Average Calculator";
+
+  static String title = "GPA".tr;
+
   static final TextStyle titleStyle = GoogleFonts.quicksand(
       fontSize: 24, fontWeight: FontWeight.w900, color: mainColor);
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/model/user_model.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
@@ -37,8 +38,14 @@ class _MyAccountState extends State<MyAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("My Account"),
-    /*    leading: IconButton(
+        title: Text(
+          "info".tr,
+          style: GoogleFonts.tajawal(
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+              color: Color.fromARGB(255, 0, 167, 171)),
+        ),
+        /*    leading: IconButton(
           onPressed: () {
             Get.to(ProfileScreen());
           },
@@ -60,14 +67,17 @@ class _MyAccountState extends State<MyAccount> {
                         child: Column(
                           children: [
                             Container(
-                                width: double.infinity,
+                                width: 200,
+                                height: 35,
                                 decoration:
                                     BoxDecoration(color: ColorManager.primary),
-                                child: const Text(
-                                  "Change Email",
+                                child: Text(
+                                  "change e".tr,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                  style: GoogleFonts.tajawal(
+                                      fontSize: 25,
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
                                 )),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -114,7 +124,11 @@ class _MyAccountState extends State<MyAccount> {
                                                           "account updated success")));
                                             }
                                           },
-                                          child: const Text("Save"))),
+                                          child: Text(
+                                            "Save".tr,
+                                            style: GoogleFonts.tajawal(
+                                                fontSize: 20),
+                                          ))),
                                 ],
                               ),
                             )
@@ -124,7 +138,8 @@ class _MyAccountState extends State<MyAccount> {
                     },
                   );
                 },
-                title: const Text("Change Email"),
+                title: Text("change e".tr,
+                    style: GoogleFonts.tajawal(fontSize: 17)),
                 leading: const Icon(Icons.email),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -141,14 +156,17 @@ class _MyAccountState extends State<MyAccount> {
                         child: Column(
                           children: [
                             Container(
-                                width: double.infinity,
+                                width: 200,
+                                height: 30,
                                 decoration:
                                     BoxDecoration(color: ColorManager.primary),
-                                child: const Text(
-                                  "Change Name",
+                                child: Text(
+                                  "change n".tr,
                                   textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 22),
+                                  style: GoogleFonts.tajawal(
+                                      fontSize: 25,
+                                      color:
+                                          Color.fromARGB(255, 255, 255, 255)),
                                 )),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -157,7 +175,7 @@ class _MyAccountState extends State<MyAccount> {
                                   AppTextFormField(
                                     validate: (val) {
                                       if (val!.isEmpty) {
-                                        return "cant be empty".tr;
+                                        return "يجب ملئ الحقل".tr;
                                       }
                                       if (val.contains(RegExp("[a-z,A-Z]"))) {
                                         return "يجب ان يكون الاسم باللغة العربية"
@@ -193,7 +211,9 @@ class _MyAccountState extends State<MyAccount> {
                                                           "account updated success")));*/
                                             }
                                           },
-                                          child: const Text("Save"))),
+                                          child: Text("Save".tr,
+                                              style: GoogleFonts.tajawal(
+                                                  fontSize: 20)))),
                                 ],
                               ),
                             )
@@ -203,7 +223,10 @@ class _MyAccountState extends State<MyAccount> {
                     },
                   );
                 },
-                title: const Text("Change Name"),
+                title: Text(
+                  "change n".tr,
+                  style: GoogleFonts.tajawal(fontSize: 17),
+                ),
                 leading: const Icon(Icons.person),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
