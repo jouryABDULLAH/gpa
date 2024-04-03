@@ -60,6 +60,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
   TextEditingController searchController = TextEditingController();
 
   bool getDirections = false;
+  bool showMarkers = true;
 
   bool showSearchMarker = false;
   bool showNavigationMarkers = false;
@@ -210,7 +211,9 @@ class _screen_Map extends ConsumerState<screen_Map> {
                       ? const Center(child: CircularProgressIndicator())
                       : GoogleMap(
                           mapType: MapType.normal,
-                          markers: Set<Marker>.of(_markers)
+                          markers: showMarkers
+                              ? Set<Marker>.of(_markers)
+                              : Set<Marker>()
                             ..addAll(Qbuildings)
                             ..addAll({
                               Marker(
@@ -350,6 +353,15 @@ class _screen_Map extends ConsumerState<screen_Map> {
               },
               icon: Icon(Icons.navigation),
             ),*/
+            FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  showMarkers = !showMarkers; // Toggle marker visibility
+                });
+              },
+              child:
+                  Icon(showMarkers ? Icons.visibility : Icons.visibility_off),
+            ),
             SizedBox(height: 16),
             IconButton(
               onPressed: () async {
