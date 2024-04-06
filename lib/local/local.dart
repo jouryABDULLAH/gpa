@@ -70,6 +70,11 @@ class MyLocal implements Translations {
           "search": "إبحث",
           "hou": "الساعات",
           "send": "إرسال",
+          "CL": "موقعك",
+          "MO": "اختر/ي",
+          "FR": "المسار",
+          "DM": "حذف العلامة",
+          "MS": "تم الحفظ",
         },
         "en": {
           "home": "home",
@@ -138,7 +143,12 @@ class MyLocal implements Translations {
           "search": "Search",
           "hou": "hours",
           "send": "send",
-          "servpage": "Academic Services"
+          "servpage": "Academic Services",
+          "CL": "your location",
+          "MO": "Marker Options",
+          "FR": "Find Route",
+          "DM": "Delete Marker",
+          "MS": "Marker saved!",
         },
       };
 }
