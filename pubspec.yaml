@@ -96,6 +96,8 @@ flutter:
     - assets/images/login.png
     - assets/images/back_card.png
     - assets/images/logo.png
+    - assets/images/Acadmic Servecis.png
+    - assets/images/captine.jpg
     - lib/icons/home.png
     - lib/icons/chatbot-speech-bubble.png
     - lib/icons/marker.png
@@ -103,6 +105,7 @@ flutter:
     - lib/icons/hand-holding-heart.png
     - lib/icons/apps.png
     - lib/icons/user.png
+<<<<<<< HEAD
     - assets/images/captine.jpg
     - assets/faculty_data.json
     - assets/rules_data.json
@@ -116,6 +119,14 @@ flutter:
     - assets/images/musq.png 
     - assets/images/tru.png
 
+=======
+    - assets/faculty_data.json
+    - assets/rules_data.json
+    - assets/faculty_rules.json
+    - assets/employee_rules.json
+    - assets/guest_rules.json
+    - assets/student_rules.json
+>>>>>>> 1be3cae74637bb639bf5dee088967369ce530603
     
   #   - images/a_dot_ham.jpeg
 
