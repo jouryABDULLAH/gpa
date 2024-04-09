@@ -75,6 +75,7 @@ class MyLocal implements Translations {
           "FR": "المسار",
           "DM": "حذف العلامة",
           "MS": "تم الحفظ",
+          "MD": "تم حذف العلامة!",
         },
         "en": {
           "home": "home",
@@ -147,8 +148,9 @@ class MyLocal implements Translations {
           "CL": "your location",
           "MO": "Marker Options",
           "FR": "Find Route",
-          "DM": "Delete Marker",
+          "DM": "Delete Marker!",
           "MS": "Marker saved!",
+          "MD": "Marker deleted!"
         },
       };
 }
