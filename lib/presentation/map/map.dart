@@ -132,6 +132,33 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
     addCustomIcon();
     fetchMarkersFromFirestore();
+
+    fetchLocationUpdates();
+    Timer.periodic(Duration(seconds: 10), (_) {
+      if (currentPosition != null) {
+        updatePath(currentPosition!);
+      }
+    });
+  }
+
+  // Update the camera position whenever the user's location changes
+  void updateCameraPosition(LatLng position) async {
+    if (position != null) {
+      final GoogleMapController controller = await _controller.future;
+      controller.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(target: position, zoom: 15)));
+    }
+  }
+
+  // Update the user's path
+  void updatePath(LatLng position) async {
+    if (position != null && currentPosition != null) {
+      final List<LatLng> polylineCoordinates = await fetchPolylinePoints(
+        currentPosition!,
+        position,
+      );
+      generatePolyLineFromPoints(polylineCoordinates);
+    }
   }
 
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
@@ -172,17 +199,17 @@ class _screen_Map extends ConsumerState<screen_Map> {
         if (data != null) {
           final latitude = data['latitude'];
           final longitude = data['longitude'];
+          final placeName = data['placeName']; // Get the place name
           final markerId = MarkerId(doc.id);
 
           if (latitude != null && longitude != null) {
             final Marker marker = Marker(
               markerId: markerId,
               position: LatLng(latitude, longitude),
-              icon: markerIcon, // BitmapDescriptor.defaultMarkerWithHue(
-              // BitmapDescriptor.hueCyan),
-              infoWindow: InfoWindow(snippet: 'Selected Place'),
-              onTap: () =>
-                  _onMarkerLongPressed(markerId), // Call method on long-press
+              icon: markerIcon,
+              infoWindow: InfoWindow(
+                  title: placeName), // Set the place name as the title
+              // Call method on long-press
             );
 
             setState(() {
@@ -566,18 +593,69 @@ class _screen_Map extends ConsumerState<screen_Map> {
             ),
             IconButton(
               onPressed: () async {
-                FirebaseFirestore.instance.collection('selected_places').add({
-                  'latitude': tappedPoint.latitude,
-                  'longitude': tappedPoint.longitude,
-                  // Add other relevant data here
-                });
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text("MS".tr), // Message to display
-                    duration: Duration(seconds: 2),
-                    backgroundColor: Color.fromARGB(
-                        253, 17, 54, 90), // Duration to display the message
-                  ),
+                final TextEditingController placeNameController =
+                    TextEditingController();
+
+                await showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: Text("Save Place"),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('Enter the name for this place:'),
+                          TextField(
+                            controller: placeNameController,
+                            decoration: InputDecoration(
+                              hintText: 'Place Name',
+                            ),
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () async {
+                            final String placeName =
+                                placeNameController.text.trim();
+                            if (placeName.isNotEmpty) {
+                              // Save the place details to Firestore
+                              await FirebaseFirestore.instance
+                                  .collection('selected_places')
+                                  .add({
+                                'latitude': tappedPoint.latitude,
+                                'longitude': tappedPoint.longitude,
+                                'placeName': placeName,
+                              });
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Place saved as: $placeName'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            } else {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      'Please enter a name for the place.'),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text('Save'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          child: Text('Cancel'),
+                        ),
+                      ],
+                    );
+                  },
                 );
               },
               icon: const Icon(
