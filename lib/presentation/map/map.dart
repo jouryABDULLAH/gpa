@@ -207,9 +207,8 @@ class _screen_Map extends ConsumerState<screen_Map> {
               markerId: markerId,
               position: LatLng(latitude, longitude),
               icon: markerIcon,
-              infoWindow: InfoWindow(
-                  title: placeName), // Set the place name as the title
-              // Call method on long-press
+              infoWindow: InfoWindow(title: placeName),
+              onTap: () => _onMarkerLongPressed(markerId),
             );
 
             setState(() {
@@ -480,7 +479,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
                           contentPadding: const EdgeInsets.symmetric(
                               horizontal: 20.0, vertical: 15.0),
                           border: const OutlineInputBorder(),
-                          hintText: 'Search',
+                          hintText: 'search'.tr,
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
@@ -600,15 +599,15 @@ class _screen_Map extends ConsumerState<screen_Map> {
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
-                      title: Text("Save Place"),
+                      title: Text("SP".tr),
                       content: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('Enter the name for this place:'),
+                          Text('PN'.tr),
                           TextField(
                             controller: placeNameController,
                             decoration: InputDecoration(
-                              hintText: 'Place Name',
+                              hintText: 'HN'.tr,
                             ),
                           ),
                         ],
@@ -630,28 +629,27 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text('Place saved as: $placeName'),
+                                  content: Text('SA: $placeName'.tr),
                                   duration: Duration(seconds: 2),
                                 ),
                               );
                             } else {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
-                                  content: Text(
-                                      'Please enter a name for the place.'),
+                                  content: Text('plsN'.tr),
                                   duration: Duration(seconds: 2),
                                 ),
                               );
                             }
                             Navigator.of(context).pop(); // Close the dialog
                           },
-                          child: Text('Save'),
+                          child: Text('Save'.tr),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop(); // Close the dialog
                           },
-                          child: Text('Cancel'),
+                          child: Text('Cancel'.tr),
                         ),
                       ],
                     );
