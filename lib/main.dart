@@ -20,6 +20,9 @@ void main() async {
   AppNotifications appNotifications = AppNotifications();
   await appNotifications.setupNotification();
   tz.initializeTimeZones();
+
+  MyLanguageController controller = Get.put(MyLanguageController());
+
   runApp(BlocProvider(
       create: (BuildContext context) => SendAlarmCubit(),
       child: const MyApp()));
@@ -30,7 +33,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MyLanguageController());
     return ProviderScope(
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -43,7 +45,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const SplashScreen(),
-        locale: Get.deviceLocale,
+        locale: Get.find<MyLanguageController>().initialLang,
         translations: MyLocal(),
       ),
     );
