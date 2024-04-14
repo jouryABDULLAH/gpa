@@ -75,6 +75,13 @@ class MyLocal implements Translations {
           "FR": "المسار",
           "DM": "حذف العلامة",
           "MS": "تم الحفظ",
+          "MD": "تم حذف العلامة!",
+          "SP": "حفظ المكان",
+          "PN": "ادخل اسمًا للمكان",
+          "HN": "اسم المكان المحفوظ",
+          "SA": "تم الحفظ كـ",
+          "plsN": "الرجاء ادخال اسمًا للمكان",
+          "Cancel": "إلغاء",
         },
         "en": {
           "home": "home",
@@ -147,8 +154,15 @@ class MyLocal implements Translations {
           "CL": "your location",
           "MO": "Marker Options",
           "FR": "Find Route",
-          "DM": "Delete Marker",
+          "DM": "Delete Marker!",
           "MS": "Marker saved!",
+          "MD": "Marker deleted!",
+          "SP": "Save Place",
+          "PN": "Enter the name for this place:",
+          "HN": "Saved place Name",
+          "SA": "Place saved as",
+          "plsN": "Please enter a name for the place",
+          "Cancel": "Cancel"
         },
       };
 }

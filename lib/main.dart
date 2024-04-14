@@ -9,7 +9,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
 import 'app_notfications.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -21,6 +20,9 @@ void main() async {
   AppNotifications appNotifications = AppNotifications();
   await appNotifications.setupNotification();
   tz.initializeTimeZones();
+
+  MyLanguageController controller = Get.put(MyLanguageController());
+
   runApp(BlocProvider(
       create: (BuildContext context) => SendAlarmCubit(),
       child: const MyApp()));
@@ -31,7 +33,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MyLanguageController());
     return ProviderScope(
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         home: const SplashScreen(),
-        locale: Get.deviceLocale,
+        locale: Get.find<MyLanguageController>().initialLang,
         translations: MyLocal(),
       ),
     );
