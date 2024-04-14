@@ -134,11 +134,11 @@ class _screen_Map extends ConsumerState<screen_Map> {
     fetchMarkersFromFirestore();
 
     fetchLocationUpdates();
-    Timer.periodic(Duration(seconds: 10), (_) {
+    /* Timer.periodic(Duration(seconds: 10), (_) {
       if (currentPosition != null) {
         updatePath(currentPosition!);
       }
-    });
+    });*/
   }
 
   // Update the camera position whenever the user's location changes
@@ -158,6 +158,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
         position,
       );
       generatePolyLineFromPoints(polylineCoordinates);
+      updateCameraPosition(position); // Update camera position
     }
   }
 
@@ -230,6 +231,9 @@ class _screen_Map extends ConsumerState<screen_Map> {
       );
       generatePolyLineFromPoints(polylineCoordinates);
     }
+    setState(() {
+      placeSelected = true;
+    });
   }
 
   void closeSearchList() {
@@ -244,6 +248,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
   bool showSearchMarker = false;
   bool showNavigationMarkers = false;
+  bool placeSelected = false; // Add this flag
 
   int markerIdCounter = 1;
   int polylineIdCounter = 1;
@@ -277,13 +282,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
     setState(() {
       _markers.add(marker);
     });
-  }
-
-  void _setCircle(LatLng point) async {
-    final GoogleMapController controller = await _controller.future;
-
-    controller.animateCamera(CameraUpdate.newCameraPosition(
-        CameraPosition(target: point, zoom: 12)));
   }
 
   Future<void> _onMarkerLongPressed(MarkerId markerId) async {
@@ -372,6 +370,10 @@ class _screen_Map extends ConsumerState<screen_Map> {
             currentLocation.longitude!,
           );
         });
+        if (showNavigationMarkers) {
+          updatePath(currentPosition!); // Update path when location changes
+        }
+        // Update camera position to follow user
       }
     });
   }
@@ -407,8 +409,11 @@ class _screen_Map extends ConsumerState<screen_Map> {
       points: polylineCoordinates,
       width: 5,
     );
+    updateCameraPosition(currentPosition!);
 
-    setState(() => polylines[id] = polyline);
+    setState(() {
+      polylines[id] = polyline; // Update polylines state
+    });
   }
 
   BitmapDescriptor customMarkerIcon(Color color) {
