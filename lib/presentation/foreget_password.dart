@@ -1,3 +1,5 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -130,7 +132,31 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 ),
                                 contentClr: Colors.white,
                                 clr: ColorManager.primary,
-                                onPressed: () async {},
+                                onPressed: () async {
+                                  try {
+                                    await FirebaseAuth.instance
+                                        .sendPasswordResetEmail(
+                                            email: email.text);
+
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.success,
+                                      animType: AnimType.rightSlide,
+                                      title: '',
+                                      desc:
+                                          'a conformation message has been sent to your email, please check your email to proceed',
+                                    ).show();
+                                  } catch (e) {
+                                    AwesomeDialog(
+                                      context: context,
+                                      dialogType: DialogType.error,
+                                      animType: AnimType.rightSlide,
+                                      title: 'an error occured',
+                                      desc:
+                                          'an error occured while sending a message to ${email.text}, please try again',
+                                    ).show();
+                                  }
+                                },
                               ),
                             ),
                     ],

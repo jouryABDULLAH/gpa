@@ -54,17 +54,17 @@ dependencies:
   pretty_dio_logger:
   get: ^4.6.6
   permission_handler:
-  firebase_auth:
-  firebase_core:
-  cloud_firestore:
+  firebase_auth: ^4.19.1
+  firebase_core: ^2.29.0
+  cloud_firestore: ^4.16.1
   google_sign_in:
   intl:
   cr_calendar:
   uuid: ^4.3.3
-  dialog_flowtter: ^0.2.0-nullsafety.0
-  firebase_messaging: ^14.6.8
+  firebase_messaging: ^14.8.1
   flutter_local_notifications: ^15.1.1
   flutter_bloc: ^8.1.3
+  awesome_dialog: ^3.2.0
   
 
 
