@@ -82,6 +82,9 @@ class MyLocal implements Translations {
           "SA": "تم الحفظ كـ",
           "plsN": "الرجاء ادخال اسمًا للمكان",
           "Cancel": "إلغاء",
+          "student plan":"خطة الطالب",
+          "About program":"عن برنامج الطالب",
+          "Academic advisor":"المرشد الطلابي",
         },
         "en": {
           "home": "home",
@@ -162,7 +165,10 @@ class MyLocal implements Translations {
           "HN": "Saved place Name",
           "SA": "Place saved as",
           "plsN": "Please enter a name for the place",
-          "Cancel": "Cancel"
+          "Cancel": "Cancel",
+          "student plan":"student plan",
+          "About program":"About the program",
+          "Academic advisor":"Academic Advisor",
         },
       };
 }
