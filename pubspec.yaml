@@ -122,7 +122,6 @@ flutter:
     - assets/employee_rules.json
     - assets/guest_rules.json
     - assets/student_rules.json
-# >>>>>>> 1be3cae74637bb639bf5dee088967369ce530603
     
   #   - images/a_dot_ham.jpeg
 
