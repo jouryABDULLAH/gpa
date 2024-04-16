@@ -18,9 +18,9 @@ class __AcademicAdvisorePagStateState extends State<AcademicAdvisorePage> {
       elevation: 0,
        toolbarHeight: 90,
       title: Text(
-            "student plan".tr,
+            "Academic advisor".tr,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white, fontSize: 50), // Align the text in the center
+            style: const TextStyle(color: Colors.white, fontSize: 40), // Align the text in the center
           ),
         centerTitle: true,
       backgroundColor: ColorManager.primary,

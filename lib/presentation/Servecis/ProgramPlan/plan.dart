@@ -22,7 +22,7 @@ class _planState extends State<plan> {
       title: Text(
             "student plan".tr,
             textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white, fontSize: 50), // Align the text in the center
+            style: const TextStyle(color: Colors.white, fontSize: 40), // Align the text in the center
           ),
         centerTitle: true,
       backgroundColor: ColorManager.primary,
