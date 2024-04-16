@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'package:flutter/services.dart';
+
 class StudentPlanModel {
   Map<String, List<CourseModel>> levels;
 
@@ -15,12 +18,10 @@ class StudentPlanModel {
     return StudentPlanModel(levels: levels);
   }
 
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> json = {};
-    levels.forEach((key, value) {
-      json[key] = value.map((course) => course.toJson()).toList();
-    });
-    return json;
+  static Future<StudentPlanModel> loadStudentPlan() async {
+    String jsonString = await rootBundle.loadString('assets/student_plan.json');
+    Map<String, dynamic> jsonData = json.decode(jsonString);
+    return StudentPlanModel.fromJson(jsonData);
   }
 }
 
@@ -36,11 +37,5 @@ class CourseModel {
       status: json['status'],
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'name': name,
-      'status': status,
-    };
-  }
 }
+
