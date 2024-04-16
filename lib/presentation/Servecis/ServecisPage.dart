@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/Servecis/AboutProgram/aboutProgram.dart';
 import 'package:gpa/presentation/Servecis/AcademicAdvisor/AcademicAdvisor.dart';
 import 'package:gpa/presentation/Servecis/ProgramPlan/plan.dart';
+import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/rules/rules_page.dart';
@@ -22,10 +23,23 @@ class _ServicisPage extends State<ServicisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: ColorManager.primary,
-        actions: [],
-      ),
+  elevation: 0,
+  backgroundColor: ColorManager.primary,
+  leading: IconButton(
+    icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+            size: 20,
+          ),
+    onPressed: () {
+      Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(builder: (context) => const HomeScreen()),
+  );
+    },
+  ),
+  actions: [],
+),
       body: ListView(
         children: [
           Upper(),
