@@ -85,6 +85,8 @@ class MyLocal implements Translations {
           "student plan":"خطة الطالب",
           "About program":"عن برنامج الطالب",
           "Academic advisor":"المرشد الطلابي",
+          "plan completion" : "كمالية الخطة",
+          "plan details": "تفاصيل الخطة",
         },
         "en": {
           "home": "home",
@@ -169,6 +171,8 @@ class MyLocal implements Translations {
           "student plan":"student plan",
           "About program":"About the program",
           "Academic advisor":"Academic Advisor",
+          "plan completion" : "plan completion",
+          "plan details" : "plan details"
         },
       };
 }
