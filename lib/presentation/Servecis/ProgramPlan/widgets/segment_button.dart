@@ -18,7 +18,7 @@ class SegmentButton extends StatelessWidget {
                       child: Container(
                          decoration:  isActive? BoxDecoration(
                             color: const Color.fromARGB(255, 118, 192, 184).withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(15)
+                            borderRadius: BorderRadius.circular(12)
                           ): null,
                           alignment: Alignment.center,
                           child: Text(title.tr,
