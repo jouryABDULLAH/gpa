@@ -108,7 +108,11 @@ flutter:
     - assets/images/captine.jpg
     - assets/faculty_data.json
     - assets/rules_data.json
-    
+    - assets/images/background.png
+    - assets/images/try.png
+    - assets/images/card2.png
+    - assets/images/lolo.png
+    - assets/images/welcome.gif
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

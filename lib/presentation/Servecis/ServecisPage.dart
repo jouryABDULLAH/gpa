@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
+import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/rules/rules_page.dart';
+import 'package:boxicons/boxicons.dart';
 
 class ServicisPage extends StatefulWidget {
-  const ServicisPage({super.key});
+  const ServicisPage({Key? key});
 
   @override
   State<ServicisPage> createState() => _ServicisPage();
@@ -20,19 +23,13 @@ class _ServicisPage extends State<ServicisPage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: ColorManager.primary,
-        actions: [
-          /*  IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications,
-                color: Color.fromARGB(255, 255, 198, 34), size: 25),
-          ),*/
-        ],
+        actions: [],
       ),
       body: Column(
         children: [
           Upper(),
           SizedBox(
-            height: 25,
+            height: 27,
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -83,15 +80,29 @@ class _ServicisPage extends State<ServicisPage> {
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(19),
-                color: Color.fromARGB(100, 0, 167, 171),
+                color: Color.fromARGB(255, 0, 167, 171),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(44, 0, 0, 0),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                    offset: Offset(0, 4),
+                  ),
+                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //Icon(IconsItems[index]),
+                  Icon(
+                    index == 0 ? Boxicons.bx_calculator : Boxicons.bx_book_open,
+                    size: 80,
+                    color: Colors.white,
+                  ),
                   Text(
                     Titles[index],
-                    style: GoogleFonts.poppins(
+                    style: GoogleFonts.getFont(
+                      MyLocal.getFontFamily(Get.locale!.languageCode),
+                      fontSize: Get.locale?.languageCode == 'ar' ? 20 : 18,
                       textStyle: style,
                       color: Color.fromARGB(255, 255, 255, 255),
                     ),
@@ -129,11 +140,13 @@ class _ServicisPage extends State<ServicisPage> {
             alignment: Alignment.center,
             child: Text(
               "servpage".tr,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.poppins().fontFamily,
-                  color: Colors.white,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  textStyle: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  )),
             ),
           ),
         ],

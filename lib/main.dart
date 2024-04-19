@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/cubit/send_alarm_cubit.dart';
 import 'package:gpa/local/local.dart';
 import 'package:gpa/local/local_controller.dart';
+import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
+import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:gpa/shared/network/cache_helper.dart';
 import 'package:gpa/splash_screen/splash.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -39,11 +41,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: "GoogleFonts.poppins",
           colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 14, 3, 46),
+            seedColor: const Color.fromARGB(255, 0, 81, 154),
           ),
           useMaterial3: true,
         ),
-        home: const SplashScreen(),
+        home: SplashScreen(),
         locale: Get.deviceLocale,
         translations: MyLocal(),
       ),

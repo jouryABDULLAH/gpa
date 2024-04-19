@@ -1,6 +1,8 @@
+import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
@@ -31,128 +33,186 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Upper(),
+          Expanded(
+            flex: 1, // Reduce the flex factor to allocate less space
+            child: _buildTopSection(),
+          ),
           Flexible(
-            child: Row(
-              children: <Widget>[
+            flex: 3, // Adjust the flex value as neede
+            child: LessonList(
+              onDismiss: (index) {
+                DataHelper.allAddedLessons.removeAt(index);
+                setState(() {});
+              },
+            ),
+          ),
+          _buildBottomSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTopSection() {
+    return Flexible(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: _buildForm(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomSection() {
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 5,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 10),
+            // Adjust spacing as needed
+            Row(
+              children: [
                 Expanded(
                   flex: 2,
-                  child: _buildForm(),
-                ),
-                Expanded(
-                  flex: 1,
                   child: ShowAverage(
                       average: DataHelper.calculateAvg(),
                       numberOfClass: DataHelper.allAddedLessons.length),
                 ),
               ],
             ),
-          ),
-          Expanded(
-            child: Container(
-              child: LessonList(
-                onDismiss: (index) {
-                  DataHelper.allAddedLessons.removeAt(index);
-                  setState(() {});
-                },
-              ),
-            ),
-          ),
-        ],
+            SizedBox(height: 15),
+          ],
+        ),
       ),
     );
   }
 
-  _buildForm() {
+  Widget _buildForm() {
     return Form(
       key: formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          _buildTextFormField(),
-// <<<<<<< HEAD
-          SizedBox(height: 5),
-// =======
-//           SizedBox(height: 25),
-// >>>>>>> HI
+          SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Padding(
-                  padding: Constants.iconPadding,
-                  child: LetterDropdownWidget(
-                    onLetterSelected: (letter) {
-                      selectedLetterValue = letter;
-                    },
-                  ),
-                ),
+                flex: 2,
+                child: _buildTextFormField(),
               ),
-              Expanded(
-                child: Padding(
-                  padding: Constants.iconPadding,
-                  child: CreditDropdownWidget(
-                    onCreditSelected: (credit) {
-                      selectedCreditValue = credit;
-                    },
+              SizedBox(width: 0),
+              Column(
+                children: [
+                  Text(
+                    'g'.tr,
+                    style: GoogleFonts.getFont(
+                      MyLocal.getFontFamily(Get.locale!.languageCode),
+                      fontSize: 16,
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: Constants.iconPadding,
+                    child: LetterDropdownWidget(
+                      onLetterSelected: (letter) {
+                        selectedLetterValue = letter;
+                      },
+                    ),
+                  ),
+                ],
               ),
+              SizedBox(width: 1),
+              Column(
+                children: [
+                  Text(
+                    'h'.tr,
+                    style: GoogleFonts.getFont(
+                      MyLocal.getFontFamily(Get.locale!.languageCode),
+                      fontSize: 16,
+                    ),
+                  ),
+                  Padding(
+                    padding: Constants.iconPadding,
+                    child: CreditDropdownWidget(
+                      onCreditSelected: (credit) {
+                        selectedCreditValue = credit;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 10,
+              ), // Adjust spacing
               IconButton(
                 onPressed: _addLessonAndCalAvg,
-                icon: Icon(Icons.arrow_forward_ios_sharp),
-// <<<<<<< HEAD
-                color: Constants.mainColor,
-// =======
-//                 color: const Color.fromRGBO(0, 168, 171, 1),
-// >>>>>>> HI
-                iconSize: 30,
+                icon: Icon(Boxicons.bx_plus_circle),
+                padding: EdgeInsets.only(top: 20),
+                color: const Color.fromRGBO(255, 198, 34, 1),
+                iconSize: 37,
               ),
+              SizedBox(width: 10),
             ],
-          ),
-          SizedBox(
-// <<<<<<< HEAD
-            height: 5,
-// =======
-//             height: 15,
-// >>>>>>> HI
           ),
         ],
       ),
     );
   }
 
-  _buildTextFormField() {
-    return Padding(
-// <<<<<<< HEAD
-      padding: const EdgeInsets.only(left: 8),
-// =======
-//       padding: const EdgeInsets.only(left: 18, top: 30),
-// >>>>>>> HI
-      child: TextFormField(
-        onSaved: (value) {
-          setState(() {
-            enteringValue = value!;
-          });
-        },
-        validator: (v) {
-          if (v!.length <= 0) {
-            return "LN".tr;
-          } else
-            return null;
-        },
-        decoration: InputDecoration(
-// <<<<<<< HEAD
-          hintText: "LN".tr,
-// =======
-//           hintText: "Enter The Class",
-
-          border: OutlineInputBorder(
-              borderRadius: Constants.borderRadius,
-              borderSide: BorderSide.none),
-          filled: true,
-          fillColor: Constants.mainColor.withOpacity(0.3),
+  Widget _buildTextFormField() {
+    return SizedBox(
+      width: 179,
+      height: 91, // Adjust the width as needed
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15, top: 6, right: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Course Name".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 16),
+            ),
+            TextFormField(
+              onSaved: (value) {
+                setState(() {
+                  enteringValue = value!;
+                });
+              },
+              validator: (v) {
+                if (v!.isEmpty) {
+                  return "LN".tr;
+                } else
+                  return null;
+              },
+              decoration: InputDecoration(
+                hintText: "LN".tr,
+                helperStyle: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                    fontSize: 16),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 8,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Constants.mainColor.withOpacity(0.3),
+              ),
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 17), // Adjust the font size as needed
+            ),
+          ],
         ),
       ),
     );
@@ -212,11 +272,13 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
             alignment: Alignment.center,
             child: Text(
               "GPA_11".tr,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.poppins().fontFamily,
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  textStyle: TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  )),
             ),
           ),
         ],

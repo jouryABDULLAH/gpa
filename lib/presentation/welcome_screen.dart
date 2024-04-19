@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/logIn/login_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/resources/responsive.dart';
@@ -49,7 +50,7 @@ class _WelcomeState extends State<Welcome> {
         body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/login.png"),
+                  image: AssetImage("assets/images/welcome.gif"),
                   fit: BoxFit.fill)),
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -71,7 +72,8 @@ class _WelcomeState extends State<Welcome> {
                         width: 300,
                         content: Text(
                           "Login".tr,
-                          style: GoogleFonts.poppins(
+                          style: GoogleFonts.getFont(
+                            MyLocal.getFontFamily(Get.locale!.languageCode),
                             textStyle: TextStyle(
                               fontSize: 20,
                               color: Color.fromARGB(255, 255, 255, 255),
@@ -89,7 +91,8 @@ class _WelcomeState extends State<Welcome> {
                       ),
                       Text(
                         "Dacc".tr,
-                        style: GoogleFonts.poppins(
+                        style: GoogleFonts.getFont(
+                          MyLocal.getFontFamily(Get.locale!.languageCode),
                           textStyle: TextStyle(
                             fontSize: 15,
                             color: Color.fromARGB(255, 22, 49, 81),
@@ -106,7 +109,8 @@ class _WelcomeState extends State<Welcome> {
                           },
                           child: Text(
                             "sign up".tr,
-                            style: GoogleFonts.poppins(
+                            style: GoogleFonts.getFont(
+                              MyLocal.getFontFamily(Get.locale!.languageCode),
                               textStyle: TextStyle(
                                 fontSize: 15,
                                 color: Color.fromARGB(255, 247, 6, 6),

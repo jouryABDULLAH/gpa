@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/rules/model/rules.dart';
@@ -26,41 +27,72 @@ class _rulesPageState extends State<rulesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* appBar: AppBar(
-        elevation: 0,
-        backgroundColor: ColorManager.primary,
-        leading: IconButton(
-          onPressed: () => Get.to(const HomeScreen()),
-          icon: const Icon(
-            Icons.home,
-            color: Colors.black,
-            size: 32,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(110.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorManager.primary,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(75, 0, 0, 0),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: ColorManager.primary,
+            toolbarHeight: 99.0,
+            actions: [],
+            centerTitle: true,
+            title: Text(
+              "rules".tr,
+              style: GoogleFonts.getFont(
+                MyLocal.getFontFamily(Get.locale!.languageCode),
+                textStyle: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ),
           ),
         ),
-        title: Text(
-          "rules_2".tr,
-          textAlign: TextAlign.center, // Align the text in the center
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon:
-                const Icon(Icons.notifications, color: Colors.black, size: 25),
-          ),
-        ],
-        toolbarHeight: 90.0,
-      ),*/
+      ),
       body: Column(
         children: [
-          //Upper(),
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 50, 30, 10),
-            child: Column(children: [Text("serv".tr), Text("serv_2".tr)]),
+            padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+            child: Column(children: [
+              Text(
+                "serv".tr,
+                style: GoogleFonts.getFont(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 0, 81, 154),
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                "serv_2".tr,
+                style: GoogleFonts.getFont(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 0, 81, 154),
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                ),
+              )
+            ]),
           ),
           Container(
-            height: 550,
-            margin: const EdgeInsets.fromLTRB(20, 5, 20, 30),
+            height: 630,
+            //color: ColorManager.primary,
+            margin: const EdgeInsets.only(top: 2, right: 8, bottom: 8, left: 8),
             child: const RulesList(),
           )
         ],
@@ -76,51 +108,6 @@ class _rulesPageState extends State<rulesPage> {
       rules = fetchedRules;
     });
   }
-
-  Widget Upper() {
-    return Container(
-      padding: const EdgeInsets.only(left: 0, right: 0),
-      height: 150,
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 0, 168, 171),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ServicisPage()),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 25.0,
-              ),
-              padding: EdgeInsets.all(0),
-            ),
-          ),
-          Align(
-            alignment: Alignment.center,
-            child: Text(
-              "rules_2".tr,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  color: Colors.white,
-                  fontFamily: GoogleFonts.tajawal().fontFamily,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }
 
 class RulesList extends StatefulWidget {
@@ -135,7 +122,7 @@ class _RulesListState extends State<RulesList> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.all(15),
+        padding: const EdgeInsets.all(10),
         child: _buildPanel(),
       ),
     );
@@ -150,46 +137,67 @@ class _RulesListState extends State<RulesList> {
           rules[index].isExpanded = isExpanded;
         });
       },
+      dividerColor: Color.fromARGB(255, 0, 81, 154),
       children: rules.map<ExpansionPanel>((Rule rule) {
         return ExpansionPanel(
           canTapOnHeader: true,
-          backgroundColor: ColorManager.card,
+          backgroundColor: Color.fromARGB(255, 236, 236, 236),
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
-              title: Text(rule.title),
+              iconColor: Color.fromARGB(255, 0, 81, 154),
+              title: Text(
+                rule.title,
+                style: GoogleFonts.almarai(
+                  color: Color.fromARGB(255, 1, 42, 76),
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
             );
           },
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Container(
-                height: 1, // Adjust the height of the divider
-                color: const Color.fromARGB(
-                    255, 9, 55, 92), // Customize the color of the divider
+                height: 0.8,
+                color: const Color.fromARGB(255, 0, 81, 154),
               ),
               ListTile(
-                hoverColor: ColorManager.blue,
-                title: Text(rule.title),
+                hoverColor: Color.fromARGB(255, 0, 81, 154),
+                title: Text(rule.title,
+                    textAlign: TextAlign.right,
+                    style: GoogleFonts.almarai(
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 42, 76))),
                 subtitle: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(rule.description),
-                    const SizedBox(
-                        height:
-                            8), // Add some space between description and steps
-                    Text("serv_st".tr,
-                        style: TextStyle(fontWeight: FontWeight.bold)),
+                    Text(rule.description,
+                        textAlign: TextAlign.right,
+                        style: GoogleFonts.almarai(
+                            color: Color.fromARGB(255, 0, 81, 154))),
+                    const SizedBox(height: 9),
+                    Text(
+                      "serv_st".tr,
+                      style: GoogleFonts.getFont(
+                        MyLocal.getFontFamily(Get.locale!.languageCode),
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 1, 42, 76),
+                      ),
+                    ),
                     for (int i = 0; i < rule.steps.length; i++)
                       Padding(
                         padding: const EdgeInsets.only(right: 16),
-                        child: Text('${i + 1}- ${rule.steps[i]}'),
+                        child: Text(
+                          textAlign: TextAlign.right,
+                          '${i + 1}- ${rule.steps[i]}',
+                          style: GoogleFonts.almarai(
+                            fontWeight: FontWeight.normal,
+                            color: Color.fromARGB(255, 0, 81, 154),
+                          ),
+                        ),
                       ),
                   ],
                 ),
-                // trailing: const Icon(Icons.list),
-                // onTap: () {
-                //   // Handle onTap event
-                // },
               ),
             ],
           ),

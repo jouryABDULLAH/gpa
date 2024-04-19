@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/control.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/home/db.dart';
 import '../../widgets/day_item_widget.dart';
 import '../../widgets/event_widget.dart';
@@ -25,7 +26,7 @@ class _HomeWidgetState extends State<HomeWidget> {
       body: Container(
         decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/images/Sign_up_page.png"),
+                image: AssetImage("assets/images/background.png"),
                 fit: BoxFit.fill)),
         child: FutureBuilder(
           future: controller.getEvents(),
@@ -42,56 +43,67 @@ class _HomeWidgetState extends State<HomeWidget> {
                         children: [
                           Icon(Icons.notifications,
                               color: Color.fromARGB(255, 255, 198, 34),
-                              size: 25),
+                              size: 27),
                         ],
                       ),
                       SizedBox(
-                        height: 25,
+                        height: 27,
                       ),
                       Expanded(
                         flex: 0,
                         child: Column(
                           children: [
                             SizedBox(
-                              height:
-                                  260, // Set a fixed height for the SizedBox
-                              child: Container(
-                                decoration: const BoxDecoration(
-                                  image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/back_card.png'),
-                                    fit: BoxFit.fill,
+                              height: 255,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(
+                                    20), // Adjust the radius as needed
+                                child: Container(
+                                  decoration: const BoxDecoration(
+                                    image: DecorationImage(
+                                      image:
+                                          AssetImage('assets/images/try.png'),
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Directionality(
-                                    textDirection: TextDirection.rtl,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const Center(
-                                          child: Image(
-                                            image: AssetImage(
-                                                'assets/images/logo.png'),
-                                            height: 100,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Directionality(
+                                      textDirection: TextDirection.rtl,
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          const Center(
+                                            child: Image(
+                                              image: AssetImage(
+                                                  'assets/images/lolo.png'),
+                                              height: 67,
+                                            ),
                                           ),
-                                        ),
-                                        Text(
-                                          "الاسم: ${controller.me?.name}" ?? "",
-                                          style: GoogleFonts.almarai(
-                                              fontSize: 18,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          " الرقم الجامعي : ${controller.me?.id}",
-                                          style: GoogleFonts.almarai(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.bold,
+                                          SizedBox(
+                                            height: 13,
                                           ),
-                                        ),
-                                      ],
+                                          Text(
+                                            "الاسم: ${controller.me?.name}" ??
+                                                "",
+                                            style: GoogleFonts.tajawal(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Text(
+                                            " الرقم الجامعي : ${controller.me?.id}",
+                                            style: GoogleFonts.tajawal(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -102,10 +114,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                       Expanded(
                         child: Column(children: [
-                          SizedBox(height: 25),
+                          SizedBox(height: 30),
                           SizedBox(
                             width: 500.0,
-                            height: 403.0,
+                            height: 410.0,
                             child: Card(
                               color: Color.fromARGB(255, 255, 255, 255),
                               child: Padding(
@@ -116,8 +128,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     TextButton(
                                       child: Text(
                                         "more".tr,
-                                        style: GoogleFonts.almarai(
-                                          color: Color.fromRGBO(0, 168, 171, 1),
+                                        style: GoogleFonts.getFont(
+                                          MyLocal.getFontFamily(
+                                              Get.locale!.languageCode),
+                                          color: ColorManager.primary,
                                           decoration: TextDecoration.underline,
                                           fontSize: 16,
                                         ),
@@ -133,6 +147,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         IconButton(
                                           icon:
                                               const Icon(Icons.arrow_back_ios),
+                                          color: ColorManager.primary,
                                           onPressed: () {
                                             controller.changeCalendarPage(
                                                 showNext: false);
@@ -143,7 +158,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                                               controller.monthNameNotifier,
                                           builder: (ctx, value, child) => Text(
                                             value,
-                                            style: GoogleFonts.poppins(
+                                            style: GoogleFonts.getFont(
+                                              MyLocal.getFontFamily(
+                                                  Get.locale!.languageCode),
                                               textStyle: TextStyle(
                                                 fontSize: 20,
                                                 color: Color.fromARGB(
@@ -156,6 +173,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         IconButton(
                                           icon: const Icon(
                                               Icons.arrow_forward_ios),
+                                          color: ColorManager.primary,
                                           onPressed: () {
                                             controller.changeCalendarPage(
                                                 showNext: true);

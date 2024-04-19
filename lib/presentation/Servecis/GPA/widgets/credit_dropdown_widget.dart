@@ -17,24 +17,27 @@ class _CreditDropdownWidgetState extends State<CreditDropdownWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: Constants.dropDownPadding,
-      decoration: BoxDecoration(
-          borderRadius: Constants.borderRadius,
-          color: Constants.mainColor.withOpacity(0.3)),
-      child: DropdownButton<double>(
-        value: selectedCreditValue,
-        elevation: 16,
-        iconEnabledColor: Constants.mainColor,
-        onChanged: (selectedValue) {
-          setState(() {
-            selectedCreditValue = selectedValue!;
-            widget.onCreditSelected(selectedCreditValue);
-          });
-        },
-        underline: Container(),
-        items: DataHelper.allClassesOfCredits(),
+    return SizedBox(
+      child: Container(
+        height: 55,
+        alignment: Alignment.center,
+        padding: Constants.dropDownPadding,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(12),
+            color: Constants.mainColor.withOpacity(0.3)),
+        child: DropdownButton<double>(
+          value: selectedCreditValue,
+          elevation: 16,
+          iconEnabledColor: Constants.mainColor,
+          onChanged: (selectedValue) {
+            setState(() {
+              selectedCreditValue = selectedValue!;
+              widget.onCreditSelected(selectedCreditValue);
+            });
+          },
+          underline: Container(),
+          items: DataHelper.allClassesOfCredits(),
+        ),
       ),
     );
   }

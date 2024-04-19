@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/model/rules_model.dart';
 import 'package:gpa/model/question_model.dart';
+import 'package:gpa/presentation/chatbot/chatbot_welcome_screen.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 
 class chatbotScreen extends StatefulWidget {
@@ -15,7 +17,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
   List<Question> questions = [
     Question(
       text:
-          'مرحبًا أنا نامق, هنا لمساعدتك في الإجابة على أسئلتك فيما يخص جامعة القصيم, اختر أحد الأسئلة التالية:',
+          'مرحبًا أنا نامق, هنا لمساعدتك في الإجابة على أسئلتك فيما يخص جامعة القصيم, اختر أحد الأسئلة التالية',
       isClickable: false,
       isAssistant: true,
     ),
@@ -59,25 +61,26 @@ class _chatbotScreenState extends State<chatbotScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: const Color.fromARGB(255, 15, 89, 149),
+        shadowColor: Color.fromARGB(75, 0, 0, 0),
+        backgroundColor: Color.fromARGB(255, 0, 168, 171),
         leading: IconButton(
           onPressed: () => Get.to(const HomeScreen()),
           icon: const Icon(
             Icons.arrow_back_rounded,
             color: Color.fromARGB(255, 255, 255, 255),
-            size: 32,
+            size: 33,
           ),
         ),
-        title: const Text(
+        title: Text(
           'مرحبًا, أنا الكابتن نامق',
           textAlign: TextAlign.center,
-          style: TextStyle(
-            fontSize: 25,
+          style: GoogleFonts.tajawal(
+            fontSize: 26,
             fontWeight: FontWeight.bold,
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        toolbarHeight: 90.0,
+        toolbarHeight: 130.0,
       ),
       body: Builder(builder: (context) {
         showfollowUpQuestionss = false;
@@ -85,7 +88,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
           padding: const EdgeInsets.only(top: 50),
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Sign_up_page.png"),
+                  image: AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill)),
           child: Column(
             children: [
@@ -287,8 +290,9 @@ class ChatBubble extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
       decoration: BoxDecoration(
-        color:
-            isAssistant ? Colors.blue : const Color.fromARGB(255, 53, 117, 170),
+        color: isAssistant
+            ? Color.fromARGB(255, 0, 168, 171)
+            : Color.fromARGB(255, 0, 81, 154),
         borderRadius: isAssistant
             ? const BorderRadius.only(
                 bottomLeft: Radius.circular(40),
@@ -306,9 +310,10 @@ class ChatBubble extends StatelessWidget {
       constraints: BoxConstraints(maxWidth: width * 2 / 3),
       child: Text(
         text,
-        style: const TextStyle(
+        textAlign: TextAlign.right,
+        style: GoogleFonts.tajawal(
           color: Colors.white,
-          fontSize: 18,
+          fontSize: 19,
         ),
       ),
     );

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -48,12 +49,14 @@ class _DbState extends State<Db> {
         children: [
           Upper(),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(10.0),
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 2,
+              ),
               decoration: BoxDecoration(
                   color: ColorManager.primary,
-                  borderRadius: BorderRadius.circular(20)),
+                  borderRadius: BorderRadius.circular(23)),
               child: Row(
                 children: [
                   Expanded(
@@ -69,9 +72,11 @@ class _DbState extends State<Db> {
                               : null)),
                       child: Text(
                         "List".tr,
-                        style: GoogleFonts.tajawal(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                        style: GoogleFonts.getFont(
+                          fontSize: 24,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          MyLocal.getFontFamily(Get.locale!.languageCode),
+                        ),
                       ),
                     ),
                   ),
@@ -88,9 +93,11 @@ class _DbState extends State<Db> {
                               : null)),
                       child: Text(
                         "Calendar".tr,
-                        style: GoogleFonts.tajawal(
-                            fontSize: 20,
-                            color: Color.fromARGB(255, 255, 255, 255)),
+                        style: GoogleFonts.getFont(
+                          fontSize: 24,
+                          color: Color.fromARGB(255, 255, 255, 255),
+                          MyLocal.getFontFamily(Get.locale!.languageCode),
+                        ),
                       ),
                     ),
                   ),
@@ -99,30 +106,48 @@ class _DbState extends State<Db> {
             ),
           ),
           const SizedBox(
-            height: 10,
+            height: 0,
           ),
           if (index == 0)
             Expanded(
               // height: 500,
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(10.0),
                 child: ListView.separated(
                     itemBuilder: (c, i) => Container(
                           decoration: BoxDecoration(
                               color: controller
                                   .calendarController.events?[i].eventColor,
-                              borderRadius: BorderRadius.circular(80)),
+                              borderRadius: BorderRadius.circular(77)),
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 10),
+                            padding: const EdgeInsets.only(left: 3),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(controller
-                                        .calendarController.events?[i].name ??
-                                    ""),
+                                Text(
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.getFont(
+                                      fontSize: 14,
+                                      color: Color.fromARGB(255, 255, 255, 255),
+                                      MyLocal.getFontFamily(
+                                          Get.locale!.languageCode),
+                                    ),
+                                    controller.calendarController.events?[i]
+                                            .name ??
+                                        ""),
                                 CircleAvatar(
-                                    radius: 30,
+                                    backgroundColor:
+                                        Color.fromARGB(240, 255, 255, 255),
+                                    radius: 32,
                                     child: Text(
+                                        textAlign: TextAlign.center,
+                                        style: GoogleFonts.getFont(
+                                          color:
+                                              Color.fromARGB(255, 1, 116, 118),
+                                          fontSize: 16,
+                                          MyLocal.getFontFamily(
+                                              Get.locale!.languageCode),
+                                        ),
                                         "${controller.calendarController.events?[i].begin.day} - ${controller.calendarController.events?[i].end.day}")),
                               ],
                             ),
@@ -143,6 +168,7 @@ class _DbState extends State<Db> {
               children: [
                 IconButton(
                   icon: const Icon(Icons.arrow_back_ios),
+                  color: ColorManager.primary,
                   onPressed: () {
                     controller.changeCalendarPage(showNext: false);
                   },
@@ -162,6 +188,7 @@ class _DbState extends State<Db> {
                 ),
                 IconButton(
                   icon: const Icon(Icons.arrow_forward_ios),
+                  color: ColorManager.primary,
                   onPressed: () {
                     controller.changeCalendarPage(showNext: true);
                   },
@@ -173,7 +200,7 @@ class _DbState extends State<Db> {
             Expanded(
               child: CrCalendar(
                 firstDayOfWeek: WeekDay.sunday,
-                eventsTopPadding: 32,
+                eventsTopPadding: 30,
                 initialDate: controller.currentDate,
                 maxEventLines: 3,
                 controller: controller.calendarController,
@@ -234,14 +261,12 @@ class _DbState extends State<Db> {
     if (event != null) {
       setState(() {
         controller.calendarController.addEvent(event);
-        // await FirebaseFirestore.instance.collection("events").add(data)
       });
-      // print(event.eventColor.value);
       await FirebaseFirestore.instance.collection("events").add({
         "name": event.name,
         "begin": event.begin.toString().split(" ")[0],
         "end": event.end.toString().split(" ")[0],
-        "color": event.eventColor.value,
+        "color": event.ColorManager.eventColors.value,
       });
       await SendAlarmCubit.get(context).sendNotification(
           event.name,
@@ -292,12 +317,16 @@ class _DbState extends State<Db> {
           ),
           Align(
             alignment: Alignment.center,
-            child: Text("Acadmic".tr,
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    color: Colors.white,
-                    fontFamily: GoogleFonts.tajawal().fontFamily,
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold)),
+            child: Text(
+              "Acadmic".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  textStyle: TextStyle(
+                    fontSize: 36,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  )),
+            ),
           ),
         ],
       ),

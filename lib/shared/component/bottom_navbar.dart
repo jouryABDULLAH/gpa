@@ -1,10 +1,14 @@
 // nav_bar.dart
 import 'package:flutter/material.dart';
+import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
+import 'package:gpa/presentation/chatbot/chatbotScreen.dart';
+import 'package:gpa/presentation/home/db.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 
 import '../../presentation/Servecis/ServecisPage.dart';
+import '../../presentation/Map/map.dart';
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -18,8 +22,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
   List screens = [
     const HomeWidget(),
     const ServicisPage(),
-    const ServicisPage(),
-    ProfileScreen(),
+    const chatbotScreen(),
+    screen_Map(),
     ProfileScreen(),
   ];
 

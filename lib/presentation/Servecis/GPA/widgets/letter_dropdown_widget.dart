@@ -13,30 +13,31 @@ class LetterDropdownWidget extends StatefulWidget {
 
 class _LetterDropdownWidgetState extends State<LetterDropdownWidget> {
   double selectedLetterValue = 4;
-// =======
-//   double selectedLetterValue = 2;
-// >>>>>>> HI
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      padding: Constants.dropDownPadding,
-      decoration: BoxDecoration(
-          borderRadius: Constants.borderRadius,
-          color: Constants.mainColor.withOpacity(0.3)),
-      child: DropdownButton<double>(
-        value: selectedLetterValue,
-        elevation: 16,
-        iconEnabledColor: Constants.mainColor,
-        onChanged: (selectedValue) {
-          setState(() {
-            selectedLetterValue = selectedValue!;
-            widget.onLetterSelected(selectedLetterValue);
-          });
-        },
-        underline: Container(),
-        items: DataHelper.allGradeLetters(),
+    return SizedBox(
+      height: 55,
+      child: Container(
+        alignment: Alignment.topRight,
+        padding: Constants.dropDownPadding,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          color: Constants.mainColor.withOpacity(0.3),
+        ),
+        child: DropdownButton<double>(
+          value: selectedLetterValue,
+          elevation: 16,
+          iconEnabledColor: Constants.mainColor,
+          onChanged: (selectedValue) {
+            setState(() {
+              selectedLetterValue = selectedValue!;
+              widget.onLetterSelected(selectedLetterValue);
+            });
+          },
+          underline: Container(),
+          items: DataHelper.allGradeLetters(),
+        ),
       ),
     );
   }
