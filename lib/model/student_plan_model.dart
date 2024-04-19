@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:gpa/model/course_model.dart';
 
 class StudentPlanModel {
   Map<String, List<CourseModel>> levels;
@@ -25,17 +26,5 @@ class StudentPlanModel {
   }
 }
 
-class CourseModel {
-  String name;
-  String status;
 
-  CourseModel({required this.name, required this.status});
-
-  factory CourseModel.fromJson(Map<String, dynamic> json) {
-    return CourseModel(
-      name: json['name'],
-      status: json['status'],
-    );
-  }
-}
 

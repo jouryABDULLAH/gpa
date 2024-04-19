@@ -17,47 +17,47 @@
         "status": "Not Taken"
       },
       {
-        "name": "CS  361                                النظم الموزعة والمعالجات المتوازية",
+        "name": "CS361                                النظم الموزعة والمعالجات المتوازية",
         "status": "Not Taken"
       },
       {
-        "name": "CS  431                                النمذجة و المحاكاة",
+        "name": "CS431                                النمذجة و المحاكاة",
         "status": "Not Taken"
       },
       {
-        "name": "CS  433                                البيانات والمعلومات والمعرفة",
+        "name": "CS433                                البيانات والمعلومات والمعرفة",
         "status": "Not Taken"
       },
       {
-        "name": "CS  434                                المنطق في عدم التأكد",
+        "name": "CS434                                المنطق في عدم التأكد",
         "status": "Not Taken"
       },
       {
-        "name": "CS  435                                تعلم الآلة",
+        "name": "CS435                                تعلم الآلة",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  452                                التشفير",
+        "name": "CS452                                التشفير",
         "status": "Not Taken"
       },
       {
-        "name": "CS  453                                عمارة وأمن النظام",
+        "name": "CS453                                عمارة وأمن النظام",
         "status": "Not Taken"
       },
       {
-        "name": "CS  484                                تقنيات البرمجة المتقدمة",
+        "name": "CS484                                تقنيات البرمجة المتقدمة",
         "status": "Not Taken"
       },
       {
-        "name": "CS  485                                البرمجة المنطقية",
+        "name": "CS485                                البرمجة المنطقية",
         "status": "Not Taken"
       },
       {
-        "name": "CS  492                                موضوعات خاصة في علوم الحاسب (1)",
+        "name": "CS492                                موضوعات خاصة في علوم الحاسب (1)",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  493                                موضوعات خاصة في علوم الحاسب (2)",
+        "name": "CS493                                موضوعات خاصة في علوم الحاسب (2)",
         "status": "Not Taken"
       },
       {
@@ -69,7 +69,7 @@
         "status": "Taken and Completed"
       },
       {
-        "name": "IT  351                                علم البيانات لإنترنت الاشياء",
+        "name": "IT351                                علم البيانات لإنترنت الاشياء",
         "status": "Taken and Completed"
       },
       {
@@ -161,7 +161,7 @@
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  181                                برمجة الحاسب (2)",
+        "name": "CS181                                برمجة الحاسب (2)",
         "status": "Taken and Completed"
       },
       {
@@ -191,7 +191,7 @@
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  182                                برمجة الحاسب (3)",
+        "name": "CS182                                برمجة الحاسب (3)",
         "status": "Taken and Completed"
       },
       {
@@ -199,7 +199,7 @@
         "status": "Taken and Completed"
       },
       {
-        "name": "IT  131                                قواعد بيانات",
+        "name": "IT131                                قواعد بيانات",
         "status": "Taken and Completed"
       },
       {
@@ -213,11 +213,11 @@
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  211                                مفاهيم الخوارزميات",
+        "name": "CS211                                مفاهيم الخوارزميات",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  213                                مبادئ لغات البرمجة",
+        "name": "CS213                                مبادئ لغات البرمجة",
         "status": "Taken and Completed"
       },
       {
@@ -231,19 +231,19 @@
     ],
     "المستوى السادس": [
       {
-        "name": "CS  214                                تراكيب البيانات",
+        "name": "CS214                                تراكيب البيانات",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  221                                لغة التجميع",
+        "name": "CS221                                لغة التجميع",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  222                                نظام التشغيل",
+        "name": "CS222                                نظام التشغيل",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  224                                تصميم المترجمات",
+        "name": "CS224                                تصميم المترجمات",
         "status": "Taken and Completed"
       },
       {
@@ -253,19 +253,19 @@
     ],
     "المستوى السابع": [
       {
-        "name": "CS  315                                تحليل وتصميم الخوارزميات",
+        "name": "CS315                                تحليل وتصميم الخوارزميات",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  341                                الرسم بالحاسب",
+        "name": "CS341                                الرسم بالحاسب",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  342                                البرمجة المرئية",
+        "name": "CS342                                البرمجة المرئية",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  383                                هندسة البرمجيات",
+        "name": "CS383                                هندسة البرمجيات",
         "status": "Taken and Completed"
       },
       {
@@ -287,11 +287,11 @@
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  348                                تقنيات الأمثليات",
+        "name": "CS348                                تقنيات الأمثليات",
         "status": "Taken and Completed"
       },
       {
-        "name": "IT  362                                مهارات الإتصال وأخلاقيات المهنة",
+        "name": "IT362                                مهارات الإتصال وأخلاقيات المهنة",
         "status": "Taken and Completed"
       },
       {
@@ -301,33 +301,33 @@
     ],
     "المستوى  التاسع": [
       {
-        "name": "CS  423                                برمجة النظم",
+        "name": "CS423                                برمجة النظم",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  451                                مقدمة في أمن الحاسب",
+        "name": "CS451                                مقدمة في أمن الحاسب",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  497                                تدريب صيفي",
+        "name": "CS497                                تدريب صيفي",
         "status": "Taken and Completed"
       },
       {
-        "name": "CS  498                                مشروع تخرج (1)",
+        "name": "CS498                                مشروع تخرج (1)",
         "status": "Taken and Completed"
       }
     ],
     "المستوى العاشر": [
       {
-        "name": "CS  432                                الذكاء الاصطناعي",
+        "name": "CS432                                الذكاء الاصطناعي",
         "status": "Taken and Not Completed"
       },
       {
-        "name": "CS  471                                تقنيات الويب",
+        "name": "CS471                                تقنيات الويب",
         "status": "Taken and Not Completed"
       },
       {
-        "name": "CS  499                                مشروع تخرج (2)",
+        "name": "CS499                                مشروع تخرج (2)",
         "status": "Taken and Not Completed"
       },
       {

@@ -16,6 +16,9 @@ class plan extends StatefulWidget {
 class _planState extends State<plan> {
   StudentPlanModel? studentPlan;
   bool isPlanCompletion = true;
+  var totalHours = 162;
+  var electivesTotalHours = 6;
+  var freeTotalHours = 6;
 
   @override
   void initState() {
