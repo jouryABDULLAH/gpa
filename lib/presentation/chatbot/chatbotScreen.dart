@@ -80,7 +80,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
             color: Color.fromARGB(255, 255, 255, 255),
           ),
         ),
-        toolbarHeight: 130.0,
+        toolbarHeight: 120.0,
       ),
       body: Builder(builder: (context) {
         showfollowUpQuestionss = false;

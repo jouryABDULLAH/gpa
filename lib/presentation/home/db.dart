@@ -52,7 +52,7 @@ class _DbState extends State<Db> {
             padding: const EdgeInsets.all(10.0),
             child: Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: 2,
+                horizontal: 1,
               ),
               decoration: BoxDecoration(
                   color: ColorManager.primary,
@@ -281,7 +281,10 @@ class _DbState extends State<Db> {
 
   Widget Upper() {
     return Container(
-      padding: const EdgeInsets.only(left: 0, right: 0),
+      padding: const EdgeInsets.only(
+        left: 0,
+        right: 0,
+      ),
       height: 200,
       width: double.infinity,
       decoration: const BoxDecoration(

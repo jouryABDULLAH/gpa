@@ -28,7 +28,7 @@ class _rulesPageState extends State<rulesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0),
+        preferredSize: Size.fromHeight(120.0),
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
@@ -53,7 +53,7 @@ class _rulesPageState extends State<rulesPage> {
                 MyLocal.getFontFamily(Get.locale!.languageCode),
                 textStyle: TextStyle(
                   fontSize: 30,
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   color: Color.fromARGB(255, 255, 255, 255),
                 ),
               ),
@@ -81,7 +81,7 @@ class _rulesPageState extends State<rulesPage> {
               Text(
                 "serv_2".tr,
                 style: GoogleFonts.getFont(
-                  fontSize: 14,
+                  fontSize: Get.locale?.languageCode == 'ar' ? 14 : 11,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 0, 81, 154),
                   MyLocal.getFontFamily(Get.locale!.languageCode),
