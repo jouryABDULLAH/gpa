@@ -151,7 +151,7 @@ class _ServicisPage extends State<ServicisPage> {
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                   fontFamily: GoogleFonts.poppins().fontFamily,
                   color: Colors.white,
-                  fontSize: 40,
+                  fontSize: 36.5,
                   fontWeight: FontWeight.bold),
             ),
           ),
