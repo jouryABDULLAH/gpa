@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
@@ -9,6 +10,7 @@ import 'package:gpa/presentation/Servecis/GPA/widgets/credit_dropdown_widget.dar
 import 'package:gpa/presentation/Servecis/GPA/widgets/lesson_list.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/letter_dropdown_widget.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/show_average.dart';
+import 'package:boxicons/boxicons.dart';
 
 class GradeAveragePageTR extends StatefulWidget {
   const GradeAveragePageTR({Key? key}) : super(key: key);
@@ -33,13 +35,56 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Upper(),
+          Expanded(
+            flex: 1, // Reduce the flex factor to allocate less space
+            child: _buildTopSection(),
+          ),
           Flexible(
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  flex: 2,
-                  child: _buildForm(),
+            flex: 3, // Adjust the flex value as neede
+            child: LessonList(
+              onDismiss: (index) {
+                DataHelper.allAddedLessons.removeAt(index);
+                setState(() {});
+              },
+            ),
+          ),
+          _buildBottomSection(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTopSection() {
+    return Flexible(
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: _buildForm(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBottomSection() {
+    return Flexible(
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: 1,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 10),
+            // Adjust spacing as needed
+            Row(
+              children: [
+                Expanded(child: _buildTextFormFieldPreviousHours()),
+                SizedBox(
+                  width: 7,
                 ),
+                Expanded(child: _buildTextFormFieldPreviousGPA()),
                 Expanded(
                   flex: 1,
                   child: ShowAverage(
@@ -49,81 +94,92 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                 ),
               ],
             ),
-          ),
-          Flexible(
-            child: Container(
-              child: LessonList(
-                onDismiss: (index) {
-                  DataHelper.allAddedLessons.removeAt(index);
-                  setState(() {});
-                },
-              ),
-            ),
-          ),
-        ],
+            SizedBox(height: 15),
+          ],
+        ),
       ),
     );
   }
 
-  _buildForm() {
+  Widget _buildForm() {
     return Form(
       key: formKey,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          _buildTextFormField(),
-          _buildTextFormFieldPreviousHours(),
-          _buildTextFormFieldPreviousGPA(),
-          SizedBox(height: 25),
+          SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
-                child: Padding(
-                  padding: Constants.iconPadding,
-                  child: LetterDropdownWidget(
-                    onLetterSelected: (letter) {
-                      selectedLetterValue = letter;
-                    },
-                  ),
-                ),
+                flex: 2,
+                child: _buildTextFormField(),
               ),
-              Expanded(
-                child: Padding(
-                  padding: Constants.iconPadding,
-                  child: CreditDropdownWidget(
-                    onCreditSelected: (credit) {
-                      selectedCreditValue = credit;
-                    },
+              SizedBox(width: 0),
+              Column(
+                children: [
+                  Text(
+                    'g'.tr,
+                    style: GoogleFonts.getFont(
+                      MyLocal.getFontFamily(Get.locale!.languageCode),
+                      fontSize: 16,
+                    ),
                   ),
-                ),
+                  Padding(
+                    padding: Constants.iconPadding,
+                    child: LetterDropdownWidget(
+                      onLetterSelected: (letter) {
+                        selectedLetterValue = letter;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(width: 1),
+              Column(
+                children: [
+                  Text(
+                    'h'.tr,
+                    style: GoogleFonts.getFont(
+                      MyLocal.getFontFamily(Get.locale!.languageCode),
+                      fontSize: 16,
+                    ),
+                  ),
+                  Padding(
+                    padding: Constants.iconPadding,
+                    child: CreditDropdownWidget(
+                      onCreditSelected: (credit) {
+                        selectedCreditValue = credit;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                width: 10,
               ),
               IconButton(
                 onPressed: _addLessonAndCalAvg,
-                icon: Icon(Icons.arrow_forward_ios_sharp),
-                color: const Color.fromRGBO(0, 168, 171, 1),
-                iconSize: 30,
+                icon: Icon(Boxicons.bx_plus_circle),
+                color: const Color.fromRGBO(255, 198, 34, 1),
+                padding: EdgeInsets.only(top: 20),
+                iconSize: 37,
               ),
+              SizedBox(width: 10),
             ],
-          ),
-          SizedBox(
-            height: 15,
           ),
         ],
       ),
     );
   }
 
-  _buildTextFormFieldPreviousHours() {
+  Widget _buildTextFormFieldPreviousHours() {
     return Padding(
-      padding: const EdgeInsets.only(left: 18, top: 10),
+      padding: const EdgeInsets.only(left: 6, top: 10),
       child: TextFormField(
-        keyboardType: TextInputType.number, // Set the keyboard type to number
+        keyboardType: TextInputType.number,
         onSaved: (value) {
           setState(() {
-            // Parse the entered value to an integer and save it to the 'hours' variable
             hours = int.tryParse(value!) ?? 0;
           });
         },
@@ -137,32 +193,37 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         },
         decoration: InputDecoration(
           hintText: "ph".tr,
+          hintStyle: GoogleFonts.getFont(
+              MyLocal.getFontFamily(Get.locale!.languageCode),
+              fontSize: 14),
           border: OutlineInputBorder(
-            borderRadius: Constants.borderRadius,
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           filled: true,
           fillColor: Constants.mainColor.withOpacity(0.3),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 8,
+          ),
         ),
       ),
     );
   }
 
-  _buildTextFormFieldPreviousGPA() {
+  Widget _buildTextFormFieldPreviousGPA() {
     return Padding(
-      padding: const EdgeInsets.only(left: 18, top: 10),
+      padding: const EdgeInsets.only(left: 6, top: 10),
       child: TextFormField(
-        keyboardType: TextInputType.numberWithOptions(
-            decimal: true), // Allow numeric input with decimal
+        keyboardType: TextInputType.numberWithOptions(decimal: true),
         onSaved: (value) {
           setState(() {
-            // Parse the entered value to a double and save it to the 'previousGPA' variable
             previousGPA = double.tryParse(value!) ?? 0.0;
           });
         },
         validator: (v) {
           if (v!.isEmpty) {
-            return "Enter The Previous GPA.";
+            return "Enter The Previous GPA".tr;
           } else if (double.tryParse(v) == null) {
             return "vi".tr;
           }
@@ -170,39 +231,72 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         },
         decoration: InputDecoration(
           hintText: "pg".tr,
+          hintStyle: GoogleFonts.getFont(
+              MyLocal.getFontFamily(Get.locale!.languageCode),
+              fontSize: 14),
           border: OutlineInputBorder(
-            borderRadius: Constants.borderRadius,
+            borderRadius: BorderRadius.circular(12),
             borderSide: BorderSide.none,
           ),
           filled: true,
           fillColor: Constants.mainColor.withOpacity(0.3),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 8,
+          ),
         ),
       ),
     );
   }
 
-  _buildTextFormField() {
-    return Padding(
-      padding: const EdgeInsets.only(left: 18, top: 10),
-      child: TextFormField(
-        onSaved: (value) {
-          setState(() {
-            enteringValue = value!;
-          });
-        },
-        validator: (v) {
-          if (v!.length <= 0) {
-            return "LN".tr;
-          } else
-            return null;
-        },
-        decoration: InputDecoration(
-          hintText: "LN".tr,
-          border: OutlineInputBorder(
-              borderRadius: Constants.borderRadius,
-              borderSide: BorderSide.none),
-          filled: true,
-          fillColor: Constants.mainColor.withOpacity(0.3),
+  Widget _buildTextFormField() {
+    return SizedBox(
+      width: 179,
+      height: 91, // Adjust the width as needed
+      child: Padding(
+        padding: const EdgeInsets.only(left: 15, top: 6, right: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Course Name".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 16),
+            ),
+            TextFormField(
+              onSaved: (value) {
+                setState(() {
+                  enteringValue = value!;
+                });
+              },
+              validator: (v) {
+                if (v!.isEmpty) {
+                  return "LN".tr;
+                } else
+                  return null;
+              },
+              decoration: InputDecoration(
+                hintText: "LN".tr,
+                helperStyle: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                    fontSize: 16),
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: 15,
+                  horizontal: 8,
+                ),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  borderSide: BorderSide.none,
+                ),
+                filled: true,
+                fillColor: Constants.mainColor.withOpacity(0.3),
+              ),
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 17), // Adjust the font size as needed
+            ),
+          ],
         ),
       ),
     );
@@ -262,11 +356,13 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
             alignment: Alignment.center,
             child: Text(
               "GPA_22".tr,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.poppins().fontFamily,
-                  color: Colors.white,
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  textStyle: TextStyle(
+                    fontSize: 27,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  )),
             ),
           ),
         ],

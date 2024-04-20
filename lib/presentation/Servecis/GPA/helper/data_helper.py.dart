@@ -40,7 +40,7 @@ class DataHelper {
   }
 
   static List<String> _gradeLetters() {
-    return ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "E", "F"];
+    return ["A+", "A", "B+", "B", "C+", "C", "D+", "D", "F"];
   }
 
   static double _convertLetterToValue(String letter) {

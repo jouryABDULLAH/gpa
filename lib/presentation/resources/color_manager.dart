@@ -11,7 +11,7 @@ class ColorManager {
   static Color grey = const Color(0xff737477);
   static Color lightBlack = const Color(0x86000000);
   static Color blueGray = const Color(0xff3c5767);
-  static Color blue = const Color(0xff7baef1);
+  static Color blue = Color.fromARGB(255, 0, 81, 154);
 
   static Color textForm = const Color(0xffE1DFDF);
   static Color card = const Color(0xffEFEFEF);

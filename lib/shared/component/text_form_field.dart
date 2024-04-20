@@ -21,8 +21,8 @@ class AppTextFormField extends StatelessWidget {
     this.direction,
     this.textInputType,
     this.readonly,
-    this.textStyle, // New parameter for text style
-    this.fontSize, // New parameter for font size
+    this.textStyle,
+    this.fontSize,
   }) : super(key: key);
 
   final String? hint;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/local/local_controller.dart';
 import 'package:gpa/presentation/profile/widget/about_us.dart';
 import 'package:gpa/presentation/profile/widget/change_password.dart';
@@ -33,7 +34,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       ),
       title: Text(
         title,
-        style: GoogleFonts.poppins(
+        textAlign: TextAlign.left,
+        style: GoogleFonts.getFont(
+          MyLocal.getFontFamily(Get.locale!.languageCode),
           textStyle: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.normal,
@@ -68,21 +71,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
     MyLanguageController languageController = Get.find();
 
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Container(
-            padding: EdgeInsets.only(right: 30, top: 5),
-            child: Text(
-              "account".tr,
-              style: GoogleFonts.poppins(
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(90.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorManager.primary,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(75, 0, 0, 0),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: ColorManager.primary,
+            toolbarHeight: 88.0,
+            actions: [],
+            centerTitle: true,
+            title: Text(
+              "profiletitle".tr,
+              style: GoogleFonts.getFont(
+                MyLocal.getFontFamily(Get.locale!.languageCode),
                 textStyle: TextStyle(
-                    fontSize: 40,
-                    fontWeight: FontWeight.bold,
-                    color: Color.fromARGB(255, 0, 167, 171)),
+                  fontSize: 40,
+                  fontWeight: FontWeight.normal,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
               ),
             ),
           ),
-        ],
+        ),
       ),
       body: GetBuilder<Controller>(
         builder: (_) {
@@ -112,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: Boxicons.bx_info_circle,
                   title: "who".tr,
                   onTap: () {
-                    Get.to(const AboutUs());
+                    Get.to(() => AboutUs()); // Navigate to AboutUs screen
                   },
                 ),
                 Row(
@@ -125,29 +146,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     SizedBox(width: 10),
                     Text(
                       "Lang".tr,
-                      style: GoogleFonts.poppins(
+                      style: GoogleFonts.getFont(
+                        MyLocal.getFontFamily(Get.locale!.languageCode),
                         textStyle: TextStyle(
-                          fontSize: 15,
+                          fontSize: 16,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
-                    SizedBox(width: 130),
+                    SizedBox(width: 27),
                     ToggleButtons(
+                      borderColor: ColorManager.primary,
+                      borderWidth: 1.0,
                       isSelected: isSelected,
                       selectedColor: Colors.white,
-                      color: Colors.cyan,
+                      color: ColorManager.primary,
                       renderBorder: false,
-                      fillColor: Colors.cyan,
-                      borderRadius: BorderRadius.circular(20),
+                      fillColor: ColorManager.primary,
+                      borderRadius: BorderRadius.circular(15),
                       children: <Widget>[
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text("Arabic"),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            "Arabic".tr,
+                            style: GoogleFonts.getFont(
+                              fontSize:
+                                  Get.locale?.languageCode == 'ar' ? 16 : 14,
+                              MyLocal.getFontFamily(Get.locale!.languageCode),
+                            ),
+                          ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Text("English"),
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Text(
+                            "English".tr,
+                            style: GoogleFonts.getFont(
+                              fontSize:
+                                  Get.locale?.languageCode == 'ar' ? 16 : 14,
+                              MyLocal.getFontFamily(Get.locale!.languageCode),
+                            ),
+                          ),
                         )
                       ],
                       onPressed: (int newIndex) {

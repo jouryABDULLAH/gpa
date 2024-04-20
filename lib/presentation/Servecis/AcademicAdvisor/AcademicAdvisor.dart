@@ -7,33 +7,52 @@ class AcademicAdvisorePage extends StatefulWidget {
   const AcademicAdvisorePage({super.key});
 
   @override
-  State<AcademicAdvisorePage> createState() => __AcademicAdvisorePagStateState();
+  State<AcademicAdvisorePage> createState() =>
+      __AcademicAdvisorePagStateState();
 }
 
 class __AcademicAdvisorePagStateState extends State<AcademicAdvisorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-      elevation: 0,
-       toolbarHeight: 90,
-      title: Text(
-            "Academic advisor".tr,
-            textAlign: TextAlign.center,
-            style: const TextStyle(color: Colors.white, fontSize: 40), // Align the text in the center
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(110.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorManager.primary,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(75, 0, 0, 0),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
           ),
-        centerTitle: true,
-      backgroundColor: ColorManager.primary,
-      leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        color: Colors.white,
-        onPressed: () {
-          Navigator.of(context).pop(); // This will navigate back to the previous screen
-        },
+          child: AppBar(
+            elevation: 0,
+            toolbarHeight: 90,
+            title: Text(
+              "Academic advisor".tr,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 30), // Align the text in the center
+            ),
+            centerTitle: true,
+            backgroundColor: ColorManager.primary,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.of(context)
+                    .pop(); // This will navigate back to the previous screen
+              },
+            ),
+            actions: [],
+          ),
+        ),
       ),
-      actions: [],
-      ),
-
       body: Container(
         foregroundDecoration: const BoxDecoration(color: Colors.white),
       ),

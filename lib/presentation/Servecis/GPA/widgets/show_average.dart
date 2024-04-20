@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 
 class ShowAverage extends StatelessWidget {
@@ -13,16 +15,11 @@ class ShowAverage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          numberOfClass > 0
-              ? "$numberOfClass classes entered"
-              : "Enter The Class",
-// =======
-//           numberOfClass > 0 ? "$numberOfClass classes entered" : " ",
-// >>>>>>> HI
+          numberOfClass > 0 ? "$numberOfClass classes entered" : " ",
           style: Constants.numberOfClassesStyle,
         ),
         Text(
@@ -31,7 +28,11 @@ class ShowAverage extends StatelessWidget {
         ),
         Text(
           "points".tr,
-          style: Constants.pointsStyle,
+          style: GoogleFonts.getFont(
+              MyLocal.getFontFamily(Get.locale!.languageCode),
+              textStyle: Constants.pointsStyle,
+              fontSize: 12,
+              fontWeight: FontWeight.bold),
         )
       ],
     );
