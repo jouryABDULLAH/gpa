@@ -1,10 +1,14 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/model/user_model.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/shared/component/text_form_field.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 import '../../../control.dart';
 
@@ -37,26 +41,58 @@ class _MyAccountState extends State<MyAccount> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "info".tr,
-          style: GoogleFonts.tajawal(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 0, 167, 171)),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(110.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorManager.primary,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(75, 0, 0, 0),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: ColorManager.primary,
+            toolbarHeight: 88.0,
+            actions: [],
+            centerTitle: true,
+            title: Text(
+              "info".tr,
+              style: GoogleFonts.getFont(
+                MyLocal.getFontFamily(Get.locale!.languageCode),
+                textStyle: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ),
+          ),
         ),
-        /*    leading: IconButton(
-          onPressed: () {
-            Get.to(ProfileScreen());
-          },
-          icon: Icon(Icons.arrow_back),
-        ),*/
       ),
       body: GetBuilder<Controller>(
         builder: (_) => Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
+              SizedBox(
+                height: 15,
+              ),
+              ListTile(
+                title: Text(
+                  "Name:".tr + " " + (controller.me?.name ?? ""),
+                  style: GoogleFonts.almarai(
+                    fontSize: 20,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
+                leading: const Icon(BoxIcons.bxs_user_detail),
+              ),
               ListTile(
                 onTap: () {
                   showModalBottomSheet(
@@ -68,13 +104,19 @@ class _MyAccountState extends State<MyAccount> {
                           children: [
                             Container(
                                 width: 200,
-                                height: 35,
-                                decoration:
-                                    BoxDecoration(color: ColorManager.primary),
+                                height: 43,
+                                decoration: BoxDecoration(
+                                    color: ColorManager.primary,
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(12),
+                                      bottomRight: Radius.circular(12),
+                                    )),
                                 child: Text(
                                   "change e".tr,
                                   textAlign: TextAlign.center,
-                                  style: GoogleFonts.tajawal(
+                                  style: GoogleFonts.getFont(
+                                      MyLocal.getFontFamily(
+                                          Get.locale!.languageCode),
                                       fontSize: 25,
                                       color:
                                           Color.fromARGB(255, 255, 255, 255)),
@@ -84,6 +126,10 @@ class _MyAccountState extends State<MyAccount> {
                               child: Column(
                                 children: [
                                   AppTextFormField(
+                                    textStyle: GoogleFonts.getFont(
+                                      MyLocal.getFontFamily(
+                                          Get.locale!.languageCode),
+                                    ),
                                     validate: (val) {
                                       if (!val!.contains("@qu.edu.sa")) {
                                         return "must contains @qu.edu.sa";
@@ -93,14 +139,16 @@ class _MyAccountState extends State<MyAccount> {
                                     controller: emailController,
                                     hint: widget.userData.email,
                                   ),
-                                  AppTextFormField(
-                                    controller: passwordController,
-                                    hint: "password",
-                                  ),
                                   SizedBox(
-                                      width: double.infinity,
+                                      height: 53,
+                                      width: 203,
                                       child: ElevatedButton(
                                           style: ButtonStyle(
+                                            shape: MaterialStateProperty.all(
+                                                RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(12),
+                                            )),
                                             backgroundColor:
                                                 MaterialStateProperty.all(
                                                     ColorManager.primary),
@@ -126,7 +174,9 @@ class _MyAccountState extends State<MyAccount> {
                                           },
                                           child: Text(
                                             "Save".tr,
-                                            style: GoogleFonts.tajawal(
+                                            style: GoogleFonts.getFont(
+                                                MyLocal.getFontFamily(
+                                                    Get.locale!.languageCode),
                                                 fontSize: 20),
                                           ))),
                                 ],
@@ -138,99 +188,19 @@ class _MyAccountState extends State<MyAccount> {
                     },
                   );
                 },
-                title: Text("change e".tr,
-                    style: GoogleFonts.tajawal(fontSize: 17)),
+                title: Text(
+                  "Email:".tr + " " + (controller.me?.email ?? ""),
+                  style: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                    fontSize: Get.locale?.languageCode == 'ar' ? 18 : 20,
+                    fontWeight: FontWeight.normal,
+                  ),
+                ),
                 leading: const Icon(Icons.email),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
                   color: ColorManager.primary,
-                ),
-              ),
-              ListTile(
-                onTap: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) {
-                      return Form(
-                        key: formState,
-                        child: Column(
-                          children: [
-                            Container(
-                                width: 200,
-                                height: 30,
-                                decoration:
-                                    BoxDecoration(color: ColorManager.primary),
-                                child: Text(
-                                  "change n".tr,
-                                  textAlign: TextAlign.center,
-                                  style: GoogleFonts.tajawal(
-                                      fontSize: 25,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255)),
-                                )),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Column(
-                                children: [
-                                  AppTextFormField(
-                                    validate: (val) {
-                                      if (val!.isEmpty) {
-                                        return "يجب ملئ الحقل".tr;
-                                      }
-                                      if (val.contains(RegExp("[a-z,A-Z]"))) {
-                                        return "يجب ان يكون الاسم باللغة العربية"
-                                            .tr;
-                                      }
-                                      return null;
-                                    },
-                                    controller: nameController,
-                                    hint: widget.userData.name,
-                                  ),
-                                  SizedBox(
-                                      width: double.infinity,
-                                      child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            backgroundColor:
-                                                MaterialStateProperty.all(
-                                                    ColorManager.primary),
-                                            foregroundColor:
-                                                MaterialStateProperty.all(
-                                                    ColorManager.white),
-                                          ),
-                                          onPressed: () async {
-                                            if (formState.currentState!
-                                                .validate()) {
-                                              await controller.updateName(
-                                                  userName: nameController.text,
-                                                  context: context);
-                                              /* ScaffoldMessenger.of(context)
-                                                  .showSnackBar(const SnackBar(
-                                                      backgroundColor:
-                                                          Colors.green,
-                                                      content: Text(
-                                                          "account updated success")));*/
-                                            }
-                                          },
-                                          child: Text("Save".tr,
-                                              style: GoogleFonts.tajawal(
-                                                  fontSize: 20)))),
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                },
-                title: Text(
-                  "change n".tr,
-                  style: GoogleFonts.tajawal(fontSize: 17),
-                ),
-                leading: const Icon(Icons.person),
-                trailing: Icon(
-                  Icons.arrow_forward_ios,
-                  color: ColorManager.primary,
+                  size: 20,
                 ),
               ),
             ],

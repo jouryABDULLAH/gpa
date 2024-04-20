@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import '../../shared/component/app_button.dart';
 import '../../shared/component/text_form_field.dart';
 import 'resources/color_manager.dart';
@@ -38,7 +39,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
         body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Sign_up_page.png"),
+                  image: AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill)),
           child: Align(
             alignment: Alignment.bottomLeft,
@@ -122,7 +123,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                 width: 200,
                                 content: Text(
                                   "send".tr,
-                                  style: GoogleFonts.poppins(
+                                  style: GoogleFonts.getFont(
+                                    MyLocal.getFontFamily(
+                                        Get.locale!.languageCode),
                                     textStyle: TextStyle(
                                       fontSize: 16,
                                       color: Color.fromARGB(255, 255, 255, 255),

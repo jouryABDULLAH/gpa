@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:gpa/local/local_controller.dart';
 import '../../control.dart';
 import '../create.dart';
 import '../../shared/component/app_button.dart';
@@ -39,7 +39,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Sign_up_page.png"),
+                  image: AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill)),
           child: Align(
             alignment: Alignment.bottomLeft,
@@ -91,13 +91,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         padding: 10,
                         head: "Name".tr,
                         controller: name,
-                        hint: "Name".tr,
+                        hint: "name".tr,
                         validate: (c) {
                           if (name.text.trim().isEmpty) {
-                            return "cannot empty".tr;
+                            return "empty".tr;
                           }
                           if (c!.contains(RegExp("[a-z,A-Z]"))) {
-                            return "يجب ان يكون الاسم باللغة العربية".tr;
+                            return "wroname".tr;
                           }
 
                           return null;
@@ -108,37 +108,34 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         head: "Email",
                         controller: email,
                         validate: (c) {
-// <<<<<<< HEAD
-//                           if (!email.text.contains("@qu.edu.sa")) {
-//                             return "must contains @qu.edu.sa".tr;
-//                           }
-//                           return null;
-//                         },
-//                         hint: '0000000000@qu.edu.sa',
-// =======
                           if (!email.text.contains("@")) {
                             return "wrong email".tr;
+                          }
+                          if (email.text.trim().isEmpty) {
+                            return "empty".tr;
                           }
                           return null;
                         },
                         hint: 'email',
-
-// >>>>>>> HI
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "id".tr,
+                        head: "University ID".tr,
                         controller: id,
-                        hint: "id".tr,
+                        hint: "UID".tr,
                         validate: (c) {
                           if (id.text.trim().isEmpty) {
-                            return "cannot empty".tr;
+                            return "empty".tr;
                           }
                           if (c!.isEmpty) {
-                            return "لا يجب ان يكون الحقل فارغ".tr;
+                            return "empty".tr;
+                          }
+
+                          if (id.text.length < 9) {
+                            return "lessi".tr;
                           }
 
                           return null;
@@ -149,13 +146,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Password",
+                        head: "Password".tr,
                         controller: password,
                         validate: (c) {
-                          if (password.text.length < 8) return "less 8".tr;
+                          if (password.text.length < 8) return "less".tr;
                           return null;
                         },
-                        hint: 'password',
+                        hint: 'password'.tr,
                       ),
                       SizedBox(
                         height: 15,

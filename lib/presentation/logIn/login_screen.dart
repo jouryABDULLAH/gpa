@@ -3,12 +3,14 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/presentation/foreget_password.dart';
 import 'package:gpa/presentation/sign_up/sign_up_screen.dart';
+import 'package:gpa/presentation/welcome_screen.dart';
 import '../create.dart';
 import '../../shared/component/app_button.dart';
 import '../../shared/component/text_form_field.dart';
 import '../../../control.dart';
 import '../resources/color_manager.dart';
 import '../resources/responsive.dart';
+import 'package:gpa/local/local_controller.dart';
 
 class LogInWidget extends StatefulWidget {
   const LogInWidget({super.key});
@@ -35,7 +37,7 @@ class _LogInWidgetState extends State<LogInWidget> {
         body: Container(
           decoration: const BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/Sign_up_page.png"),
+                  image: AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill)),
           child: Align(
             alignment: Alignment.bottomLeft,
@@ -63,7 +65,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                                 color: Colors.white,
                               ),
                               onPressed: () {
-                                Get.back();
+                                Get.to(() => Welcome());
                               }),
                         ),
                       ),
@@ -85,7 +87,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Email",
+                        head: "Email".tr,
                         controller: email,
                         validate: (c) {
                           if (!email.text.contains("@")) {
@@ -104,10 +106,10 @@ class _LogInWidgetState extends State<LogInWidget> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Password",
+                        head: "Password".tr,
                         controller: password,
                         validate: (c) {
-                          if (password.text.length < 8) return "less 8".tr;
+                          if (password.text.length < 8) return "less".tr;
                           return null;
                         },
                         hint: '********',
@@ -178,7 +180,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                               "forget".tr,
                               style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: Color.fromARGB(255, 0, 81, 154),
                                   fontWeight: FontWeight.normal,
                                   decoration: TextDecoration.underline,
@@ -198,7 +200,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                               "sign up".tr,
                               style: GoogleFonts.poppins(
                                 textStyle: TextStyle(
-                                  fontSize: 13,
+                                  fontSize: 14,
                                   color: Color.fromARGB(255, 0, 81, 154),
                                   fontWeight: FontWeight.normal,
                                   decoration: TextDecoration.underline,

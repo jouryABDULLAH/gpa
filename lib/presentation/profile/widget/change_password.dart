@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/shared/component/text_form_field.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,14 +19,36 @@ class ChangePassword extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "pass".tr,
-          style: GoogleFonts.tajawal(
-            textStyle: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 0, 167, 171),
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(110.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: ColorManager.primary,
+            boxShadow: [
+              BoxShadow(
+                color: Color.fromARGB(75, 0, 0, 0),
+                spreadRadius: 2,
+                blurRadius: 10,
+                offset: Offset(0, 4),
+              ),
+            ],
+          ),
+          child: AppBar(
+            elevation: 0,
+            backgroundColor: ColorManager.primary,
+            toolbarHeight: 88.0,
+            actions: [],
+            centerTitle: true,
+            title: Text(
+              "pass".tr,
+              style: GoogleFonts.getFont(
+                MyLocal.getFontFamily(Get.locale!.languageCode),
+                textStyle: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.normal,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
             ),
           ),
         ),
@@ -37,6 +60,9 @@ class ChangePassword extends StatelessWidget {
             child: Column(
               children: [
                 AppTextFormField(
+                  textStyle: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                  ),
                   validate: (val) {
                     if (val!.isEmpty) {
                       return "fill".tr;
@@ -50,6 +76,9 @@ class ChangePassword extends StatelessWidget {
                   hint: "curr pass".tr,
                 ),
                 AppTextFormField(
+                  textStyle: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                  ),
                   validate: (val) {
                     if (val!.isEmpty) {
                       return "fill".tr;
@@ -60,9 +89,12 @@ class ChangePassword extends StatelessWidget {
                     return null;
                   },
                   controller: newPasswordController,
-                  hint: "fill".tr,
+                  hint: "new pass".tr,
                 ),
                 AppTextFormField(
+                  textStyle: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                  ),
                   validate: (val) {
                     if (val!.isEmpty) {
                       return "fill".tr;
@@ -76,9 +108,13 @@ class ChangePassword extends StatelessWidget {
                   hint: "conf".tr,
                 ),
                 SizedBox(
-                    width: double.infinity,
+                    width: 200,
                     child: ElevatedButton(
                         style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all(RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          )),
                           backgroundColor:
                               MaterialStateProperty.all(ColorManager.primary),
                           foregroundColor:
@@ -96,10 +132,11 @@ class ChangePassword extends StatelessWidget {
                                   context: context,
                                   barrierDismissible: true,
                                   builder: (_) => AlertDialog(
-                                        title: Text(
-                                          "تم تغيير كلمة المرور بنجاح",
-                                          style: GoogleFonts.tajawal(),
-                                        ),
+                                        title: Text("ch pass".tr,
+                                            style: GoogleFonts.getFont(
+                                              MyLocal.getFontFamily(
+                                                  Get.locale!.languageCode),
+                                            )),
                                         content: Icon(
                                           Icons.task_alt,
                                           size: 80,
@@ -113,8 +150,11 @@ class ChangePassword extends StatelessWidget {
                                                   Navigator.pop(context);
                                                 },
                                                 child: Text(
-                                                  "العودة للخلف",
-                                                  style: GoogleFonts.tajawal(),
+                                                  "back".tr,
+                                                  style: GoogleFonts.getFont(
+                                                    MyLocal.getFontFamily(Get
+                                                        .locale!.languageCode),
+                                                  ),
                                                 )),
                                           )
                                         ],
@@ -127,7 +167,10 @@ class ChangePassword extends StatelessWidget {
                         },
                         child: Text(
                           "Save".tr,
-                          style: GoogleFonts.tajawal(fontSize: 20),
+                          style: GoogleFonts.getFont(
+                            MyLocal.getFontFamily(Get.locale!.languageCode),
+                            fontSize: 19,
+                          ),
                         )))
               ],
             )),

@@ -1,7 +1,10 @@
+import 'package:boxicons/boxicons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
+import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page_TR.dart';
@@ -14,39 +17,20 @@ class GPAPage extends StatefulWidget {
 }
 
 class _GPAPage extends State<GPAPage> {
-  final style = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
+  final style = TextStyle(
+    fontSize: 30,
+    fontWeight: FontWeight.normal,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        elevation: 0,
-        backgroundColor: ColorManager.primary,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const ServicisPage()),
-            );
-          },
-          icon: Icon(
-            Icons.list,
-            color: Color.fromARGB(255, 255, 255, 255),
-            size: 32,
-          ),
-          padding: EdgeInsets.all(0),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications,
-                color: Color.fromARGB(255, 255, 255, 255), size: 25),
-          ),
-        ],
-      ),*/
       body: Column(
         children: [
-          Upper(), // Place Upper widget at the top
+          Upper(),
+          SizedBox(
+            height: 20,
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: MyList(),
@@ -74,7 +58,7 @@ class _GPAPage extends State<GPAPage> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.1,
-          mainAxisSpacing: 25,
+          mainAxisSpacing: 28,
         ),
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
@@ -98,19 +82,31 @@ class _GPAPage extends State<GPAPage> {
               margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(19),
-                color: Color.fromARGB(90, 0, 167, 171),
+                color: Color.fromARGB(255, 0, 167, 171),
+                boxShadow: [
+                  BoxShadow(
+                    color: Color.fromARGB(44, 0, 0, 0),
+                    spreadRadius: 2,
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  //Icon(IconsItems[index]),
+                  Icon(
+                    index == 0 ? Boxicons.bx_book : Boxicons.bx_award,
+                    size: 80,
+                    color: Colors.white,
+                  ),
                   Text(
                     Titles[index],
-                    style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                        fontFamily: GoogleFonts.poppins().fontFamily,
+                    style: GoogleFonts.getFont(
+                        MyLocal.getFontFamily(Get.locale!.languageCode),
                         color: Colors.white,
-                        fontSize: 27,
-                        fontWeight: FontWeight.bold),
+                        fontSize: Get.locale?.languageCode == 'ar' ? 20 : 18,
+                        fontWeight: FontWeight.normal),
                   ),
                 ],
               ),
@@ -145,9 +141,10 @@ class _GPAPage extends State<GPAPage> {
             alignment: Alignment.topLeft,
             child: IconButton(
               onPressed: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const ServicisPage(),
-                ));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
               },
               icon: Icon(
                 Icons.arrow_back,
@@ -161,11 +158,13 @@ class _GPAPage extends State<GPAPage> {
             alignment: Alignment.center,
             child: Text(
               "GPA".tr,
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                  fontFamily: GoogleFonts.poppins().fontFamily,
-                  color: Colors.white,
-                  fontSize: 40,
-                  fontWeight: FontWeight.bold),
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  textStyle: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.normal,
+                    color: Color.fromARGB(255, 255, 255, 255),
+                  )),
             ),
           ),
         ],

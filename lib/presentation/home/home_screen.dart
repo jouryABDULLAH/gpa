@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Map/map.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
@@ -20,12 +21,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  @override
-  void initState() {
-    FirebaseMessaging.instance.subscribeToTopic("event");
-    super.initState();
-  }
-
   int index = 0;
   final controller = Get.put(Controller());
   List screens = [
@@ -33,11 +28,20 @@ class _HomeScreenState extends State<HomeScreen> {
     const ServicisPage(),
     const chatbot_welcome(),
     const screen_Map(),
-    ProfileScreen(),
   ];
+
+  @override
+  void initState() {
+    FirebaseMessaging.instance.subscribeToTopic("event");
+    super.initState();
+  }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       body: FutureBuilder(
         future: controller.getMe(),
         builder: (_, da) {
@@ -57,6 +61,9 @@ class _HomeScreenState extends State<HomeScreen> {
             if (i >= 0 && i < screens.length) {
               index = i;
             }
+            if (i == 4) {
+              _scaffoldKey.currentState!.openDrawer();
+            }
           });
         },
         items: [
@@ -69,24 +76,24 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "Services".tr,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Boxicons.bxs_bot),
-              /*Image.asset(
-                'lib/icons/chatbot-speech-bubble.png',
-                width: 25,
-                height: 25,
-                color: Color.fromARGB(255, 255, 198, 34),
-              ),*/
-              label: "namik".tr),
+              icon: Icon(Boxicons.bxs_bot), label: "namik".tr),
           BottomNavigationBarItem(
               icon: Icon(Ionicons.location), label: "map".tr),
           BottomNavigationBarItem(
               icon: Icon(Ionicons.person), label: "account".tr),
         ],
-        selectedLabelStyle: GoogleFonts.almarai(),
-        unselectedLabelStyle: GoogleFonts.almarai(),
+        selectedLabelStyle: GoogleFonts.getFont(
+          MyLocal.getFontFamily(Get.locale!.languageCode),
+        ),
+        unselectedLabelStyle: GoogleFonts.getFont(
+          MyLocal.getFontFamily(Get.locale!.languageCode),
+        ),
         selectedFontSize: 13,
         unselectedFontSize: 13,
         unselectedItemColor: Color.fromARGB(255, 17, 53, 91),
+      ),
+      drawer: Drawer(
+        child: ProfileScreen(),
       ),
     );
   }

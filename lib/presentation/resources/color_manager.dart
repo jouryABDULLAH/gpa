@@ -11,7 +11,7 @@ class ColorManager {
   static Color grey = const Color(0xff737477);
   static Color lightBlack = const Color(0x86000000);
   static Color blueGray = const Color(0xff3c5767);
-  static Color blue = const Color(0xff7baef1);
+  static Color blue = Color.fromARGB(255, 0, 81, 154);
 
   static Color textForm = const Color(0xffE1DFDF);
   static Color card = const Color(0xffEFEFEF);
@@ -42,8 +42,8 @@ class ColorManager {
   /// Colors for [EventWidget].
   static const eventColors = [
     Color.fromARGB(255, 0, 167, 171),
-    Color(0xff116d7a),
-    Color.fromARGB(255, 255, 198, 34),
-    Color.fromARGB(255, 17, 53, 91),
+    Color.fromARGB(255, 0, 167, 171),
+    Color.fromARGB(255, 0, 167, 171),
+    Color.fromARGB(255, 0, 167, 171),
   ];
 }

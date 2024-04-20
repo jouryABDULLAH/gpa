@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Servecis/GPA/constants/app_constants.dart';
 import 'package:gpa/presentation/Servecis/GPA/helper/data_helper.py.dart';
 
@@ -20,7 +22,7 @@ class LessonList extends StatelessWidget {
                   onDismiss(index);
                 },
                 child: Padding(
-                  padding: const EdgeInsets.all(2.0),
+                  padding: const EdgeInsets.all(3.0),
                   child: Card(
                     child: ListTile(
                       title: Text(DataHelper.allAddedLessons[index].name),
@@ -31,26 +33,21 @@ class LessonList extends StatelessWidget {
                                   DataHelper.allAddedLessons[index].creditGrade)
                               .toStringAsFixed(0))),
                       subtitle: Text(
-// <<<<<<< HEAD
                           "الساعات: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
-// =======
-//                           "Credit: ${DataHelper.allAddedLessons[index].creditGrade}, Letter Grade: ${DataHelper.allAddedLessons[index].letterGrade}"),
-// >>>>>>> HI
                     ),
                   ),
                 ),
               );
             })
         : Container(
-// <<<<<<< HEAD
             alignment: Alignment.center,
-// <<<<<<< HEAD
-            child: Text("pa".tr,
-// =======
-//             child: Text("Please Add Lesson.",
-// >>>>>>> HI
-                textAlign: TextAlign.center,
-                style: Constants.titleStyle),
+            child: Text(
+              "pa".tr,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  textStyle: Constants.titleStyle),
+            ),
           );
   }
 }
