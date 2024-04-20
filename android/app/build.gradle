@@ -5,13 +5,6 @@ plugins {
     id "com.google.gms.google-services"
 }
 
-plugins {
-    id "com.android.application"
-    id "kotlin-android"
-    id "dev.flutter.flutter-gradle-plugin"
-    id "com.google.gms.google-services"
-}
-
 def localProperties = new Properties()
 def localPropertiesFile = rootProject.file('local.properties')
 if (localPropertiesFile.exists()) {
@@ -33,7 +26,8 @@ if (flutterVersionName == null) {
 android {
     namespace "com.gpa.com"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion "26.3.11579264"
+
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -92,6 +86,4 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'androidx.multidex:multidex:2.0.1'
-    implementation 'androidx.multidex:multidex:2.0.1'
 }
-

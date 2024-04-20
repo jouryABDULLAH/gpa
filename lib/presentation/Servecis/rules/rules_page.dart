@@ -24,44 +24,43 @@ class _rulesPageState extends State<rulesPage> {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /* appBar: AppBar(
+      appBar: AppBar(
         elevation: 0,
-        backgroundColor: ColorManager.primary,
+        backgroundColor: Color.fromARGB(255, 0, 167, 171),
         leading: IconButton(
           onPressed: () => Get.to(const HomeScreen()),
           icon: const Icon(
             Icons.home,
-            color: Colors.black,
-            size: 32,
+            color: Color.fromARGB(255, 255, 255, 255),
+            size: 20,
           ),
         ),
-        title: Text(
-          "rules_2".tr,
-          textAlign: TextAlign.center, // Align the text in the center
-        ),
-        centerTitle: true,
+
+        /* centerTitle: true,
         actions: [
           IconButton(
             onPressed: () {},
             icon:
                 const Icon(Icons.notifications, color: Colors.black, size: 25),
           ),
-        ],
-        toolbarHeight: 90.0,
-      ),*/
+        ],*/
+        toolbarHeight: 30.0,
+      ),
       body: Column(
         children: [
-          //Upper(),
+          Upper(),
           Container(
             padding: const EdgeInsets.fromLTRB(30, 50, 30, 10),
             child: Column(children: [Text("serv".tr), Text("serv_2".tr)]),
           ),
-          Container(
-            height: 550,
-            margin: const EdgeInsets.fromLTRB(20, 5, 20, 30),
-            child: const RulesList(),
+          Expanded(
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(20, 5, 20, 30),
+              child: const RulesList(),
+            ),
           )
         ],
       ),
@@ -79,41 +78,33 @@ class _rulesPageState extends State<rulesPage> {
 
   Widget Upper() {
     return Container(
-      padding: const EdgeInsets.only(left: 0, right: 0),
+      //padding: const EdgeInsets.only(top: 50),
       height: 150,
       width: double.infinity,
       decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 0, 168, 171),
+        color: Color.fromARGB(255, 0, 167, 171),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
+            spreadRadius: 2, // Spread radius
+            blurRadius: 10, // Blur radius
+            offset: Offset(0, 4), // Offset of the shadow
+          ),
+        ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Align(
-            alignment: Alignment.topLeft,
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ServicisPage()),
-                );
-              },
-              icon: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-                size: 25.0,
-              ),
-              padding: EdgeInsets.all(0),
-            ),
-          ),
-          Align(
             alignment: Alignment.center,
             child: Text(
+              textAlign: TextAlign.center,
               "rules_2".tr,
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
+                  fontFamily: GoogleFonts.poppins().fontFamily,
                   color: Colors.white,
-                  fontFamily: GoogleFonts.tajawal().fontFamily,
-                  fontSize: 30,
+                  fontSize: 40,
                   fontWeight: FontWeight.bold),
             ),
           ),

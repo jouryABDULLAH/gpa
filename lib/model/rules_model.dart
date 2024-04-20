@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 
 class Rules {
   String title;
-  String url;
-  String service_target;
+  String? url;
+  List<String> service_target;
   String description;
   List<String> steps;
 
@@ -17,20 +17,27 @@ class Rules {
 
   factory Rules.fromJson(Map<String, dynamic> json) {
     return Rules(
-        title: json['title'],
-        url: json['url'],
-        service_target: json['service-target'],
-        description: json['description'],
-        steps: List<String>.from(json['steps']));
+      title: json["title"] ?? "",
+      url: json["url"] ?? "--",
+      service_target: (json["service-target"] as List<dynamic>?)
+              ?.map((target) => target.toString())
+              .toList() ??
+          [],
+      description: json["description"] ?? "",
+      steps: (json["steps"] as List<dynamic>?)
+              ?.map((step) => step.toString())
+              .toList() ??
+          [],
+    );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'title': title,
-      'url': url,
-      'service_target': service_target,
-      'description': description,
-      'steps': steps
+      "title": title,
+      "url": url,
+      "service-target": service_target,
+      "description": description,
+      "steps": steps
     };
   }
 
@@ -41,27 +48,28 @@ class Rules {
     List<dynamic> jsonList = json.decode(jsonData);
     // Convert JSON data into a list of Rule objects
     List<Rules> rules = jsonList.map((json) {
-      List<String> steps = List<String>.from(json['steps']);
+      List<String> steps = List<String>.from(json["steps"]);
+      List<String> service_target = List<String>.from(json["service-target"]);
       return Rules(
-        title: json['title'],
-        description: json['description'],
+        title: json["title"],
+        description: json["description"],
         steps: steps,
-        url: json['url'],
-        service_target: json['service_target'],
+        url: json["url"],
+        service_target: service_target,
       );
     }).toList();
     return rules;
   }
-}
 
-Future<List<Rules>> loadRulessFromAsset(String path) async {
-  String jsonData = await rootBundle.loadString(path);
-  List<dynamic> jsonList = json.decode(jsonData);
+  static Future<List<Rules>> loadRulessFromAsset(String path) async {
+    String jsonData = await rootBundle.loadString(path);
+    List<dynamic> jsonList = json.decode(jsonData);
 
-  List<Rules> rulesList = [];
-  for (var json in jsonList) {
-    Rules rule = Rules.fromJson(json);
-    rulesList.add(rule);
+    List<Rules> rulesList = [];
+    for (var json in jsonList) {
+      Rules rule = Rules.fromJson(json);
+      rulesList.add(rule);
+    }
+    return rulesList;
   }
-  return rulesList;
 }

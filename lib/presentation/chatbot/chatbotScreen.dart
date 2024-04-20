@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:gpa/model/faculty_model.dart';
 import 'package:gpa/model/rules_model.dart';
 import 'package:gpa/model/question_model.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
@@ -36,7 +38,12 @@ class _chatbotScreenState extends State<chatbotScreen> {
   late List<Question> defaultQuestions;
   bool showfollowUpQuestionss = false;
   bool assistantMessage = true;
-  List<Rules> rulesList = [];
+  late List<Rules> rulesList = [];
+  late List<Rules> studentsRulesList = [];
+  late List<Rules> facultyRulesList = [];
+  late List<Rules> guestsRulesList = [];
+  late List<Rules> employeesRulesList = [];
+  late List<Faculty> facultyInfoList = [];
   final ScrollController _scrollController = ScrollController();
   // late Future<List<Rules>> futureRules;
 
@@ -52,6 +59,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
     // futureRules = fetchRulesData();
     defaultQuestions = List.from(questions);
     fetchRulesData();
+    fetchFacultyData();
   }
 
   @override
@@ -112,6 +120,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
                       return GestureDetector(
                         onTap: () {
                           handleUserMessageClick(index);
+                          // handleUserMessageClick2(index);
                         },
                         child: ChatBubble(
                           text: questions[index].text,
@@ -129,24 +138,57 @@ class _chatbotScreenState extends State<chatbotScreen> {
     );
   }
 
+  void fetchFacultyData() async {
+    try {
+      List<Faculty> fetchedFacultyInfo = await Faculty.fetchAll();
+      if (mounted) {
+        setState(() {
+          facultyInfoList = fetchedFacultyInfo;
+        });
+      }
+    } catch (e) {
+      print("Error loading faculty data: $e");
+    }
+  }
+
   void fetchRulesData() async {
-    List<Rules> fetchedRules = await Rules.fetchAll();
-    // return fetchedRules;
-    setState(() {
-      rulesList = fetchedRules;
-    });
+    try {
+      List<Rules> fetchedRules = await Rules.fetchAll();
+      if (mounted) {
+        setState(() {
+          rulesList = fetchedRules;
+          studentsRulesList = rulesList
+              .where((rule) => rule.service_target == 'Students')
+              .toList();
+          guestsRulesList = rulesList
+              .where((rule) => rule.service_target == 'Guests')
+              .toList();
+          facultyRulesList = rulesList
+              .where((rule) => rule.service_target == 'Faculty')
+              .toList();
+          employeesRulesList = rulesList
+              .where((rule) => rule.service_target == 'Employees')
+              .toList();
+        });
+      }
+    } catch (e) {
+      print("Error loading rules data: $e");
+    }
   }
 
   void handleUserMessageClick(int index) {
     if (questions[index].text == 'العودة إلى البداية') {
-      setState(() {
-        questions = [...defaultQuestions];
-      });
+      if (mounted) {
+        setState(() {
+          questions = [...defaultQuestions];
+        });
+      }
     } else if (questions[index].isClickable) {
       // default value is the followup question | we can use late instead
       List<Question> nextQuestions = [];
 
       if (questions[index].followUpQuestions != null) {
+        // turn FU questions into main questions
         nextQuestions = questions[index].followUpQuestions!.map((questionText) {
           return Question(
             text: questionText,
@@ -155,26 +197,23 @@ class _chatbotScreenState extends State<chatbotScreen> {
           );
         }).toList();
       } else if (questions[index].followUpQuestions == null) {
+        List<String> departments = facultyInfoList
+            .map((faculty) => faculty.department)
+            .toSet()
+            .toList();
+        List<String> serviceTargets =
+            rulesList.expand((rule) => rule.service_target).toSet().toList();
+
         // in case the follow-up question is empty assign it
         if (questions[index].text == 'مالفئة التي تستهدفها هذه الخدمة؟') {
-          // List<String> categories =
-          //     rulesList.map((rule) => rule.service_target).toSet().toList();
-
-          List<Rules> rules = rulesList;
-          Set<String> uniqueCategories = {};
-          for (Rules rule in rules) {
-            uniqueCategories.add(rule.service_target);
-          }
-          nextQuestions = uniqueCategories
-              .map((category) => Question(
-                    text: category,
+          nextQuestions = serviceTargets
+              .map((target) => Question(
+                    text: target,
                     isClickable: true,
                     isAssistant: true,
                   ))
               .toList();
         } else if (questions[index].text == 'العضو من أي كلية؟') {
-          List<String> departments = ['CS', 'IT', 'CE'];
-
           nextQuestions = departments
               .map((category) => Question(
                     text: category,
@@ -182,93 +221,85 @@ class _chatbotScreenState extends State<chatbotScreen> {
                     isAssistant: true,
                   ))
               .toList();
+        } else if (serviceTargets.contains(questions[index].text)) {
+          List targetRules = rulesList
+              .where(
+                  (rule) => rule.service_target.contains(questions[index].text))
+              .toList();
+          nextQuestions = targetRules
+              .map((rule) => Question(
+                    text: rule.title,
+                    isClickable: true,
+                    isAssistant: true,
+                  ))
+              .toList();
+        } else if (departments.contains(questions[index].text)) {
+          List departmentFaculty = facultyInfoList
+              .where((faculty) => faculty.department == questions[index].text)
+              .toList();
+
+          nextQuestions = departmentFaculty
+              .map((faculty) => Question(
+                    text: faculty.name,
+                    isClickable: true,
+                    isAssistant: true,
+                  ))
+              .toList();
+        } else if (rulesList
+            .any((rule) => rule.title == questions[index].text)) {
+          String selectedRuleTitle = questions[index].text;
+          Rules selectedRule =
+              rulesList.firstWhere((rule) => rule.title == selectedRuleTitle);
+          String title = selectedRule.title;
+          String description = selectedRule.description;
+          String steps = '';
+          int counter = 1;
+          for (var step in selectedRule.steps) {
+            steps += '$counter $step';
+            steps += '\n';
+            counter = counter + 1;
+          }
+          String url = selectedRule.url.toString();
+          String answer =
+              '$title,\n\n$description,\n\nالخطوات \n$steps \n..$url';
+          nextQuestions = [Question(text: answer)];
+        } else if (facultyInfoList
+            .any((faculty) => faculty.name == questions[index].text)) {
+          String selectedFacultyName = questions[index].text;
+          Faculty selectedFaculty = facultyInfoList
+              .firstWhere((faculty) => faculty.name == selectedFacultyName);
+          String name = selectedFaculty.name.toString();
+          String department = selectedFaculty.department.toString();
+          String email = selectedFaculty.email.toString();
+          String answer = '$name,\n\n$email ,\n\n$department';
+          nextQuestions = [Question(text: answer)];
         }
       }
-      setState(() {
-        // List<Question> nextQuestions =
-        //     questions[index].followUpQuestions!.map((questionText) {
-        //   return Question(
-        //     text: questionText,
-        //     isClickable: true,
-        //     isAssistant: true,
-        //   );
-        // }).toList();
-        questions = [
-          ...questions.sublist(0, index),
-          Question(
-              text: questions[index].text,
-              isClickable: false,
-              isAssistant: false),
-          ...nextQuestions,
-          Question(
-              text: 'العودة إلى البداية', isClickable: true, isAssistant: true),
-        ];
-      });
+
+      if (mounted) {
+        setState(() {
+          questions = [
+            // ...questions.sublist(0, index),
+            Question(
+                text: questions[index].text,
+                isClickable: false,
+                isAssistant: false),
+            ...nextQuestions,
+            Question(
+                text: 'العودة إلى البداية',
+                isClickable: true,
+                isAssistant: true),
+          ];
+        });
+      }
     }
 
     _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
+      _scrollController.position.allowImplicitScrolling as double,
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
   }
-
-  // void handleUserMessageClick(int index) {
-  //   if (questions[index].isClickable) {
-  //     print(
-  //         '\n\n\n-------------------------------\n\t\t$rulesList\n----------------------------------------------------\n\n\n\n');
-  //     if (questions[index].text == 'العودة إلى البداية') {
-  //       setState(() {
-  //         questions = [...defaultQuestions];
-  //       });
-  //     } else if (questions[index].followUpQuestions != null) {
-  //       //List<String> newFollowUpQuestions = [];
-  //       List<String> nextQuestions = [];
-  //       //questions[index].followUpQuestions;
-  //       if (questions[index].followUpQuestions ==
-  //           ['مالفئة التي تستهدفها هذه الخدمة؟']) {
-  //         nextQuestions =
-  //             rulesList.map((rule) => rule.service_target).toSet().toList();
-  //       } else if (questions[index].followUpQuestions ==
-  //           ['العضو من أي كلية؟']) {
-  //         nextQuestions = ['CS', 'IT', 'CE'];
-  //       }
-  //       setState(() {
-  //         List<Question> nextQuestions = // show the follow up question a the next question
-  //             questions[index].followUpQuestions!.map((questionText) {
-  //           return Question(
-  //             text: questionText,
-  //             isClickable: true,
-  //             isAssistant: true,
-  //           );
-  //         }).toList();
-  //         questions = [
-  //           Question(
-  //               text: questions[index].text,
-  //               isClickable: false,
-  //               isAssistant: false),
-  //           ...nextQuestions.map((category) => Question(
-  //                 text: nextQuestions.toString(),
-  //                 isClickable: true,
-  //                 isAssistant: true,
-  //               )),
-  //           //  .toList(),
-  //           Question(
-  //             text: 'العودة إلى البداية',
-  //             isClickable: true,
-  //             isAssistant: true,
-  //           ),
-  //         ];
-  //       });
-  //     }
-  //   }
-
-  //   _scrollController.animateTo(
-  //     _scrollController.position.maxScrollExtent,
-  //     duration: const Duration(milliseconds: 300),
-  //     curve: Curves.easeOut,
-  //   );
-  // }
 }
 
 class ChatBubble extends StatelessWidget {
@@ -282,9 +313,9 @@ class ChatBubble extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
+    // var width = MediaQuery.of(context).size.width;
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 14),
+      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
       decoration: BoxDecoration(
         color:
@@ -303,9 +334,10 @@ class ChatBubble extends StatelessWidget {
                 topRight: Radius.circular(40),
               ),
       ),
-      constraints: BoxConstraints(maxWidth: width * 2 / 3),
+      // constraints: BoxConstraints(maxWidth: width * 2 / 3),
       child: Text(
         text,
+        textDirection: TextDirection.rtl,
         style: const TextStyle(
           color: Colors.white,
           fontSize: 18,
