@@ -43,7 +43,6 @@ class ColorManager {
   static const eventColors = [
     Color.fromARGB(255, 0, 167, 171),
     Color(0xff116d7a),
-    Color.fromARGB(255, 255, 198, 34),
     Color.fromARGB(255, 17, 53, 91),
   ];
 }

@@ -203,13 +203,15 @@ class _screen_Map extends ConsumerState<screen_Map> {
           final placeName = data['placeName']; // Get the place name
           final markerId = MarkerId(doc.id);
 
+          final String uniqueMarkerId = '$placeName';
+
           if (latitude != null && longitude != null) {
             final Marker marker = Marker(
-              markerId: markerId,
+              markerId: MarkerId(uniqueMarkerId),
               position: LatLng(latitude, longitude),
               icon: markerIcon,
               infoWindow: InfoWindow(title: placeName),
-              onTap: () => _onMarkerLongPressed(markerId),
+              onTap: () => _onMarkerLongPressed(MarkerId(uniqueMarkerId)),
             );
 
             setState(() {
@@ -336,6 +338,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
       );
 
       if (currentPosition != null) {
+        print(selectedMarker.position);
         // Draw polyline between current position and selected place
         onDestinationSelected(selectedMarker.position);
       }
@@ -491,6 +494,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
                                 searchController.text = '';
                                 suggestions
                                     .clear(); // Clear suggestions when search text is cleared
+                                polylines.clear();
                               });
                             },
                             icon: Icon(Icons.close),
@@ -522,7 +526,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
                       final suggestion = suggestions[index];
                       return Container(
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
+                          //  borderRadius: BorderRadius.circular(5),
                           color: const Color.fromARGB(255, 255, 255, 255)
                               .withOpacity(0.7),
                         ),
