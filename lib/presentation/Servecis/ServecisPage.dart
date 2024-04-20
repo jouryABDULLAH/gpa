@@ -43,11 +43,11 @@ class _ServicisPage extends State<ServicisPage> {
         ),
         actions: [],
       ),
-      body: ListView(
+      body: Column(
         children: [
           Upper(),
           SizedBox(
-            height: 27,
+            height: 20,
           ),
           Padding(
             padding: const EdgeInsets.all(9.0),

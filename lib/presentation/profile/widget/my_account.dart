@@ -72,6 +72,14 @@ class _MyAccountState extends State<MyAccount> {
                 ),
               ),
             ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.of(context)
+                    .pop(); // This will navigate back to the previous screen
+              },
+            ),
           ),
         ),
       ),

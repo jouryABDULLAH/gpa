@@ -26,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
   List screens = [
     const HomeWidget(),
     const ServicisPage(),
-    const chatbot_welcome(),
+    const ChatbotWelcome(),
     const screen_Map(),
   ];
 

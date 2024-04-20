@@ -29,10 +29,10 @@ class _GPAPage extends State<GPAPage> {
         children: [
           Upper(),
           SizedBox(
-            height: 20,
+            height: 12,
           ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(9.0),
             child: MyList(),
           ),
         ],
@@ -58,7 +58,7 @@ class _GPAPage extends State<GPAPage> {
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.1,
-          mainAxisSpacing: 28,
+          mainAxisSpacing: 15,
         ),
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
@@ -126,10 +126,10 @@ class _GPAPage extends State<GPAPage> {
         color: Color.fromARGB(255, 0, 168, 171),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
-            spreadRadius: 2, // Spread radius
-            blurRadius: 10, // Blur radius
-            offset: Offset(0, 4), // Offset of the shadow
+            color: Color.fromARGB(75, 0, 0, 0),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: Offset(0, 4),
           ),
         ],
       ),

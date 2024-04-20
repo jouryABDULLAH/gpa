@@ -93,10 +93,11 @@ class MyLocal implements Translations {
           "English": "الانجليزية",
           "serv_st": "كيفية الحصول على الخدمة:",
           "student plan": "خطة الطالب",
+          "servpage": " الخدمات",
           "About program": "عن البرنامج",
           "Academic advisor": "المرشد الاكاديمي",
-          "plan completion": "plan completion",
-          "plan details": "plan details",
+          "plan completion": "كمالية الخطة",
+          "plan details": "تفاصيل الخطة",
         },
         "en": {
           "Arabic": "Arabic",
