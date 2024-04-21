@@ -103,11 +103,11 @@ class _ServicisPage extends State<ServicisPage> {
             }
           },
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(19),
-              color: Color.fromARGB(255, 0, 167, 171),
-              boxShadow: [
+              color: const Color.fromARGB(255, 0, 167, 171),
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromARGB(44, 0, 0, 0),
                   spreadRadius: 2,
@@ -139,7 +139,7 @@ class _ServicisPage extends State<ServicisPage> {
                     MyLocal.getFontFamily(Get.locale!.languageCode),
                     fontSize: Get.locale?.languageCode == 'ar' ? 20 : 18,
                     textStyle: style,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ],
@@ -152,8 +152,8 @@ class _ServicisPage extends State<ServicisPage> {
 
   Widget Upper() {
     return Container(
-      padding: const EdgeInsets.only(bottom: 50),
-      height: 120,
+      padding: const EdgeInsets.only(bottom: 49),
+      height: 100,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 167, 171),
@@ -176,7 +176,7 @@ class _ServicisPage extends State<ServicisPage> {
               "servpage".tr,
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 255, 255, 255),

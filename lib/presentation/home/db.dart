@@ -62,9 +62,11 @@ class _DbState extends State<Db> {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        setState(() {
+                        if (mounted) {
+                          setState(() {
                           index = 0;
                         });
+                        }
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(index == 0
@@ -83,9 +85,12 @@ class _DbState extends State<Db> {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        setState(() {
+                        if (mounted) {
+                          setState(() {
                           index = 1;
                         });
+                        }
+                        
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(index == 1
@@ -259,9 +264,12 @@ class _DbState extends State<Db> {
     final event = await showDialog(
         context: context, builder: (context) => const CreateEventDialog());
     if (event != null) {
-      setState(() {
+      if (mounted) {
+        setState(() {
         controller.calendarController.addEvent(event);
       });
+      }
+      
       await FirebaseFirestore.instance.collection("events").add({
         "name": event.name,
         "begin": event.begin.toString().split(" ")[0],

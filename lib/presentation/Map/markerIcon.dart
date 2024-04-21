@@ -22,9 +22,11 @@ class _IconMapState extends State<IconMap> {
       const ImageConfiguration(),
       "assets/images/bus.png",
     ).then((icon) {
-      setState(() {
+      if (mounted) {
+        setState(() {
         markerIcon = icon;
       });
+      }
     });
   }
 

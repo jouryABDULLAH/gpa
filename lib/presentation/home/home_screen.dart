@@ -57,7 +57,8 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: index,
         selectedItemColor: ColorManager.primary,
         onTap: (i) {
-          setState(() {
+          if (mounted) {
+            setState(() {
             if (i >= 0 && i < screens.length) {
               index = i;
             }
@@ -65,6 +66,8 @@ class _HomeScreenState extends State<HomeScreen> {
               _scaffoldKey.currentState!.openDrawer();
             }
           });
+          }
+          
         },
         items: [
           BottomNavigationBarItem(
