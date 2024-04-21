@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Map/map.dart';
+import 'package:gpa/presentation/Map/widget_to_map_icon.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';

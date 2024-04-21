@@ -85,7 +85,7 @@ class _ServicisPage extends State<ServicisPage> {
               );
             } else if (index == 1) {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const rulesPage()),
+                MaterialPageRoute(builder: (context) => const RulesPage()),
               );
             } else if (index == 2) {
               Navigator.of(context).push(

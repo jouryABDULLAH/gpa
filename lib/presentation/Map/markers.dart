@@ -1,8 +1,10 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:gpa/presentation/Map/map.dart';
 
-class marks extends StatefulWidget {
-  const marks({super.key});
+class marks extends ConsumerStatefulWidget {
+  marks({Key? key}) : super(key: key);
 
   static final Set<Marker> Qbuildings = {
     Marker(
@@ -95,7 +97,7 @@ class marks extends StatefulWidget {
       position: LatLng(26.346433260575168, 43.764021791756385),
       infoWindow: InfoWindow(title: "ادارة الأمن الجامعي جامعة القصيم"),
     ),
-    Marker( 
+    Marker(
       markerId: MarkerId("مبنى عمادة كلية الهندسة"),
       position: LatLng(26.346443145893083, 43.76382332887437),
       infoWindow: InfoWindow(title: "مبنى عمادة كلية الهندسة"),
@@ -495,7 +497,7 @@ class marks extends StatefulWidget {
   }
 
   @override
-  State<StatefulWidget> createState() {
+  ConsumerState<ConsumerStatefulWidget> createState() {
     // TODO: implement createState
     throw UnimplementedError();
   }

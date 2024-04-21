@@ -1,14 +1,19 @@
 import 'dart:async';
-//import 'dart:typed_data';
+import 'package:boxicons/boxicons.dart';
+import 'dart:typed_data';
+import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Map/mapkey.dart';
 import 'package:gpa/presentation/Map/markers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:icons_plus/icons_plus.dart';
 
 import 'package:location/location.dart';
 
@@ -23,12 +28,13 @@ class screen_Map extends ConsumerStatefulWidget {
 
 class _screen_Map extends ConsumerState<screen_Map> {
   Set<Marker> Qbuildings = marks.Qbuildings;
+
   Completer<GoogleMapController> _controller = Completer();
   final locationController = Location();
   LatLng? currentPosition;
   Map<PolylineId, Polyline> polylines = {};
 
-  Set<Marker> selectedMarkers = {}; // Step 1
+  Set<Marker> selectedMarkers = {};
 
   Set<Polygon> _createPolygons() {
     final polygons = <Polygon>{};
@@ -129,7 +135,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
     super.initState();
     WidgetsBinding.instance
         .addPostFrameCallback((_) async => await initializeMap());
-
+    loadData();
     addCustomIcon();
     fetchMarkersFromFirestore();
 
@@ -211,10 +217,12 @@ class _screen_Map extends ConsumerState<screen_Map> {
               position: LatLng(latitude, longitude),
               icon: markerIcon,
               infoWindow: InfoWindow(title: placeName),
-              onTap: () => _onMarkerLongPressed(MarkerId(uniqueMarkerId)),
+              onTap: () =>
+                  _onMarkerLongPressed(MarkerId(uniqueMarkerId), markerId),
             );
 
             setState(() {
+              _markers.add(marker);
               Qbuildings.add(marker); // Add marker to Qbuildings set
             });
           }
@@ -255,7 +263,96 @@ class _screen_Map extends ConsumerState<screen_Map> {
   int markerIdCounter = 1;
   int polylineIdCounter = 1;
 
-  Set<Marker> _markers = Set<Marker>();
+  Uint8List? marketimages;
+
+  List<String> images = [
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+    'assets/images/hat.png',
+  ];
+
+  final List<Marker> _markers = <Marker>[];
+  final List<LatLng> _latLen = <LatLng>[
+    LatLng(26.350659189721537, 43.767918903374316),
+    LatLng(26.34739841528648, 43.76734840839205), //1
+    LatLng(26.349387167211944, 43.765018229733535), //2
+    LatLng(26.352922094022734, 43.77393488788893),
+    LatLng(26.350659189721537, 43.767918903374316),
+    LatLng(26.36095082397776, 43.749291034015464),
+    LatLng(26.34739841528648, 43.76734840839205),
+    LatLng(26.36095082397776, 43.749291034015464),
+    LatLng(26.347226658485795, 43.76611019011761),
+    LatLng(26.348450278424348, 43.76498582490215),
+    LatLng(26.362782853570597, 43.74810475521704),
+    LatLng(26.3469723809983, 43.7639916757364),
+    LatLng(26.348202999061032, 43.764412387680285),
+    LatLng(26.348368754299293, 43.76454394382294),
+    LatLng(26.34967671377754, 43.76863253048418),
+  ];
+  final List<String> markerTitles = [
+    "كلية الصيدلة",
+    "College of Languages & Humanities", //1
+    "كلية الطب البشري - مبنى الطالبات B2", //2
+    "كلية الصيدلة",
+    "العلوم",
+    "كلية الحاسب للبنات",
+    "الهندسة",
+    "كلية الشريعة",
+    "كلية التصاميم",
+    "كلية الزراعة والبيطري",
+    "كلية الهندسة",
+    "كلية العلوم",
+    "كلية التمريض",
+    "مبنى الصيدلة",
+    "كلية العلوم التطبيقية",
+    "بوابة كلية الحاسب",
+    "العلوم A4",
+  ];
+
+  Future<Uint8List> getImages(String path, int width) async {
+    ByteData data = await rootBundle.load(path);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetHeight: width);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
+  }
+
+  loadData() async {
+    for (int i = 0; i < images.length; i++) {
+      final Uint8List markIcons = await getImages(images[i], 100);
+      // makers added according to index
+      _markers.add(Marker(
+        // given marker id
+        markerId: MarkerId(i.toString()),
+        // given marker icon
+        icon: BitmapDescriptor.fromBytes(markIcons),
+        // given position
+        position: _latLen[i],
+        infoWindow: InfoWindow(
+          // given title for marker
+          title: markerTitles[i], // Using markerTitles instead of Names
+        ),
+      ));
+      setState(() {});
+    }
+  }
 
   late Set<Marker> buildings = Set.from(Qbuildings);
   late List<String> buildingNames =
@@ -286,8 +383,9 @@ class _screen_Map extends ConsumerState<screen_Map> {
     });
   }
 
-  Future<void> _onMarkerLongPressed(MarkerId markerId) async {
-    final String markerDocId = markerId.value.toString();
+  Future<void> _onMarkerLongPressed(
+      MarkerId markerId, MarkerId markerval) async {
+    final String markerDocId = markerval.value.toString();
 
     final action = await showDialog<String>(
       context: context,
@@ -312,7 +410,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
     if (action == 'delete') {
       // Remove the marker from the map
       setState(() {
-        Qbuildings.removeWhere((marker) => marker.markerId == markerId);
+        _markers.removeWhere((marker) => marker.markerId == markerId);
       });
 
       // Delete the marker from Firestore
@@ -329,7 +427,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
         ),
       );
     } else if (action == 'findRoute') {
-      final selectedMarker = Qbuildings.firstWhere(
+      final selectedMarker = _markers.firstWhere(
         (marker) => marker.markerId == markerId,
         orElse: () => Marker(
           markerId: MarkerId(""),
@@ -453,7 +551,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
                         },
                         mapType: MapType.satellite,
                         markers: Set<Marker>.of(_markers)
-                          ..addAll(Qbuildings)
                           ..addAll({
                             Marker(
                               markerId: const MarkerId('currentLocation'),
@@ -478,26 +575,39 @@ class _screen_Map extends ConsumerState<screen_Map> {
                     Container(
                       height: 50.0,
                       decoration: BoxDecoration(
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color.fromARGB(44, 0, 0, 0),
+                            blurRadius: 5.0,
+                            spreadRadius: 1.0,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
                         borderRadius: BorderRadius.circular(10.0),
+                        border: Border.all(
+                            color: Color.fromARGB(255, 255, 253, 253)),
                         color: Colors.white,
                       ),
                       child: TextField(
                         controller: searchController,
                         decoration: InputDecoration(
                           contentPadding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 15.0),
-                          border: const OutlineInputBorder(),
+                              horizontal: 15.0, vertical: 11.0),
+                          border: InputBorder.none,
                           hintText: 'search'.tr,
+                          hintStyle: GoogleFonts.getFont(
+                            MyLocal.getFontFamily(Get.locale!.languageCode),
+                          ),
                           suffixIcon: IconButton(
                             onPressed: () {
                               setState(() {
                                 searchController.text = '';
-                                suggestions
+                                suggestions.clear();
+                                polylines
                                     .clear(); // Clear suggestions when search text is cleared
-                                polylines.clear();
                               });
                             },
-                            icon: Icon(Icons.close),
+                            icon: Icon(BoxIcons.bx_x),
                           ),
                         ),
                         onChanged: (query) {
@@ -578,99 +688,134 @@ class _screen_Map extends ConsumerState<screen_Map> {
       ),
       floatingActionButton: Align(
         alignment: Alignment.bottomLeft,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 16),
-            IconButton(
-              onPressed: () async {
-                if (currentPosition != null) {
-                  GoogleMapController controller = await _controller.future;
-                  controller.animateCamera(CameraUpdate.newCameraPosition(
-                      CameraPosition(
-                          target: LatLng(currentPosition!.latitude,
-                              currentPosition!.longitude),
-                          zoom: 15)));
-                }
-              },
-              icon: const Icon(
-                Icons.location_pin,
-                color: Colors.black,
-              ),
-            ),
-            IconButton(
-              onPressed: () async {
-                final TextEditingController placeNameController =
-                    TextEditingController();
-
-                await showDialog<String>(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return AlertDialog(
-                      title: Text("SP".tr),
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('PN'.tr),
-                          TextField(
-                            controller: placeNameController,
-                            decoration: InputDecoration(
-                              hintText: 'HN'.tr,
-                            ),
+        child: Container(
+          margin: EdgeInsets.only(bottom: 15, left: 23),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Color.fromARGB(53, 0, 0, 0),
+                      blurRadius: 5.0,
+                      spreadRadius: 1.0,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  onPressed: () async {
+                    if (currentPosition != null) {
+                      GoogleMapController controller = await _controller.future;
+                      controller.animateCamera(CameraUpdate.newCameraPosition(
+                        CameraPosition(
+                          target: LatLng(
+                            currentPosition!.latitude,
+                            currentPosition!.longitude,
                           ),
-                        ],
-                      ),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () async {
-                            final String placeName =
-                                placeNameController.text.trim();
-                            if (placeName.isNotEmpty) {
-                              // Save the place details to Firestore
-                              await FirebaseFirestore.instance
-                                  .collection('selected_places')
-                                  .add({
-                                'latitude': tappedPoint.latitude,
-                                'longitude': tappedPoint.longitude,
-                                'placeName': placeName,
-                              });
+                          zoom: 15,
+                        ),
+                      ));
+                    }
+                  },
+                  icon: const Icon(
+                    BoxIcons.bx_current_location,
+                    color: Color.fromARGB(255, 0, 167, 171),
+                  ),
+                  splashColor: Color.fromARGB(255, 171, 0, 0),
+                ),
+              ),
+              SizedBox(height: 14),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: const Color.fromARGB(53, 0, 0, 0),
+                      blurRadius: 5.0,
+                      spreadRadius: 1.0,
+                      offset: Offset(0, 2),
+                    ),
+                  ],
+                ),
+                child: IconButton(
+                  onPressed: () async {
+                    final TextEditingController placeNameController =
+                        TextEditingController();
 
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('SA: $placeName'.tr),
-                                  duration: Duration(seconds: 2),
+                    await showDialog<String>(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("SP".tr),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('PN'.tr),
+                              TextField(
+                                controller: placeNameController,
+                                decoration: InputDecoration(
+                                  hintText: 'HN'.tr,
                                 ),
-                              );
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                  content: Text('plsN'.tr),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                            }
-                            Navigator.of(context).pop(); // Close the dialog
-                          },
-                          child: Text('Save'.tr),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close the dialog
-                          },
-                          child: Text('Cancel'.tr),
-                        ),
-                      ],
+                              ),
+                            ],
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () async {
+                                final String placeName =
+                                    placeNameController.text.trim();
+                                if (placeName.isNotEmpty) {
+                                  await FirebaseFirestore.instance
+                                      .collection('selected_places')
+                                      .add({
+                                    'latitude': tappedPoint.latitude,
+                                    'longitude': tappedPoint.longitude,
+                                    'placeName': placeName,
+                                  });
+
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('SA: $placeName'.tr),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text('plsN'.tr),
+                                      duration: Duration(seconds: 2),
+                                    ),
+                                  );
+                                }
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Save'.tr),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Cancel'.tr),
+                            ),
+                          ],
+                        );
+                      },
                     );
                   },
-                );
-              },
-              icon: const Icon(
-                Icons.archive,
-                color: Color.fromARGB(255, 37, 30, 1),
+                  icon: const Icon(
+                    BoxIcons.bxs_bookmark,
+                    color: Color.fromARGB(255, 0, 167, 171),
+                  ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
