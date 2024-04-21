@@ -17,7 +17,7 @@ class plan extends StatefulWidget {
 class _planState extends State<plan> {
   StudentPlanModel? studentPlan;
   bool isPlanCompletion = true;
-  var totalHours = 162;
+  var totalHours = 149;
   var electivesTotalHours = 6;
   var freeTotalHours = 6;
 
@@ -32,11 +32,11 @@ class _planState extends State<plan> {
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(110.0),
+          preferredSize: const Size.fromHeight(110.0),
           child: Container(
             decoration: BoxDecoration(
               color: ColorManager.primary,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromARGB(75, 0, 0, 0),
                   spreadRadius: 2,
@@ -128,12 +128,7 @@ class _planState extends State<plan> {
             ),
           ),
         )
-        // Container(
-        //   child: studentPlan == null
-        //       ? const Center(child:  LinearProgressIndicator(backgroundColor: Colors.black))
-        //       : buildPlanListView(),
-        // ),
-        );
+      );
   }
 
   Widget buildPlanListView() {
