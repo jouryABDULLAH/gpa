@@ -174,9 +174,12 @@ class _screen_Map extends ConsumerState<screen_Map> {
             const ImageConfiguration(), "assets/images/bus.png")
         .then(
       (icon) {
-        setState(() {
+        if (mounted) {
+          setState(() {
           markerIcon = icon;
         });
+        }
+        
       },
     );
   }

@@ -62,9 +62,11 @@ class _DbState extends State<Db> {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        setState(() {
-                          index = 0;
-                        });
+                        if (mounted) {
+                          setState(() {
+                            index = 0;
+                          });
+                        }
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(index == 0
@@ -83,9 +85,11 @@ class _DbState extends State<Db> {
                   Expanded(
                     child: TextButton(
                       onPressed: () {
-                        setState(() {
-                          index = 1;
-                        });
+                        if (mounted) {
+                          setState(() {
+                            index = 1;
+                          });
+                        }
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(index == 1
@@ -110,54 +114,56 @@ class _DbState extends State<Db> {
           ),
           if (index == 0)
             Expanded(
-              // height: 500,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: ListView.separated(
-                    itemBuilder: (c, i) => Container(
-                          decoration: BoxDecoration(
-                              color: controller
-                                  .calendarController.events?[i].eventColor,
-                              borderRadius: BorderRadius.circular(77)),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 3),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.getFont(
-                                      fontSize: 14,
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      MyLocal.getFontFamily(
-                                          Get.locale!.languageCode),
-                                    ),
-                                    controller.calendarController.events?[i]
-                                            .name ??
-                                        ""),
-                                CircleAvatar(
-                                    backgroundColor:
-                                        Color.fromARGB(240, 255, 255, 255),
-                                    radius: 32,
-                                    child: Text(
-                                        textAlign: TextAlign.center,
-                                        style: GoogleFonts.getFont(
-                                          color:
-                                              Color.fromARGB(255, 1, 116, 118),
-                                          fontSize: 16,
-                                          MyLocal.getFontFamily(
-                                              Get.locale!.languageCode),
-                                        ),
-                                        "${controller.calendarController.events?[i].begin.day} - ${controller.calendarController.events?[i].end.day}")),
-                              ],
+                  itemBuilder: (context, i) => Container(
+                    decoration: BoxDecoration(
+                      color:
+                          controller.calendarController.events?[i].eventColor,
+                      borderRadius: BorderRadius.circular(77),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 3),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            // Wrap with Flexible
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.getFont(
+                                fontSize: 14,
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                MyLocal.getFontFamily(Get.locale!.languageCode),
+                              ),
+                              overflow:
+                                  TextOverflow.ellipsis, // Handle overflow
+                              maxLines: 1, // Limit max lines
+                              controller.calendarController.events?[i].name ??
+                                  "",
                             ),
                           ),
-                        ),
-                    separatorBuilder: (pp, dd) => const SizedBox(
-                          height: 10,
-                        ),
-                    itemCount:
-                        controller.calendarController.events?.length ?? 0),
+                          CircleAvatar(
+                            backgroundColor: Color.fromARGB(240, 255, 255, 255),
+                            radius: 32,
+                            child: Text(
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.getFont(
+                                color: Color.fromARGB(255, 1, 116, 118),
+                                fontSize: 16,
+                                MyLocal.getFontFamily(Get.locale!.languageCode),
+                              ),
+                              "${controller.calendarController.events?[i].begin.day} - ${controller.calendarController.events?[i].end.day}",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                  itemCount: controller.calendarController.events?.length ?? 0,
+                ),
               ),
             ),
 
@@ -259,9 +265,12 @@ class _DbState extends State<Db> {
     final event = await showDialog(
         context: context, builder: (context) => const CreateEventDialog());
     if (event != null) {
-      setState(() {
-        controller.calendarController.addEvent(event);
-      });
+      if (mounted) {
+        setState(() {
+          controller.calendarController.addEvent(event);
+        });
+      }
+
       await FirebaseFirestore.instance.collection("events").add({
         "name": event.name,
         "begin": event.begin.toString().split(" ")[0],
