@@ -171,9 +171,12 @@ class _planState extends State<plan> {
       StudentPlanModel studentPlanInfo =
           await StudentPlanModel.loadStudentPlan();
 
-      setState(() {
-        studentPlan = studentPlanInfo;
-      });
+      if(mounted){
+        setState(() {
+          studentPlan = studentPlanInfo;
+        });
+      }
+      
 
       printData();
     } catch (e) {
