@@ -100,15 +100,15 @@ flutter:
     - assets/images/captine.jpg
     - assets/faculty_data.json
     - assets/rules_data.json
-    - assets/images/buildings.png
+    - assets/images/building.png
+    - assets/images/driveSchool.png
     - assets/images/bus.png
     - assets/images/cafe.png
-    - assets/images/car.png
-    - assets/images/door.png 
-    - assets/images/food.png
-    - assets/images/hat.png
-    - assets/images/musq.png 
-    - assets/images/tru.png
+    - assets/images/collage.png
+    - assets/images/out.png 
+    - assets/images/rest.png
+    - assets/images/عمادة.png 
+    - assets/images/mosq.png 
     - assets/faculty_data.json
     - assets/rules_data.json
     - assets/faculty_rules.json
@@ -121,6 +121,15 @@ flutter:
     - assets/images/card2.png
     - assets/images/lolo.png
     - assets/images/welcome.gif
+    - assets/images/book.png
+    - assets/images/bookmark.png
+    - assets/images/hos.png
+    - assets/images/rajhi.png
+    - assets/images/gym.png
+    - assets/images/park.png
+    - assets/images/stad.png
+    - assets/images/stage.png
+    - assets/images/kids.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

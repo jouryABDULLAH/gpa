@@ -176,10 +176,9 @@ class _screen_Map extends ConsumerState<screen_Map> {
       (icon) {
         if (mounted) {
           setState(() {
-          markerIcon = icon;
-        });
+            markerIcon = icon;
+          });
         }
-        
       },
     );
   }
@@ -269,62 +268,300 @@ class _screen_Map extends ConsumerState<screen_Map> {
   Uint8List? marketimages;
 
   List<String> images = [
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
-    'assets/images/hat.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    'assets/images/collage.png',
+    //---
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    'assets/images/عمادة.png',
+    //--
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/bus.png', //bus
+    'assets/images/out.png',
+    'assets/images/out.png',
+    'assets/images/out.png',
+    //--
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    'assets/images/cafe.png',
+    //--
+    'assets/images/rest.png',
+    'assets/images/rest.png',
+    'assets/images/rest.png',
+    //--
+    'assets/images/building.png',
+    'assets/images/building.png',
+    'assets/images/building.png',
+    'assets/images/building.png',
+    'assets/images/building.png',
+    'assets/images/building.png',
+    'assets/images/building.png',
+    'assets/images/building.png',
+    //--
+    'assets/images/book.png',
+    'assets/images/book.png',
+    'assets/images/book.png',
+    'assets/images/book.png',
+    'assets/images/book.png',
+    //--
+    'assets/images/hos.png',
+    'assets/images/hos.png',
+    'assets/images/hos.png',
+    'assets/images/hos.png',
+    //--
+    'assets/images/mosq.png',
+    'assets/images/rajhi.png',
+    'assets/images/stage.png',
+    'assets/images/stad.png',
+    'assets/images/gym.png',
+    'assets/images/park.png',
+    'assets/images/stad.png',
+    'assets/images/driveSchool.png',
+    'assets/images/kids.png',
   ];
 
   final List<Marker> _markers = <Marker>[];
+
   final List<LatLng> _latLen = <LatLng>[
-    LatLng(26.350659189721537, 43.767918903374316),
-    LatLng(26.34739841528648, 43.76734840839205), //1
-    LatLng(26.349387167211944, 43.765018229733535), //2
-    LatLng(26.352922094022734, 43.77393488788893),
-    LatLng(26.350659189721537, 43.767918903374316),
-    LatLng(26.36095082397776, 43.749291034015464),
-    LatLng(26.34739841528648, 43.76734840839205),
-    LatLng(26.36095082397776, 43.749291034015464),
-    LatLng(26.347226658485795, 43.76611019011761),
-    LatLng(26.348450278424348, 43.76498582490215),
-    LatLng(26.362782853570597, 43.74810475521704),
-    LatLng(26.3469723809983, 43.7639916757364),
-    LatLng(26.348202999061032, 43.764412387680285),
-    LatLng(26.348368754299293, 43.76454394382294),
-    LatLng(26.34967671377754, 43.76863253048418),
+    //كليات
+    LatLng(26.350659189721537, 43.767918903374316),//sai
+    LatLng(26.34900556147856, 43.76863773531845),//mang
+    LatLng(26.34739841528648, 43.76734840839205),//sci
+    LatLng(26.347226658485795, 43.76611019011761),//eng
+    LatLng(26.348450278424348, 43.76498582490215), //reg
+    LatLng(26.344544538114047, 43.764318015121574),//par
+    LatLng(26.351248837837225, 43.76676367410213),//midic
+    LatLng(26.349508385019707, 43.7651054235499),//lang
+    LatLng(26.347049025390778, 43.7673376158313),//app
+    LatLng(26.34884281321887, 43.768638347598056), //eco
+    LatLng(26.351603204986336, 43.77241286312792),//phy
+    LatLng(26.353133677155398, 43.773754058963085),//mid2
+    LatLng(26.358446981055806, 43.765952228741504),//comp
+    LatLng(26.358137824795612, 43.765587459167335),//bild
+    LatLng(26.360365179576085, 43.765324195880375),//pyp
+    LatLng(26.36075793332889, 43.76534503866934),//ap
+    LatLng(26.362970238369446, 43.7484636116622),//plnf
+    LatLng(26.352922094022734, 43.77393488788893),//midicf
+    LatLng(26.36095082397776, 43.749291034015464),//compf
+    LatLng(26.362782853570597, 43.74810475521704),//desf
+    LatLng(26.36259680720437, 43.74760579861648),//regf
+    LatLng(26.363789189457712, 43.74767434854764),//bildf
+    LatLng(26.364055434368524, 43.74696230719967),//appf
+    LatLng(26.36141591966223, 43.74625691972054),//scif
+    LatLng(26.36059158075166, 43.74615810724614),//ecof
+    //عمادة
+    LatLng(26.346443145893083, 43.76382332887437),
+    LatLng(26.344077401031996, 43.76491348148404),
+    LatLng(26.35203566120996, 43.76545628839597),
+    LatLng(26.352271340087285, 43.76503071418529),
+    LatLng(26.35224515609609, 43.76471609162526),
+    LatLng(26.352151566940304, 43.76449685632332),
+    LatLng(26.352007030491325, 43.7660545707422),
+    LatLng(26.352088148055838, 43.7662510425329),
+    LatLng(26.358349264180077, 43.76568523245526),
+    LatLng(26.360206770107386, 43.76525166881108),
+    //بوابات
+    LatLng(26.347260516283942, 43.774265909369554),
+    LatLng(26.340722409193088, 43.76777004476463),
+    LatLng(26.356960251993392, 43.77532702732607),
+    LatLng(26.34515489312964, 43.74376633858247),
+    LatLng(26.352298486585774, 43.74307801458005),
+    LatLng(26.36123176583021, 43.742086660829486),
+    LatLng(26.36381418346422, 43.742127942805475),
+    LatLng(26.361366216044438, 43.75166223639429),
+    LatLng(26.362985125367604, 43.749745190216345), //bus
+    LatLng(26.36321513836393, 43.74558221307835),
+    LatLng(26.36123150862995, 43.744917260962644),
+    LatLng(26.359095670259887, 43.745665897722255),
+    //cafes
+    LatLng(26.34882323885558, 43.76529196343982), //c1
+    LatLng(26.348892104022724, 43.765296502361345), //c2
+    LatLng(26.347511005932034, 43.766514570932216), //c3
+    LatLng(26.348852407480663, 43.76666375695636), //c4
+    LatLng(26.349203295832567, 43.7669275368094), //c5
+    LatLng(26.346384776151996, 43.76930093072032), //c6
+    LatLng(26.355484282994045, 43.776023875354674), //c7
+    LatLng(26.35351543628355, 43.76773744957642), //c8
+    LatLng(26.358976771524944, 43.76550535821559), //c9
+    LatLng(26.362326502932003, 43.747238874592284), //cf1
+    LatLng(26.360902294743855, 43.74952716477048), //cf2
+    //rest
+    LatLng(26.347646751108847, 43.76704452817856), //r1
+    LatLng(26.348813021220153, 43.76795484958039), //r2
+    LatLng(26.362469746326756, 43.74852143480965), //rf1
+    //bildings
+    LatLng(26.343850394765813, 43.765026945011925), //b1
+    LatLng(26.346614831348024, 43.76003020811748), //b2
+    LatLng(26.34920310935825, 43.767975469692615), //b3
+    LatLng(26.348409775863217, 43.76924072881003), //b4
+    LatLng(26.355288803098745, 43.765217558112674), //b5
+    LatLng(26.35289429337081, 43.76062879098441), //b6
+    LatLng(26.349180825964382, 43.74977706873789), //b7
+    LatLng(26.348296017573244, 43.74435877194481), //b8
+    //laibrary
+    LatLng(26.348843621185633, 43.76558638978577), //l1
+    LatLng(26.345713407041035, 43.763189348715265), //l2
+    LatLng(26.348524641166627, 43.76657187324112), //l3
+    LatLng(26.34886896963504, 43.76636980017489), //l4
+    LatLng(26.360606920779862, 43.76517484510339), //l5
+    //--
+    LatLng(26.35122103893483, 43.773941107676876), //h1
+    LatLng(26.351831214423814, 43.77504330017547), //h2
+    LatLng(26.355841600257694, 43.7761836924104), //h3
+    LatLng(26.355683101685557, 43.77548701417721), //h4
+    //specials
+    LatLng(26.34864803558948, 43.76453342297615), //mos
+    LatLng(26.349067084376696, 43.76659229200432), //rajhi
+    LatLng(26.353272582144303, 43.76376657976202), //romstage
+    LatLng(26.352032667852804, 43.762130035389205), //stad
+    LatLng(26.349597020208535, 43.760061329147), //gym
+    LatLng(26.348694270019365, 43.75576380102693), //park
+    LatLng(26.346026856949493, 43.754930768348856), //stad
+    LatLng(26.364269548755832, 43.75137170664656), //driv school
+    LatLng(26.362452674525617, 43.747185900969534), //ner
   ];
   final List<String> markerTitles = [
-    "كلية الصيدلة",
-    "College of Languages & Humanities", //1
-    "كلية الطب البشري - مبنى الطالبات B2", //2
-    "كلية الصيدلة",
-    "العلوم",
-    "كلية الحاسب للبنات",
-    "الهندسة",
-    "كلية الشريعة",
-    "كلية التصاميم",
-    "كلية الزراعة والبيطري",
-    "كلية الهندسة",
-    "كلية العلوم",
-    "كلية التمريض",
-    "مبنى الصيدلة",
-    "كلية العلوم التطبيقية",
-    "بوابة كلية الحاسب",
-    "العلوم A4",
+    "sai".tr,
+    "mang".tr,
+    "sci".tr,
+    "eng".tr,
+    "reg".tr,
+    "par".tr,
+    "midic".tr,
+    "lang".tr,
+    "app".tr,
+    "eco".tr,
+    "phy".tr,
+    "mid2".tr,
+    "comp".tr,
+    "bild".tr,
+    "pyp".tr,
+    "ap".tr,
+    //female
+    "plnf".tr,
+    "midicf".tr,
+    "compf".tr,
+    "desf".tr,
+    "regf".tr,
+    "bildf".tr,
+    "appf".tr,
+    "scif".tr,
+    "ecof".tr,
+    //--
+    "princ1".tr,
+    "princ2".tr,
+    "princ3".tr,
+    "princ4".tr,
+    "princ5".tr,
+    "princ6".tr,
+    "princ7".tr,
+    "princ8".tr,
+    "princ9".tr,
+    "princ10".tr,
+    //--
+    "mainout".tr,
+    "outr".tr,
+    "out1".tr,
+    "out2".tr,
+    "out3".tr,
+    "out4".tr,
+    "out5".tr,
+    "outf1".tr,
+    "outf2".tr,
+    "outf3".tr,
+    "outf4".tr,
+    "outf5".tr,
+    //--
+    "cafe1".tr,
+    "cafe2".tr,
+    "cafe3".tr,
+    "cafe4".tr,
+    "cafe5".tr,
+    "cafe6".tr,
+    "cafe7".tr,
+    "cafe8".tr,
+    "cafe9".tr,
+    "cafef1".tr,
+    "cafef2".tr,
+    //--
+    "rast1".tr,
+    "rast2".tr,
+    "rastf1".tr,
+    //--
+    "b1".tr,
+    "b2".tr,
+    "b3".tr,
+    "b4".tr,
+    "b5".tr,
+    "b6".tr,
+    "b7".tr,
+    "b8".tr,
+    //--
+    "lai1".tr,
+    "lai2".tr,
+    "lai3".tr,
+    "lai4".tr,
+    "lai5".tr,
+    //--
+    "h1".tr,
+    "h2".tr,
+    "h3".tr,
+    "h4".tr,
+    //--
+    "spe1".tr,
+    "spe2".tr,
+    "spe3".tr,
+    "spe4".tr,
+    "spe5".tr,
+    "spe6".tr,
+    "spe7".tr,
+    "spe8".tr,
+    "spe9".tr,
   ];
 
   Future<Uint8List> getImages(String path, int width) async {
@@ -376,6 +613,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
     final Marker marker = Marker(
         markerId: MarkerId('1'),
         position: point,
+        infoWindow: InfoWindow(title: "drooped marker"),
         onTap: () {},
         icon:
             markerIcon // BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)
