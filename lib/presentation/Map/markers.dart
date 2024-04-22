@@ -1,20 +1,25 @@
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
+import 'package:gpa/presentation/Map/map.dart';
+import 'package:gpa/presentation/home/home_screen.dart';
 
-class marks extends StatefulWidget {
-  const marks({super.key});
+ImageConfiguration images = ImageConfiguration();
+
+class marks extends ConsumerStatefulWidget {
+  marks({Key? key}) : super(key: key);
 
   static final Set<Marker> Qbuildings = {
-    const Marker(
-      markerId: MarkerId("Qassim University"),
-      position: LatLng(26.34900306634682, 43.76681242106987),
-      infoWindow: InfoWindow(title: "المبنى الرئيسي"),
-      icon: BitmapDescriptor.defaultMarker,
+    Marker(
+      markerId: MarkerId("كلية الطب البشري - مبنى الطالبات B2 "),
+      position: LatLng(26.352922094022734, 43.77393488788893),
+      infoWindow: InfoWindow(title: "كلية الطب البشري - مبنى الطالبات"),
     ),
     const Marker(
       markerId: MarkerId("Qassim University Grand Mosque"),
       position: LatLng(26.34864615733482, 43.764528904833334),
       infoWindow: InfoWindow(title: "Qassim University Grand Mosque"),
+      icon: BitmapDescriptor.defaultMarker,
     ),
     const Marker(
       markerId: MarkerId("College of Languages & Humanities"),
@@ -199,14 +204,14 @@ class marks extends StatefulWidget {
   };
 
   @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
+  ConsumerState<ConsumerStatefulWidget> createState() {
+    // TODO: implement createState
     throw UnimplementedError();
   }
 
   @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
+  Widget build(BuildContext context) {
+    // TODO: implement build
     throw UnimplementedError();
   }
 }

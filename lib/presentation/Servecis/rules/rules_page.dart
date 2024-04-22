@@ -84,13 +84,13 @@ class _rulesPageState extends State<rulesPage> {
                 ),
               ),
               SizedBox(
-                height: 5,
+                height: 3,
               ),
               Text(
                 "serv_2".tr,
                 style: GoogleFonts.getFont(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
+                  fontSize: Get.locale?.languageCode == 'ar' ? 14 : 12,
+                  fontWeight: FontWeight.normal,
                   color: Color.fromARGB(255, 0, 81, 154),
                   MyLocal.getFontFamily(Get.locale!.languageCode),
                 ),
@@ -98,9 +98,10 @@ class _rulesPageState extends State<rulesPage> {
             ]),
           ),
           Container(
-            height: 630,
+            height: 620,
             //color: ColorManager.primary,
-            margin: const EdgeInsets.only(top: 2, right: 8, bottom: 8, left: 8),
+            margin:
+                const EdgeInsets.only(top: 2, right: 8, bottom: 10, left: 8),
             child: const RulesList(),
           )
         ],
@@ -185,9 +186,8 @@ class _RulesListState extends State<RulesList> {
                             color: Color.fromARGB(255, 0, 81, 154))),
                     const SizedBox(height: 9),
                     Text(
-                      "serv_st".tr,
-                      style: GoogleFonts.getFont(
-                        MyLocal.getFontFamily(Get.locale!.languageCode),
+                      "خطوات تنفيذ الخدمة:",
+                      style: GoogleFonts.tajawal(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 1, 42, 76),
                       ),
