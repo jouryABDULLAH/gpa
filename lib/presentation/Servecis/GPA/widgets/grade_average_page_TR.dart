@@ -76,7 +76,6 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 10),
             // Adjust spacing as needed
             Row(
               children: [
@@ -94,7 +93,6 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                 ),
               ],
             ),
-            SizedBox(height: 15),
           ],
         ),
       ),
@@ -318,7 +316,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
   Widget Upper() {
     return Container(
       padding: const EdgeInsets.only(left: 0, right: 0),
-      height: 200,
+      height: 150,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 167, 171),
