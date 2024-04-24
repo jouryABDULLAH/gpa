@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/model/student_plan_model.dart';
+import 'package:gpa/presentation/Servecis/ProgramPlan/widgets/remaining_hrs_row.dart';
 import 'package:gpa/presentation/Servecis/ProgramPlan/widgets/status_button.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/ProgramPlan/widgets/segment_button.dart';
@@ -18,9 +19,9 @@ class plan extends StatefulWidget {
 
 class _planState extends State<plan> {
   StudentPlanModel? studentPlan;
-  bool isPlanCompletion = true;
+  bool isHrsRemaining = true;
   var totalHours = 149;
-  var electivesTotalHours = 6;
+  var electivesTotalHours = 12;
   var freeTotalHours = 6;
   int stdCsElectiveHrs = 0;
   int stdTotalHrs = 0;
@@ -46,14 +47,6 @@ class _planState extends State<plan> {
           child: Container(
             decoration: BoxDecoration(
               color: ColorManager.primary,
-              // boxShadow: const [
-              //   BoxShadow(
-              //     color: Color.fromARGB(75, 0, 0, 0),
-              //     spreadRadius: 2,
-              //     blurRadius: 10,
-              //     offset: Offset(0, 4),
-              //   ),
-              // ],
             ),
             child: AppBar(
               elevation: 0,
@@ -92,8 +85,6 @@ class _planState extends State<plan> {
                       borderRadius: const BorderRadius.only(
                           bottomLeft: Radius.circular(25),
                           bottomRight: Radius.circular(25),
-                          // topLeft: Radius.circular(25),
-                          // topRight: Radius.circular(25)
                           )),
                   child:  Padding(
                     padding: const EdgeInsets.all(5.0),
@@ -128,7 +119,7 @@ class _planState extends State<plan> {
                               children: [
                                   Expanded(
                                     child: StatusButton(
-                                      title: "total completed hours",
+                                      title: "total completed hours".tr,
                                       value: '$stdTotalHrs',
                                       statusColor: const Color.fromARGB(255, 21, 163, 195),
                                       onPressed: () {},
@@ -137,7 +128,7 @@ class _planState extends State<plan> {
                                 
                                   Expanded(
                                     child: StatusButton(
-                                      title: "college elective hours",
+                                      title: "college elective hours".tr,
                                       value: '$stdNoneCsElectiveHrs',
                                       statusColor: const Color.fromARGB(255, 170, 48, 236),
                                       onPressed: () {},
@@ -146,7 +137,7 @@ class _planState extends State<plan> {
                                   
                                   Expanded(
                                     child: StatusButton(
-                                      title: "CS elective hours",
+                                      title: "CS elective hours".tr,
                                       value: '$stdCsElectiveHrs',
                                       statusColor: const Color.fromARGB(255, 220, 53, 173),
                                       onPressed: () {},
@@ -154,9 +145,9 @@ class _planState extends State<plan> {
                                   ),
                                   Expanded(
                                     child: StatusButton(
-                                      title: "free hours",
+                                      title: "free hours".tr,
                                       value: '$stdFreeHrs',
-                                      statusColor: Color.fromARGB(255, 27, 188, 118),
+                                      statusColor: const Color.fromARGB(255, 27, 188, 118),
                                       onPressed: () {},
                                     ),
                                   )
@@ -185,28 +176,46 @@ class _planState extends State<plan> {
                       Expanded(
                           child: SegmentButton(
                               title: "plan completion",
-                              isActive: isPlanCompletion,
+                              isActive: isHrsRemaining,
                               onPressed: () {
                                 if (mounted) {
                                   setState(() {
-                                    isPlanCompletion = !isPlanCompletion;
+                                    isHrsRemaining = !isHrsRemaining;
                                   });
                                 }
                               })),
                       Expanded(
                           child: SegmentButton(
                               title: "plan details",
-                              isActive: !isPlanCompletion,
+                              isActive: !isHrsRemaining,
                               onPressed: () {
                                 if (mounted) {
                                   setState(() {
-                                    isPlanCompletion = !isPlanCompletion;
+                                    isHrsRemaining = !isHrsRemaining;
                                   });
                                 }
                               }))
                     ],
                   ),
-                )
+                ),
+                if(isHrsRemaining)
+                   ListView.builder(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: getRemainingHrs().length,
+                      itemBuilder: (context, index) {
+                        var sObj = getRemainingHrs()[index];
+                        List<RemainingHrs> stdRemHrs = getRemainingHrs();
+                        return RemainingHrsRow(
+                          sObj: sObj,
+                          onPressed: () {
+                          },
+                          stdRemHrs: stdRemHrs
+                        );
+                      }
+                    ),
               ],
             ),
           ),
@@ -259,7 +268,6 @@ class _planState extends State<plan> {
           studentPlan = studentPlanInfo;
         });
       }
-        printData();
         setStdHrs();
         _studentHoursChartData = getStdHrs();
         _TooltipBehavior = TooltipBehavior(enable: true);
@@ -269,18 +277,8 @@ class _planState extends State<plan> {
     }
   }
 
-  printData() {
-    studentPlan?.levels.forEach((level, courses) {
-      print('Level: $level');
-      for (var course in courses) {
-        print('Course: ${course.name}, Status: ${course.status}');
-      }
-    });
-  }
-
   void setStdHrs() {
     if (studentPlan != null) {
-      print('\n\n\n\n\t---- vars before: $stdCsElectiveHrs, $stdFreeHrs, $stdNoneCsElectiveHrs, $stdTotalHrs ---- \n\n\n\n');
       studentPlan!.levels.forEach((level, courses) {
         for (var course in courses) {
           String? hours = course.hours;
@@ -299,22 +297,31 @@ class _planState extends State<plan> {
           }
         }
       });
-      print('\n\n\n\n\t----vars after: $stdCsElectiveHrs, $stdFreeHrs, $stdNoneCsElectiveHrs, $stdTotalHrs----\n\n\n\n');
   }
 }
 
 List<StdHours> getStdHrs(){
     List<StdHours> stdHrs = [
-      StdHours("college elective hours", stdNoneCsElectiveHrs, const Color.fromARGB(255, 170, 48, 236)),
-      StdHours("CS elective hours", stdCsElectiveHrs, const Color.fromARGB(255, 220, 53, 173)),
-      StdHours('free hours', stdFreeHrs, const Color.fromARGB(255, 27, 188, 118)),
-      StdHours("total completed hours", stdTotalHrs, const Color.fromARGB(255, 21, 163, 195)),
+      StdHours("college elective hours".tr, stdNoneCsElectiveHrs, const Color.fromARGB(255, 170, 48, 236)),
+      StdHours("CS elective hours".tr, stdCsElectiveHrs, const Color.fromARGB(255, 220, 53, 173)),
+      StdHours('free hours'.tr, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118)),
+      StdHours("total completed hours".tr, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195)),
       
     ];
 
     return stdHrs;
  }
 
+List<RemainingHrs> getRemainingHrs(){
+    List<RemainingHrs> stdRemHrs = [
+      RemainingHrs("Elective hours", electivesTotalHours, stdCsElectiveHrs+stdNoneCsElectiveHrs,const Color.fromARGB(255, 222, 29, 129), electivesTotalHours - (stdCsElectiveHrs+stdNoneCsElectiveHrs) ),
+      RemainingHrs("Free hours".tr, freeTotalHours, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118), freeTotalHours - stdFreeHrs),
+      RemainingHrs("Total hour".tr, totalHours, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195), totalHours - stdTotalHrs),
+      
+    ];
+
+    return stdRemHrs;
+ }
 }
 
 class StdHours {
@@ -322,4 +329,14 @@ class StdHours {
   String hrsType = '';
   int hrs = 0;
   Color color;
+}
+
+class RemainingHrs {
+  RemainingHrs( this.type, this.total, this.takenHrs, this.color, this.remaining);
+  String type;
+  int total;
+  int takenHrs;
+  int remaining;
+  Color color;
+
 }

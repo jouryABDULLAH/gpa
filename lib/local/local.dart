@@ -94,7 +94,7 @@ class MyLocal implements Translations {
           "student plan": "خطة الطالب",
           "About program": "عن البرنامج",
           "Academic advisor": "المرشد الاكاديمي",
-          "plan completion": "كمالية الخطة",
+          "plan completion": "الساعات المتبقية",
           "plan details": "تفاصيل الخطة",
           "sai": "كلية الصيدلة",
           "mang": "كلية الادارة",
@@ -184,6 +184,11 @@ class MyLocal implements Translations {
           "spe7": "استاد الملعب الدولي",
           "spe8": "مدرسة جامعة القصيم لتعليم القيادة",
           "spe9": "حضانة مكارم الطفل لرعاية الأطفال",
+          "total completed hours": "مجموع الساعات المكتملة",
+          "college elective hours": "ساعات اختياري كلية",
+          "CS elective hours": "ساعات اختياري تخصص",
+          "free hours": "ساعات حرة",
+          "Plan progress" : "مدى تقدم الخطة\n(بالساعات)"
         },
         "en": {
           "Arabic": "Arabic",
@@ -284,7 +289,7 @@ class MyLocal implements Translations {
           "student plan": "Student plan",
           "About program": "About the program",
           "Academic advisor": "Academic Advisor",
-          "plan completion": "plan completion",
+          "plan completion": "Remaining hours",
           "plan details": "plan details",
           "serv_steps": "steps to implement this service",
           "sai": "College of Pharmacy",
@@ -374,7 +379,12 @@ class MyLocal implements Translations {
           "spe6": "University of Qassim Park",
           "spe7": "International Stadium",
           "spe8": "University of Qassim Driving School",
-          "spe9": "Makarem Al-Tifl Nursery for Childcare"
+          "spe9": "Makarem Al-Tifl Nursery for Childcare",
+          "total completed hours": "total completed hours",
+          "college elective hours": "college elective hours",
+          "CS elective hours": "CS elective hours",
+          "free hours": "free hours",
+          "Plan progress" : "Plan progress\n(in Hours)"
         }
       };
   static String getFontFamily(String languageCode) {
