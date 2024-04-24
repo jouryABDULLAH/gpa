@@ -137,6 +137,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
         .addPostFrameCallback((_) async => await initializeMap());
     loadData();
     addCustomIcon();
+    addCustomIcon_2();
     fetchMarkersFromFirestore();
 
     fetchLocationUpdates();
@@ -169,14 +170,29 @@ class _screen_Map extends ConsumerState<screen_Map> {
   }
 
   BitmapDescriptor markerIcon = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor markerIcon_2 = BitmapDescriptor.defaultMarker;
   void addCustomIcon() {
     BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), "assets/images/bus.png")
+            const ImageConfiguration(), "assets/images/bookmark.png")
         .then(
       (icon) {
         if (mounted) {
           setState(() {
             markerIcon = icon;
+          });
+        }
+      },
+    );
+  }
+
+  void addCustomIcon_2() {
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(), "assets/images/current.png")
+        .then(
+      (icon) {
+        if (mounted) {
+          setState(() {
+            markerIcon_2 = icon;
           });
         }
       },
@@ -369,31 +385,31 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
   final List<LatLng> _latLen = <LatLng>[
     //كليات
-    LatLng(26.350659189721537, 43.767918903374316),//sai
-    LatLng(26.34900556147856, 43.76863773531845),//mang
-    LatLng(26.34739841528648, 43.76734840839205),//sci
-    LatLng(26.347226658485795, 43.76611019011761),//eng
+    LatLng(26.350659189721537, 43.767918903374316), //sai
+    LatLng(26.34900556147856, 43.76863773531845), //mang
+    LatLng(26.34739841528648, 43.76734840839205), //sci
+    LatLng(26.347226658485795, 43.76611019011761), //eng
     LatLng(26.348450278424348, 43.76498582490215), //reg
-    LatLng(26.344544538114047, 43.764318015121574),//par
-    LatLng(26.351248837837225, 43.76676367410213),//midic
-    LatLng(26.349508385019707, 43.7651054235499),//lang
-    LatLng(26.347049025390778, 43.7673376158313),//app
+    LatLng(26.344544538114047, 43.764318015121574), //par
+    LatLng(26.351248837837225, 43.76676367410213), //midic
+    LatLng(26.349508385019707, 43.7651054235499), //lang
+    LatLng(26.347049025390778, 43.7673376158313), //app
     LatLng(26.34884281321887, 43.768638347598056), //eco
-    LatLng(26.351603204986336, 43.77241286312792),//phy
-    LatLng(26.353133677155398, 43.773754058963085),//mid2
-    LatLng(26.358446981055806, 43.765952228741504),//comp
-    LatLng(26.358137824795612, 43.765587459167335),//bild
-    LatLng(26.360365179576085, 43.765324195880375),//pyp
-    LatLng(26.36075793332889, 43.76534503866934),//ap
-    LatLng(26.362970238369446, 43.7484636116622),//plnf
-    LatLng(26.352922094022734, 43.77393488788893),//midicf
-    LatLng(26.36095082397776, 43.749291034015464),//compf
-    LatLng(26.362782853570597, 43.74810475521704),//desf
-    LatLng(26.36259680720437, 43.74760579861648),//regf
-    LatLng(26.363789189457712, 43.74767434854764),//bildf
-    LatLng(26.364055434368524, 43.74696230719967),//appf
-    LatLng(26.36141591966223, 43.74625691972054),//scif
-    LatLng(26.36059158075166, 43.74615810724614),//ecof
+    LatLng(26.351603204986336, 43.77241286312792), //phy
+    LatLng(26.353133677155398, 43.773754058963085), //mid2
+    LatLng(26.358446981055806, 43.765952228741504), //comp
+    LatLng(26.358137824795612, 43.765587459167335), //bild
+    LatLng(26.360365179576085, 43.765324195880375), //pyp
+    LatLng(26.36075793332889, 43.76534503866934), //ap
+    LatLng(26.362970238369446, 43.7484636116622), //plnf
+    LatLng(26.352922094022734, 43.77393488788893), //midicf
+    LatLng(26.36095082397776, 43.749291034015464), //compf
+    LatLng(26.362782853570597, 43.74810475521704), //desf
+    LatLng(26.36259680720437, 43.74760579861648), //regf
+    LatLng(26.363789189457712, 43.74767434854764), //bildf
+    LatLng(26.364055434368524, 43.74696230719967), //appf
+    LatLng(26.36141591966223, 43.74625691972054), //scif
+    LatLng(26.36059158075166, 43.74615810724614), //ecof
     //عمادة
     LatLng(26.346443145893083, 43.76382332887437),
     LatLng(26.344077401031996, 43.76491348148404),
@@ -611,13 +627,11 @@ class _screen_Map extends ConsumerState<screen_Map> {
     var counter = markerIdCounter++;
 
     final Marker marker = Marker(
-        markerId: MarkerId('1'),
-        position: point,
-        infoWindow: InfoWindow(title: "drooped marker"),
-        onTap: () {},
-        icon:
-            markerIcon // BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)
-        );
+      markerId: MarkerId('1'),
+      position: point,
+      infoWindow: InfoWindow(title: "dp"),
+      onTap: () {},
+    );
 
     setState(() {
       _markers.add(marker);
@@ -633,7 +647,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text("MO".tr),
-          content: Text('Choose an action:'), //احس ما لها داعي
+          //احس ما لها داعي
           actions: <Widget>[
             TextButton(
               onPressed: () => Navigator.of(context).pop('delete'),
@@ -775,7 +789,8 @@ class _screen_Map extends ConsumerState<screen_Map> {
     return Scaffold(
       body: Column(
         children: [
-          Stack(
+          Flexible(
+              child: Stack(
             children: [
               Container(
                 height: screenHeight - 60,
@@ -796,7 +811,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
                             Marker(
                               markerId: const MarkerId('currentLocation'),
                               infoWindow: InfoWindow(title: "CL".tr),
-                              icon: markerIcon,
+                              icon: markerIcon_2,
                               position: currentPosition!,
                             ),
                           }),
@@ -924,7 +939,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
                 ),
               ),
             ],
-          )
+          )),
         ],
       ),
       floatingActionButton: Align(
@@ -1022,7 +1037,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: Text('SA: $placeName'.tr),
+                                      content: Text('Saved as: $placeName'.tr),
                                       duration: Duration(seconds: 2),
                                     ),
                                   );

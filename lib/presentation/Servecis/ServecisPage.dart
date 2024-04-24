@@ -90,13 +90,18 @@ class ServicisPage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const aboutProgram()),
               );
-            } else if (index == 4) {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => const AcademicAdvisorePage()),
-              );
-            }
-          },
+            }  else if (index == 4) {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AdvisorInfoPage(
+                advisorName: 'H'.tr, // Replace 'Advisor Name' with actual advisor name
+                advisorEmail: 'laty2548@gmail.com', // Replace with actual advisor email
+              ),
+            ),
+          );
+        }
+
+      },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(

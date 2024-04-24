@@ -87,6 +87,18 @@ class MyLocal implements Translations {
           "Name:": "الاسم:",
           "Email:": "البريد الالكتروني:",
           "servpage": "الخدمات الاكاديمية",
+          "CL":"الموقع الحالي",
+          "MO":"خيارات الموقع المحفوظ",
+
+          "FR": "المسار",
+          "DM": "  حذف العلامة!",
+          "MS": "تم حفظ العلامة!",
+          "MD": "تم حذف العلامة !",
+          "SP": "حفظ المكان",
+          "PN": "ادخل إسمًا للمكان:",
+          "HN": "اسم المكان المحفوظ",
+          "SA": "تم حفظ المكان كـ",
+          "db":"علامة محررة",
           "Course Name": "اسم المادة",
           "Enter The Previous GPA": "ادخل المعدل السابق",
           "Arabic": "العربية",
@@ -184,6 +196,10 @@ class MyLocal implements Translations {
           "spe7": "استاد الملعب الدولي",
           "spe8": "مدرسة جامعة القصيم لتعليم القيادة",
           "spe9": "حضانة مكارم الطفل لرعاية الأطفال",
+          "db": "حفظ المكان",
+          "H":"د.هادية الزردي",
+          "SM":"إرسال",
+          "WM":"أكتب رسالتك هنا..."
         },
         "en": {
           "Arabic": "Arabic",
@@ -374,7 +390,12 @@ class MyLocal implements Translations {
           "spe6": "University of Qassim Park",
           "spe7": "International Stadium",
           "spe8": "University of Qassim Driving School",
-          "spe9": "Makarem Al-Tifl Nursery for Childcare"
+          "spe9": "Makarem Al-Tifl Nursery for Childcare",
+          "db":"drooped marker",
+          "H":"Hadia zardi",
+          "SM":"Send massege",
+          "WM":"Write your message here..."
+
         }
       };
   static String getFontFamily(String languageCode) {
