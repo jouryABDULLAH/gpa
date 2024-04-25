@@ -19,6 +19,7 @@ class ShowAverage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
+          textAlign: TextAlign.center,
           numberOfClass > 0 ? "$numberOfClass classes entered" : " ",
           style: Constants.numberOfClassesStyle,
         ),

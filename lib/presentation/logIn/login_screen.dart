@@ -150,9 +150,12 @@ class _LogInWidgetState extends State<LogInWidget> {
                                 onPressed: () async {
                                   if (nameKey.currentState?.validate() ==
                                       true) {
-                                    setState(() {
-                                      controller.isLoading = true;
-                                    });
+                                        if (mounted) {
+                                          setState(() {
+                                            controller.isLoading = true;
+                                          });
+                                        }
+                                   
                                     await Si()
                                         .submitAuthForm(
                                       email: email.text.trim(),

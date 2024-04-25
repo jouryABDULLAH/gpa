@@ -12,22 +12,15 @@ import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/rules/rules_page.dart';
 import 'package:boxicons/boxicons.dart';
 
-class ServicisPage extends StatefulWidget {
+class ServicisPage extends StatelessWidget {
   const ServicisPage({Key? key});
-
-  @override
-  State<ServicisPage> createState() => _ServicisPage();
-}
-
-class _ServicisPage extends State<ServicisPage> {
-  final style = const TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         elevation: 0,
-        backgroundColor: ColorManager.primary,
+        backgroundColor: Color.fromARGB(255, 0, 167, 171),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
@@ -42,16 +35,18 @@ class _ServicisPage extends State<ServicisPage> {
           },
         ),
         actions: [],
-      ),
+      ),*/
       body: Column(
         children: [
           Upper(),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(9.0),
-            child: MyList(),
+          Expanded(
+            child: SingleChildScrollView(
+              // Use Expanded
+              child: Padding(
+                padding: const EdgeInsets.all(9.0),
+                child: MyList(),
+              ),
+            ),
           ),
         ],
       ),
@@ -71,7 +66,7 @@ class _ServicisPage extends State<ServicisPage> {
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         childAspectRatio: 1.1,
-        mainAxisSpacing: 15,
+        mainAxisSpacing: 12,
       ),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
@@ -85,7 +80,7 @@ class _ServicisPage extends State<ServicisPage> {
               );
             } else if (index == 1) {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const rulesPage()),
+                MaterialPageRoute(builder: (context) => const RulesPage()),
               );
             } else if (index == 2) {
               Navigator.of(context).push(
@@ -103,11 +98,11 @@ class _ServicisPage extends State<ServicisPage> {
             }
           },
           child: Container(
-            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+            margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(19),
-              color: Color.fromARGB(255, 0, 167, 171),
-              boxShadow: [
+              color: const Color.fromARGB(255, 0, 167, 171),
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromARGB(44, 0, 0, 0),
                   spreadRadius: 2,
@@ -138,8 +133,9 @@ class _ServicisPage extends State<ServicisPage> {
                   style: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
                     fontSize: Get.locale?.languageCode == 'ar' ? 20 : 18,
-                    textStyle: style,
-                    color: Color.fromARGB(255, 255, 255, 255),
+                    textStyle: const TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.normal),
+                    color: const Color.fromARGB(255, 255, 255, 255),
                   ),
                 ),
               ],
@@ -152,8 +148,8 @@ class _ServicisPage extends State<ServicisPage> {
 
   Widget Upper() {
     return Container(
-      padding: const EdgeInsets.only(bottom: 50),
-      height: 120,
+      padding: const EdgeInsets.only(top: 48),
+      height: 200,
       width: double.infinity,
       decoration: const BoxDecoration(
         color: Color.fromARGB(255, 0, 167, 171),
@@ -176,7 +172,7 @@ class _ServicisPage extends State<ServicisPage> {
               "servpage".tr,
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 255, 255, 255),

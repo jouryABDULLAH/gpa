@@ -23,73 +23,75 @@ class _ChatbotWelcomeState extends State<ChatbotWelcome> {
           ),
         ),
         child: SafeArea(
-          child: Center(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(50, 5, 50, 10),
-              child: Column(
-                children: [
-                  const SizedBox(height: 110),
-                  Text(
-                    'مرحبًا، نامق في خدمتك!',
-                    style: GoogleFonts.almarai(
-                      color: Colors.white,
-                      fontSize: 28,
-                    ),
-                    textDirection: TextDirection.rtl,
-                  ),
-                  const SizedBox(height: 75),
-                  Container(
-                    padding: const EdgeInsets.all(15),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 10),
-                          width: 150,
-                          height: 150,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/captine.jpg'),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 30),
-                        Center(
-                          child: Text(
-                            'هنا لمساعدتك على إيجاد إجابات لتساؤلاتك حول الخدمات الأكديمية وما يخص الجامعة ',
-                            style: GoogleFonts.almarai(
-                              color: Colors.white,
-                              fontSize: 20,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 50),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      foregroundColor: ColorManager.white,
-                      backgroundColor: ColorManager.primary,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    onPressed: () {
-                      Get.to(() => const chatbotScreen());
-                    },
-                    child: Text(
-                      '!دعنا نتحدث',
+          child: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(50, 5, 50, 50),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 200),
+                    Text(
+                      'مرحبًا، نامق في خدمتك!',
                       style: GoogleFonts.almarai(
                         color: Colors.white,
-                        fontSize: 30,
+                        fontSize: 28,
+                      ),
+                      textDirection: TextDirection.rtl,
+                    ),
+                    const SizedBox(height: 75),
+                    Container(
+                      padding: const EdgeInsets.all(15),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 10),
+                            width: 150,
+                            height: 180,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                image: AssetImage('assets/images/captine.jpg'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 30),
+                          Center(
+                            child: Text(
+                              'هنا لمساعدتك على إيجاد إجابات لتساؤلاتك حول الخدمات الأكديمية وما يخص الجامعة ',
+                              style: GoogleFonts.almarai(
+                                color: Colors.white,
+                                fontSize: 20,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                ],
+                    const SizedBox(height: 20),
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        foregroundColor: ColorManager.white,
+                        backgroundColor: ColorManager.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.to(() => const chatbotScreen());
+                      },
+                      child: Text(
+                        '!دعنا نتحدث',
+                        style: GoogleFonts.almarai(
+                          color: Colors.white,
+                          fontSize: 30,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
           ),

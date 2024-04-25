@@ -233,7 +233,7 @@ class Controller extends GetxController {
         await user!.reauthenticateWithCredential(
           EmailAuthProvider.credential(
             email: user.email!,
-            password: "01099551686", // Replace with actual password
+            password: "12345678", // Replace with actual password
           ),
         );
         // Update the email address

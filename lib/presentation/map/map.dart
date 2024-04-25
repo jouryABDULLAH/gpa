@@ -4,7 +4,10 @@ import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -174,9 +177,11 @@ class _screen_Map extends ConsumerState<screen_Map> {
             const ImageConfiguration(), "assets/images/bus.png")
         .then(
       (icon) {
-        setState(() {
-          markerIcon = icon;
-        });
+        if (mounted) {
+          setState(() {
+            markerIcon = icon;
+          });
+        }
       },
     );
   }
@@ -222,6 +227,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
             );
 
             setState(() {
+              _markers.add(marker);
               Qbuildings.add(marker); // Add marker to Qbuildings set
             });
           }
@@ -362,33 +368,34 @@ class _screen_Map extends ConsumerState<screen_Map> {
   ];
 
   final List<Marker> _markers = <Marker>[];
+
   final List<LatLng> _latLen = <LatLng>[
     //كليات
-    LatLng(26.350659189721537, 43.767918903374316),
-    LatLng(26.34900556147856, 43.76863773531845),
-    LatLng(26.34739841528648, 43.76734840839205),
-    LatLng(26.347226658485795, 43.76611019011761),
-    LatLng(26.348450278424348, 43.76498582490215),
-    LatLng(26.344544538114047, 43.764318015121574),
-    LatLng(26.351248837837225, 43.76676367410213),
-    LatLng(26.349508385019707, 43.7651054235499),
-    LatLng(26.347049025390778, 43.7673376158313),
-    LatLng(26.34884281321887, 43.768638347598056),
-    LatLng(26.351603204986336, 43.77241286312792),
-    LatLng(26.353133677155398, 43.773754058963085),
-    LatLng(26.358446981055806, 43.765952228741504),
-    LatLng(26.358137824795612, 43.765587459167335),
-    LatLng(26.360365179576085, 43.765324195880375),
-    LatLng(26.36075793332889, 43.76534503866934),
-    LatLng(26.362970238369446, 43.7484636116622),
-    LatLng(26.352922094022734, 43.77393488788893),
-    LatLng(26.36095082397776, 43.749291034015464),
-    LatLng(26.362782853570597, 43.74810475521704),
-    LatLng(26.36259680720437, 43.74760579861648),
-    LatLng(26.363789189457712, 43.74767434854764),
-    LatLng(26.364055434368524, 43.74696230719967),
-    LatLng(26.36141591966223, 43.74625691972054),
-    LatLng(26.36059158075166, 43.74615810724614),
+    LatLng(26.350659189721537, 43.767918903374316), //sai
+    LatLng(26.34900556147856, 43.76863773531845), //mang
+    LatLng(26.34739841528648, 43.76734840839205), //sci
+    LatLng(26.347226658485795, 43.76611019011761), //eng
+    LatLng(26.348450278424348, 43.76498582490215), //reg
+    LatLng(26.344544538114047, 43.764318015121574), //par
+    LatLng(26.351248837837225, 43.76676367410213), //midic
+    LatLng(26.349508385019707, 43.7651054235499), //lang
+    LatLng(26.347049025390778, 43.7673376158313), //app
+    LatLng(26.34884281321887, 43.768638347598056), //eco
+    LatLng(26.351603204986336, 43.77241286312792), //phy
+    LatLng(26.353133677155398, 43.773754058963085), //mid2
+    LatLng(26.358446981055806, 43.765952228741504), //comp
+    LatLng(26.358137824795612, 43.765587459167335), //bild
+    LatLng(26.360365179576085, 43.765324195880375), //pyp
+    LatLng(26.36075793332889, 43.76534503866934), //ap
+    LatLng(26.362970238369446, 43.7484636116622), //plnf
+    LatLng(26.352922094022734, 43.77393488788893), //midicf
+    LatLng(26.36095082397776, 43.749291034015464), //compf
+    LatLng(26.362782853570597, 43.74810475521704), //desf
+    LatLng(26.36259680720437, 43.74760579861648), //regf
+    LatLng(26.363789189457712, 43.74767434854764), //bildf
+    LatLng(26.364055434368524, 43.74696230719967), //appf
+    LatLng(26.36141591966223, 43.74625691972054), //scif
+    LatLng(26.36059158075166, 43.74615810724614), //ecof
     //عمادة
     LatLng(26.346443145893083, 43.76382332887437),
     LatLng(26.344077401031996, 43.76491348148404),
@@ -608,6 +615,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
     final Marker marker = Marker(
         markerId: MarkerId('1'),
         position: point,
+        infoWindow: InfoWindow(title: "drooped marker"),
         onTap: () {},
         icon:
             markerIcon // BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue)
@@ -645,7 +653,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
     if (action == 'delete') {
       // Remove the marker from the map
       setState(() {
-        Qbuildings.removeWhere((marker) => marker.markerId == markerId);
+        _markers.removeWhere((marker) => marker.markerId == markerId);
       });
 
       // Delete the marker from Firestore
@@ -662,7 +670,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
         ),
       );
     } else if (action == 'findRoute') {
-      final selectedMarker = Qbuildings.firstWhere(
+      final selectedMarker = _markers.firstWhere(
         (marker) => marker.markerId == markerId,
         orElse: () => Marker(
           markerId: MarkerId(""),
@@ -837,7 +845,8 @@ class _screen_Map extends ConsumerState<screen_Map> {
                             onPressed: () {
                               setState(() {
                                 searchController.text = '';
-                                suggestions
+                                suggestions.clear();
+                                polylines
                                     .clear(); // Clear suggestions when search text is cleared
                               });
                             },
@@ -923,7 +932,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
       floatingActionButton: Align(
         alignment: Alignment.bottomLeft,
         child: Container(
-          margin: EdgeInsets.only(bottom: 15, left: 25),
+          margin: EdgeInsets.only(bottom: 15, left: 23),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.end,
@@ -985,11 +994,15 @@ class _screen_Map extends ConsumerState<screen_Map> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("SP".tr),
+                          backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                          title: Text(
+                            "SP".tr,
+                            style: TextStyle(
+                                color: Color.fromARGB(255, 0, 81, 154)),
+                          ),
                           content: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('PN'.tr),
                               TextField(
                                 controller: placeNameController,
                                 decoration: InputDecoration(

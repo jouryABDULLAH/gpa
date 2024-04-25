@@ -1,0 +1,338 @@
+{
+    "المستوى الأول": [
+      {
+        "name": "327 STAT                                استدلالي إحصائي (2)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CHEM101                                كيمياء عامة (1)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "COE 361                                تحليل الإشارات والنظم",
+        "status": "Not Taken"
+      },
+      {
+        "name": "COE 362                                معمل تحليل الإشارات والنظم",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS361                                النظم الموزعة والمعالجات المتوازية",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS431                                النمذجة و المحاكاة",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS433                                البيانات والمعلومات والمعرفة",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS434                                المنطق في عدم التأكد",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS435                                تعلم الآلة",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS452                                التشفير",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS453                                عمارة وأمن النظام",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS484                                تقنيات البرمجة المتقدمة",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS485                                البرمجة المنطقية",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CS492                                موضوعات خاصة في علوم الحاسب (1)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS493                                موضوعات خاصة في علوم الحاسب (2)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "CSC105                                مهارات الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "ENG 0011                                لغة الإنجليزية تحضيري (1)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "IT351                                علم البيانات لإنترنت الاشياء",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH.204                                حساب المتجهات",
+        "status": "Not Taken"
+      },
+      {
+        "name": "MATH.244                                الجبر الخطي (2)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "MATH.326                                الطرائق الرياضية",
+        "status": "Not Taken"
+      },
+      {
+        "name": "MATH.345                                تطبيقات الجبر",
+        "status": "Not Taken"
+      },
+      {
+        "name": "MATH.351                                التحليل العددي",
+        "status": "Not Taken"
+      },
+      {
+        "name": "MATH218                                المعادلات التفاضلية",
+        "status": "Not Taken"
+      },
+      {
+        "name": "MATH319                                نظرية الترميز والتشفير",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH382                                التحليل الحقيقي (1)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "PHYS 243                                الديناميكا الحرارية",
+        "status": "Not Taken"
+      },
+      {
+        "name": "PHYS 321                                كهرومغناطيسية (2)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "PHYS 422                                إلكترونيات",
+        "status": "Not Taken"
+      },
+      {
+        "name": "PHYS110                                فيزياء (1)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "PHYS221                                كهرومغناطيسية (1)",
+        "status": "Not Taken"
+      },
+      {
+        "name": "PSYCH101                                مهارات التفكير وأساليب التعلم",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "STAT100                                إحصاء",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى الثاني": [
+      {
+        "name": "CSC111                                برمجة الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "ENG 0012                                لغة إنجليزية تحضيري (2)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "ESP102                                لغة إنجليزية لتخصصات الهندسة وعلوم الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH105                                حساب التفاضل",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "PHYS115                                فيزياء (2)",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى الثالث": [
+      {
+        "name": "ARAB101                                المهارات اللغوية",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS181                                برمجة الحاسب (2)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH115                                حساب التكامل",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "PHYS116                                فيزياء عامه (3)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "STAT126                                الإحصاء والإحتمالات",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى الرابع": [
+      {
+        "name": "ARAB103                                التحرير العربي",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "COE 121                                التصميم المنطقي",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "COE 122                                التصميم المنطقي (معمل)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS182                                برمجة الحاسب (3)",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "IC  101                                المدخل إلى الثقافة الإسلامية",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "IT131                                قواعد بيانات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH116                                الجبر الخطي والحساب متعدد المتغيرات",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى الخامس": [
+      {
+        "name": "COE 223                                عمارة الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS211                                مفاهيم الخوارزميات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS213                                مبادئ لغات البرمجة",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "IC  102                                الإسلام وبناء المجتمع",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH212                                رياضيات محددة",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى السادس": [
+      {
+        "name": "CS214                                تراكيب البيانات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS221                                لغة التجميع",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS222                                نظام التشغيل",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS224                                تصميم المترجمات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "IC  103                                النظام الاقتصادي في الإسلام",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى السابع": [
+      {
+        "name": "CS315                                تحليل وتصميم الخوارزميات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS341                                الرسم بالحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS342                                البرمجة المرئية",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS383                                هندسة البرمجيات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH317                                الطرق العددية",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH329                                بحوث العمليات",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى الثامن": [
+      {
+        "name": "COE 351                                شبكات الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "COE 352                                معمل شبكات الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS348                                تقنيات الأمثليات",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "IT362                                مهارات الإتصال وأخلاقيات المهنة",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "MATH314                                رياضيات محددة متقدمة",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى  التاسع": [
+      {
+        "name": "CS423                                برمجة النظم",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS451                                مقدمة في أمن الحاسب",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS497                                تدريب صيفي",
+        "status": "Taken and Completed"
+      },
+      {
+        "name": "CS498                                مشروع تخرج (1)",
+        "status": "Taken and Completed"
+      }
+    ],
+    "المستوى العاشر": [
+      {
+        "name": "CS432                                الذكاء الاصطناعي",
+        "status": "Taken and Not Completed"
+      },
+      {
+        "name": "CS471                                تقنيات الويب",
+        "status": "Taken and Not Completed"
+      },
+      {
+        "name": "CS499                                مشروع تخرج (2)",
+        "status": "Taken and Not Completed"
+      },
+      {
+        "name": "IC  104                                أسس النظام السياسي في الإسلام",
+        "status": "Taken and Completed"
+      }
+    ]
+  }

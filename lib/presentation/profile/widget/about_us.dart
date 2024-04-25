@@ -67,7 +67,7 @@ class AboutUs extends StatelessWidget {
                     : TextAlign.left,
                 style: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
-                    fontSize: 16,
+                    fontSize: 20,
                     fontWeight: FontWeight.normal),
               ),
             ),
