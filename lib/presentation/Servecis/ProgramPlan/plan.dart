@@ -289,7 +289,7 @@ class _planState extends State<plan> {
       _studentHoursChartData = getStdHrs();
       _TooltipBehavior = TooltipBehavior(enable: true);
     } catch (e) {
-      print("Error loading student plan data: $e".tr);
+      print("Error loading student plan data: $e");
     }
   }
 
@@ -297,7 +297,7 @@ class _planState extends State<plan> {
     studentPlan?.levels.forEach((level, courses) {
       print('Level: $level'.tr);
       for (var course in courses) {
-        print('Course: ${course.name}, Status: ${course.status}'.tr);
+        print('Course: ${course.name}, Status: ${course.status}');
       }
     });
   }
