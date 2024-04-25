@@ -23,6 +23,7 @@ class AppTextFormField extends StatelessWidget {
     this.readonly,
     this.textStyle,
     this.fontSize,
+    this.obscureText = false,
   }) : super(key: key);
 
   final String? hint;
@@ -41,8 +42,9 @@ class AppTextFormField extends StatelessWidget {
   final Function(String)? onChanged;
   final TextInputType? textInputType;
   final bool? readonly;
-  final TextStyle? textStyle; // Added parameter for text style
-  final double? fontSize; // Added parameter for font size
+  final TextStyle? textStyle;
+  final double? fontSize;
+  final bool obscureText;
 
   String local = CacheHelper.getDate(key: 'local') ?? '';
 

@@ -20,6 +20,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
   TextEditingController email = TextEditingController();
 
   TextEditingController password = TextEditingController();
+  TextEditingController password1 = TextEditingController();
 
   TextEditingController name = TextEditingController();
   TextEditingController id = TextEditingController();
@@ -45,7 +46,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
             alignment: Alignment.bottomLeft,
             child: Container(
               padding: const EdgeInsets.all(10),
-              height: responsive.sHeight(context) / 1.25,
+              height: responsive.sHeight(context) / 1.15,
               width: responsive.sWidth(context) - 20,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -72,7 +73,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         ),
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 2,
                       ),
                       Text(
                         "Nice".tr,
@@ -85,7 +86,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         ),
                       ),
                       const SizedBox(
-                        height: 12,
+                        height: 9,
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -114,12 +115,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           if (email.text.trim().isEmpty) {
                             return "empty".tr;
                           }
+                          if (!email.text.contains("qu.edu.sa")) {
+                            return "most".tr;
+                          }
                           return null;
                         },
                         hint: 'email',
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 2,
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -137,12 +141,15 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           if (id.text.length < 9) {
                             return "lessi".tr;
                           }
+                          if (double.tryParse(id.text) == null) {
+                            return "notNum".tr;
+                          }
 
                           return null;
                         },
                       ),
                       const SizedBox(
-                        height: 5,
+                        height: 2,
                       ),
                       AppTextFormField(
                         padding: 10,
@@ -154,8 +161,27 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         },
                         hint: 'password'.tr,
                       ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      AppTextFormField(
+                        padding: 10,
+                        head: "conf".tr,
+                        controller: password1,
+                        validate: (c) {
+                          if (password.text.length < 8) {
+                            return "less".tr;
+                          }
+                          if (password.value != password1.value) {
+                            return "equals".tr;
+                          } else {
+                            return null;
+                          }
+                        },
+                        hint: 'Confpassword'.tr,
+                      ),
                       SizedBox(
-                        height: 15,
+                        height: 16,
                       ),
                       controller.isLoading
                           ? Center(

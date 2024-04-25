@@ -120,6 +120,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                             fontWeight: FontWeight.normal,
                           ),
                         ),
+                        secure: true,
                       ),
                       SizedBox(
                         height: 5,

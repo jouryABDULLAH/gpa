@@ -116,8 +116,7 @@ class _DbState extends State<Db> {
                 child: ListView.separated(
                     itemBuilder: (c, i) => Container(
                           decoration: BoxDecoration(
-                              color: controller
-                                  .calendarController.events?[i].eventColor,
+                              color: Color.fromARGB(255, 236, 236, 236),
                               borderRadius: BorderRadius.circular(77)),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 3),
@@ -125,30 +124,27 @@ class _DbState extends State<Db> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.getFont(
-                                      fontSize: 14,
-                                      color: Color.fromARGB(255, 255, 255, 255),
-                                      MyLocal.getFontFamily(
-                                          Get.locale!.languageCode),
+                                    textAlign: TextAlign.right,
+                                    style: GoogleFonts.tajawal(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color.fromARGB(255, 0, 81, 154),
                                     ),
                                     controller.calendarController.events?[i]
                                             .name ??
                                         ""),
                                 CircleAvatar(
                                     backgroundColor:
-                                        Color.fromARGB(240, 255, 255, 255),
-                                    radius: 32,
+                                        Color.fromARGB(255, 0, 167, 171),
+                                    radius: 49,
                                     child: Text(
                                         textAlign: TextAlign.center,
-                                        style: GoogleFonts.getFont(
-                                          color:
-                                              Color.fromARGB(255, 1, 116, 118),
+                                        style: GoogleFonts.poppins(
+                                          color: Color.fromARGB(
+                                              255, 236, 236, 236),
                                           fontSize: 16,
-                                          MyLocal.getFontFamily(
-                                              Get.locale!.languageCode),
                                         ),
-                                        "${controller.calendarController.events?[i].begin.day} - ${controller.calendarController.events?[i].end.day}")),
+                                        "${controller.calendarController.events?[i].begin.day}/${controller.calendarController.events?[i].begin.month} - ${controller.calendarController.events?[i].end.day}/${controller.calendarController.events?[i].end.month}")),
                               ],
                             ),
                           ),
@@ -209,7 +205,6 @@ class _DbState extends State<Db> {
                     DayItemWidget(properties: builderArgument),
                 weekDaysBuilder: (day) => WeekDaysWidget(day: day),
                 eventBuilder: (drawer) => EventWidget(drawer: drawer),
-                // onDayClicked: controller.showDayEventsInModalSheet(context),
                 minDate: DateTime.now().subtract(const Duration(days: 1000)),
                 maxDate: DateTime.now().add(const Duration(days: 180)),
                 // weeksToShow: [0,1,2].toList(),
@@ -218,14 +213,6 @@ class _DbState extends State<Db> {
             ),
           ],
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: addEvent,
-        backgroundColor: ColorManager.primary,
-        child: const Icon(
-          Icons.add,
-          color: Color.fromARGB(255, 255, 198, 34),
-        ),
       ),
     );
   }

@@ -187,7 +187,8 @@ class _RulesListState extends State<RulesList> {
                     const SizedBox(height: 9),
                     Text(
                       "خطوات تنفيذ الخدمة:",
-                      style: GoogleFonts.tajawal(
+                      textAlign: TextAlign.right,
+                      style: GoogleFonts.almarai(
                         fontWeight: FontWeight.bold,
                         color: Color.fromARGB(255, 1, 42, 76),
                       ),
