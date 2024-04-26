@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/model/student_plan_model.dart';
+import 'package:gpa/presentation/Servecis/ProgramPlan/widgets/level_progress_row.dart';
 import 'package:gpa/presentation/Servecis/ProgramPlan/widgets/remaining_hrs_row.dart';
 import 'package:gpa/presentation/Servecis/ProgramPlan/widgets/status_button.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
@@ -216,6 +217,25 @@ class _planState extends State<plan> {
                         );
                       }
                     ),
+
+                if(!isHrsRemaining)
+                   ListView.builder(
+                      padding:
+                          const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: getStdLvlHrs().length,
+                      itemBuilder: (context, index) {
+                        List<StdLVlHrs> stdLvlHrs = getStdLvlHrs();
+                        return LevelCompletionRow(
+                          level: stdLvlHrs[index].level, 
+                          totalHours: stdLvlHrs[index].totalHours, 
+                          completedHours: stdLvlHrs[index].completedHours, 
+                          onPressed: () {  },
+                        );
+                      }
+                    ),
+
               ],
             ),
           ),
@@ -278,50 +298,74 @@ class _planState extends State<plan> {
   }
 
   void setStdHrs() {
-    if (studentPlan != null) {
-      studentPlan!.levels.forEach((level, courses) {
-        for (var course in courses) {
-          String? hours = course.hours;
-          String type = course.type;
+      if (studentPlan != null) {
+        studentPlan!.levels.forEach((level, courses) {
+          for (var course in courses) {
+            String? hours = course.hours;
+            String type = course.type;
 
-          if (hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
-            stdTotalHrs += int.parse(hours); // Increment instead of reassigning
-          }
+            if (hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
+              stdTotalHrs += int.parse(hours); // Increment instead of reassigning
+            }
 
-          if (type == 'free' && hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
-            stdFreeHrs += int.parse(hours); // Increment instead of reassigning
-          } else if (type == "CSelective" && hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
-            stdCsElectiveHrs += int.parse(hours); // Increment instead of reassigning
-          } else if (type == "noneCSelective" && hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
-            stdNoneCsElectiveHrs += int.parse(hours); // Increment instead of reassigning
+            if (type == 'free' && hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
+              stdFreeHrs += int.parse(hours); // Increment instead of reassigning
+            } else if (type == "CSelective" && hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
+              stdCsElectiveHrs += int.parse(hours); // Increment instead of reassigning
+            } else if (type == "noneCSelective" && hours != "--"  && hours.isNotEmpty && course.status == "Taken and Completed") {
+              stdNoneCsElectiveHrs += int.parse(hours); // Increment instead of reassigning
+            }
           }
-        }
-      });
+        });
+    }
   }
-}
 
-List<StdHours> getStdHrs(){
-    List<StdHours> stdHrs = [
-      StdHours("college elective hours".tr, stdNoneCsElectiveHrs, const Color.fromARGB(255, 170, 48, 236)),
-      StdHours("CS elective hours".tr, stdCsElectiveHrs, const Color.fromARGB(255, 220, 53, 173)),
-      StdHours('free hours'.tr, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118)),
-      StdHours("total completed hours".tr, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195)),
-      
-    ];
+  List<StdHours> getStdHrs(){
+      List<StdHours> stdHrs = [
+        StdHours("college elective hours".tr, stdNoneCsElectiveHrs, const Color.fromARGB(255, 170, 48, 236)),
+        StdHours("CS elective hours".tr, stdCsElectiveHrs, const Color.fromARGB(255, 220, 53, 173)),
+        StdHours('free hours'.tr, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118)),
+        StdHours("total completed hours".tr, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195)),
+        
+      ];
 
-    return stdHrs;
- }
+      return stdHrs;
+  }
 
-List<RemainingHrs> getRemainingHrs(){
-    List<RemainingHrs> stdRemHrs = [
-      RemainingHrs("Elective hours", electivesTotalHours, stdCsElectiveHrs+stdNoneCsElectiveHrs,const Color.fromARGB(255, 222, 29, 129), electivesTotalHours - (stdCsElectiveHrs+stdNoneCsElectiveHrs) ),
-      RemainingHrs("Free hours".tr, freeTotalHours, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118), freeTotalHours - stdFreeHrs),
-      RemainingHrs("Total hour".tr, totalHours, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195), totalHours - stdTotalHrs),
-      
-    ];
+  List<RemainingHrs> getRemainingHrs(){
+      List<RemainingHrs> stdRemHrs = [
+        RemainingHrs("Elective hours", electivesTotalHours, stdCsElectiveHrs+stdNoneCsElectiveHrs,const Color.fromARGB(255, 222, 29, 129), electivesTotalHours - (stdCsElectiveHrs+stdNoneCsElectiveHrs) ),
+        RemainingHrs("Free hours".tr, freeTotalHours, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118), freeTotalHours - stdFreeHrs),
+        RemainingHrs("Total hour".tr, totalHours, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195), totalHours - stdTotalHrs),
+      ];
 
-    return stdRemHrs;
- }
+      return stdRemHrs;
+  }
+
+
+  List<StdLVlHrs> getStdLvlHrs() {
+      List<StdLVlHrs> stdLvlHrs = [];
+
+      if (studentPlan != null) {
+        studentPlan!.levels.forEach((level, courses) {
+          int totalHours = 0;
+          int completedHours = 0;
+          String levelName = level;
+
+          for (var course in courses) {
+            if (course.hours != "--") {
+              totalHours += int.parse(course.hours);
+              if (course.status == "Taken and Completed") {
+                completedHours += int.parse(course.hours);
+              }
+            }
+          }
+
+          stdLvlHrs.add(StdLVlHrs(levelName, totalHours, completedHours));
+        });
+    }
+    return stdLvlHrs;
+  }
 }
 
 class StdHours {
@@ -329,6 +373,13 @@ class StdHours {
   String hrsType = '';
   int hrs = 0;
   Color color;
+}
+
+class StdLVlHrs {
+  StdLVlHrs(this.level, this.totalHours, this.completedHours);
+  final String level;
+  final int totalHours;
+  final int completedHours;
 }
 
 class RemainingHrs {
