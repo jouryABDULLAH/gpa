@@ -14,20 +14,20 @@ class SegmentButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-                      onTap: onPressed,
-                      child: Container(
-                         decoration:  isActive? BoxDecoration(
-                            color: const Color.fromARGB(255, 118, 192, 184).withOpacity(0.7),
-                            borderRadius: BorderRadius.circular(12)
-                          ): null,
-                          alignment: Alignment.center,
-                          child: Text(title.tr,
-                          style:  TextStyle(
-                            color: isActive ? Colors.white :  const Color.fromARGB(255, 118, 192, 184).withOpacity(0.2),
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600
-                          ),),
-                      ),
-                    );
+      onTap: onPressed,
+      child: Container(
+        decoration:  isActive? BoxDecoration(
+            color: const Color.fromARGB(255, 118, 192, 184).withOpacity(0.7),
+            borderRadius: BorderRadius.circular(12)
+        ): null,
+        alignment: Alignment.center,
+        child: Text(title.tr,
+          style:  TextStyle(
+              color: isActive ? Colors.white :  const Color.fromARGB(255, 118, 192, 184).withOpacity(0.2),
+              fontSize: 12,
+              fontWeight: FontWeight.w600
+          ),),
+      ),
+    );
   }
 }

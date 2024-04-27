@@ -5,6 +5,7 @@ import 'package:cr_calendar/cr_calendar.dart';
 import 'package:gpa/control.dart';
 import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/home/db.dart';
+import 'package:gpa/presentation/notification/notification_screen.dart';
 import '../../widgets/day_item_widget.dart';
 import '../../widgets/event_widget.dart';
 import '../../widgets/week_days_widget.dart';
@@ -41,18 +42,24 @@ class _HomeWidgetState extends State<HomeWidget> {
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      SizedBox(height: 19),
+                      const SizedBox(height: 19),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
-                            Icons.notifications,
-                            color: const Color.fromARGB(255, 255, 198, 34),
-                            size: 27,
-                          ),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (_) => const NotificationScreen()));
+                            },
+                            icon: const Icon(
+                              Icons.notifications,
+                              color: Color.fromARGB(255, 255, 198, 34),
+                              size: 27,
+                            ),
+                          )
                         ],
                       ),
-                      SizedBox(height: 27),
+                      const SizedBox(height: 27),
                       SizedBox(
                         height: 255,
                         child: ClipRRect(
@@ -78,7 +85,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         height: 67,
                                       ),
                                     ),
-                                    SizedBox(height: 13),
+                                    const SizedBox(height: 13),
                                     Text(
                                       "الاسم: ${controller.me?.name}" ?? "",
                                       style: GoogleFonts.tajawal(
@@ -86,7 +93,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    SizedBox(height: 5),
+                                    const SizedBox(height: 5),
                                     Text(
                                       " الرقم الجامعي : ${controller.me?.id}",
                                       style: GoogleFonts.tajawal(
@@ -101,7 +108,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 30),
+                      const SizedBox(height: 30),
                       SizedBox(
                         width: 500,
                         height: 410,
@@ -129,7 +136,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
                                       icon: const Icon(Icons.arrow_back_ios),
@@ -141,15 +148,15 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     ValueListenableBuilder(
                                       valueListenable:
-                                          controller.monthNameNotifier,
+                                      controller.monthNameNotifier,
                                       builder: (context, value, child) => Text(
                                         value,
                                         style: GoogleFonts.getFont(
                                           MyLocal.getFontFamily(
                                               Get.locale!.languageCode),
-                                          textStyle: TextStyle(
+                                          textStyle: const TextStyle(
                                             fontSize: 20,
-                                            color: const Color.fromARGB(
+                                            color: Color.fromARGB(
                                                 255, 109, 109, 109),
                                             fontWeight: FontWeight.normal,
                                           ),
@@ -176,8 +183,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     forceSixWeek: true,
                                     dayItemBuilder: (builderArgument) =>
                                         DayItemWidget(
-                                      properties: builderArgument,
-                                    ),
+                                          properties: builderArgument,
+                                        ),
                                     weekDaysBuilder: (day) =>
                                         WeekDaysWidget(day: day),
                                     eventBuilder: (drawer) =>

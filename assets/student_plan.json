@@ -23,44 +23,44 @@
         {
             "name": "CHEM101                                كيمياء عامة (1)",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "COE 361                                تحليل الإشارات والنظم",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "COE 362                                معمل تحليل الإشارات والنظم",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  361                                النظم الموزعة والمعالجات المتوازية",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  431                                النمذجة و المحاكاة",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  433                                البيانات والمعلومات والمعرفة",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  434                                المنطق في عدم التأكد",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  435                                تعلم الآلة",
@@ -71,26 +71,26 @@
         {
             "name": "CS  452                                التشفير",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  453                                عمارة وأمن النظام",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  484                                تقنيات البرمجة المتقدمة",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  485                                البرمجة المنطقية",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CS  492                                موضوعات خاصة في علوم الحاسب (1)",
@@ -101,20 +101,20 @@
         {
             "name": "CS  493                                موضوعات خاصة في علوم الحاسب (2)",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "CSC105                                مهارات الحاسب",
             "status": "Taken and Completed",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "ENG 0011                                لغة الإنجليزية تحضيري (1)",
             "status": "Taken and Completed",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "IT  351                                علم البيانات لإنترنت الاشياء",
@@ -125,38 +125,38 @@
         {
             "name": "MATH.204                                حساب المتجهات",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "MATH.244                                الجبر الخطي (2)",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "MATH.326                                الطرائق الرياضية",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "MATH.345                                تطبيقات الجبر",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "MATH.351                                التحليل العددي",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "MATH218                                المعادلات التفاضلية",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "MATH319                                نظرية الترميز والتشفير",
@@ -167,38 +167,38 @@
         {
             "name": "MATH382                                التحليل الحقيقي (1)",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "PHYS 243                                الديناميكا الحرارية",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "PHYS 321                                كهرومغناطيسية (2)",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "PHYS 422                                إلكترونيات",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "PHYS110                                فيزياء (1)",
             "status": "Taken and Completed",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "PHYS221                                كهرومغناطيسية (1)",
             "status": "Not Taken",
-            "hours": "",
-            "type": ""
+            "hours": "--",
+            "type": "--"
         },
         {
             "name": "PSYCH101                                مهارات التفكير وأساليب التعلم",

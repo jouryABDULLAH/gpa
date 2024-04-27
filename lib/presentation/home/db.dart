@@ -26,6 +26,7 @@ class Db extends StatefulWidget {
 class _DbState extends State<Db> {
   int index = 0;
   final controller = Get.put(Controller());
+
   @override
   void initState() {
     controller.setTexts(
@@ -70,13 +71,13 @@ class _DbState extends State<Db> {
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(index == 0
-                              ? Color.fromARGB(118, 219, 219, 219)
+                              ? const Color.fromARGB(118, 219, 219, 219)
                               : null)),
                       child: Text(
                         "List".tr,
                         style: GoogleFonts.getFont(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: const Color.fromARGB(255, 255, 255, 255),
                           MyLocal.getFontFamily(Get.locale!.languageCode),
                         ),
                       ),
@@ -93,13 +94,13 @@ class _DbState extends State<Db> {
                       },
                       style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(index == 1
-                              ? Color.fromARGB(118, 219, 219, 219)
+                              ? const Color.fromARGB(118, 219, 219, 219)
                               : null)),
                       child: Text(
                         "Calendar".tr,
                         style: GoogleFonts.getFont(
                           fontSize: 24,
-                          color: Color.fromARGB(255, 255, 255, 255),
+                          color: const Color.fromARGB(255, 255, 255, 255),
                           MyLocal.getFontFamily(Get.locale!.languageCode),
                         ),
                       ),
@@ -120,7 +121,7 @@ class _DbState extends State<Db> {
                   itemBuilder: (context, i) => Container(
                     decoration: BoxDecoration(
                       color:
-                          controller.calendarController.events?[i].eventColor,
+                      controller.calendarController.events?[i].eventColor,
                       borderRadius: BorderRadius.circular(77),
                     ),
                     child: Padding(
@@ -134,23 +135,23 @@ class _DbState extends State<Db> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.getFont(
                                 fontSize: 14,
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: const Color.fromARGB(255, 255, 255, 255),
                                 MyLocal.getFontFamily(Get.locale!.languageCode),
                               ),
                               overflow:
-                                  TextOverflow.ellipsis, // Handle overflow
+                              TextOverflow.ellipsis, // Handle overflow
                               maxLines: 1, // Limit max lines
                               controller.calendarController.events?[i].name ??
                                   "",
                             ),
                           ),
                           CircleAvatar(
-                            backgroundColor: Color.fromARGB(240, 255, 255, 255),
+                            backgroundColor: const Color.fromARGB(240, 255, 255, 255),
                             radius: 32,
                             child: Text(
                               textAlign: TextAlign.center,
                               style: GoogleFonts.getFont(
-                                color: Color.fromARGB(255, 1, 116, 118),
+                                color: const Color.fromARGB(255, 1, 116, 118),
                                 fontSize: 16,
                                 MyLocal.getFontFamily(Get.locale!.languageCode),
                               ),
@@ -161,7 +162,7 @@ class _DbState extends State<Db> {
                       ),
                     ),
                   ),
-                  separatorBuilder: (context, index) => SizedBox(height: 10),
+                  separatorBuilder: (context, index) => const SizedBox(height: 10),
                   itemCount: controller.calendarController.events?.length ?? 0,
                 ),
               ),
@@ -184,7 +185,7 @@ class _DbState extends State<Db> {
                   builder: (ctx, value, child) => Text(
                     value,
                     style: GoogleFonts.poppins(
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 20,
                         color: Color.fromARGB(255, 109, 109, 109),
                         fontWeight: FontWeight.normal,
@@ -237,7 +238,7 @@ class _DbState extends State<Db> {
   }
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin();
 
   Future<void> _zonedScheduleNotification(
       String name, String duration, DateTime dateEnd) async {
@@ -258,7 +259,10 @@ class _DbState extends State<Db> {
         platform,
         androidScheduleMode: AndroidScheduleMode.inexact,
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
+        UILocalNotificationDateInterpretation.absoluteTime);
+    /*  await FirebaseFirestore.instance
+        .collection("notifications")
+        .add({"eventName": name, "start": duration,});*/
   }
 
   Future<void> addEvent() async {
@@ -270,17 +274,22 @@ class _DbState extends State<Db> {
           controller.calendarController.addEvent(event);
         });
       }
-
       await FirebaseFirestore.instance.collection("events").add({
         "name": event.name,
         "begin": event.begin.toString().split(" ")[0],
         "end": event.end.toString().split(" ")[0],
-        "color": event.ColorManager.eventColors.value,
+        "color": event.eventColor.value,
       });
       await SendAlarmCubit.get(context).sendNotification(
           event.name,
-          "Start ${event.begin.toString().split(" ")[0]}: End ${event.end.toString().split(" ")[0]}",
+          "Start ${event.begin.toString().split(" ")[0]} : End ${event.end.toString().split(" ")[0]}",
           "event");
+
+      await FirebaseFirestore.instance.collection("notifications").add({
+        "eventName": event.name,
+        "start": "Start :${event.begin.toString().split(" ")[0]}",
+        "end": "End :${event.end.toString().split(" ")[0]}"
+      });
       _zonedScheduleNotification(
           event.name,
           "Start ${event.begin.toString().split(" ")[0]}: End ${event.end.toString().split(" ")[0]}",
@@ -319,12 +328,12 @@ class _DbState extends State<Db> {
                   context,
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
                 size: 25.0,
               ),
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
             ),
           ),
           Align(
@@ -333,7 +342,7 @@ class _DbState extends State<Db> {
               "Acadmic".tr,
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 36,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 255, 255, 255),

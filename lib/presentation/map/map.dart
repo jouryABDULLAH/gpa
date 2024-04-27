@@ -187,7 +187,7 @@ class _screen_Map extends ConsumerState<screen_Map> {
 
   void addCustomIcon_2() {
     BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(), "assets/images/current.png")
+            const ImageConfiguration(size: Size(8, 8)), "assets/images/current.png",)
         .then(
       (icon) {
         if (mounted) {
