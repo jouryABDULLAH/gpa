@@ -79,7 +79,7 @@ class _planState extends State<plan> {
             child: Column(
               children: [
                 Container(
-                  height: media.width * 1.0,
+                  height: media.width * 1.2,
                   decoration: BoxDecoration(
                       color: const Color.fromARGB(255, 118, 192, 184)
                           .withOpacity(0.5),
