@@ -8,10 +8,10 @@ class StatusButton extends StatelessWidget {
   final VoidCallback onPressed;
   const StatusButton(
       {super.key,
-      required this.title,
-      required this.value,
-      required this.statusColor,
-      required this.onPressed});
+        required this.title,
+        required this.value,
+        required this.statusColor,
+        required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

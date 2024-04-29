@@ -40,7 +40,7 @@ class _planState extends State<plan> {
   Widget build(BuildContext context) {
 
     var media = MediaQuery.sizeOf(context);
-   
+
 
     return Scaffold(
         appBar: PreferredSize(
@@ -66,7 +66,7 @@ class _planState extends State<plan> {
                 color: Colors.white,
                 onPressed: () {
                   Navigator.of(context)
-                      .pop(); 
+                      .pop();
                 },
               ),
               actions: [],
@@ -90,34 +90,34 @@ class _planState extends State<plan> {
                   child:  Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 310,
-                              child: SfCircularChart(
-                                title: const ChartTitle(text: 'Plan progress\n(in Hours)'),
-                                legend: const Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap, position: LegendPosition.bottom, iconHeight: Checkbox.width*1.1, iconWidth: Checkbox.width*1.1),
-                                tooltipBehavior: _TooltipBehavior,
-                                series: <CircularSeries>[
-                                RadialBarSeries<StdHours,String>(
-                                  dataSource: _studentHoursChartData,
-                                  pointColorMapper:(StdHours data,  _) => data.color,
-                                  xValueMapper: (StdHours data, _) => data.hrsType , 
-                                  yValueMapper: (StdHours data, _) => data.hrs,
-                                  enableTooltip: true,
-                                  maximumValue: totalHours.toDouble(),
-                                  gap: '1.7',
-                                  radius: '85',
-                                  )
-                              ],),
-                            
-                            ),
-                             const SizedBox(height: 10,
-                             ),
-                            Row(
-                              children: [
+                        alignment: Alignment.bottomCenter,
+                        children: [
+                          Column(
+                            children: [
+                              SizedBox(
+                                height: 310,
+                                child: SfCircularChart(
+                                  title: const ChartTitle(text: 'Plan progress\n(in Hours)'),
+                                  legend: const Legend(isVisible: true, overflowMode: LegendItemOverflowMode.wrap, position: LegendPosition.bottom, iconHeight: Checkbox.width*1.1, iconWidth: Checkbox.width*1.1),
+                                  tooltipBehavior: _TooltipBehavior,
+                                  series: <CircularSeries>[
+                                    RadialBarSeries<StdHours,String>(
+                                      dataSource: _studentHoursChartData,
+                                      pointColorMapper:(StdHours data,  _) => data.color,
+                                      xValueMapper: (StdHours data, _) => data.hrsType ,
+                                      yValueMapper: (StdHours data, _) => data.hrs,
+                                      enableTooltip: true,
+                                      maximumValue: totalHours.toDouble(),
+                                      gap: '1.7',
+                                      radius: '85',
+                                    )
+                                  ],),
+
+                              ),
+                              const SizedBox(height: 10,
+                              ),
+                              Row(
+                                children: [
                                   Expanded(
                                     child: StatusButton(
                                       title: "total completed hours".tr,
@@ -126,7 +126,7 @@ class _planState extends State<plan> {
                                       onPressed: () {},
                                     ),
                                   ),
-                                
+
                                   Expanded(
                                     child: StatusButton(
                                       title: "college elective hours".tr,
@@ -135,7 +135,7 @@ class _planState extends State<plan> {
                                       onPressed: () {},
                                     ),
                                   ),
-                                  
+
                                   Expanded(
                                     child: StatusButton(
                                       title: "CS elective hours".tr,
@@ -153,18 +153,18 @@ class _planState extends State<plan> {
                                     ),
                                   )
                                 ],
-                            )
-                      ],
-                      )
-                      ]
+                              )
+                            ],
+                          )
+                        ]
                     ),
                   ),
                 ),
                 Container(
                   margin:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                  const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                   padding:
-                      const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+                  const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
                   height: 50,
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -240,7 +240,7 @@ class _planState extends State<plan> {
             ),
           ),
         )
-      );
+    );
   }
 
   Widget buildPlanListView() {
@@ -281,7 +281,7 @@ class _planState extends State<plan> {
   void fetchStudentPlanData() async {
     try {
       StudentPlanModel studentPlanInfo =
-          await StudentPlanModel.loadStudentPlan();
+      await StudentPlanModel.loadStudentPlan();
 
       if(mounted){
         setState(() {
@@ -320,13 +320,13 @@ class _planState extends State<plan> {
     }
   }
 
-  List<StdHours> getStdHrs(){
+    List<StdHours> getStdHrs(){
       List<StdHours> stdHrs = [
         StdHours("college elective hours".tr, stdNoneCsElectiveHrs, const Color.fromARGB(255, 170, 48, 236)),
         StdHours("CS elective hours".tr, stdCsElectiveHrs, const Color.fromARGB(255, 220, 53, 173)),
         StdHours('free hours'.tr, stdFreeHrs, const Color.fromARGB(255, 27, 188, 118)),
         StdHours("total completed hours".tr, stdTotalHrs, const Color.fromARGB(255, 21, 163, 195)),
-        
+  
       ];
 
       return stdHrs;

@@ -164,7 +164,7 @@ class Controller extends GetxController {
       onSwipe: onCalendarPageChanged,
       events: List.generate(
           events.length,
-          (index) => CalendarEventModel(
+              (index) => CalendarEventModel(
               eventColor: events[index].eventColor,
               name: events[index].name,
               begin: events[index].begin,
@@ -180,17 +180,17 @@ class Controller extends GetxController {
         isScrollControlled: true,
         context: context,
         builder: (context) => DayEventsBottomSheet(
-              events: events,
-              day: day,
-              screenHeight: MediaQuery.of(context).size.height,
-            ));
+          events: events,
+          day: day,
+          screenHeight: MediaQuery.of(context).size.height,
+        ));
   }
 
   Future<bool> changePassword(
-    String currentPassword,
-    String newPassword,
-    BuildContext context,
-  ) async {
+      String currentPassword,
+      String newPassword,
+      BuildContext context,
+      ) async {
     log("I've been called");
     if (currentPassword.isEmpty) return true;
     try {

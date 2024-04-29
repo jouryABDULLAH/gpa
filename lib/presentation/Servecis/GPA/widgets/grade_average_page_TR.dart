@@ -31,7 +31,8 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Column(
+      body: LayoutBuilder(
+        builder: (context, constraints) =>  Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Upper(),
@@ -50,6 +51,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           ),
           _buildBottomSection(),
         ],
+      ),
       ),
     );
   }
@@ -109,7 +111,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Expanded(
+              Flexible(
                 flex: 2,
                 child: _buildTextFormField(),
               ),
@@ -157,7 +159,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                 width: 10,
               ),
               IconButton(
-                onPressed: _addLessonAndCalAvg,
+                onPressed: _LessonAndCalAvg,
                 icon: Icon(Boxicons.bx_plus_circle),
                 color: const Color.fromRGBO(255, 198, 34, 1),
                 padding: EdgeInsets.only(top: 20),
@@ -171,14 +173,14 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     );
   }
 
-  Widget _buildTextFormFieldPreviousHours() {
+  _buildTextFormFieldPreviousHours() {
     return Padding(
       padding: const EdgeInsets.only(left: 6, top: 10),
       child: TextFormField(
         keyboardType: TextInputType.number,
-        onSaved: (value) {
+        onChanged: (value) {
           setState(() {
-            hours = int.tryParse(value!) ?? 0;
+            hours = int.tryParse(value) ?? 0;
           });
         },
         validator: (v) {
@@ -209,14 +211,14 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     );
   }
 
-  Widget _buildTextFormFieldPreviousGPA() {
+  _buildTextFormFieldPreviousGPA() {
     return Padding(
       padding: const EdgeInsets.only(left: 6, top: 10),
       child: TextFormField(
         keyboardType: TextInputType.numberWithOptions(decimal: true),
-        onSaved: (value) {
+        onChanged: (value) {
           setState(() {
-            previousGPA = double.tryParse(value!) ?? 0.0;
+            previousGPA = double.tryParse(value) ?? 0.0;
           });
         },
         validator: (v) {
@@ -247,7 +249,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     );
   }
 
-  Widget _buildTextFormField() {
+  _buildTextFormField() {
     return SizedBox(
       width: 179,
       height: 91, // Adjust the width as needed
@@ -300,18 +302,28 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     );
   }
 
-  void _addLessonAndCalAvg() {
+  void _LessonAndCalAvg() {
     formKey.currentState!.save();
     if (formKey.currentState!.validate()) {
       var addingLesson = Lesson(
-          name: enteringValue,
-          letterGrade: selectedLetterValue,
-          creditGrade: selectedCreditValue);
+        name: enteringValue,
+        letterGrade: selectedLetterValue,
+        creditGrade: selectedCreditValue,
+      );
       DataHelper.addLesson(addingLesson);
-      print(DataHelper.calculateAvg());
+
+      // Debugging prints
+      print("Hours: $hours");
+      print("Previous GPA: $previousGPA");
+
+      // Recalculate cumulative average
+      var cumulativeAvg = DataHelper.cumulativeAvg(hours, previousGPA);
+      print("Cumulative Average: $cumulativeAvg");
+
       setState(() {});
     }
   }
+
 
   Widget Upper() {
     return Container(

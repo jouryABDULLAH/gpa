@@ -19,7 +19,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
   List<Question> questions = [
     Question(
       text:
-          'مرحبًا أنا نامق, هنا لمساعدتك في الإجابة على أسئلتك فيما يخص جامعة القصيم, اختر أحد الأسئلة التالية',
+      'مرحبًا أنا نامق, هنا لمساعدتك في الإجابة على أسئلتك فيما يخص جامعة القصيم, اختر أحد الأسئلة التالية',
       isClickable: false,
       isAssistant: true,
     ),
@@ -205,24 +205,24 @@ class _chatbotScreenState extends State<chatbotScreen> {
             .toSet()
             .toList();
         List<String> serviceTargets =
-            rulesList.expand((rule) => rule.service_target).toSet().toList();
+        rulesList.expand((rule) => rule.service_target).toSet().toList();
 
         // in case the follow-up question is empty assign it
         if (questions[index].text == 'مالفئة التي تستهدفها هذه الخدمة؟') {
           nextQuestions = serviceTargets
               .map((target) => Question(
-                    text: target,
-                    isClickable: true,
-                    isAssistant: true,
-                  ))
+            text: target,
+            isClickable: true,
+            isAssistant: true,
+          ))
               .toList();
         } else if (questions[index].text == 'العضو من أي كلية؟') {
           nextQuestions = departments
               .map((category) => Question(
-                    text: category,
-                    isClickable: true,
-                    isAssistant: true,
-                  ))
+            text: category,
+            isClickable: true,
+            isAssistant: true,
+          ))
               .toList();
         } else if (serviceTargets.contains(questions[index].text)) {
           List targetRules = rulesList
@@ -231,10 +231,10 @@ class _chatbotScreenState extends State<chatbotScreen> {
               .toList();
           nextQuestions = targetRules
               .map((rule) => Question(
-                    text: rule.title,
-                    isClickable: true,
-                    isAssistant: true,
-                  ))
+            text: rule.title,
+            isClickable: true,
+            isAssistant: true,
+          ))
               .toList();
         } else if (departments.contains(questions[index].text)) {
           List departmentFaculty = facultyInfoList
@@ -243,16 +243,16 @@ class _chatbotScreenState extends State<chatbotScreen> {
 
           nextQuestions = departmentFaculty
               .map((faculty) => Question(
-                    text: faculty.name,
-                    isClickable: true,
-                    isAssistant: true,
-                  ))
+            text: faculty.name,
+            isClickable: true,
+            isAssistant: true,
+          ))
               .toList();
         } else if (rulesList
             .any((rule) => rule.title == questions[index].text)) {
           String selectedRuleTitle = questions[index].text;
           Rules selectedRule =
-              rulesList.firstWhere((rule) => rule.title == selectedRuleTitle);
+          rulesList.firstWhere((rule) => rule.title == selectedRuleTitle);
           String title = selectedRule.title;
           String description = selectedRule.description;
           String steps = '';
@@ -326,17 +326,17 @@ class ChatBubble extends StatelessWidget {
             : Color.fromARGB(255, 0, 81, 154),
         borderRadius: isAssistant
             ? const BorderRadius.only(
-                bottomLeft: Radius.circular(40),
-                topLeft: Radius.circular(40),
-                bottomRight: Radius.circular(0),
-                topRight: Radius.circular(40),
-              )
+          bottomLeft: Radius.circular(40),
+          topLeft: Radius.circular(40),
+          bottomRight: Radius.circular(0),
+          topRight: Radius.circular(40),
+        )
             : const BorderRadius.only(
-                bottomLeft: Radius.circular(0),
-                topLeft: Radius.circular(40),
-                bottomRight: Radius.circular(40),
-                topRight: Radius.circular(40),
-              ),
+          bottomLeft: Radius.circular(0),
+          topLeft: Radius.circular(40),
+          bottomRight: Radius.circular(40),
+          topRight: Radius.circular(40),
+        ),
       ),
       // constraints: BoxConstraints(maxWidth: width * 2 / 3),
       child: Text(

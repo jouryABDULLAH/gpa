@@ -57,7 +57,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     ),
                   ),
                   separatorBuilder: (context, index) =>
-                      const SizedBox(height: 10),
+                  const SizedBox(height: 10),
                 ),
               )
             ],

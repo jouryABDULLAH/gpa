@@ -62,7 +62,7 @@ class SendAlarmCubit extends Cubit<SendAlarmState> {
     emit(GetNotificationLoading());
     try {
       var response =
-          await FirebaseFirestore.instance.collection("notifications").get();
+      await FirebaseFirestore.instance.collection("notifications").get();
 
       for (var element in response.docs) {
         notification.add(NotificationModel.fromJson(element.data()));

@@ -121,7 +121,7 @@ class _DbState extends State<Db> {
                   itemBuilder: (context, i) => Container(
                     decoration: BoxDecoration(
                       color:
-                          controller.calendarController.events?[i].eventColor,
+                      controller.calendarController.events?[i].eventColor,
                       borderRadius: BorderRadius.circular(77),
                     ),
                     child: Padding(
@@ -139,7 +139,7 @@ class _DbState extends State<Db> {
                                 MyLocal.getFontFamily(Get.locale!.languageCode),
                               ),
                               overflow:
-                                  TextOverflow.ellipsis, // Handle overflow
+                              TextOverflow.ellipsis, // Handle overflow
                               maxLines: 1, // Limit max lines
                               controller.calendarController.events?[i].name ??
                                   "",
@@ -238,7 +238,7 @@ class _DbState extends State<Db> {
   }
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  FlutterLocalNotificationsPlugin();
 
   Future<void> _zonedScheduleNotification(
       String name, String duration, DateTime dateEnd) async {
@@ -259,8 +259,8 @@ class _DbState extends State<Db> {
         platform,
         androidScheduleMode: AndroidScheduleMode.inexact,
         uiLocalNotificationDateInterpretation:
-            UILocalNotificationDateInterpretation.absoluteTime);
-  /*  await FirebaseFirestore.instance
+        UILocalNotificationDateInterpretation.absoluteTime);
+    /*  await FirebaseFirestore.instance
         .collection("notifications")
         .add({"eventName": name, "start": duration,});*/
   }

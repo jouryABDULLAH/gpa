@@ -136,7 +136,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                 ),
                                 Row(
                                   mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+                                  MainAxisAlignment.spaceBetween,
                                   children: [
                                     IconButton(
                                       icon: const Icon(Icons.arrow_back_ios),
@@ -148,7 +148,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     ),
                                     ValueListenableBuilder(
                                       valueListenable:
-                                          controller.monthNameNotifier,
+                                      controller.monthNameNotifier,
                                       builder: (context, value, child) => Text(
                                         value,
                                         style: GoogleFonts.getFont(
@@ -183,8 +183,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     forceSixWeek: true,
                                     dayItemBuilder: (builderArgument) =>
                                         DayItemWidget(
-                                      properties: builderArgument,
-                                    ),
+                                          properties: builderArgument,
+                                        ),
                                     weekDaysBuilder: (day) =>
                                         WeekDaysWidget(day: day),
                                     eventBuilder: (drawer) =>
