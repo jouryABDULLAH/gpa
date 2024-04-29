@@ -69,37 +69,37 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     );
   }
 
-  Widget _buildBottomSection() {
-    return Flexible(
-      child: Padding(
-        padding: EdgeInsets.symmetric(
-          horizontal: 1,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Adjust spacing as needed
-            Row(
-              children: [
-                Expanded(child: _buildTextFormFieldPreviousHours()),
-                SizedBox(
-                  width: 7,
-                ),
-                Expanded(child: _buildTextFormFieldPreviousGPA()),
-                Expanded(
-                  flex: 1,
-                  child: ShowAverage(
-                    average: DataHelper.cumulativeAvg(hours, previousGPA),
-                    numberOfClass: DataHelper.allAddedLessons.length,
+  Widget _buildBottomSection() => Flexible(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 1,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Adjust spacing as needed
+              Row(
+                children: [
+                  Expanded(child: _buildTextFormFieldPreviousHours()),
+                  SizedBox(
+                    width: 7,
                   ),
-                ),
-              ],
-            ),
-          ],
+                  Expanded(child: _buildTextFormFieldPreviousGPA()),
+                  Expanded(
+                    flex: 1,
+                    child: ShowAverage(
+                      average: DataHelper.cumulativeAvg(hours, previousGPA),
+                      numberOfClass: DataHelper.allAddedLessons.length,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
-  }
 
   Widget _buildForm() {
     return Form(
