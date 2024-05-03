@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/chatbot/chatbotScreen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 
@@ -29,16 +30,18 @@ class _ChatbotWelcomeState extends State<ChatbotWelcome> {
                 padding: EdgeInsets.fromLTRB(50, 5, 50, 50),
                 child: Column(
                   children: [
-                    const SizedBox(height: 200),
+                    const SizedBox(height: 150),
                     Text(
-                      'مرحبًا، نامق في خدمتك!',
-                      style: GoogleFonts.almarai(
+                      "WN".tr,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.getFont(
+                        MyLocal.getFontFamily(Get.locale!.languageCode),
                         color: Colors.white,
-                        fontSize: 28,
+                        fontSize: Get.locale?.languageCode == 'ar' ? 35 : 28,
                       ),
                       textDirection: TextDirection.rtl,
                     ),
-                    const SizedBox(height: 75),
+                    const SizedBox(height: 50),
                     Container(
                       padding: const EdgeInsets.all(15),
                       child: Column(
@@ -59,18 +62,24 @@ class _ChatbotWelcomeState extends State<ChatbotWelcome> {
                           const SizedBox(height: 30),
                           Center(
                             child: Text(
-                              'هنا لمساعدتك على إيجاد إجابات لتساؤلاتك حول الخدمات الأكديمية وما يخص الجامعة ',
-                              style: GoogleFonts.almarai(
-                                color: Colors.white,
-                                fontSize: 20,
-                              ),
+                              "hereforU".tr,
+                              style: GoogleFonts.getFont(
+                                  MyLocal.getFontFamily(
+                                      Get.locale!.languageCode),
+                                  color: Colors.white,
+                                  fontWeight: Get.locale?.languageCode == 'ar'
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                  fontSize: Get.locale?.languageCode == 'ar'
+                                      ? 20
+                                      : 18),
                               textAlign: TextAlign.center,
                             ),
                           ),
                         ],
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 35),
                     TextButton(
                       style: TextButton.styleFrom(
                         foregroundColor: ColorManager.white,
@@ -83,10 +92,11 @@ class _ChatbotWelcomeState extends State<ChatbotWelcome> {
                         Get.to(() => const chatbotScreen());
                       },
                       child: Text(
-                        '!دعنا نتحدث',
-                        style: GoogleFonts.almarai(
+                        "lets".tr,
+                        style: GoogleFonts.getFont(
+                          MyLocal.getFontFamily(Get.locale!.languageCode),
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: Get.locale?.languageCode == 'ar' ? 30 : 30,
                         ),
                       ),
                     )

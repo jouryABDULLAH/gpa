@@ -69,7 +69,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                             }),
                       ),
                       SizedBox(
-                        height: 13,
+                        height: 16,
                       ),
                       Text(
                         textAlign: TextAlign.center,
@@ -83,14 +83,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         ),
                       ),
                       SizedBox(
-                        height: 3,
+                        height: 15,
                       ),
                       Text(
                         textAlign: TextAlign.center,
                         "forgpage1".tr,
                         style: GoogleFonts.vidaloka(
                           textStyle: TextStyle(
-                            fontSize: 15,
+                            fontSize: 16,
                             color: Color.fromARGB(255, 108, 108, 108),
                             fontWeight: FontWeight.normal,
                           ),
@@ -101,15 +101,18 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Email",
+                        head: "Email".tr,
                         controller: email,
                         validate: (c) {
                           if (!email.text.contains("@")) {
                             return "wrong email".tr;
                           }
+                          if (email.text.trim().isEmpty) {
+                            return "empty".tr;
+                          }
                           return null;
                         },
-                        hint: ' enter your email',
+                        hint: "enter your email".tr,
                       ),
                       controller.isLoading
                           ? Center(
@@ -146,17 +149,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                       dialogType: DialogType.success,
                                       animType: AnimType.rightSlide,
                                       title: '',
-                                      desc:
-                                          'a conformation message has been sent to your email, please check your email to proceed',
+                                      desc: "mess".tr,
                                     ).show();
                                   } catch (e) {
                                     AwesomeDialog(
                                       context: context,
                                       dialogType: DialogType.error,
                                       animType: AnimType.rightSlide,
-                                      title: 'an error occured',
-                                      desc:
-                                          'an error occured while sending a message to ${email.text}, please try again',
+                                      title: "erroroccured".tr,
+                                      desc: "erroroccured2".tr +
+                                          "${email.text}" +
+                                          "TA".tr,
                                     ).show();
                                   }
                                 },

@@ -106,7 +106,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       ),
                       AppTextFormField(
                         padding: 10,
-                        head: "Email",
+                        head: "Email".tr,
                         controller: email,
                         validate: (c) {
                           if (!email.text.contains("@")) {
@@ -120,7 +120,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                           }
                           return null;
                         },
-                        hint: 'email',
+                        hint: 'email'.tr,
                       ),
                       const SizedBox(
                         height: 2,
