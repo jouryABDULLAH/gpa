@@ -93,13 +93,18 @@ class _chatbotScreenState extends State<chatbotScreen> {
       body: Builder(builder: (context) {
         showfollowUpQuestionss = false;
         return Container(
-          padding: const EdgeInsets.only(top: 50),
+          padding: const EdgeInsets.only(
+            top: 50,
+          ),
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/background.png"),
                   fit: BoxFit.fill)),
           child: Column(
             children: [
+              SizedBox(
+                height: 15,
+              ),
               Container(
                 margin: const EdgeInsets.only(bottom: 10),
                 width: 150,

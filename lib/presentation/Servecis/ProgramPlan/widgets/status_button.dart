@@ -22,9 +22,11 @@ class StatusButton extends StatelessWidget {
         children: [
           Container(
             height: 68,
+            width: 85,
             decoration: BoxDecoration(
               border: Border.all(
-                color: const Color.fromARGB(255, 74, 195, 135).withOpacity(0.15),
+                color:
+                    const Color.fromARGB(255, 74, 195, 135).withOpacity(0.15),
               ),
               color: const Color.fromARGB(255, 74, 195, 135).withOpacity(0.2),
               borderRadius: BorderRadius.circular(16),
@@ -35,15 +37,16 @@ class StatusButton extends StatelessWidget {
               children: [
                 Text(
                   title,
+                  textAlign: TextAlign.center,
                   style: const TextStyle(
-                      color: Color.fromARGB(255, 74, 195, 135),
-                      fontSize: 12,
-                      fontWeight: FontWeight.w600),
+                      color: Colors.white,
+                      fontSize: 11,
+                      fontWeight: FontWeight.w500),
                 ),
                 Text(
                   value,
                   style: const TextStyle(
-                      color: Color.fromARGB(255, 74, 195, 135),
+                      color: Color.fromARGB(255, 249, 249, 249),
                       fontSize: 14,
                       fontWeight: FontWeight.w600),
                 ),

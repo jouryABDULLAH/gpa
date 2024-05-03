@@ -42,8 +42,7 @@ class ColorManager {
   /// Colors for [EventWidget].
   static const eventColors = [
     Color.fromARGB(255, 0, 167, 171),
-    Color.fromARGB(255, 0, 167, 171),
-    Color.fromARGB(255, 0, 167, 171),
-    Color.fromARGB(255, 0, 167, 171),
+    Color(0xff116d7a),
+    Color.fromARGB(255, 17, 53, 91),
   ];
 }

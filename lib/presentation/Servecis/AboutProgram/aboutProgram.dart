@@ -14,6 +14,22 @@ class aboutProgram extends StatefulWidget {
 }
 
 class __aboutProgramState extends State<aboutProgram> {
+  final Map<String, dynamic> departmentInfo = {
+    "البداية": "تأسس قسم علوم الحاسب في العام الدراسي 1419/1418هـ متزامناً...",
+    "رئيس القسم": {
+      "name": "د. محمد بن عبدالرحمن السحيباني",
+      "office": "GR-210",
+      "extension": "20394 - 12700",
+      "email": "m.suhibani@qu.edu.sa"
+    },
+    "الرؤية":
+        "يتطلع قسم علوم الحاسب لتحقيق الريادة في التعليم والبحث العلمي...",
+    "نظام الدراسة بالقسم":
+        "طبقاً للخطة الدراسية، الطالب يدرس ثمانية فصول دراسية...",
+    "الهيكل العام للخطة الدراسية لقسم علوم الحاسب":
+        "- السنة التحضيرية: 34 ساعة معتمدة..."
+  };
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +38,7 @@ class __aboutProgramState extends State<aboutProgram> {
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromARGB(75, 0, 0, 0),
                 spreadRadius: 2,
@@ -39,7 +55,7 @@ class __aboutProgramState extends State<aboutProgram> {
               textAlign: TextAlign.center,
               style: GoogleFonts.getFont(
                 MyLocal.getFontFamily(Get.locale!.languageCode),
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.normal,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -52,16 +68,72 @@ class __aboutProgramState extends State<aboutProgram> {
               icon: const Icon(Icons.arrow_back),
               color: Colors.white,
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // This will navigate back to the previous screen
+                Navigator.of(context).pop();
               },
             ),
             actions: [],
           ),
         ),
       ),
-      body: Container(
-        foregroundDecoration: const BoxDecoration(color: Colors.white),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            const SizedBox(height: 20),
+            Text(
+              "begining".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(departmentInfo["البداية".tr]),
+            const SizedBox(height: 20),
+            Text("res".tr,
+                style: GoogleFonts.getFont(
+                    MyLocal.getFontFamily(Get.locale!.languageCode),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold)),
+            const SizedBox(height: 10),
+            Text("Name:".tr + " ${departmentInfo["رئيس القسم"]["name"]}"),
+            Text("off".tr + " ${departmentInfo["رئيس القسم"]["office"]}"),
+            Text("tah".tr + " ${departmentInfo["رئيس القسم"]["extension"]}"),
+            Text("Email:".tr + " ${departmentInfo["رئيس القسم"]["email"]}"),
+            const SizedBox(height: 20),
+            Text(
+              "vig".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(departmentInfo["الرؤية".tr]),
+            const SizedBox(height: 20),
+            Text(
+              "sys".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(departmentInfo["نظام الدراسة بالقسم".tr]),
+            const SizedBox(height: 20),
+            Text(
+              "haykal".tr,
+              style: GoogleFonts.getFont(
+                  MyLocal.getFontFamily(Get.locale!.languageCode),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            Text(
+                departmentInfo['الهيكل العام للخطة الدراسية لقسم علوم الحاسب']),
+          ],
+        ),
       ),
     );
   }

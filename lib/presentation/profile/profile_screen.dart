@@ -133,7 +133,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: Boxicons.bx_info_circle,
                   title: "who".tr,
                   onTap: () {
-                    Get.to(() => AboutUs()); // Navigate to AboutUs screen
+                    Get.to(() => AboutUs());
                   },
                 ),
                 Row(

@@ -8,16 +8,17 @@ import 'package:gpa/presentation/Servecis/rules/model/rules.dart';
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 
 // ignore: camel_case_types
-class rulesPage extends StatefulWidget {
-  const rulesPage({super.key});
+class RulesPage extends StatefulWidget {
+  const RulesPage({Key? key}) : super(key: key);
+
   @override
-  State<rulesPage> createState() => _rulesPageState();
+  State<RulesPage> createState() => _RulesPageState();
 }
 
 List<Rule> rules = [];
 
 // ignore: camel_case_types
-class _rulesPageState extends State<rulesPage> {
+class _RulesPageState extends State<RulesPage> {
   @override
   void initState() {
     super.initState();
@@ -62,8 +63,7 @@ class _rulesPageState extends State<rulesPage> {
               icon: const Icon(Icons.arrow_back),
               color: Colors.white,
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // This will navigate back to the previous screen
+                Navigator.of(context).pop();
               },
             ),
           ),
@@ -72,7 +72,7 @@ class _rulesPageState extends State<rulesPage> {
       body: Column(
         children: [
           Container(
-            padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
+            padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
             child: Column(children: [
               Text(
                 "serv".tr,
@@ -97,22 +97,19 @@ class _rulesPageState extends State<rulesPage> {
               )
             ]),
           ),
-          Container(
-            height: 620,
-            //color: ColorManager.primary,
-            margin:
-                const EdgeInsets.only(top: 2, right: 8, bottom: 10, left: 8),
-            child: const RulesList(),
-          )
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.all(8),
+              child: RulesList(),
+            ),
+          ),
         ],
       ),
     );
   }
 
   void fetchRulesData() async {
-    // Call the fetchAll method of the Rule class to fetch the data
     List<Rule> fetchedRules = await Rule.fetchAll();
-    // Update the state with the fetched data
     setState(() {
       rules = fetchedRules;
     });
@@ -120,7 +117,7 @@ class _rulesPageState extends State<rulesPage> {
 }
 
 class RulesList extends StatefulWidget {
-  const RulesList({super.key});
+  const RulesList({Key? key}) : super(key: key);
 
   @override
   State<RulesList> createState() => _RulesListState();
@@ -129,90 +126,50 @@ class RulesList extends StatefulWidget {
 class _RulesListState extends State<RulesList> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Container(
-        padding: const EdgeInsets.all(10),
-        child: _buildPanel(),
-      ),
-    );
-  }
-
-  Widget _buildPanel() {
-    return ExpansionPanelList(
-      expandedHeaderPadding: const EdgeInsets.all(2),
-      animationDuration: const Duration(seconds: 1),
-      expansionCallback: (int index, bool isExpanded) {
-        setState(() {
-          rules[index].isExpanded = isExpanded;
-        });
-      },
-      dividerColor: Color.fromARGB(255, 0, 81, 154),
-      children: rules.map<ExpansionPanel>((Rule rule) {
-        return ExpansionPanel(
-          canTapOnHeader: true,
-          backgroundColor: Color.fromARGB(255, 236, 236, 236),
-          headerBuilder: (BuildContext context, bool isExpanded) {
-            return ListTile(
-              iconColor: Color.fromARGB(255, 0, 81, 154),
+    return ListView.builder(
+      itemCount: rules.length,
+      itemBuilder: (context, index) {
+        return ExpansionTile(
+          title: Text(
+            rules[index].title,
+            style: GoogleFonts.almarai(
+              color: Color.fromARGB(255, 1, 42, 76),
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          children: [
+            ListTile(
               title: Text(
-                rule.title,
+                rules[index].description,
                 style: GoogleFonts.almarai(
-                  color: Color.fromARGB(255, 1, 42, 76),
-                  fontWeight: FontWeight.w400,
+                  color: Color.fromARGB(255, 0, 81, 154),
                 ),
               ),
-            );
-          },
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Container(
-                height: 0.8,
-                color: const Color.fromARGB(255, 0, 81, 154),
-              ),
-              ListTile(
-                hoverColor: Color.fromARGB(255, 0, 81, 154),
-                title: Text(rule.title,
-                    textAlign: TextAlign.right,
-                    style: GoogleFonts.almarai(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 1, 42, 76))),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(rule.description,
-                        textAlign: TextAlign.right,
-                        style: GoogleFonts.almarai(
-                            color: Color.fromARGB(255, 0, 81, 154))),
-                    const SizedBox(height: 9),
+              subtitle: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "serv_st".tr,
+                    style: GoogleFonts.getFont(
+                      MyLocal.getFontFamily(Get.locale!.languageCode),
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 1, 42, 76),
+                    ),
+                  ),
+                  for (int i = 0; i < rules[index].steps.length; i++)
                     Text(
-                      "خطوات تنفيذ الخدمة:",
-                      textAlign: TextAlign.right,
+                      '${i + 1}- ${rules[index].steps[i]}',
                       style: GoogleFonts.almarai(
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 1, 42, 76),
+                        fontWeight: FontWeight.normal,
+                        color: Color.fromARGB(255, 0, 81, 154),
                       ),
                     ),
-                    for (int i = 0; i < rule.steps.length; i++)
-                      Padding(
-                        padding: const EdgeInsets.only(right: 16),
-                        child: Text(
-                          textAlign: TextAlign.right,
-                          '${i + 1}- ${rule.steps[i]}',
-                          style: GoogleFonts.almarai(
-                            fontWeight: FontWeight.normal,
-                            color: Color.fromARGB(255, 0, 81, 154),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
+                ],
               ),
-            ],
-          ),
-          isExpanded: rule.isExpanded,
+            ),
+          ],
         );
-      }).toList(),
+      },
     );
   }
 }

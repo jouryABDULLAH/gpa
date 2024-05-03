@@ -76,8 +76,7 @@ class _MyAccountState extends State<MyAccount> {
               icon: const Icon(Icons.arrow_back),
               color: Colors.white,
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // This will navigate back to the previous screen
+                Navigator.of(context).pop();
               },
             ),
           ),
@@ -95,7 +94,7 @@ class _MyAccountState extends State<MyAccount> {
                 title: Text(
                   "Name:".tr + " " + (controller.me?.name ?? ""),
                   style: GoogleFonts.almarai(
-                    fontSize: 20,
+                    fontSize: Get.locale?.languageCode == 'ar' ? 17 : 20,
                     fontWeight: FontWeight.normal,
                   ),
                 ),
@@ -200,7 +199,7 @@ class _MyAccountState extends State<MyAccount> {
                   "Email:".tr + " " + (controller.me?.email ?? ""),
                   style: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
-                    fontSize: Get.locale?.languageCode == 'ar' ? 18 : 20,
+                    fontSize: Get.locale?.languageCode == 'ar' ? 16 : 18,
                     fontWeight: FontWeight.normal,
                   ),
                 ),

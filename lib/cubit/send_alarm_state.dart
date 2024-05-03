@@ -10,5 +10,7 @@ class SendAlarmLoading extends SendAlarmState {}
 class SendAlarmFailure extends SendAlarmState {}
 
 class SendAlarmSuccess extends SendAlarmState {}
+class GetNotificationSuccess extends SendAlarmState {}
+class GetNotificationLoading extends SendAlarmState {}
 
 class SendAlarmChangeSelectedCategory extends SendAlarmState {}

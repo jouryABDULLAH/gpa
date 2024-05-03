@@ -35,12 +35,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final languageCode = Get.locale?.languageCode ?? 'en';
     return ProviderScope(
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
-          fontFamily: "GoogleFonts.poppins",
+          fontFamily: GoogleFonts.getFont(MyLocal.getFontFamily(languageCode))
+              .fontFamily,
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 0, 81, 154),
           ),
