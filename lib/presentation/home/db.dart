@@ -5,10 +5,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:gpa/control.dart';
 import 'package:gpa/local/local.dart';
-import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../cubit/send_alarm_cubit.dart';
 import '../../widgets/create_event_dialog.dart';
 import '../../widgets/day_item_widget.dart';
@@ -37,9 +35,6 @@ class _DbState extends State<Db> {
 
   @override
   void dispose() {
-    // controller.calendarController.dispose();
-    // controller.appbarTitleNotifier.dispose();
-    // controller.monthNameNotifier.dispose();
     super.dispose();
   }
 
@@ -120,7 +115,7 @@ class _DbState extends State<Db> {
                 child: ListView.separated(
                     itemBuilder: (c, i) => Container(
                           decoration: BoxDecoration(
-                              color: Color.fromARGB(255, 236, 236, 236),
+                              color: const Color.fromARGB(255, 236, 236, 236),
                               borderRadius: BorderRadius.circular(77)),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 3),
@@ -132,19 +127,20 @@ class _DbState extends State<Db> {
                                     style: GoogleFonts.tajawal(
                                       fontSize: 13,
                                       fontWeight: FontWeight.bold,
-                                      color: Color.fromARGB(255, 0, 81, 154),
+                                      color:
+                                          const Color.fromARGB(255, 0, 81, 154),
                                     ),
                                     controller.calendarController.events?[i]
                                             .name ??
                                         ""),
                                 CircleAvatar(
                                     backgroundColor:
-                                        Color.fromARGB(255, 0, 167, 171),
+                                        const Color.fromARGB(255, 0, 167, 171),
                                     radius: 49,
                                     child: Text(
                                         textAlign: TextAlign.center,
                                         style: GoogleFonts.poppins(
-                                          color: Color.fromARGB(
+                                          color: const Color.fromARGB(
                                               255, 236, 236, 236),
                                           fontSize: 16,
                                         ),
@@ -211,8 +207,6 @@ class _DbState extends State<Db> {
                 eventBuilder: (drawer) => EventWidget(drawer: drawer),
                 minDate: DateTime.now().subtract(const Duration(days: 1000)),
                 maxDate: DateTime.now().add(const Duration(days: 180)),
-                // weeksToShow: [0,1,2].toList(),
-                //localizedWeekDaysBuilder: (weekDay) => LocalizedWeekDaysWidget(weekDay: weekDay),
               ),
             ),
           ],
@@ -244,9 +238,6 @@ class _DbState extends State<Db> {
         androidScheduleMode: AndroidScheduleMode.inexact,
         uiLocalNotificationDateInterpretation:
             UILocalNotificationDateInterpretation.absoluteTime);
-    /*  await FirebaseFirestore.instance
-        .collection("notifications")
-        .add({"eventName": name, "start": duration,});*/
   }
 
   Future<void> addEvent() async {
@@ -293,10 +284,10 @@ class _DbState extends State<Db> {
         color: Color.fromARGB(255, 0, 168, 171),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
-            spreadRadius: 2, // Spread radius
-            blurRadius: 10, // Blur radius
-            offset: Offset(0, 4), // Offset of the shadow
+            color: Color.fromARGB(75, 0, 0, 0),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: Offset(0, 4),
           ),
         ],
       ),

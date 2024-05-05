@@ -70,7 +70,7 @@ class LevelCompletionRow extends StatelessWidget {
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 backgroundColor: Colors.grey[300],
                 valueColor: AlwaysStoppedAnimation<Color>(
-                    Color.fromARGB(255, 0, 145, 94).withOpacity(0.5)),
+                    const Color.fromARGB(255, 0, 145, 94).withOpacity(0.5)),
               ),
               const SizedBox(height: 8),
               Text(

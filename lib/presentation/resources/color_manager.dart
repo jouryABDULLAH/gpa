@@ -3,15 +3,15 @@ import 'package:flutter/material.dart';
 class ColorManager {
   static Color primary = const Color.fromARGB(255, 0, 167, 171);
   static Color splash = const Color(0xff021F4A);
-  static Color perf = Color.fromARGB(255, 255, 255, 255);
+  static Color perf = const Color.fromARGB(255, 255, 255, 255);
   static Color backGroundPerf = perf.withOpacity(0.1);
   static Color black = Colors.black;
-  static Color yellow = Color.fromARGB(255, 255, 198, 34);
+  static Color yellow = const Color.fromARGB(255, 255, 198, 34);
   static Color darkGrey = const Color(0xff525252);
   static Color grey = const Color(0xff737477);
   static Color lightBlack = const Color(0x86000000);
   static Color blueGray = const Color(0xff3c5767);
-  static Color blue = Color.fromARGB(255, 0, 81, 154);
+  static Color blue = const Color.fromARGB(255, 0, 81, 154);
 
   static Color textForm = const Color(0xffE1DFDF);
   static Color card = const Color(0xffEFEFEF);
@@ -34,8 +34,8 @@ class ColorManager {
   static Color grey1 = const Color(0xff707070);
   static Color grey2 = const Color(0xff797979);
   static Color white = const Color(0xffFFFFFF);
-  static Color error = const Color(0xffe61f34); // red color
-  static Color first = const Color(0xffF5F5F5); // red color
+  static Color error = const Color(0xffe61f34);
+  static Color first = const Color(0xffF5F5F5);
   static Color second = Colors.white;
   static const violet = Color.fromARGB(255, 17, 10, 48);
 

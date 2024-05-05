@@ -27,7 +27,7 @@ class _ChatbotWelcomeState extends State<ChatbotWelcome> {
           child: SingleChildScrollView(
             child: Center(
               child: Padding(
-                padding: EdgeInsets.fromLTRB(50, 5, 50, 50),
+                padding: const EdgeInsets.fromLTRB(50, 5, 50, 50),
                 child: Column(
                   children: [
                     const SizedBox(height: 150),

@@ -35,7 +35,7 @@ class DataHelper {
               (sumOfCredit + previousHours)
           : 0.0;
     } else {
-      return 0.0; // Handle the case where there are no lessons added
+      return 0.0;
     }
   }
 

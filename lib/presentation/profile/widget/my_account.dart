@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +11,7 @@ import 'package:icons_plus/icons_plus.dart';
 import '../../../control.dart';
 
 class MyAccount extends StatefulWidget {
-  MyAccount({super.key, required this.userData});
+  const MyAccount({super.key, required this.userData});
 
   final UserModel userData;
 
@@ -42,11 +40,11 @@ class _MyAccountState extends State<MyAccount> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(110.0),
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromARGB(75, 0, 0, 0),
                 spreadRadius: 2,
@@ -59,13 +57,13 @@ class _MyAccountState extends State<MyAccount> {
             elevation: 0,
             backgroundColor: ColorManager.primary,
             toolbarHeight: 88.0,
-            actions: [],
+            actions: const [],
             centerTitle: true,
             title: Text(
               "info".tr,
               style: GoogleFonts.getFont(
                 MyLocal.getFontFamily(Get.locale!.languageCode),
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.normal,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -87,7 +85,7 @@ class _MyAccountState extends State<MyAccount> {
           padding: const EdgeInsets.all(5.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               ListTile(
@@ -114,7 +112,7 @@ class _MyAccountState extends State<MyAccount> {
                                 height: 43,
                                 decoration: BoxDecoration(
                                     color: ColorManager.primary,
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(12),
                                       bottomRight: Radius.circular(12),
                                     )),
@@ -125,8 +123,8 @@ class _MyAccountState extends State<MyAccount> {
                                       MyLocal.getFontFamily(
                                           Get.locale!.languageCode),
                                       fontSize: 25,
-                                      color:
-                                          Color.fromARGB(255, 255, 255, 255)),
+                                      color: const Color.fromARGB(
+                                          255, 255, 255, 255)),
                                 )),
                             Padding(
                               padding: const EdgeInsets.all(8.0),

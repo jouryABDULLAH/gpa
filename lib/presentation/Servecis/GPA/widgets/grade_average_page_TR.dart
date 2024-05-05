@@ -72,7 +72,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
   Widget _buildBottomSection() => Flexible(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 1,
             ),
             child: Column(
@@ -82,7 +82,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                 Row(
                   children: [
                     Expanded(child: _buildTextFormFieldPreviousHours()),
-                    SizedBox(
+                    const SizedBox(
                       width: 7,
                     ),
                     Expanded(child: _buildTextFormFieldPreviousGPA()),
@@ -107,7 +107,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -115,7 +115,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                 flex: 2,
                 child: _buildTextFormField(),
               ),
-              SizedBox(width: 0),
+              const SizedBox(width: 0),
               Column(
                 children: [
                   Text(
@@ -135,7 +135,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                   ),
                 ],
               ),
-              SizedBox(width: 1),
+              const SizedBox(width: 1),
               Column(
                 children: [
                   Text(
@@ -155,17 +155,17 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               IconButton(
                 onPressed: _LessonAndCalAvg,
-                icon: Icon(Boxicons.bx_plus_circle),
+                icon: const Icon(Boxicons.bx_plus_circle),
                 color: const Color.fromRGBO(255, 198, 34, 1),
-                padding: EdgeInsets.only(top: 20),
+                padding: const EdgeInsets.only(top: 20),
                 iconSize: 37,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
             ],
           ),
         ],
@@ -202,7 +202,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           ),
           filled: true,
           fillColor: Constants.mainColor.withOpacity(0.3),
-          contentPadding: EdgeInsets.symmetric(
+          contentPadding: const EdgeInsets.symmetric(
             vertical: 15,
             horizontal: 8,
           ),
@@ -215,7 +215,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
     return Padding(
       padding: const EdgeInsets.only(left: 6, top: 10),
       child: TextFormField(
-        keyboardType: TextInputType.numberWithOptions(decimal: true),
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
         onChanged: (value) {
           setState(() {
             previousGPA = double.tryParse(value) ?? 0.0;
@@ -240,7 +240,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
           ),
           filled: true,
           fillColor: Constants.mainColor.withOpacity(0.3),
-          contentPadding: EdgeInsets.symmetric(
+          contentPadding: const EdgeInsets.symmetric(
             vertical: 15,
             horizontal: 8,
           ),
@@ -281,7 +281,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
                 helperStyle: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
                     fontSize: 16),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   vertical: 15,
                   horizontal: 8,
                 ),
@@ -316,7 +316,6 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
       print("Hours: $hours");
       print("Previous GPA: $previousGPA");
 
-      // Recalculate cumulative average
       var cumulativeAvg = DataHelper.cumulativeAvg(hours, previousGPA);
       print("Cumulative Average: $cumulativeAvg");
 
@@ -350,15 +349,15 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GPAPage()),
+                  MaterialPageRoute(builder: (context) => const GPAPage()),
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
                 size: 25.0,
               ),
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
             ),
           ),
           Align(
@@ -367,7 +366,7 @@ class _GradeAveragePageState extends State<GradeAveragePageTR> {
               "GPA_22".tr,
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 255, 255, 255),

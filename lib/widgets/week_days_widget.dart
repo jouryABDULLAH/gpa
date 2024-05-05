@@ -3,7 +3,6 @@ import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-/// Widget that represents week days in row above calendar month view.
 class WeekDaysWidget extends StatelessWidget {
   const WeekDaysWidget({
     required this.day,

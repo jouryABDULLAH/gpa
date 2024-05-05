@@ -1,7 +1,6 @@
 import 'package:cr_calendar/cr_calendar.dart';
 import 'package:flutter/material.dart';
 
-/// Custom event widget with rounded borders
 class EventWidget extends StatelessWidget {
   const EventWidget({
     required this.drawer,

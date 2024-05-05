@@ -9,7 +9,8 @@ class AdvisorInfoPage extends StatefulWidget {
   final String advisorName;
   final String advisorEmail;
 
-  AdvisorInfoPage({required this.advisorName, required this.advisorEmail});
+  const AdvisorInfoPage(
+      {required this.advisorName, required this.advisorEmail});
 
   @override
   _AdvisorInfoPageState createState() => _AdvisorInfoPageState();
@@ -22,7 +23,7 @@ class _AdvisorInfoPageState extends State<AdvisorInfoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(110.0),
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
@@ -69,48 +70,48 @@ class _AdvisorInfoPageState extends State<AdvisorInfoPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              SizedBox(height: 120),
+              const SizedBox(height: 120),
               Text(
                 "Academic advisor".tr,
                 style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 3, 3, 3),
                   ),
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 widget.advisorName,
                 style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 19,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 3, 3, 3),
                   ),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextField(
                 controller: _messageController,
                 decoration: InputDecoration(
                   hintText: 'WM'.tr,
                   hintStyle: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.normal,
                       color: Color.fromARGB(97, 107, 99, 99),
                     ),
                   ),
-                  border: OutlineInputBorder(),
+                  border: const OutlineInputBorder(),
                 ),
                 maxLines: 5,
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               TextButton(
                 style: TextButton.styleFrom(
                   foregroundColor: ColorManager.white,
@@ -126,7 +127,7 @@ class _AdvisorInfoPageState extends State<AdvisorInfoPage> {
                   'SM'.tr,
                   style: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontSize: 19,
                       fontWeight: FontWeight.normal,
                       color: Color.fromARGB(255, 255, 255, 255),

@@ -58,7 +58,7 @@ class AppTextFormField extends StatelessWidget {
           Text(
             head ?? "",
             style: GoogleFonts.poppins(
-              textStyle: TextStyle(
+              textStyle: const TextStyle(
                 fontSize: 18,
                 color: Color.fromARGB(255, 0, 81, 154),
                 fontWeight: FontWeight.normal,
@@ -76,9 +76,7 @@ class AppTextFormField extends StatelessWidget {
                   textDirection: direction,
                   obscureText: secure ?? false,
                   style: textStyle ??
-                      Theme.of(context)
-                          .inputDecorationTheme
-                          .hintStyle, // Use custom or default text style
+                      Theme.of(context).inputDecorationTheme.hintStyle,
                   keyboardType: textInputType,
                   decoration: InputDecoration(
                     contentPadding: const EdgeInsets.all(5),

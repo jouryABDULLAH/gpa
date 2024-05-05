@@ -42,11 +42,8 @@ class Rules {
   }
 
   static Future<List<Rules>> fetchAll() async {
-    // Load JSON data from the assets folder
     String jsonData = await rootBundle.loadString('assets/rules_data.json');
-    // Parse the JSON data
     List<dynamic> jsonList = json.decode(jsonData);
-    // Convert JSON data into a list of Rule objects
     List<Rules> rules = jsonList.map((json) {
       List<String> steps = List<String>.from(json["steps"]);
       List<String> service_target = List<String>.from(json["service-target"]);

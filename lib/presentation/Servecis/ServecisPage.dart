@@ -6,8 +6,6 @@ import 'package:gpa/presentation/home/home_screen.dart';
 import 'package:gpa/presentation/Servecis/AboutProgram/aboutProgram.dart';
 import 'package:gpa/presentation/Servecis/AcademicAdvisor/AcademicAdvisor.dart';
 import 'package:gpa/presentation/Servecis/ProgramPlan/plan.dart';
-import 'package:gpa/presentation/home/home_screen.dart';
-import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/GPA_Page.dart';
 import 'package:gpa/presentation/Servecis/rules/rules_page.dart';
 import 'package:boxicons/boxicons.dart';
@@ -18,24 +16,6 @@ class ServicisPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      /*appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Color.fromARGB(255, 0, 167, 171),
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.white,
-            size: 20,
-          ),
-          onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => const HomeScreen()),
-            );
-          },
-        ),
-        actions: [],
-      ),*/
       body: Column(
         children: [
           Upper(),
@@ -90,18 +70,17 @@ class ServicisPage extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => const aboutProgram()),
               );
-            }  else if (index == 4) {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => AdvisorInfoPage(
-                advisorName: 'H'.tr, // Replace 'Advisor Name' with actual advisor name
-                advisorEmail: 'laty2548@gmail.com', // Replace with actual advisor email
-              ),
-            ),
-          );
-        }
-
-      },
+            } else if (index == 4) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => AdvisorInfoPage(
+                    advisorName: 'H'.tr,
+                    advisorEmail: 'laty2548@gmail.com',
+                  ),
+                ),
+              );
+            }
+          },
           child: Container(
             margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
             decoration: BoxDecoration(

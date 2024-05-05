@@ -5,7 +5,6 @@ import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:gpa/model/faculty_model.dart';
 import 'package:gpa/model/rules_model.dart';
 import 'package:gpa/model/question_model.dart';
-import 'package:gpa/presentation/chatbot/chatbot_welcome_screen.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
 
 class chatbotScreen extends StatefulWidget {
@@ -47,7 +46,6 @@ class _chatbotScreenState extends State<chatbotScreen> {
   late List<Rules> employeesRulesList = [];
   late List<Faculty> facultyInfoList = [];
   final ScrollController _scrollController = ScrollController();
-  // late Future<List<Rules>> futureRules;
 
   @override
   void dispose() {
@@ -58,7 +56,6 @@ class _chatbotScreenState extends State<chatbotScreen> {
   @override
   void initState() {
     super.initState();
-    // futureRules = fetchRulesData();
     defaultQuestions = List.from(questions);
     fetchRulesData();
     fetchFacultyData();
@@ -69,8 +66,8 @@ class _chatbotScreenState extends State<chatbotScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        shadowColor: Color.fromARGB(75, 0, 0, 0),
-        backgroundColor: Color.fromARGB(255, 0, 168, 171),
+        shadowColor: const Color.fromARGB(75, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(255, 0, 168, 171),
         leading: IconButton(
           onPressed: () => Get.to(const HomeScreen()),
           icon: const Icon(
@@ -85,7 +82,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
           style: GoogleFonts.tajawal(
             fontSize: 26,
             fontWeight: FontWeight.bold,
-            color: Color.fromARGB(255, 255, 255, 255),
+            color: const Color.fromARGB(255, 255, 255, 255),
           ),
         ),
         toolbarHeight: 120.0,
@@ -102,7 +99,7 @@ class _chatbotScreenState extends State<chatbotScreen> {
                   fit: BoxFit.fill)),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               Container(
@@ -192,11 +189,9 @@ class _chatbotScreenState extends State<chatbotScreen> {
         });
       }
     } else if (questions[index].isClickable) {
-      // default value is the followup question | we can use late instead
       List<Question> nextQuestions = [];
 
       if (questions[index].followUpQuestions != null) {
-        // turn FU questions into main questions
         nextQuestions = questions[index].followUpQuestions!.map((questionText) {
           return Question(
             text: questionText,
@@ -212,7 +207,6 @@ class _chatbotScreenState extends State<chatbotScreen> {
         List<String> serviceTargets =
             rulesList.expand((rule) => rule.service_target).toSet().toList();
 
-        // in case the follow-up question is empty assign it
         if (questions[index].text == 'مالفئة التي تستهدفها هذه الخدمة؟') {
           nextQuestions = serviceTargets
               .map((target) => Question(
@@ -287,7 +281,6 @@ class _chatbotScreenState extends State<chatbotScreen> {
       if (mounted) {
         setState(() {
           questions = [
-            // ...questions.sublist(0, index),
             Question(
                 text: questions[index].text,
                 isClickable: false,
@@ -327,8 +320,8 @@ class ChatBubble extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
       decoration: BoxDecoration(
         color: isAssistant
-            ? Color.fromARGB(255, 0, 168, 171)
-            : Color.fromARGB(255, 0, 81, 154),
+            ? const Color.fromARGB(255, 0, 168, 171)
+            : const Color.fromARGB(255, 0, 81, 154),
         borderRadius: isAssistant
             ? const BorderRadius.only(
                 bottomLeft: Radius.circular(40),

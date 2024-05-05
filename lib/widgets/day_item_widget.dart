@@ -2,7 +2,6 @@ import 'package:cr_calendar/cr_calendar.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:flutter/material.dart';
 
-/// Widget of day item cell for calendar
 class DayItemWidget extends StatelessWidget {
   const DayItemWidget({
     required this.properties,

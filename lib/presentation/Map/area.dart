@@ -80,7 +80,7 @@ Set<Polygon> _createPolygons() {
   if (_createPolygonPoints().isNotEmpty) {
     polygons.add(
       Polygon(
-        fillColor: Color.fromARGB(0, 255, 255, 255).withOpacity(0.3),
+        fillColor: const Color.fromARGB(0, 255, 255, 255).withOpacity(0.3),
         strokeColor: Colors.black,
         polygonId: const PolygonId('test3'),
         points: _createPolygonPoints(),

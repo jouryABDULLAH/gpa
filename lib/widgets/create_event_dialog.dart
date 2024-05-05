@@ -8,7 +8,6 @@ import 'package:gpa/widgets/week_days_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-/// Pop up dialog for event creation.
 class CreateEventDialog extends StatefulWidget {
   const CreateEventDialog({super.key});
 

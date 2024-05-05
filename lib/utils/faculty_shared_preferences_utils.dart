@@ -1,5 +1,3 @@
-// shared_preferences_utils.dart
-
 import 'dart:convert';
 import 'package:gpa/model/faculty_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

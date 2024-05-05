@@ -3,7 +3,6 @@ import 'package:gpa/presentation/resources/constants.dart';
 import 'package:gpa/presentation/resources/extensions.dart';
 import 'package:flutter/material.dart';
 
-/// Draggable bottom sheet with events for the day.
 class DayEventsBottomSheet extends StatelessWidget {
   const DayEventsBottomSheet({
     required this.screenHeight,

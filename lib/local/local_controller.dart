@@ -16,8 +16,8 @@ class MyLanguageController extends GetxController {
   Future<void> initializeSharedPreferences() async {
     sharedPreferences = await SharedPreferences.getInstance();
     initialLang = sharedPreferences!.getString("lang") == "ar"
-        ? Locale("ar")
-        : Locale("en");
+        ? const Locale("ar")
+        : const Locale("en");
   }
 
   void changLang(String codelang) {

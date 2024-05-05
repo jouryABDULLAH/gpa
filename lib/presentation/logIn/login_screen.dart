@@ -65,7 +65,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                                 color: Colors.white,
                               ),
                               onPressed: () {
-                                Get.to(() => Welcome());
+                                Get.to(() => const Welcome());
                               }),
                         ),
                       ),
@@ -75,7 +75,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                       Text(
                         "welcome".tr,
                         style: GoogleFonts.vidaloka(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 39,
                             color: Color.fromARGB(255, 0, 167, 171),
                             fontWeight: FontWeight.normal,
@@ -97,7 +97,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                         },
                         hint: '411900000@qu.edu.sa',
                         textStyle: GoogleFonts.poppins(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 15,
                             color: Color.fromARGB(255, 108, 108, 108),
                             fontWeight: FontWeight.normal,
@@ -114,7 +114,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                         },
                         hint: '********',
                         textStyle: GoogleFonts.poppins(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 18,
                             color: Color.fromARGB(255, 108, 108, 108),
                             fontWeight: FontWeight.normal,
@@ -122,7 +122,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                         ),
                         secure: true,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       controller.isLoading
@@ -138,7 +138,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                                 content: Text(
                                   'Login'.tr,
                                   style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                       fontSize: 16,
                                       color: Color.fromARGB(255, 255, 255, 255),
                                       fontWeight: FontWeight.normal,
@@ -146,16 +146,16 @@ class _LogInWidgetState extends State<LogInWidget> {
                                   ),
                                 ),
                                 contentClr: Colors.white,
-                                clr: Color.fromARGB(255, 0, 167, 171),
+                                clr: const Color.fromARGB(255, 0, 167, 171),
                                 onPressed: () async {
                                   if (nameKey.currentState?.validate() ==
                                       true) {
-                                        if (mounted) {
-                                          setState(() {
-                                            controller.isLoading = true;
-                                          });
-                                        }
-                                   
+                                    if (mounted) {
+                                      setState(() {
+                                        controller.isLoading = true;
+                                      });
+                                    }
+
                                     await Si()
                                         .submitAuthForm(
                                       email: email.text.trim(),
@@ -183,7 +183,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                             child: Text(
                               "forget".tr,
                               style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                   fontSize: 14,
                                   color: Color.fromARGB(255, 0, 81, 154),
                                   fontWeight: FontWeight.normal,
@@ -192,7 +192,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                               ),
                             )),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 0,
                       ),
                       Center(
@@ -203,7 +203,7 @@ class _LogInWidgetState extends State<LogInWidget> {
                             child: Text(
                               "sign up".tr,
                               style: GoogleFonts.poppins(
-                                textStyle: TextStyle(
+                                textStyle: const TextStyle(
                                   fontSize: 14,
                                   color: Color.fromARGB(255, 0, 81, 154),
                                   fontWeight: FontWeight.normal,

@@ -56,7 +56,6 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 child: Form(
                   key: nameKey,
                   child: Column(
-                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Align(
                         alignment: Alignment.centerLeft,
@@ -78,7 +77,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       Text(
                         "Nice".tr,
                         style: GoogleFonts.vidaloka(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 34,
                             color: Color.fromARGB(255, 0, 167, 171),
                             fontWeight: FontWeight.normal,
@@ -180,7 +179,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                         },
                         hint: 'Confpassword'.tr,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       controller.isLoading
@@ -196,7 +195,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                 content: Text(
                                   "sign up".tr,
                                   style: GoogleFonts.poppins(
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                       fontSize: 16,
                                       color: Color.fromARGB(255, 255, 255, 255),
                                       fontWeight: FontWeight.normal,

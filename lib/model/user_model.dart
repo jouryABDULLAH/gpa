@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class UserModel {
@@ -32,7 +31,8 @@ class UserModel {
     this.notification,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json, String uId, String stringAsFixed) {
+  factory UserModel.fromJson(
+      Map<String, dynamic> json, String uId, String stringAsFixed) {
     return UserModel(
       name: json["name"],
       id: json["id"],
@@ -44,13 +44,8 @@ class UserModel {
       type: json["type"],
       notification: json["notification"],
       password: json["password"],
-
     );
   }
-
-
-
-
 
   Map<String, dynamic> toMap() {
     return {

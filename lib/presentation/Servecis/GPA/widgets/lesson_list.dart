@@ -11,7 +11,7 @@ class LessonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DataHelper.allAddedLessons.length > 0
+    return DataHelper.allAddedLessons.isNotEmpty
         ? ListView.builder(
             itemCount: DataHelper.allAddedLessons.length,
             itemBuilder: (context, index) {

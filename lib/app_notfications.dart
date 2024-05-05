@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,6 @@ class AppNotifications {
     const initSettings = InitializationSettings(android: android, iOS: ios);
     _flutterLocalNotificationsPlugin.initialize(
       initSettings,
-      //onDidReceiveBackgroundNotificationResponse:(details)=> flutterNotificationClick( details.payload),
       onDidReceiveNotificationResponse: (details) =>
           flutterNotificationClick(details.payload),
     );
@@ -36,8 +34,6 @@ class AppNotifications {
         log("Message data:${message.data}");
         log("notification:${message.notification?.title}");
         _showLocalNotification(message);
-        //flutterNotificationClick(json.encode(message.data));
-        //! you can check here on type to do a specific action
       });
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
         log('onMessageOpenedApp');
@@ -53,7 +49,6 @@ class AppNotifications {
       RemoteMessage message) async {
     log("Handling a background message: ${message.messageId}");
     await Firebase.initializeApp();
-    // flutterNotificationClick(json.encode(message.data));
   }
 
   Future<void> _showLocalNotification(RemoteMessage? message) async {
@@ -76,12 +71,6 @@ class AppNotifications {
   }
 
   static Future flutterNotificationClick(String? details) async {
-    // final _data = json.decode("$payload");
     final context = AppContext.context;
-  /*  Navigator.pushAndRemoveUntil(
-      context,
-      MaterialPageRoute(builder: (_) => BottomNavBar()),
-      (route) => false,
-    );*/
   }
 }

@@ -23,8 +23,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     const HomeWidget(),
     const ServicisPage(),
     const chatbotScreen(),
-    screen_Map(),
-    ProfileScreen(),
+    const screen_Map(),
+    const ProfileScreen(),
   ];
 
   @override

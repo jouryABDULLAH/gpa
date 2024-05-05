@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:boxicons/boxicons.dart';
 import 'dart:typed_data';
 import 'dart:ui' as ui;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,10 +13,7 @@ import 'package:gpa/presentation/Map/markers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:icons_plus/icons_plus.dart';
-
 import 'package:location/location.dart';
-
-//import 'package:gpa/presentation/Map/FAB.dart';
 
 class screen_Map extends ConsumerStatefulWidget {
   const screen_Map({Key? key}) : super(key: key);
@@ -208,7 +204,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
         B,
       );
       fetchMarkersFromFirestore();
-      // addPolygon();
       generatePolyLineFromPoints(coordinates);
     }
   }
@@ -879,7 +874,6 @@ class _screen_Map extends ConsumerState<screen_Map> {
                       final suggestion = suggestions[index];
                       return Container(
                         decoration: BoxDecoration(
-                          //  borderRadius: BorderRadius.circular(5),
                           color: const Color.fromARGB(255, 255, 255, 255)
                               .withOpacity(0.7),
                         ),

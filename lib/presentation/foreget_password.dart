@@ -68,35 +68,35 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               Get.back();
                             }),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 16,
                       ),
                       Text(
                         textAlign: TextAlign.center,
                         "forgpage".tr,
                         style: GoogleFonts.vidaloka(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 39,
                             color: Color.fromARGB(255, 0, 167, 171),
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Text(
                         textAlign: TextAlign.center,
                         "forgpage1".tr,
                         style: GoogleFonts.vidaloka(
-                          textStyle: TextStyle(
+                          textStyle: const TextStyle(
                             fontSize: 16,
                             color: Color.fromARGB(255, 108, 108, 108),
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       AppTextFormField(
@@ -129,7 +129,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                   style: GoogleFonts.getFont(
                                     MyLocal.getFontFamily(
                                         Get.locale!.languageCode),
-                                    textStyle: TextStyle(
+                                    textStyle: const TextStyle(
                                       fontSize: 16,
                                       color: Color.fromARGB(255, 255, 255, 255),
                                       fontWeight: FontWeight.normal,

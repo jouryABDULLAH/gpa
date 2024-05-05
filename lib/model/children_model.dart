@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ChildrenModel {
@@ -50,7 +49,8 @@ class ChildrenModel {
     this.lastUpdateUser,
   });
 
-  factory ChildrenModel.fromJson(Map<String, dynamic> json, String uId, String stringAsFixed) {
+  factory ChildrenModel.fromJson(
+      Map<String, dynamic> json, String uId, String stringAsFixed) {
     return ChildrenModel(
       name: json["name"],
       uId: uId,
@@ -60,31 +60,8 @@ class ChildrenModel {
       status: json["status"],
       busNumber: json["busNumber"],
       photo: json["photo"],
-      // myGroups: json["My Groups"],
-      // location: json["location"],
-      // signWith: json["signWith"],
-      // userName: json["userName"],
-      // photo: json["photo"],
-      // short: json["short"],
-      // token: json["token"],
-      // notification: json["notification"],
-      // myShow: json["myShow"],
-      // password: json["password"],
-      // lastUpdateUser: json["lastUpdateUser"],
-      // lastMessage: json["lastMessage"],
-      // countMessage: json["countMessage"],
-      // countUnread: json["countUnread"]??0,
-      // email: json["email"],
-      // phone: json["phone"],
-      // uId: json["uId"],
-      // isAdmin: json["isAdmin"],
-      // category: json["category"],
     );
   }
-
-
-
-
 
   Map<String, dynamic> toMap() {
     return {

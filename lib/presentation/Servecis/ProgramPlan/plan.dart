@@ -1,4 +1,3 @@
-// ignore_for_file: camel_case_types
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -46,7 +45,7 @@ class _planState extends State<plan> {
           child: Container(
             decoration: BoxDecoration(
               color: ColorManager.primary,
-              boxShadow: [
+              boxShadow: const [
                 BoxShadow(
                   color: Color.fromARGB(75, 0, 0, 0),
                   spreadRadius: 2,
@@ -75,7 +74,7 @@ class _planState extends State<plan> {
                   Navigator.of(context).pop();
                 },
               ),
-              actions: [],
+              actions: const [],
             ),
           ),
         ),

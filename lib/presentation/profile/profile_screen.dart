@@ -11,14 +11,14 @@ import '../../control.dart';
 import '../resources/color_manager.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key});
+  const ProfileScreen({Key? key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  final style = TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
+  final style = const TextStyle(fontSize: 30, fontWeight: FontWeight.normal);
   final controller = Get.put(Controller());
 
   Widget buildDrawerListItem(
@@ -37,7 +37,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         textAlign: TextAlign.left,
         style: GoogleFonts.getFont(
           MyLocal.getFontFamily(Get.locale!.languageCode),
-          textStyle: TextStyle(
+          textStyle: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.normal,
           ),
@@ -72,11 +72,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(90.0),
+        preferredSize: const Size.fromHeight(90.0),
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromARGB(75, 0, 0, 0),
                 spreadRadius: 2,
@@ -89,13 +89,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
             elevation: 0,
             backgroundColor: ColorManager.primary,
             toolbarHeight: 88.0,
-            actions: [],
+            actions: const [],
             centerTitle: true,
             title: Text(
               "profiletitle".tr,
               style: GoogleFonts.getFont(
                 MyLocal.getFontFamily(Get.locale!.languageCode),
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 40,
                   fontWeight: FontWeight.normal,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -109,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         builder: (_) {
           if (controller.me!.name != null) {
             return ListView(
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               children: [
                 buildDrawerListItem(
                   leading: Boxicons.bx_user_circle,
@@ -133,28 +133,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   leading: Boxicons.bx_info_circle,
                   title: "who".tr,
                   onTap: () {
-                    Get.to(() => AboutUs());
+                    Get.to(() => const AboutUs());
                   },
                 ),
                 Row(
                   children: [
-                    SizedBox(width: 15),
+                    const SizedBox(width: 15),
                     Icon(
                       Icons.language,
                       color: ColorManager.primary,
                     ),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Text(
                       "Lang".tr,
                       style: GoogleFonts.getFont(
                         MyLocal.getFontFamily(Get.locale!.languageCode),
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.normal,
                         ),
                       ),
                     ),
-                    SizedBox(width: 27),
+                    const SizedBox(width: 27),
                     ToggleButtons(
                       borderColor: ColorManager.primary,
                       borderWidth: 1.0,

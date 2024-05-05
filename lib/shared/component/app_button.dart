@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../presentation/resources/color_manager.dart';
 import '../../presentation/resources/responsive.dart';
 
@@ -53,9 +52,6 @@ class AppButton extends StatelessWidget {
                     style: TextStyle(color: contentClr ?? Colors.white),
                   )
                 : content,
-        // color: gradient
-        //   ? Colors.transparent
-        //   : clr ??appClrs.mainClr,
         padding: padding,
         minWidth:
             flexibleWidth ? null : width ?? responsive.sWidth(context) * .35,

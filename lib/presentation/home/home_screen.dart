@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gpa/local/local.dart';
 import 'package:gpa/presentation/Map/map.dart';
-import 'package:gpa/presentation/Map/widget_to_map_icon.dart';
 import 'package:gpa/presentation/home/home_widget.dart';
 import 'package:gpa/presentation/profile/profile_screen.dart';
 import 'package:gpa/presentation/resources/color_manager.dart';
@@ -60,31 +59,30 @@ class _HomeScreenState extends State<HomeScreen> {
         onTap: (i) {
           if (mounted) {
             setState(() {
-            if (i >= 0 && i < screens.length) {
-              index = i;
-            }
-            if (i == 4) {
-              _scaffoldKey.currentState!.openDrawer();
-            }
-          });
+              if (i >= 0 && i < screens.length) {
+                index = i;
+              }
+              if (i == 4) {
+                _scaffoldKey.currentState!.openDrawer();
+              }
+            });
           }
-          
         },
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Boxicons.bxs_home),
+            icon: const Icon(Boxicons.bxs_home),
             label: "home".tr,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Boxicons.bxs_grid_alt),
+            icon: const Icon(Boxicons.bxs_grid_alt),
             label: "Services".tr,
           ),
           BottomNavigationBarItem(
-              icon: Icon(Boxicons.bxs_bot), label: "namik".tr),
+              icon: const Icon(Boxicons.bxs_bot), label: "namik".tr),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.location), label: "map".tr),
+              icon: const Icon(Ionicons.location), label: "map".tr),
           BottomNavigationBarItem(
-              icon: Icon(Ionicons.person), label: "account".tr),
+              icon: const Icon(Ionicons.person), label: "account".tr),
         ],
         selectedLabelStyle: GoogleFonts.getFont(
           MyLocal.getFontFamily(Get.locale!.languageCode),
@@ -94,9 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         selectedFontSize: 13,
         unselectedFontSize: 13,
-        unselectedItemColor: Color.fromARGB(255, 17, 53, 91),
+        unselectedItemColor: const Color.fromARGB(255, 17, 53, 91),
       ),
-      drawer: Drawer(
+      drawer: const Drawer(
         child: ProfileScreen(),
       ),
     );

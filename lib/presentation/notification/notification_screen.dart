@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gpa/cubit/send_alarm_cubit.dart';
@@ -24,9 +23,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
         title: const Text("Notification Screen"),
       ),
       body: BlocConsumer<SendAlarmCubit, SendAlarmState>(
-        listener: (context, state) {
-          // TODO: implement listener
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           var data = SendAlarmCubit.get(context).notification;
           if (state is GetNotificationLoading || data == null) {
@@ -34,7 +31,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           }
 
           return Column(
-
             children: [
               Expanded(
                 child: ListView.separated(
@@ -47,17 +43,23 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text("Event Name :${data[index].eventName}"),
-                          const Divider(thickness: 1,),
+                          const Divider(
+                            thickness: 1,
+                          ),
                           Text("${data[index].start}"),
-                          const Divider(thickness: 1,),
+                          const Divider(
+                            thickness: 1,
+                          ),
                           Text("${data[index].end}"),
-                          const Divider(thickness: 1,),
+                          const Divider(
+                            thickness: 1,
+                          ),
                         ],
                       ),
                     ),
                   ),
                   separatorBuilder: (context, index) =>
-                  const SizedBox(height: 10),
+                      const SizedBox(height: 10),
                 ),
               )
             ],

@@ -34,11 +34,11 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         children: <Widget>[
           Upper(),
           Expanded(
-            flex: 1, // Reduce the flex factor to allocate less space
+            flex: 1,
             child: _buildTopSection(),
           ),
           Flexible(
-            flex: 3, // Adjust the flex value as neede
+            flex: 3,
             child: LessonList(
               onDismiss: (index) {
                 DataHelper.allAddedLessons.removeAt(index);
@@ -68,13 +68,12 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   Widget _buildBottomSection() {
     return Flexible(
       child: Padding(
-        padding: EdgeInsets.symmetric(
+        padding: const EdgeInsets.symmetric(
           horizontal: 5,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            // Adjust spacing as needed
             Row(
               children: [
                 Expanded(
@@ -85,7 +84,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
           ],
         ),
       ),
@@ -98,7 +97,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -106,7 +105,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
                 flex: 2,
                 child: _buildTextFormField(),
               ),
-              SizedBox(width: 0),
+              const SizedBox(width: 0),
               Column(
                 children: [
                   Text(
@@ -126,7 +125,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
                   ),
                 ],
               ),
-              SizedBox(width: 1),
+              const SizedBox(width: 1),
               Column(
                 children: [
                   Text(
@@ -146,17 +145,17 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
-              ), // Adjust spacing
+              ),
               IconButton(
                 onPressed: _addLessonAndCalAvg,
-                icon: Icon(Boxicons.bx_plus_circle),
-                padding: EdgeInsets.only(top: 20),
+                icon: const Icon(Boxicons.bx_plus_circle),
+                padding: const EdgeInsets.only(top: 20),
                 color: const Color.fromRGBO(255, 198, 34, 1),
                 iconSize: 37,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
             ],
           ),
         ],
@@ -167,7 +166,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
   Widget _buildTextFormField() {
     return SizedBox(
       width: 179,
-      height: 91, // Adjust the width as needed
+      height: 91,
       child: Padding(
         padding: const EdgeInsets.only(left: 15, top: 6, right: 10),
         child: Column(
@@ -196,7 +195,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
                 helperStyle: GoogleFonts.getFont(
                     MyLocal.getFontFamily(Get.locale!.languageCode),
                     fontSize: 16),
-                contentPadding: EdgeInsets.symmetric(
+                contentPadding: const EdgeInsets.symmetric(
                   vertical: 15,
                   horizontal: 8,
                 ),
@@ -209,7 +208,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               ),
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  fontSize: 17), // Adjust the font size as needed
+                  fontSize: 17),
             ),
           ],
         ),
@@ -239,10 +238,10 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
         color: Color.fromARGB(255, 0, 168, 171),
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(75, 0, 0, 0), // Shadow color
-            spreadRadius: 2, // Spread radius
-            blurRadius: 10, // Blur radius
-            offset: Offset(0, 4), // Offset of the shadow
+            color: Color.fromARGB(75, 0, 0, 0),
+            spreadRadius: 2,
+            blurRadius: 10,
+            offset: Offset(0, 4),
           ),
         ],
       ),
@@ -256,15 +255,15 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => GPAPage()),
+                  MaterialPageRoute(builder: (context) => const GPAPage()),
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
                 size: 25.0,
               ),
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
             ),
           ),
           Align(
@@ -273,7 +272,7 @@ class _GradeAveragePageState extends State<GradeAveragePage> {
               "GPA_11".tr,
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 27,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 255, 255, 255),

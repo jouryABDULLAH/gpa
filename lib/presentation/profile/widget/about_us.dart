@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,11 +11,11 @@ class AboutUs extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(110.0),
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromARGB(75, 0, 0, 0),
                 spreadRadius: 2,
@@ -30,13 +28,13 @@ class AboutUs extends StatelessWidget {
             elevation: 0,
             backgroundColor: ColorManager.primary,
             toolbarHeight: 88.0,
-            actions: [],
+            actions: const [],
             centerTitle: true,
             title: Text(
               "who".tr,
               style: GoogleFonts.getFont(
                 MyLocal.getFontFamily(Get.locale!.languageCode),
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.normal,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -47,19 +45,17 @@ class AboutUs extends StatelessWidget {
               icon: const Icon(Icons.arrow_back),
               color: Colors.white,
               onPressed: () {
-                Navigator.of(context)
-                    .pop(); // This will navigate back to the previous screen
+                Navigator.of(context).pop();
               },
             ),
           ),
         ),
       ),
-      body: //const
-          SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Text(
                 "ab".tr,
                 textAlign: Get.locale?.languageCode == 'ar'

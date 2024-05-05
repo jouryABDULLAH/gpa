@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:gpa/local/local.dart';
-import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 import 'package:gpa/presentation/home/home_screen.dart';
-import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page.dart';
 import 'package:gpa/presentation/Servecis/GPA/widgets/grade_average_page_TR.dart';
 
@@ -17,7 +15,7 @@ class GPAPage extends StatefulWidget {
 }
 
 class _GPAPage extends State<GPAPage> {
-  final style = TextStyle(
+  final style = const TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.normal,
   );
@@ -28,7 +26,7 @@ class _GPAPage extends State<GPAPage> {
       body: Column(
         children: [
           Upper(),
-          SizedBox(
+          const SizedBox(
             height: 12,
           ),
           Padding(
@@ -47,7 +45,7 @@ class _GPAPage extends State<GPAPage> {
     ];
 
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(19),
           bottomRight: Radius.circular(19),
@@ -55,13 +53,13 @@ class _GPAPage extends State<GPAPage> {
         color: Colors.white,
       ),
       child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 1.1,
           mainAxisSpacing: 15,
         ),
         shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         itemCount: 2,
         itemBuilder: (context, index) {
           return InkWell(
@@ -79,11 +77,11 @@ class _GPAPage extends State<GPAPage> {
               }
             },
             child: Container(
-              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 20),
+              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(19),
-                color: Color.fromARGB(255, 0, 167, 171),
-                boxShadow: [
+                color: const Color.fromARGB(255, 0, 167, 171),
+                boxShadow: const [
                   BoxShadow(
                     color: Color.fromARGB(44, 0, 0, 0),
                     spreadRadius: 2,
@@ -143,15 +141,15 @@ class _GPAPage extends State<GPAPage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                  MaterialPageRoute(builder: (context) => const HomeScreen()),
                 );
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: Colors.white,
                 size: 25.0,
               ),
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
             ),
           ),
           Align(
@@ -160,7 +158,7 @@ class _GPAPage extends State<GPAPage> {
               "GPA".tr,
               style: GoogleFonts.getFont(
                   MyLocal.getFontFamily(Get.locale!.languageCode),
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontSize: 40,
                     fontWeight: FontWeight.normal,
                     color: Color.fromARGB(255, 255, 255, 255),

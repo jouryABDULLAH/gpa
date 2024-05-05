@@ -24,19 +24,17 @@ class _IconMapState extends State<IconMap> {
     ).then((icon) {
       if (mounted) {
         setState(() {
-        markerIcon = icon;
-      });
+          markerIcon = icon;
+        });
       }
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    // You can return your GoogleMap widget here using markerIcon
     return Container();
   }
 
-  // Getter method to retrieve markerIcon from other classes
   BitmapDescriptor getMarkerIcon() {
     return markerIcon;
   }

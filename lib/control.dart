@@ -36,7 +36,6 @@ class Controller extends GetxController {
 
   CrCalendarController calendarController = CrCalendarController();
 
-  // String local = CacheHelper.getDate(key: 'local');
   ch() {
     isLoading = false;
     update();
@@ -44,7 +43,6 @@ class Controller extends GetxController {
 
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
   }
 
@@ -76,26 +74,10 @@ class Controller extends GetxController {
     me = (UserModel.fromJson(
         ol.data()!, FirebaseAuth.instance.currentUser!.uid, ""));
     update();
-    //
-    // me?.children?.add(ol.data()?["children"]);
+
     return me;
   }
-// <<<<<<< HEAD
 
-//   Future getEvents() async {
-//     events.clear();
-//     var ol = await FirebaseFirestore.instance.collection('events').get();
-//     for (var element in ol.docs) {
-//       var begin = element["begin"].toString().split("-");
-//       var end = element["end"].toString().split("-");
-//       events.add(CalendarEventModel(
-//           eventColor: Color(element["color"]),
-//           name: element["name"],
-//           begin: DateTime(
-//               int.parse(begin[0]), int.parse(begin[1]), int.parse(begin[2])),
-//           end: DateTime(
-//               int.parse(end[0]), int.parse(end[1]), int.parse(end[2]))));
-// =======
   Future getEvents() async {
     events.clear();
     var ol = await FirebaseFirestore.instance.collection('events').get();
@@ -115,7 +97,6 @@ class Controller extends GetxController {
 
   Future logout(context) async {
     try {
-      // await FirebaseMessaging.instance.deleteToken();
       await FirebaseAuth.instance.signOut();
       await CacheHelper.removeData(key: 'uId');
       await FirebaseMessaging.instance.unsubscribeFromTopic("event");
@@ -128,7 +109,6 @@ class Controller extends GetxController {
     }
   }
 
-  /// Control calendar with arrow buttons.
   void changeCalendarPage({required bool showNext}) => showNext
       ? calendarController.swipeToNextMonth()
       : calendarController.swipeToPreviousPage();
@@ -137,14 +117,12 @@ class Controller extends GetxController {
     setTexts(year, month);
   }
 
-  /// Set app bar text and month name over calendar.
-  Future<void> setTexts(int year, int month)async {
+  Future<void> setTexts(int year, int month) async {
     final date = DateTime(year, month);
-    appbarTitleNotifier.value =await date.format(kAppBarDateFormat);
+    appbarTitleNotifier.value = await date.format(kAppBarDateFormat);
     monthNameNotifier.value = await date.format(kMonthFormat);
   }
 
-  /// Show current month page.
   void showCurrentMonth() {
     calendarController.goToDate(currentDate);
   }
@@ -164,7 +142,7 @@ class Controller extends GetxController {
       onSwipe: onCalendarPageChanged,
       events: List.generate(
           events.length,
-              (index) => CalendarEventModel(
+          (index) => CalendarEventModel(
               eventColor: events[index].eventColor,
               name: events[index].name,
               begin: events[index].begin,
@@ -180,36 +158,31 @@ class Controller extends GetxController {
         isScrollControlled: true,
         context: context,
         builder: (context) => DayEventsBottomSheet(
-          events: events,
-          day: day,
-          screenHeight: MediaQuery.of(context).size.height,
-        ));
+              events: events,
+              day: day,
+              screenHeight: MediaQuery.of(context).size.height,
+            ));
   }
 
   Future<bool> changePassword(
-      String currentPassword,
-      String newPassword,
-      BuildContext context,
-      ) async {
+    String currentPassword,
+    String newPassword,
+    BuildContext context,
+  ) async {
     log("I've been called");
     if (currentPassword.isEmpty) return true;
     try {
       if (newPassword.isEmpty) return false;
-      // Get the current user object from Firebase Authentication.
       final user = FirebaseAuth.instance.currentUser;
 
-      // If the user is not signed in, return.
       if (user == null) {
         return false;
       }
-      // Create a credential object with the user's current password.
       final credential = EmailAuthProvider.credential(
           email: user.email!, password: currentPassword);
 
-      // Reauthenticate the user with their current password.
       await user.reauthenticateWithCredential(credential);
 
-      // Update the user's password with the new password.
       await user.updatePassword(newPassword);
       return true;
     } on FirebaseAuthException catch (e) {
@@ -233,12 +206,10 @@ class Controller extends GetxController {
         await user!.reauthenticateWithCredential(
           EmailAuthProvider.credential(
             email: user.email!,
-            password: "12345678", // Replace with actual password
+            password: "12345678",
           ),
         );
-        // Update the email address
         await user.updateEmail(email);
-        // Send a verification email
         await user.sendEmailVerification();
       }
       if (email.isEmpty) return;
@@ -269,12 +240,4 @@ class Controller extends GetxController {
       print(e.toString());
     }
   }
-// =======
-//           events: events,
-//           day: day,
-//           screenHeight: MediaQuery.of(context).size.height,
-//         ));
-//   }
-
-// >>>>>>> HI
 }

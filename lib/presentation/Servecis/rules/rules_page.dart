@@ -7,7 +7,6 @@ import 'package:gpa/presentation/resources/color_manager.dart';
 import 'package:gpa/presentation/Servecis/rules/model/rules.dart';
 import 'package:gpa/presentation/Servecis/ServecisPage.dart';
 
-// ignore: camel_case_types
 class RulesPage extends StatefulWidget {
   const RulesPage({Key? key}) : super(key: key);
 
@@ -17,7 +16,6 @@ class RulesPage extends StatefulWidget {
 
 List<Rule> rules = [];
 
-// ignore: camel_case_types
 class _RulesPageState extends State<RulesPage> {
   @override
   void initState() {
@@ -29,11 +27,11 @@ class _RulesPageState extends State<RulesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(110.0),
+        preferredSize: const Size.fromHeight(110.0),
         child: Container(
           decoration: BoxDecoration(
             color: ColorManager.primary,
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                 color: Color.fromARGB(75, 0, 0, 0),
                 spreadRadius: 2,
@@ -46,13 +44,13 @@ class _RulesPageState extends State<RulesPage> {
             elevation: 0,
             backgroundColor: ColorManager.primary,
             toolbarHeight: 99.0,
-            actions: [],
+            actions: const [],
             centerTitle: true,
             title: Text(
               "rules".tr,
               style: GoogleFonts.getFont(
                 MyLocal.getFontFamily(Get.locale!.languageCode),
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
                   color: Color.fromARGB(255, 255, 255, 255),
@@ -72,18 +70,18 @@ class _RulesPageState extends State<RulesPage> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.fromLTRB(30, 20, 30, 10),
+            padding: const EdgeInsets.fromLTRB(30, 20, 30, 10),
             child: Column(children: [
               Text(
                 "serv".tr,
                 style: GoogleFonts.getFont(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
-                  color: Color.fromARGB(255, 0, 81, 154),
+                  color: const Color.fromARGB(255, 0, 81, 154),
                   MyLocal.getFontFamily(Get.locale!.languageCode),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Text(
@@ -91,7 +89,7 @@ class _RulesPageState extends State<RulesPage> {
                 style: GoogleFonts.getFont(
                   fontSize: Get.locale?.languageCode == 'ar' ? 14 : 12,
                   fontWeight: FontWeight.normal,
-                  color: Color.fromARGB(255, 0, 81, 154),
+                  color: const Color.fromARGB(255, 0, 81, 154),
                   MyLocal.getFontFamily(Get.locale!.languageCode),
                 ),
               )
@@ -99,8 +97,8 @@ class _RulesPageState extends State<RulesPage> {
           ),
           Expanded(
             child: Container(
-              margin: EdgeInsets.all(8),
-              child: RulesList(),
+              margin: const EdgeInsets.all(8),
+              child: const RulesList(),
             ),
           ),
         ],
@@ -133,7 +131,7 @@ class _RulesListState extends State<RulesList> {
           title: Text(
             rules[index].title,
             style: GoogleFonts.almarai(
-              color: Color.fromARGB(255, 1, 42, 76),
+              color: const Color.fromARGB(255, 1, 42, 76),
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -142,7 +140,7 @@ class _RulesListState extends State<RulesList> {
               title: Text(
                 rules[index].description,
                 style: GoogleFonts.almarai(
-                  color: Color.fromARGB(255, 0, 81, 154),
+                  color: const Color.fromARGB(255, 0, 81, 154),
                 ),
               ),
               subtitle: Column(
@@ -153,7 +151,7 @@ class _RulesListState extends State<RulesList> {
                     style: GoogleFonts.getFont(
                       MyLocal.getFontFamily(Get.locale!.languageCode),
                       fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 1, 42, 76),
+                      color: const Color.fromARGB(255, 1, 42, 76),
                     ),
                   ),
                   for (int i = 0; i < rules[index].steps.length; i++)
@@ -161,7 +159,7 @@ class _RulesListState extends State<RulesList> {
                       '${i + 1}- ${rules[index].steps[i]}',
                       style: GoogleFonts.almarai(
                         fontWeight: FontWeight.normal,
-                        color: Color.fromARGB(255, 0, 81, 154),
+                        color: const Color.fromARGB(255, 0, 81, 154),
                       ),
                     ),
                 ],
