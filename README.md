@@ -58,15 +58,15 @@ A secure, always-accessible digital version of the student’s university ID car
     <img src="https://github.com/SERNAME1.png" width="60" height="60" style="border-radius:50%;"/>
   </a>
 
-  <a href="https://github.com/USERNAME2">
+  <a href="https://github.com/7uba">
     <img src="https://github.com/USERNAME2.png" width="60" height="60" style="border-radius:50%;"/>
   </a>
 
-  <a href="https://github.com/USERNAME3">
+  <a href="https://github.com/Ghadi33">
     <img src="https://github.com/USERNAME3.png" width="60" height="60" style="border-radius:50%;"/>
   </a>
 
-  <a href="https://github.com/jouryABDULLAH">
+  <a href="https://github.com/Latysan">
     <img src="https://github.com/jouryABDULLAH.png" width="60" height="60" style="border-radius:50%;"/>
   </a>
 </p>
